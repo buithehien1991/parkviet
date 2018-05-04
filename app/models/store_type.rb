@@ -1,0 +1,2 @@
+class StoreType < ApplicationRecord
+end

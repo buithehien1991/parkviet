@@ -1,0 +1,2 @@
+class StoreKind < ApplicationRecord
+end
