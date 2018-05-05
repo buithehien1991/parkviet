@@ -55,10 +55,10 @@ ActiveRecord::Schema.define(version: 2018_05_04_071358) do
 
   create_table "communes", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci", force: :cascade do |t|
     t.string "name"
-    t.bigint "district_id"
-    t.bigint "province_id"
-    t.index ["district_id"], name: "index_communes_on_district_id"
-    t.index ["province_id"], name: "index_communes_on_province_id"
+    t.string "commune_code"
+    t.string "commune_type"
+    t.string "district_code"
+    t.index ["district_code"], name: "index_communes_on_district_code"
   end
 
   create_table "customers", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci", force: :cascade do |t|
@@ -96,8 +96,10 @@ ActiveRecord::Schema.define(version: 2018_05_04_071358) do
 
   create_table "districts", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci", force: :cascade do |t|
     t.string "name"
-    t.bigint "province_id"
-    t.index ["province_id"], name: "index_districts_on_province_id"
+    t.string "district_code"
+    t.string "district_type"
+    t.string "province_code"
+    t.index ["province_code"], name: "index_districts_on_province_code"
   end
 
   create_table "invoices", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci", force: :cascade do |t|
@@ -204,6 +206,8 @@ ActiveRecord::Schema.define(version: 2018_05_04_071358) do
 
   create_table "provinces", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci", force: :cascade do |t|
     t.string "name"
+    t.string "province_code"
+    t.string "province_type"
   end
 
   create_table "purchases", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci", force: :cascade do |t|
@@ -339,14 +343,11 @@ ActiveRecord::Schema.define(version: 2018_05_04_071358) do
   add_foreign_key "branches", "provinces"
   add_foreign_key "branches", "stores"
   add_foreign_key "branches", "users"
-  add_foreign_key "communes", "districts"
-  add_foreign_key "communes", "provinces"
   add_foreign_key "customers", "communes"
   add_foreign_key "customers", "districts"
   add_foreign_key "customers", "provinces"
   add_foreign_key "customers", "stores"
   add_foreign_key "customers", "users"
-  add_foreign_key "districts", "provinces"
   add_foreign_key "invoices", "customers"
   add_foreign_key "invoices", "users"
   add_foreign_key "producers", "stores"
