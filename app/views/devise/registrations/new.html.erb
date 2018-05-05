@@ -1,0 +1,103 @@
+<br>
+<br>
+<br>
+<br>
+
+<div class="d-flex justify-content-center">
+  <div class="card login-card">
+    <div class="card-body">
+
+      <h3 class="card-title"><%= fa_icon "lock", text: "Đăng ký sử dụng" %></h3>
+
+      <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+        <%= devise_error_messages! %>
+
+        <div class="form-group">
+          <%= f.label "Họ và tên", class: "label-text" %><span style="color: red;">*</span><br/>
+          <%= f.text_field :fullname, autofocus: true, class: "form-control" %>
+        </div>
+
+        <div class="form-group">
+          <%= f.label "Số điện thoại", class: "label-text" %><span style="color: red;">*</span><br/>
+          <%= f.text_field :phone, class: "form-control" %>
+        </div>
+
+        <div class="form-group">
+          <%= f.label "Email", class: "label-text" %><span style="color: red;">*</span><br/>
+          <%= f.email_field :email, class: "form-control" %>
+        </div>
+
+        <div class="form-group">
+          <%= label_tag 'store_name', "Tên cửa hàng", class: "label-text" %><span style="color: red;">*</span><br />
+          <%= text_field_tag 'store_name', '', class: "form-control" %>
+        </div>
+
+        <div class="form-group">
+          <%= f.label "Tên đăng nhập" %><span style="color: red;">*</span><br/>
+          <%= f.email_field :username, class: "form-control" %>
+        </div>
+
+        <div class="form-row">
+          <div class="col">
+            <%= f.label "Mật khẩu" %><span style="color: red;">*</span>
+            <% if @minimum_password_length %>
+              <em>(ít nhất <%= @minimum_password_length %> ký tự)</em>
+            <% end %><br/>
+            <%= f.password_field :password, autocomplete: "off", class: "form-control" %>
+          </div>
+          <div class="col">
+            <%= f.label "Xác nhận mật khẩu" %><span style="color: red;">*</span>
+            <%= f.password_field :password_confirmation, autocomplete: "off", class: "form-control" %>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <%= label_tag 'store_type', "Ngành nghề kinh doanh" %>
+          <%= select_tag 'store_type', [], class: "form-control"%>
+        </div>
+
+        <div class="form-group">
+          <%= label_tag 'store_kind', "Loại hình kinh doanh" %>
+          <%= select_tag 'store_kind', [], class: "form-control"%>
+        </div>
+
+        <div class="form-row">
+          <div class="col">
+            <%= f.label "Tỉnh/Thành phố" %><span style="color: red;">*</span>
+            <%= f.select :province_id, [], {}, class: "form-control" %>
+          </div>
+          <div class="col">
+            <%= f.label "Huyện/Quận" %><span style="color: red;">*</span>
+            <%= f.select :district_id, [], {}, class: "form-control" %>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <%= f.label "Địa chỉ", class: "label-text" %><br/>
+          <%= f.text_field :address, class: "form-control" %>
+        </div>
+
+        <div class="actions text-center">
+          <%= f.submit "Đăng ký", class: "btn btn-info" %>
+        </div>
+      <% end %>
+
+    </div>
+  </div>
+</div>
+
+<div class="d-flex justify-content-center help-text-login">
+  <div style="text-align: center;">
+    <%= link_to fa_icon("phone", text: "Hỗ trợ: 01649593392") , "#", class: "help-text-login" %>
+    |
+    <%= link_to fa_icon("lock", text: "Quên mật khẩu"), new_password_path(resource_name), class: "help-text-login" %>
+    |
+    <%= link_to fa_icon("sign-in", text: "Đăng nhập"), new_user_session_path, class: "help-text-login" %>
+  </div>
+</div>
+
+
+<br>
+<br>
+<br>
+<br>

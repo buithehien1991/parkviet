@@ -1,0 +1,37 @@
+<br>
+<br>
+<br>
+<br>
+
+<div class="d-flex justify-content-center">
+  <div class="card login-card">
+    <div class="card-body">
+
+    <h3 class="card-title"><%= fa_icon("unlock", text: "Quên mật khẩu ?") %></h3>
+
+    <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f| %>
+      <%= devise_error_messages! %>
+
+      <div class="form-group">
+        <%= f.label :email %><br />
+        <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "form-control" %>
+      </div>
+
+      <div class="actions text-center">
+        <%= f.submit "Gửi cho tôi hướng dẫn lấy lại mật khẩu", class: "btn btn-info" %>
+      </div>
+    <% end %>
+
+    </div>
+  </div>
+</div>
+
+<div class="d-flex justify-content-center help-text-login">
+  <div style="text-align: center;">
+    <%= link_to fa_icon("phone", text: "Hỗ trợ: 01649593392") , "#", class: "help-text-login" %>
+    |
+    <%= link_to fa_icon("sign-in", text: "Đăng nhập"), new_user_session_path, class: "help-text-login" %>
+    |
+    <%= link_to fa_icon("pencil-square-o", text: "Đăng ký"), new_user_registration_path, class: "help-text-login" %>
+  </div>
+</div>

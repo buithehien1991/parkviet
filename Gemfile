@@ -59,4 +59,7 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 gem 'devise', '~> 4.4.3'
 
 # Gem group for UI
+gem 'bootstrap', '~> 4.1.1'
+gem 'jquery-rails'
 gem 'toastr-rails'
+gem "font-awesome-rails"

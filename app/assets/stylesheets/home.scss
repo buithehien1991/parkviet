@@ -1,3 +1,62 @@
 // Place all the styles related to the home controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+.bg-park {
+  background-color: #0084b4;
+}
+
+.navbar-container, .devise-container {
+  background-color: #0084b4;
+}
+
+a.nav-link {
+  border-bottom: .2rem solid transparent;
+}
+
+.navbar-home .active > a {
+  border-bottom-color: #fff;
+}
+
+.navbar-home {
+  .btn-link {
+    text-decoration: none;
+    color: #fff;
+  }
+}
+
+.login-card {
+  width: 500px;
+
+  h3 {
+    color: #0084b4;
+  }
+
+  .card-title {
+    text-align: center;
+  }
+
+  .label-text {
+    font-weight: bold;
+  }
+
+  .btn-login {
+    min-width: 160px;
+    margin: 0px 10px;
+  }
+
+  .form-row {
+    margin-bottom: 1rem;
+  }
+
+  label {
+    font-weight: bold;
+  }
+}
+
+.help-text-login {
+  margin: 5px;
+  color: #fff;
+  font-size: 0.9em;
+}
+

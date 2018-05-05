@@ -1,0 +1,53 @@
+<br>
+<br>
+<br>
+<br>
+
+<div class="d-flex justify-content-center">
+  <div class="card login-card">
+    <div class="card-body">
+
+      <h3 class="card-title"><%= fa_icon "sign-in", text: "Đăng nhập" %></h3>
+
+      <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+        <div class="form-group">
+          <%= f.label "Tên đăng nhập hoặc Email", class: "label-text" %><br/>
+          <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "form-control" %>
+        </div>
+
+        <div class="form-group">
+          <%= f.label "Mật khẩu", class: "label-text" %><br/>
+          <%= f.password_field :password, autocomplete: "off", class: "form-control" %>
+        </div>
+
+        <% if devise_mapping.rememberable? -%>
+          <div class="form-group form-check form-check-inline">
+            <%= f.check_box :remember_me, class: "form-check-input" %>
+            <%= f.label "Nhớ mật khẩu", class: "form-check-label" %>
+          </div>
+        <% end -%>
+
+        <div class="actions text-center">
+          <button type="submit" class="btn btn-info btn-login">
+            <%= fa_icon("list", text: "Quản lý") %>
+          </button>
+
+          <button type="submit" class="btn btn-success btn-login">
+            <%= fa_icon("shopping-cart", text: "Bán hàng") %>
+          </button>
+        </div>
+      <% end %>
+
+    </div>
+  </div>
+</div>
+
+<div class="d-flex justify-content-center help-text-login">
+  <div style="text-align: center;">
+    <%= link_to fa_icon("phone", text: "Hỗ trợ: 01649593392") , "#", class: "help-text-login" %>
+    |
+    <%= link_to fa_icon("lock", text: "Quên mật khẩu"), new_password_path(resource_name), class: "help-text-login" %>
+    |
+    <%= link_to fa_icon("pencil-square-o", text: "Đăng ký"), new_user_registration_path, class: "help-text-login" %>
+  </div>
+</div>
