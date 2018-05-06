@@ -5,6 +5,8 @@ Rails.application.routes.draw do
              controllers: { registrations: 'users/registrations', sessions: 'users/sessions' }
 
   root to: "home#index"
-  get 'sale/index'
-  get 'manage/index'
+
+  get 'get_district_list', to: "application#get_districts"
+  get 'manage', to: "manage#index"
+  get 'sale', to: "sale#index"
 end

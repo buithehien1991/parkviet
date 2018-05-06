@@ -1,4 +1,3 @@
 class Commune < ApplicationRecord
-  belongs_to :district
-  belongs_to :province
+  belongs_to :district, foreign_key: :commune_code
 end

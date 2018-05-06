@@ -1,0 +1,11 @@
+vi:
+  activerecord:
+    errors:
+      models:
+        user:
+          attributes:
+            email:
+              taken: đã tồn tại. Vui lòng chọn email khác hoặc đăng nhập
+              blank: không được để trống
+            password_confirmation:
+              confirmation: Xác nhận mật khẩu không đúng

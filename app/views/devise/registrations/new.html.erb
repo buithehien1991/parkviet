@@ -14,27 +14,27 @@
 
         <div class="form-group">
           <%= f.label "Họ và tên", class: "label-text" %><span style="color: red;">*</span><br/>
-          <%= f.text_field :fullname, autofocus: true, class: "form-control" %>
+          <%= f.text_field :fullname, autofocus: true, class: "form-control", placeholder: "Nhập họ và tên đầy đủ của bạn", required: true %>
         </div>
 
         <div class="form-group">
           <%= f.label "Số điện thoại", class: "label-text" %><span style="color: red;">*</span><br/>
-          <%= f.text_field :phone, class: "form-control" %>
+          <%= f.telephone_field :phone, class: "form-control", placeholder: "Nhập số điện thoại của bạn", required: true %>
         </div>
 
         <div class="form-group">
           <%= f.label "Email", class: "label-text" %><span style="color: red;">*</span><br/>
-          <%= f.email_field :email, class: "form-control" %>
+          <%= f.email_field :email, class: "form-control", placeholder: "Nhập địa chỉ thư điện tử của bạn", required: true %>
         </div>
 
         <div class="form-group">
           <%= label_tag 'store_name', "Tên cửa hàng", class: "label-text" %><span style="color: red;">*</span><br />
-          <%= text_field_tag 'store_name', '', class: "form-control" %>
+          <%= text_field_tag 'store[name]', '', class: "form-control", placeholder: "Tên cửa hàng: Dream Shop", required: true %>
         </div>
 
         <div class="form-group">
           <%= f.label "Tên đăng nhập" %><span style="color: red;">*</span><br/>
-          <%= f.email_field :username, class: "form-control" %>
+          <%= f.text_field :username, class: "form-control", placeholder: "Tên để bạn truy cập và sử dụng về sau. VD: Số điện thoại", required: true %>
         </div>
 
         <div class="form-row">
@@ -43,38 +43,38 @@
             <% if @minimum_password_length %>
               <em>(ít nhất <%= @minimum_password_length %> ký tự)</em>
             <% end %><br/>
-            <%= f.password_field :password, autocomplete: "off", class: "form-control" %>
+            <%= f.password_field :password, autocomplete: "off", class: "form-control", required: true %>
           </div>
           <div class="col">
             <%= f.label "Xác nhận mật khẩu" %><span style="color: red;">*</span>
-            <%= f.password_field :password_confirmation, autocomplete: "off", class: "form-control" %>
+            <%= f.password_field :password_confirmation, autocomplete: "off", class: "form-control", required: true %>
           </div>
         </div>
 
         <div class="form-group">
           <%= label_tag 'store_type', "Ngành nghề kinh doanh" %>
-          <%= select_tag 'store_type', [], class: "form-control"%>
+          <%= select_tag 'store[store_type_id]', options_for_select(StoreType.all.collect{|type| [type.name, type.id]}), prompt: "-- Chọn một ngành nghề mà bạn đang kinh doanh --", class: "form-control"%>
         </div>
 
         <div class="form-group">
           <%= label_tag 'store_kind', "Loại hình kinh doanh" %>
-          <%= select_tag 'store_kind', [], class: "form-control"%>
+          <%= select_tag 'store[store_kind_id]', options_for_select(StoreKind.all.collect{|kind| [kind.name, kind.id]}), prompt: "-- Chọn loại hình kinh doanh --", class: "form-control"%>
         </div>
 
         <div class="form-row">
           <div class="col">
             <%= f.label "Tỉnh/Thành phố" %><span style="color: red;">*</span>
-            <%= f.select :province_id, [], {}, class: "form-control" %>
+            <%= f.select :province_id, options_for_select(Province.all.collect{|province| [province.name, province.id]}), {prompt: "-- Chọn tỉnh/tp của bạn --"}, class: "form-control", required: true %>
           </div>
           <div class="col">
             <%= f.label "Huyện/Quận" %><span style="color: red;">*</span>
-            <%= f.select :district_id, [], {}, class: "form-control" %>
+            <%= f.select :district_id, [], {prompt: "-- Chọn Quận/Huyện --"}, class: "form-control", required: true %>
           </div>
         </div>
 
         <div class="form-group">
           <%= f.label "Địa chỉ", class: "label-text" %><br/>
-          <%= f.text_field :address, class: "form-control" %>
+          <%= f.text_field :address, class: "form-control", placeholder: "Địa chỉ của bạn cửa hàng của bạn" %>
         </div>
 
         <div class="actions text-center">
@@ -101,3 +101,26 @@
 <br>
 <br>
 <br>
+
+
+<script>
+    $(document).ready(function () {
+        'use strict';
+
+        $('#user_province_id').on('change', function () {
+            let province_id = this.value;
+            $.ajax({
+                url: '/get_district_list',
+                data: {
+                    province_id: province_id
+                },
+                success: function (data) {
+                    $('#user_district_id').html(data);
+                    if (!province_id) {
+                        $('#user_district_id').html('<option value="">-- Chọn Quận/Huyện --</option>');
+                    }
+                }
+            });
+        });
+    })
+</script>

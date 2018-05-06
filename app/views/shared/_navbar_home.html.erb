@@ -25,7 +25,12 @@
         <a class="nav-link" href="#">Tin tức</a>
       </li>
     </ul>
-    <%= link_to "Đăng nhập", new_user_session_path, class: "btn btn-link" %>
-    <%= link_to "Đăng ký", new_user_registration_path, class: "btn btn-info" %>
+    <% if user_signed_in? %>
+      <%= link_to fa_icon("list", text: "Quản lý"), manage_path, class: "btn btn-info", style: "margin-right: 10px;" %>
+      <%= link_to fa_icon("shopping-cart", text: "Bán hàng"), sale_path, class: "btn btn-success" %>
+    <% else %>
+      <%= link_to "Đăng nhập", new_user_session_path, class: "btn btn-link" %>
+      <%= link_to "Đăng ký", new_user_registration_path, class: "btn btn-info" %>
+    <% end %>
   </div>
 </nav>
