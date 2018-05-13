@@ -1,6 +1,4 @@
 Rails.application.routes.draw do
-  get 'products/index'
-  get 'products/show'
   devise_for :users,
              path: '',
              path_names: { sign_in: 'dang-nhap', sign_out: 'dang-xuat', sign_up: 'dang-ky' },
@@ -13,6 +11,9 @@ Rails.application.routes.draw do
   get 'sale', to: "sale#index"
 
   scope :manage do
+    resources :invoices
     resources :products
+    resources :customers
+    resources :suppliers
   end
 end

@@ -5,28 +5,28 @@
       <ul class="nav nav-list">
 
         <li class="sale-menu">
-          <%= link_to "#", class: "btn btn-sale" do %>
+          <%= link_to sale_path, class: "btn btn-sale", target: :_blank do %>
             <%= fa_icon "desktop", class: "sidebar-icon" %>
             <span class="sidebar-name sale-name">Bán hàng</span>
           <% end %>
         </li>
 
-        <li class="active">
-          <%= link_to "#" do %>
+        <li class="<%= current_page?(controller: 'manage', action: 'index') ? "active" : ""%>">
+          <%= link_to manage_path do %>
             <%= fa_icon "home", class: "sidebar-icon" %>
             <span class="sidebar-name">Tổng quan</span>
           <% end %>
         </li>
 
-        <li>
-          <%= link_to "#" do %>
+        <li class="<%= current_page?(invoices_path) ? "active" : '' %>">
+          <%= link_to invoices_path do %>
             <%= fa_icon "shopping-cart", class: "sidebar-icon" %>
             <span class="sidebar-name">Đơn hàng</span>
           <% end %>
         </li>
 
-        <li>
-          <%= link_to "#" do %>
+        <li class="<%= current_page?(products_path) ? "active" : '' %>">
+          <%= link_to products_path do %>
             <%= fa_icon "barcode", class: "sidebar-icon" %>
             <span class="sidebar-name">Hàng hóa</span>
           <% end %>
