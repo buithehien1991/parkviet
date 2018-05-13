@@ -2,8 +2,14 @@
 @import "font-awesome";
 @import "toastr";
 @import "home";
+@import "manage";
 
 body {
   color: #565a5c;
   background-color: #ffffff;
+}
+
+a {
+  text-decoration: none!important;
+  cursor: pointer;
 }

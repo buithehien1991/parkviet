@@ -8,3 +8,9 @@
  - CSDL tại db/diadanh_2018-05-05.sql
  
 ## Đăng nhập và sử dụng
+
+
+## Tips
+Xóa cổng đang chạy
+ - lsof -wni tcp:3000
+ - kill -9 xxxx 

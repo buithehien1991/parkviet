@@ -1,0 +1,39 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-park">
+  <a class="navbar-brand" href="#">Park Việt</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+
+    <ul class="navbar-nav mx-auto">
+      <div class="d-flex justify-content-center help-text-login">
+        <%= link_to fa_icon("phone", text: "Hỗ trợ"), "#", class: "help-text-login" %>
+        <span class="help-text-login">|</span>
+        <%= link_to fa_icon("laptop", text: "Tải Teamviewer"), "#", class: "help-text-login" %>
+        <span class="help-text-login">|</span>
+        <div class="help-text-login"><%= fa_icon("volume-control-phone", text: "Hotline:") %><span class="help-text-login" style="color: orange;">01649593392</span></div>
+      </div>
+    </ul>
+  </div>
+
+  <div class="navbar-select-branch">
+    <%= select_tag  'branch' , options_for_select(["Chi nhánh trung tâm"], "Chi nhánh trung tâm"), class: "form-control form-control-sm"%>
+  </div>
+
+
+  <ul class="navbar-nav">
+    <li class="nav-item dropdown">
+      <a class="nav-link dropdown-toggle navbar-user" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        Xin chào, <br>
+        <%= current_user.fullname %>
+      </a>
+      <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+        <%= link_to "Tài khoản", "#", class: "dropdown-item" %>
+        <div class="dropdown-divider"></div>
+        <%= link_to "Đăng xuất", destroy_user_session_path, method: :delete, class: "dropdown-item"%>
+      </div>
+    </li>
+  </ul>
+
+</nav>

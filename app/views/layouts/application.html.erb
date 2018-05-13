@@ -12,6 +12,14 @@
   </head>
 
   <body>
-    <%= yield %>
+    <div class="navbar-container">
+      <%= render 'shared/navbar' %>
+    </div>
+
+    <%= render 'manage/sidebar' %>
+    <div class="main-container">
+      <%= yield %>
+    </div>
+
   </body>
 </html>

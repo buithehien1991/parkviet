@@ -63,3 +63,4 @@ gem 'bootstrap', '~> 4.1.1'
 gem 'jquery-rails'
 gem 'toastr-rails'
 gem "font-awesome-rails"
+gem 'rails-i18n', '~> 5.1'

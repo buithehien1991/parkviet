@@ -1,3 +1,121 @@
 // Place all the styles related to the manage controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+
+.navbar-select-branch {
+
+}
+
+.navbar-user {
+  font-size: 0.7em;
+  padding-top: 4px;
+  padding-bottom: 0;
+}
+
+.manage-aside {
+  .sidebar {
+    background-color: #f2f2f2;
+    border-style: solid;
+    border-color: #ccc;
+    border-width: 0 1px 0 0;
+  }
+
+  .sidebar {
+    width: 180px;
+  }
+
+  .sidebar-fixed {
+    position: fixed;
+    top: auto;
+    float: none !important;
+    z-index: 1027;
+    height: 100%;
+  }
+
+  .nav > li {
+    width: 100%;
+    border-color: #e5e5e5;
+  }
+
+  .nav-list>li {
+    display: block;
+    position: relative;
+    float: none;
+    padding: 0;
+    border-style: solid;
+    border-width: 1px 0 0;
+  }
+
+  .nav-list > li:last-child {
+    border-bottom-width: 1px;
+  }
+
+  .nav > li > a {
+    position: relative;
+    display: block;
+    padding: 10px 15px;
+  }
+
+  .nav-list > li > a {
+    background-color: #f8f8f8;
+    color: #585858;
+  }
+
+  .nav-list > li.active > a, .nav-list > li.active > a:focus, .nav-list > li.active > a:hover {
+    background-color: #fff;
+  }
+
+  .nav-list > li:hover > a {
+    background-color: #fff;
+    color: #0084b4;
+  }
+
+  .nav-list>li.active>a {
+    font-weight: 700;
+    color: #0084b4;
+  }
+
+  .sidebar-icon {
+    vertical-align: middle;
+  }
+
+  .sidebar-name {
+    line-height: 17px;
+    padding-left: 7px;
+    text-shadow: none!important;
+    font-size: 13px;
+  }
+
+
+  .sale-menu {
+    .btn-sale {
+      vertical-align: middle;
+      text-align: left;
+      padding: 5px 10px;
+      margin: 7px 10px;
+      background-color: orange;
+      color: #fff;
+      font-weight: bold;
+    }
+
+    .sale-name {
+      font-size: 15px;
+    }
+
+    .btn-sale:hover {
+      background-color: darkorange;
+      color: #fff;
+    }
+  }
+
+  .nav-list > li.sale-menu:hover > a {
+    background-color: darkorange;
+    color: #fff;
+  }
+
+}
+
+.main-container {
+  margin-left: 200px;
+}
