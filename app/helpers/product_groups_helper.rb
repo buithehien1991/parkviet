@@ -1,0 +1,2 @@
+module ProductGroupsHelper
+end

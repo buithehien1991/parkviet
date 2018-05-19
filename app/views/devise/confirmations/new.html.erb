@@ -1,16 +1,38 @@
-<h2>Resend confirmation instructions</h2>
+<br>
+<br>
+<br>
+<br>
 
-<%= form_for(resource, as: resource_name, url: confirmation_path(resource_name), html: { method: :post }) do |f| %>
-  <%= devise_error_messages! %>
+<div class="d-flex justify-content-center">
+  <div class="card login-card">
+    <div class="card-body">
 
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email", value: (resource.pending_reconfirmation? ? resource.unconfirmed_email : resource.email) %>
+      <h3 class="card-title"><%= fa_icon("check-square-o", text: "Gửi email xác nhận tài khoản") %></h3>
+
+      <%= form_for(resource, as: resource_name, url: confirmation_path(resource_name), html: {method: :post}) do |f| %>
+        <%= devise_error_messages! %>
+
+        <div class="form-group">
+          <%= f.label :email %><br/>
+          <%= f.email_field :email, autofocus: true, autocomplete: "email", value: (resource.pending_reconfirmation? ? resource.unconfirmed_email : resource.email), class: "form-control" %>
+        </div>
+
+        <div class="actions text-center">
+          <%= f.submit "Gửi xác nhận" %>
+        </div>
+      <% end %>
+    </div>
   </div>
+</div>
 
-  <div class="actions">
-    <%= f.submit "Resend confirmation instructions" %>
+<div class="d-flex justify-content-center help-text-login">
+  <div style="text-align: center;">
+    <%= link_to fa_icon("phone", text: "Hỗ trợ: 01649593392") , "#", class: "help-text-login" %>
+    |
+    <%= link_to fa_icon("sign-in", text: "Đăng nhập"), new_user_session_path, class: "help-text-login" %>
+    |
+    <%= link_to fa_icon("pencil-square-o", text: "Đăng ký"), new_user_registration_path, class: "help-text-login" %>
   </div>
-<% end %>
+</div>
 
 <%= render "devise/shared/links" %>

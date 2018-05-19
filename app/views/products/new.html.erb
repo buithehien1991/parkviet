@@ -1,0 +1,55 @@
+<div class="product">
+  <div class="header">
+
+    <ul class="nav nav-tabs new-product-tabs" id="new-product" role="tab">
+      <li class="nav-item">
+        <a href="#basic-content" id="basic-tab" data-toggle="tab" role="tab" aria-controls="basic" aria-selected="true" class="nav-link active">
+          <%= fa_icon "barcode" %> <span class="tab-name">Thông tin cơ bản</span>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a href="#detail-content" id="detail-tab" data-toggle="tab" role="tab" aria-controls="detail" aria-selected="true" class="nav-link">
+          <%= fa_icon "file-text-o" %> <span class="tab-name">Mô tả chi tiết</span>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a href="#part-content" id="part-tab" data-toggle="tab" role="tab" aria-controls="part" aria-selected="true" class="nav-link">
+          <%= fa_icon "info-circle" %> <span>Thành phần</span>
+        </a>
+      </li>
+
+
+      <li class="nav-item ml-auto">
+        <%= link_to "#", class: "btn btn-success" do %>
+          <%= fa_icon "floppy-o", text: "Lưu" %>
+        <% end %>
+
+        <%= link_to "#", class: "btn btn-success" do %>
+          <%= fa_icon "floppy-o", text: "Lưu & Thêm mới" %>
+        <% end %>
+
+        <%= link_to "#", class: "btn btn-secondary" do %>
+          <%= fa_icon "ban", text: "Hủy bỏ" %>
+        <% end %>
+      </li>
+
+    </ul>
+
+  </div>
+
+  <%= form_with model: Product.new do |f| %>
+
+  <div class="tab-content">
+    <div class="tab-pane fade show active" id="basic-content" role="tabpanel" aria-labelledby="home-tab">
+      <%= render 'new_product_basic', f: f, locals: {f: f} %>
+    </div>
+    <div class="tab-pane fade" id="detail-content" role="tabpanel" aria-labelledby="detail-tab">
+      <%= render 'new_product_detail' %>
+    </div>
+    <div class="tab-pane fade" id="part-content" role="tabpanel" aria-labelledby="part-tab">
+      <%= render 'new_product_part' %>
+    </div>
+  </div>
+
+  <% end %>
+</div>

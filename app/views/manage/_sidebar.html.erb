@@ -25,7 +25,7 @@
           <% end %>
         </li>
 
-        <li class="<%= current_page?(products_path) ? "active" : '' %>">
+        <li class="<%= request.path.start_with?(products_path) ? "active" : '' %>">
           <%= link_to products_path do %>
             <%= fa_icon "barcode", class: "sidebar-icon" %>
             <span class="sidebar-name">Hàng hóa</span>

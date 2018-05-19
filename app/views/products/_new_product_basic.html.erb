@@ -1,0 +1,59 @@
+<div class="row">
+  <div class="col-md-6">
+    <div class="form-group">
+      <%= f.label :code, "Mã hàng hóa (Tối đa 32 ký tự)" %>
+      <%= f.text_field :code, class: "form-control form-control-sm", placeholder: "Hệ thống sẽ tự tạo nếu để trống" %>
+    </div>
+
+    <div class="form-group">
+      <%= f.label :name, "Tên hàng hóa" %> <span style="color: red;">*</span>
+      <%= f.text_field :name, class: "form-control form-control-sm", placeholder: "Nhập tên hàng hóa của bạn" %>
+    </div>
+
+    <div class="form-group">
+      <%= f.label :product_group_id, "Nhóm hàng" %>
+      <div class="input-group">
+        <%= f.select :product_group_id, options_for_select(ProductGroup.all.collect{|group| [group.name, group.id]}), {prompt: "-- Chọn nhóm hàng nếu có --"}, {class: "custom-select form-control form-control-sm"} %>
+        <div class="input-group-append">
+          <%= link_to product_groups_path, class: "btn btn-outline-secondary btn-sm", remote: true do %>
+            <%= fa_icon("ellipsis-h") %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <%= f.label :cost_price, "Giá vốn" %>
+      <%= f.number_field :cost_price, class: "form-control text-right form-control-sm", placeholder: "Nhập giá vốn" %>
+    </div>
+
+    <div class="form-group">
+      <%= f.label :sale_price, "Giá bán" %>
+      <div class="input-group">
+        <%= f.number_field :sale_price, class: "form-control text-right form-control-sm", value: 0 %>
+        <div class="input-group-append">
+          <%= link_to "#", class: "btn btn-outline-secondary btn-sm" do %>
+            <%= fa_icon("tags") %>
+          <% end %>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="form-group">
+      <%= f.label :producer_id, "Nhà sản xuất" %>
+      <div class="input-group">
+        <%= f.text_field :producer_id, class: "form-control form-control-sm", placeholder: "Không có nhà sản xuất" %>
+        <div class="input-group-append">
+          <%= link_to "#", class: "btn btn-outline-secondary btn-sm" do %>
+            <%= fa_icon("ellipsis-h") %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+
+  </div>
+  <div class="col-md-6">
+
+  </div>
+</div>

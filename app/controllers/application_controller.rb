@@ -4,7 +4,6 @@ class ApplicationController < ActionController::Base
     if params[:province_id].present?
       province = Province.find(params[:province_id])
       districts = province.districts
-      p districts
       html += '<option value="">-- Chọn Quận/Huyện --</option>'
       districts.each do |district|
         html += '<option value="'+district.id.to_s+'">'+district.name.to_s+'</option>'

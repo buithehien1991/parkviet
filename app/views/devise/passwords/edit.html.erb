@@ -1,25 +1,45 @@
-<h2>Change your password</h2>
+<br>
+<br>
+<br>
+<br>
 
-<%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :put }) do |f| %>
-  <%= devise_error_messages! %>
-  <%= f.hidden_field :reset_password_token %>
+<div class="d-flex justify-content-center">
+  <div class="card login-card">
+    <div class="card-body">
 
-  <div class="field">
-    <%= f.label :password, "New password" %><br />
-    <% if @minimum_password_length %>
-      <em>(<%= @minimum_password_length %> characters minimum)</em><br />
-    <% end %>
-    <%= f.password_field :password, autofocus: true, autocomplete: "off" %>
+      <h3 class="card-title"><%= fa_icon("key", text: "Đổi mật khẩu") %></h3>
+
+      <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: {method: :put}) do |f| %>
+        <%= devise_error_messages! %>
+        <%= f.hidden_field :reset_password_token %>
+
+        <div class="form-group">
+          <%= f.label :password, "Mật khẩu mới" %>
+          <% if @minimum_password_length %>
+            <em>(Tối thiểu <%= @minimum_password_length %> ký tự)</em><br/>
+          <% end %>
+          <%= f.password_field :password, autofocus: true, autocomplete: "off", class: "form-control" %>
+        </div>
+
+        <div class="form-group">
+          <%= f.label :password_confirmation, "Xác nhận mật khẩu mới" %><br/>
+          <%= f.password_field :password_confirmation, autocomplete: "off", class: "form-control" %>
+        </div>
+
+        <div class="actions text-center">
+          <%= f.submit "Đổi mật khẩu", class: "btn btn-info" %>
+        </div>
+      <% end %>
+    </div>
   </div>
+</div>
 
-  <div class="field">
-    <%= f.label :password_confirmation, "Confirm new password" %><br />
-    <%= f.password_field :password_confirmation, autocomplete: "off" %>
+<div class="d-flex justify-content-center help-text-login">
+  <div style="text-align: center;">
+    <%= link_to fa_icon("phone", text: "Hỗ trợ: 01649593392") , "#", class: "help-text-login" %>
+    |
+    <%= link_to fa_icon("sign-in", text: "Đăng nhập"), new_user_session_path, class: "help-text-login" %>
+    |
+    <%= link_to fa_icon("pencil-square-o", text: "Đăng ký"), new_user_registration_path, class: "help-text-login" %>
   </div>
-
-  <div class="actions">
-    <%= f.submit "Change my password" %>
-  </div>
-<% end %>
-
-<%= render "devise/shared/links" %>
+</div>

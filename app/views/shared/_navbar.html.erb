@@ -28,7 +28,7 @@
         Xin chào, <br>
         <%= current_user.fullname %>
       </a>
-      <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+      <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
         <%= link_to "Tài khoản", "#", class: "dropdown-item" %>
         <div class="dropdown-divider"></div>
         <%= link_to "Đăng xuất", destroy_user_session_path, method: :delete, class: "dropdown-item"%>

@@ -1,2 +1,70 @@
-<h1>Products#index</h1>
-<p>Find me in app/views/products/index.html.erb</p>
+<div class="products">
+
+  <div class="header">
+    <nav class="navbar navbar-expand navbar-light bg-light">
+      <div>
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item">
+            <span class="title">Hàng hóa</span>
+          </li>
+        </ul>
+      </div>
+      <div class="mx-auto order-0">
+
+      </div>
+      <div class="navbar-nav">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item">
+            <%= link_to new_product_path, class: "btn btn-info header-menu" do %>
+              <%= fa_icon "plus", text: "Thêm hàng hóa" %>
+            <% end %>
+          </li>
+
+          <li class="nav-item">
+            <%= link_to new_product_path, class: "btn btn-info header-menu" do %>
+              <%= fa_icon "upload", text: "Nhập excel" %>
+            <% end %>
+          </li>
+          <li class="nav-item">
+            <%= link_to new_product_path, class: "btn btn-info header-menu" do %>
+              <%= fa_icon "download", text: "Xuất excel" %>
+            <% end %>
+          </li>
+
+          <li class="nav-item dropdown">
+            <a class="dropdown-toggle btn btn-info header-menu" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <%= fa_icon "columns" %>
+            </a>
+            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+              <a class="dropdown-item" href="#">Action</a>
+              <a class="dropdown-item" href="#">Another action</a>
+              <div class="dropdown-divider"></div>
+              <a class="dropdown-item" href="#">Something else here</a>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </nav>
+  </div>
+
+
+  <div class="notification">
+    <% if @products.size == 0 %>
+      <div class="alert alert-success alert-dismissible fade show" role="alert">
+        Chưa có hàng hóa nào trong cửa hàng của bạn. Vui lòng chọn <strong>"Thêm hàng hóa"</strong> để thêm hàng hóa của bạn!
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+    <% end %>
+  </div>
+
+  <div class="search">
+
+  </div>
+
+  <div class="list">
+
+  </div>
+
+</div>
