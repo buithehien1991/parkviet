@@ -1,0 +1,14 @@
+toastr.options.closeButton = true;
+<% if user_signed_in? && !@error %>
+  toastr.success("Tạo nhóm hàng thành công");
+  <% if params[:kind].eql?('save') %>
+    var message = "<%= j render :partial => 'index_modal', locals: {tab: 'list'} %>";
+  <% elsif params[:kind].eql?('cont') %>
+    var message = "<%= j render :partial => 'index_modal', locals: {tab: 'new'} %>";
+  <% end %>
+  message = message.replace(/(?:\r\n|\r|\n)/g, '');
+  $(".modal-body").html(message);
+
+<% else %>
+  toastr.error("Tạo nhóm không thành công. Vui lòng thử lại hoặc xem trợ giúp");
+<% end %>

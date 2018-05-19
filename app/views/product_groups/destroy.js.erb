@@ -1,0 +1,10 @@
+<% if user_signed_in? && !@error %>
+  toastr.success("Xoá nhóm hàng thành công!");
+  $("#product-group-<%= @product_group.id %>").remove();
+<% else %>
+  <% if @error_message %>
+    toastr.error("<%= @error_message %>");
+  <% else %>
+    toastr.error("Xóa nhóm hàng không thành công. Vui lòng thử lại hoặc xem trợ giúp");
+  <% end %>
+<% end %>

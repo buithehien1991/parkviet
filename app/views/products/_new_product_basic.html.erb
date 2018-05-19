@@ -13,7 +13,7 @@
     <div class="form-group">
       <%= f.label :product_group_id, "Nhóm hàng" %>
       <div class="input-group">
-        <%= f.select :product_group_id, options_for_select(ProductGroup.all.collect{|group| [group.name, group.id]}), {prompt: "-- Chọn nhóm hàng nếu có --"}, {class: "custom-select form-control form-control-sm"} %>
+        <%= f.select :product_group_id, options_for_select(@product_group_options), {prompt: "-- Chọn nhóm hàng nếu có --"}, {class: "custom-select form-control form-control-sm"} %>
         <div class="input-group-append">
           <%= link_to product_groups_path, class: "btn btn-outline-secondary btn-sm", remote: true do %>
             <%= fa_icon("ellipsis-h") %>

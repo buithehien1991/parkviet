@@ -61,6 +61,6 @@ gem 'devise', '~> 4.4.3'
 # Gem group for UI
 gem 'bootstrap', '~> 4.1.1'
 gem 'jquery-rails'
+gem 'font-awesome-rails'
 gem 'toastr-rails'
-gem "font-awesome-rails"
-gem 'rails-i18n', '~> 5.1'
+gem 'acts_as_tree'

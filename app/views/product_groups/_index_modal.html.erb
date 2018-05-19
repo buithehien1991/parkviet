@@ -1,0 +1,64 @@
+<ul class="nav nav-tabs product-groups" id="new-product" role="tab">
+  <li class="nav-item">
+    <a href="#group-list" id="group-list-tab" data-toggle="tab" role="tab" aria-controls="basic" aria-selected="true" class="nav-link <%= "active" if tab.eql?('list') %>">
+      <%= fa_icon "list" %> <span class="tab-name">Danh sách nhóm hàng</span>
+    </a>
+  </li>
+  <li class="nav-item">
+    <a href="#new-group" id="new-group-tab" data-toggle="tab" role="tab" aria-controls="detail" aria-selected="true" class="nav-link <%= "active" if tab.eql?('new') %>">
+      <%= fa_icon "plus" %> <span class="tab-name">Tạo nhóm hàng mới</span>
+    </a>
+  </li>
+</ul>
+
+<div class="tab-content mx-3 mt-3">
+  <div class="tab-pane fade show active" id="group-list" role="tabpanel" aria-labelledby="list-tab">
+    <div class="products">
+      <table class="table table-bordered">
+        <thead>
+        <tr>
+          <th scope="col">Tên nhóm hàng</th>
+          <th scope="col">Tên nhóm hàng cha</th>
+          <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        <% @product_groups.walk_tree do |group, level| %>
+          <tr id="product-group-<%= group.id %>">
+            <td><%= "#{'--' * level} #{group.name}" %></td>
+            <td><%= group.parent ? "#{'--' * group.parent.level} #{group.parent.name}" : "Chưa có nhóm hàng" %></td>
+            <td class="text-center">
+              <%= link_to fa_icon("pencil-square-o"), "#", class: "text-center mr-2" %>
+              <%= link_to fa_icon("trash-o"), product_group_path(group), method: :delete, class: 'text-danger', data: { confirm: "Bạn có chắc chắn muốn xóa nhóm hàng: #{group.name} ?", remote: true  } %>
+            </td>
+          </tr>
+        <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div class="tab-pane fade" id="new-group" role="tabpanel" aria-labelledby="new-tab">
+    <%= form_with model: ProductGroup.new do |f| %>
+      <div class="form-group row">
+        <%= f.label :name, "Tên nhóm hàng", class: "col-md-3 text-right font-weight-bold" %>
+        <div class="col-md-9">
+          <%= f.text_field :name, class: "form-control form-control-sm", placeholder: "Nhập tên nhóm hàng cha", required: true %>
+        </div>
+      </div>
+      <div class="form-group row">
+        <%= f.label :parent_id, "Nhóm hàng cha", class: "col-md-3 text-right font-weight-bold" %>
+        <div class="col-md-9">
+          <%= f.select :parent_id, options_for_select(@options), {prompt: "-- Nhóm hàng cha --"}, {class: "form-control form-control-sm"} %>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-3"></div>
+        <div class="col-md-9">
+          <%= f.button "Lưu", class: "btn btn-info btn-park", type: 'submit', name: 'kind', value: 'save' %>
+          <%= f.button "Lưu & Tiếp tục", class: "btn btn-info btn-park", type: 'submit', name: 'kind', value: 'cont' %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>

@@ -9,6 +9,7 @@
 body {
   color: #565a5c;
   background-color: #ffffff;
+  font-size: 0.9rem;
 }
 
 a {
@@ -19,4 +20,12 @@ a {
 
 .container-fluid {
   padding: 0;
+}
+
+.btn {
+  font-size: 0.9rem;
+}
+
+.btn-park {
+  background-color: #0084b4;
 }

@@ -1,10 +1,10 @@
 <% if user_signed_in? %>
-  var message = "<%= j render :partial => 'index_modal', locals: {} %>";
+  var message = "<%= j render :partial => 'index_modal', locals: {tab: 'list'} %>";
   message = message.replace(/(?:\r\n|\r|\n)/g, '');
   var modal = "<%= j render :partial => 'shared/modal', locals: {title: "Quản lý nhóm hàng"} %>";
   modal = modal.replace(/(?:\r\n|\r|\n)/g, '');
   $("body").append(modal);
-  $("#park-modal > .modal-body").html(message);
+  $(".modal-body").html(message);
   $("#park-modal").modal({
       backdrop: 'static',
       keyboard: false

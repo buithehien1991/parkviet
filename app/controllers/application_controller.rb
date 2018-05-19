@@ -13,4 +13,8 @@ class ApplicationController < ActionController::Base
   rescue ActiveRecord::RecordNotFound
     render plain: ''
   end
+
+  def current_store
+    current_user.stores.first
+  end
 end
