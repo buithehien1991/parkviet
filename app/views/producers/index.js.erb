@@ -1,0 +1,12 @@
+<% if user_signed_in? %>
+var message = "<%= j render :partial => 'producers/index_modal', locals: {tab: 'list'} %>";
+message = message.replace(/(?:\r\n|\r|\n)/g, '');
+var modal = "<%= j render :partial => 'shared/modal', locals: {title: "Quản lý nhà sản xuất"} %>";
+modal = modal.replace(/(?:\r\n|\r|\n)/g, '');
+$("body").append(modal);
+$(".modal-body").html(message);
+$("#park-modal").modal({
+    backdrop: 'static',
+    keyboard: false
+});
+<% end %>

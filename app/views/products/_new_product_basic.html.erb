@@ -43,9 +43,9 @@
     <div class="form-group">
       <%= f.label :producer_id, "Nhà sản xuất" %>
       <div class="input-group">
-        <%= f.text_field :producer_id, class: "form-control form-control-sm", placeholder: "Không có nhà sản xuất" %>
+        <%= f.select :producer_id, options_for_select(@producers.collect{|producer| [producer.name, producer.id]}), {prompt: "-- Không có nhà sản xuất --"}, { class: "form-control form-control-sm" } %>
         <div class="input-group-append">
-          <%= link_to "#", class: "btn btn-outline-secondary btn-sm" do %>
+          <%= link_to producers_path, class: "btn btn-outline-secondary btn-sm", remote: true do %>
             <%= fa_icon("ellipsis-h") %>
           <% end %>
         </div>

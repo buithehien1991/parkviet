@@ -1,0 +1,5 @@
+<% if user_signed_in? && !@producer.errors.present? %>
+  toastr.success("Tạo nhà sản xuất thành công");
+<% else %>
+  toastr.error("Tạo nhà sản xuất không thành công. Vui lòng thử lại hoặc xem trợ giúp")
+<% end %>

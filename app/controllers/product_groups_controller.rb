@@ -5,14 +5,11 @@ class ProductGroupsController < ApplicationController
   include ApplicationHelper
 
   def index
-    @product_groups = ProductGroup.where(store_id: current_store.id)
+    @product_groups = ProductGroup.by_store(current_store.id)
     @options = []
     @product_groups.walk_tree do |group, level|
       @options << ["#{'--' * level} #{group.name}", group.id]
     end
-  end
-
-  def new
   end
 
   def create
@@ -26,7 +23,7 @@ class ProductGroupsController < ApplicationController
         format.html { redirect_to @product_group, notice: 'Product group was successfully created.' }
         format.json { render :show, status: :created, location: @product_group }
         format.js {
-          @product_groups = ProductGroup.where(store_id: current_store.id)
+          @product_groups = ProductGroup.by_store(current_store.id)
           @options = []
           @product_groups.walk_tree do |group, level|
             @options << ["#{'--' * level} #{group.name}", group.id]
@@ -51,7 +48,7 @@ class ProductGroupsController < ApplicationController
       @error_message = "Vui lòng xóa hoặc chuyển các nhóm ngành con sang nhóm ngành khác trước khi xóa nhóm ngành này."
     else
       if @product_group.destroy
-        @product_groups = ProductGroup.where(store_id: current_store.id)
+        @product_groups = ProductGroup.by_store(current_store.id)
       else
         @error = @product_group.errors
       end

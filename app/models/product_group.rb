@@ -5,4 +5,6 @@ class ProductGroup < ApplicationRecord
   belongs_to :user
 
   acts_as_tree order: 'name'
+
+  scope :by_store, ->(store_id) { where(store_id: store_id) }
 end
