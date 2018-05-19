@@ -50,7 +50,9 @@ class ProductGroupsController < ApplicationController
       @error = true
       @error_message = "Vui lòng xóa hoặc chuyển các nhóm ngành con sang nhóm ngành khác trước khi xóa nhóm ngành này."
     else
-      unless @product_group.destroy
+      if @product_group.destroy
+        @product_groups = ProductGroup.where(store_id: current_store.id)
+      else
         @error = @product_group.errors
       end
     end

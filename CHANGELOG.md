@@ -5,6 +5,7 @@
 ### Thêm
 - Add/List/Delete Product Group items
 - Sử dụng Acts_As_Tree để biểu diễn cây cha-con
+- Sau khi thêm product group thì update lại group select
 ### Sửa
 - Chuyển font-size global to 0.9rem
 

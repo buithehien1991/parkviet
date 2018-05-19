@@ -1,6 +1,14 @@
 <% if user_signed_in? && !@error %>
   toastr.success("Xoá nhóm hàng thành công!");
   $("#product-group-<%= @product_group.id %>").remove();
+
+  // TODO Update select from New product page
+  $el = $("#product_product_group_id");
+  $el.empty(); // remove old options
+  $el.append($("<option></option>").attr("value", "").text("-- Chọn nhóm hàng nếu có --"));
+  <% @product_groups.walk_tree do |group, level| %>
+      $el.append($("<option></option>").attr("value", "<%= group.id %>").text("<%= "#{'--' * level} #{group.name}" %>"));
+  <% end %>
 <% else %>
   <% if @error_message %>
     toastr.error("<%= @error_message %>");

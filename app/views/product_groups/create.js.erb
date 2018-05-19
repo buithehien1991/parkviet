@@ -9,6 +9,14 @@ toastr.options.closeButton = true;
   message = message.replace(/(?:\r\n|\r|\n)/g, '');
   $(".modal-body").html(message);
 
+  // Update select from New product page
+  $el = $("#product_product_group_id");
+  $el.empty(); // remove old options
+  $el.append($("<option></option>").attr("value", "").text("-- Chọn nhóm hàng nếu có --"));
+  <% @product_groups.walk_tree do |group, level| %>
+      $el.append($("<option></option>").attr("value", "<%= group.id %>").text("<%= "#{'--' * level} #{group.name}" %>"));
+  <% end %>
+
 <% else %>
   toastr.error("Tạo nhóm không thành công. Vui lòng thử lại hoặc xem trợ giúp");
 <% end %>
