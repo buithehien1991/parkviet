@@ -1,0 +1,20 @@
+<% if user_signed_in? && !@producer.errors.present? %>
+  toastr.success("Xoá nhóm hàng thành công!");
+  $("#producer-<%= @producer.id %>").remove();
+
+  <% if @producers.size == 0 %>
+  $("#row-none").attr('class', 'd-table-row');
+  <% else %>
+  $("#row-none").attr('class', 'd-none');
+  <% end %>
+
+  // Update select from New product page
+  $el = $("#product_producer_id");
+  $el.empty(); // remove old options
+  $el.append($("<option></option>").attr("value", "").text("-- Không có nhà sản xuất --"));
+  <% @producers.each do |producer| %>
+      $el.append($("<option></option>").attr("value", "<%= producer.id %>").text("<%= producer.name %>"));
+  <% end %>
+<% else %>
+  toastr.error("Xóa nhà sản xuất không thành công. Vui lòng thử lại hoặc xem trợ giúp");
+<% end %>

@@ -12,11 +12,14 @@ class ProducersController < ApplicationController
     @producer = Producer.new(producer_params)
     @producer.user = current_user
     @producer.store = current_store
-    @product_group.save
+    @producer.save
+    @producers = Producer.by_store(current_store.id)
   end
 
+  # TODO(hienbt) check permission for delete
   def destroy
-    @product_group.destroy
+    @producer.destroy
+    @producers = Producer.by_store(current_store.id)
   end
 
   private

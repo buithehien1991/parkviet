@@ -1,5 +1,10 @@
 #CHANGE LOG
 
+## Ngày 20-05-2018
+### Thêm
+- Update information after create/remove producer. Only have Edit function
+### Sửa
+- Lưu & Tiếp tục not working correctly
 
 ## Ngày 19-05-2018
 ### Thêm
@@ -9,14 +14,6 @@
 - Thêm Nhà sản xuất (Cần cập nhật lại thông tin khi tạo hoặc xóa thành công)
 ### Sửa
 - Chuyển font-size global to 0.9rem
-
-# Remaining Items should be done by other member
-## Manage
-### Product Groups
-- Edit product groups
-- Lưu & Tiếp tục not working correctly
-- Thêm position để order theo position bởi người dùng
-
 
 -- Template --
 ## Ngày 19-05-2018

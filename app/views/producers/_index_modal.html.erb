@@ -12,7 +12,7 @@
 </ul>
 
 <div class="tab-content mx-3 mt-3">
-  <div class="tab-pane fade show active" id="group-list" role="tabpanel" aria-labelledby="list-tab">
+  <div class="tab-pane fade <%= "show active" if tab.eql?('list') %>" id="group-list" role="tabpanel" aria-labelledby="list-tab">
     <div class="products">
       <table class="table table-bordered">
         <thead>
@@ -22,17 +22,15 @@
         </tr>
         </thead>
         <tbody>
-        <% if @producers.empty? %>
-          <tr id="producer-none">
-            <td colspan="2" class="font-italic">Không có nhà sản xuất nào. Vui lòng thêm nhà sản xuất mới</td>
-          </tr>
-        <% end %>
+        <tr id="row-none" class="<%= @producers.size != 0 ? "d-none" : "d-table-row" %>">
+          <td colspan="2" class="font-italic">Không có nhà sản xuất nào. Vui lòng thêm nhà sản xuất mới</td>
+        </tr>
         <% @producers.each do |producer| %>
           <tr id="producer-<%= producer.id %>">
             <td><%= producer.name %></td>
             <td class="text-center">
               <%= link_to fa_icon("pencil-square-o"), "#", class: "text-center mr-2" %>
-              <%= link_to fa_icon("trash-o"), producer_path(group), method: :delete, class: 'text-danger', data: { confirm: "Bạn có chắc chắn muốn xóa nhà sản xuất: #{producer.name} ?", remote: true  } %>
+              <%= link_to fa_icon("trash-o"), producer_path(producer), method: :delete, class: 'text-danger', data: { confirm: "Bạn có chắc chắn muốn xóa nhà sản xuất: #{producer.name} ?", remote: true  } %>
             </td>
           </tr>
         <% end %>
@@ -40,7 +38,7 @@
       </table>
     </div>
   </div>
-  <div class="tab-pane fade" id="new-group" role="tabpanel" aria-labelledby="new-tab">
+  <div class="tab-pane fade <%= "show active" if tab.eql?('new') %>" id="new-group" role="tabpanel" aria-labelledby="new-tab">
     <%= form_with model: Producer.new do |f| %>
       <div class="form-group row">
         <%= f.label :name, "Tên nhà sản xuất", class: "col-md-3 text-right font-weight-bold" %>

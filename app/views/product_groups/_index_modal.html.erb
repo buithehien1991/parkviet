@@ -12,7 +12,7 @@
 </ul>
 
 <div class="tab-content mx-3 mt-3">
-  <div class="tab-pane fade show active" id="group-list" role="tabpanel" aria-labelledby="list-tab">
+  <div class="tab-pane fade <%= "show active" if tab.eql?('list') %>" id="group-list" role="tabpanel" aria-labelledby="list-tab">
     <div class="products">
       <table class="table table-bordered">
         <thead>
@@ -23,6 +23,9 @@
         </tr>
         </thead>
         <tbody>
+        <tr id="row-none" class="<%= @product_groups.size != 0 ? "d-none" : "d-table-row" %>">
+          <td colspan="3" class="font-italic">Không có nhóm hàng nào. Vui lòng thêm mới nhóm hàng.</td>
+        </tr>
         <% @product_groups.walk_tree do |group, level| %>
           <tr id="product-group-<%= group.id %>">
             <td><%= "#{'--' * level} #{group.name}" %></td>
@@ -37,7 +40,7 @@
       </table>
     </div>
   </div>
-  <div class="tab-pane fade" id="new-group" role="tabpanel" aria-labelledby="new-tab">
+  <div class="tab-pane fade <%= "show active" if tab.eql?('new') %>" id="new-group" role="tabpanel" aria-labelledby="new-tab">
     <%= form_with model: ProductGroup.new do |f| %>
       <div class="form-group row">
         <%= f.label :name, "Tên nhóm hàng", class: "col-md-3 text-right font-weight-bold" %>
