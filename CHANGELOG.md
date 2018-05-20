@@ -3,6 +3,7 @@
 ## Ngày 20-05-2018
 ### Thêm
 - Update information after create/remove producer. Only have Edit function
+- Update UI for create new product. 
 ### Sửa
 - Lưu & Tiếp tục not working correctly
 

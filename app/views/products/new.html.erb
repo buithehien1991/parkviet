@@ -44,12 +44,17 @@
       <%= render 'new_product_basic', f: f, locals: {f: f} %>
     </div>
     <div class="tab-pane fade" id="detail-content" role="tabpanel" aria-labelledby="detail-tab">
-      <%= render 'new_product_detail' %>
+      <%= render 'new_product_detail', f: f, locals: {f: f} %>
     </div>
     <div class="tab-pane fade" id="part-content" role="tabpanel" aria-labelledby="part-tab">
-      <%= render 'new_product_part' %>
+      <%= render 'new_product_part', f: f, locals: {f: f} %>
     </div>
   </div>
 
   <% end %>
 </div>
+
+<script src="https://cdn.ckeditor.com/4.9.2/standard/ckeditor.js"></script>
+<script>
+    CKEDITOR.replace('product[description]');
+</script>

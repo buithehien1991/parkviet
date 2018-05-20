@@ -1,0 +1,17 @@
+<div class="row">
+  <div class="col">
+    <div class="form-group">
+      <%= f.label :description, "Mô tả chi tiết" %>
+      <%= f.text_area :description, class: "form-control", ckeditor: { toolbar: 'mini' } %>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col">
+    <div class="form-group">
+      <%= f.label :note, "Ghi chú" %>
+      <%= f.text_area :note, placeholder: "Nhập ghi chú cho hàng hóa của bạn", class: "form-control" %>
+    </div>
+  </div>
+</div>
