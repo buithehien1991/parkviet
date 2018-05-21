@@ -1,5 +1,12 @@
 #CHANGE LOG
 
+## Ngày 21-05-2018
+### Thêm
+- Thêm paper-trail để theo dõi các hoạt động trong cửa hàng. Cho phép người dùng có thể khôi phục dữ liệu trong tương lai  nếu có nhầm lẫn. Mặc định mọi yêu cầu được tracking sẽ có ip và user_agent phục vụ cho việc kiểm tra và thống kê sau này. Chỉ add tracking khi xong cơ bản model tránh phát sinh dữ liệu rác.
+- Thêm pundit for xác thực quyền hạn để thực hiện các hành động tiếp theo của người dùng: VD thu ngân thì không thể thêm được hàng hóa nhưng được truy cập vào mục hóa đơn. Them khảo thêm việc phân quyền của Redmine.
+### Sửa
+### Xóa
+
 ## Ngày 20-05-2018
 ### Thêm
 - Update information after create/remove producer. Only have Edit function

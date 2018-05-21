@@ -64,3 +64,9 @@ gem 'jquery-rails'
 gem 'font-awesome-rails'
 gem 'toastr-rails'
 gem 'acts_as_tree'
+
+# Track changes to your models' data. Good for auditing or versioning.
+gem 'paper_trail', '~> 9.0.2'
+
+# Authorization to system
+gem 'pundit', '~> 1.1.0'

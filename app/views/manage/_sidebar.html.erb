@@ -32,8 +32,8 @@
           <% end %>
         </li>
 
-        <li>
-          <%= link_to "#" do %>
+        <li class="<%= request.path.start_with?(customers_path) || request.path.start_with?(suppliers_path) ? "active" : '' %>">
+          <%= link_to customers_path do %>
             <%= fa_icon "users", class: "sidebar-icon" %>
             <span class="sidebar-name">Đối tác</span>
           <% end %>

@@ -1,4 +1,6 @@
 class ApplicationController < ActionController::Base
+  before_action :set_paper_trail_whodunnit
+
   def get_districts
     html = ''
     if params[:province_id].present?
@@ -16,5 +18,9 @@ class ApplicationController < ActionController::Base
 
   def current_store
     current_user.stores.first
+  end
+
+  def info_for_paper_trail
+    { ip: request.remote_ip, user_agent: request.user_agent }
   end
 end
