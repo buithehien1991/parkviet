@@ -14,3 +14,10 @@
 Xóa cổng đang chạy
  - lsof -wni tcp:3000
  - kill -9 xxxx 
+ 
+## Install & Run on Windows
+### Error 
+While executing gem ... (Encoding::ConverterNotFoundError)
+    code converter not found (UTF-16LE to Windows-1258)
+- chcp 850
+ 
