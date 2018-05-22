@@ -9,3 +9,13 @@ vi:
               blank: không được để trống
             password_confirmation:
               confirmation: Xác nhận mật khẩu không đúng
+
+  customer_tab: Khách hàng
+  supplier_tab: Nhà cung cấp
+  add_new_customer_button: Thêm KH mới
+  add_new_supplier_button: Thêm NCC mới
+  manage_customer_title: Quản lý khách hàng
+  manage_supplier_title: Quản lý nhà cung cấp
+
+  # Common button
+  close: Đóng

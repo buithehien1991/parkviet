@@ -1,2 +1,30 @@
-<h1>Suppliers#index</h1>
-<p>Find me in app/views/suppliers/index.html.erb</p>
+<div class="m-3">
+  <div class="card text-center">
+    <div class="card-header">
+      <ul class="nav nav-tabs card-header-tabs">
+        <li class="nav-item">
+          <a class="nav-link <%= request.path.start_with?(customers_path) ? "active" : "" %>" href="<%= customers_path %>">
+            <%= fa_icon("user", text: t(:customer_tab)) %>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link <%= request.path.start_with?(suppliers_path) ? "active" : "" %>" href="<%= suppliers_path %>">
+            <%= fa_icon("truck", text: t(:supplier_tab)) %>
+          </a>
+        </li>
+
+        <li class="nav-item ml-auto">
+          <%= link_to new_supplier_path, class: "btn btn-success", remote: true do %>
+            <%= fa_icon "plus", text: t(:add_new_supplier_button) %>
+          <% end %>
+        </li>
+
+      </ul>
+    </div>
+    <div class="card-body">
+      <h5 class="card-title">Special title treatment</h5>
+      <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+      <a href="#" class="btn btn-primary">Go somewhere</a>
+    </div>
+  </div>
+</div>
