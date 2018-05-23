@@ -9,13 +9,37 @@ vi:
               blank: không được để trống
             password_confirmation:
               confirmation: Xác nhận mật khẩu không đúng
+    attributes:
+      customer:
+        name: Tên khách hàng
+        code: Mã khách hàng
+        type: Loại khách hàng
+        company_name: Tên công ty
+        phone: Số điện thoại
+        birthday: Ngày sinh
+        address: Địa chỉ
+
+  # Translate views
+  customers:
+    form:
+      name_placeholder: Nhập tên khách hàng
+      code_placeholder: Nhập mã khách hàng (Để trống hệ thống sẽ tự tạo)
+      phone_placeholder: Nhập số điện thoại của khách
+
 
   customer_tab: Khách hàng
   supplier_tab: Nhà cung cấp
   add_new_customer_button: Thêm KH mới
   add_new_supplier_button: Thêm NCC mới
-  manage_customer_title: Quản lý khách hàng
-  manage_supplier_title: Quản lý nhà cung cấp
+  add_new_customer_title: Thêm khách hàng mới
+  add_new_supplier_title: Thêm nhà cung cấp mới
 
   # Common button
   close: Đóng
+
+  # Common Label
+  label_fullname: Họ và tên
+  label_province: Tỉnh/Thành phố
+  label_district: Huyện/Quận
+  label_commune: Xã/Phường
+

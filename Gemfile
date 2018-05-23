@@ -70,3 +70,5 @@ gem 'paper_trail', '~> 9.0.2'
 
 # Authorization to system
 gem 'pundit', '~> 1.1.0'
+gem 'wdm', '>= 0.1.0' if Gem.win_platform?
+gem 'rails-i18n'

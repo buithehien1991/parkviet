@@ -1,9 +1,50 @@
 <%= form_with model: @customer do |f| %>
-  <div class="form-group row">
-    <%= f.label '' %>
-    <label for="staticEmail" class="col-sm-2 col-form-label">Email</label>
-    <div class="col-sm-10">
-      <input type="text" readonly class="form-control-plaintext" id="staticEmail" value="email@example.com">
+  <div class="row">
+    <div class="col-md-6">
+
+
+      <div class="form-group">
+        <%= f.label :name, class: "col-form-label font-weight-bold" %>
+        <%= f.text_field :name, class: "form-control form-control-sm", placeholder: t('.name_placeholder') %>
+      </div>
+
+      <div class="form-group">
+        <%= f.label :code, class: "col-form-label font-weight-bold" %>
+        <%= f.text_field :code, class: "form-control form-control-sm", placeholder: t('.code_placeholder') %>
+      </div>
+
+      <div class="form-group">
+        <%= f.label :phone, class: "col-form-label font-weight-bold" %>
+        <%= f.phone_field :phone, class: "form-control form-control-sm", placeholder: t('.phone_placeholder') %>
+      </div>
+
+      <div class="form-group">
+        <%= f.label :birthday, class: "col-form-label font-weight-bold mr-3" %>
+        <div class="input-group">
+          <%= f.date_select :birthday, {order: [:day, :month, :year], prompt: { day: 'Ngày', month: 'Tháng', year: 'Năm' }, start_year: Date.today.year - 18, end_year: Date.today.year - 100}, {class: "form-control form-control-sm d-inline-block"} %>
+        </div>
+      </div>
+
+      <div class="form-control">
+
+      </div>
+    </div>
+
+    <div class="col-md-6">
+      <div class="form-group row">
+        <%= f.label :type, class: "col-form-label font-weight-bold col-md-5" %>
+        <div class="col-md-7 mt-2">
+          <div class="form-check form-check-inline">
+            <%= f.radio_button :type, '0', class: "form-check-input", checked: true %>
+            <%= f.label "Cá nhân", class: "form-check-label" %>
+          </div>
+          <div class="form-check form-check-inline">
+            <%= f.radio_button :type, '1', class: "form-check-input" %>
+            <%= f.label "Công ty", class: "form-check-label" %>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
+
 <% end %>
