@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   root to: "home#index"
 
   get 'get_district_list', to: "application#get_districts"
+  get 'get_commune_list', to: "application#get_communes"
   get 'manage', to: "manage#index"
   get 'sale', to: "sale#index"
 

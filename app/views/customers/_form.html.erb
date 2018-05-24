@@ -1,50 +1,159 @@
-<%= form_with model: @customer do |f| %>
-  <div class="row">
-    <div class="col-md-6">
+<div class="new-customer">
+  <%= form_with model: @customer, id: 'new-customer' do |f| %>
+    <div class="row">
+      <div class="col-md-6">
 
+        <div class="form-group">
+          <%= f.label :name, class: "col-form-label font-weight-bold" %>
+          <%= f.text_field :name, class: "form-control form-control-sm", placeholder: t('.name_placeholder'), required: true %>
+        </div>
 
-      <div class="form-group">
-        <%= f.label :name, class: "col-form-label font-weight-bold" %>
-        <%= f.text_field :name, class: "form-control form-control-sm", placeholder: t('.name_placeholder') %>
-      </div>
+        <div class="form-group">
+          <%= f.label :code, class: "col-form-label font-weight-bold" %>
+          <%= f.text_field :code, class: "form-control form-control-sm", placeholder: t('.code_placeholder') %>
+        </div>
 
-      <div class="form-group">
-        <%= f.label :code, class: "col-form-label font-weight-bold" %>
-        <%= f.text_field :code, class: "form-control form-control-sm", placeholder: t('.code_placeholder') %>
-      </div>
+        <div class="form-group">
+          <%= f.label :phone, class: "col-form-label font-weight-bold" %>
+          <%= f.phone_field :phone, class: "form-control form-control-sm", placeholder: t('.phone_placeholder') %>
+        </div>
 
-      <div class="form-group">
-        <%= f.label :phone, class: "col-form-label font-weight-bold" %>
-        <%= f.phone_field :phone, class: "form-control form-control-sm", placeholder: t('.phone_placeholder') %>
-      </div>
+        <div class="form-group">
+          <%= f.label :email, class: "col-form-label font-weight-bold" %>
+          <%= f.email_field :email, class: "form-control form-control-sm", placeholder: t('.email_placeholder') %>
+        </div>
 
-      <div class="form-group">
-        <%= f.label :birthday, class: "col-form-label font-weight-bold mr-3" %>
-        <div class="input-group">
-          <%= f.date_select :birthday, {order: [:day, :month, :year], prompt: { day: 'Ngày', month: 'Tháng', year: 'Năm' }, start_year: Date.today.year - 18, end_year: Date.today.year - 100}, {class: "form-control form-control-sm d-inline-block"} %>
+        <div class="form-group">
+          <%= f.label :birthday, class: "col-form-label font-weight-bold mr-3" %>
+          <div class="input-group">
+            <%= f.date_select :birthday, {order: [:day, :month, :year], prompt: { day: 'Ngày', month: 'Tháng', year: 'Năm' }, start_year: Date.today.year - 18, end_year: Date.today.year - 100}, {class: "form-control form-control-sm d-inline-block"} %>
+          </div>
+        </div>
+
+        <div class="form-group row mb-0">
+          <%= f.label :sex, class: "col-form-label font-weight-bold col-md-4" %>
+          <div class="col-md-8 mt-2">
+            <div class="form-check form-check-inline">
+              <%= f.radio_button :sex, '0', class: "form-check-input" %>
+              <%= f.label t(:label_male), class: "form-check-label" %>
+            </div>
+            <div class="form-check form-check-inline">
+              <%= f.radio_button :sex, '1', class: "form-check-input" %>
+              <%= f.label t(:label_female), class: "form-check-label" %>
+            </div>
+          </div>
         </div>
       </div>
 
-      <div class="form-control">
-
-      </div>
-    </div>
-
-    <div class="col-md-6">
-      <div class="form-group row">
-        <%= f.label :type, class: "col-form-label font-weight-bold col-md-5" %>
-        <div class="col-md-7 mt-2">
-          <div class="form-check form-check-inline">
-            <%= f.radio_button :type, '0', class: "form-check-input", checked: true %>
-            <%= f.label "Cá nhân", class: "form-check-label" %>
+      <div class="col-md-6">
+        <div class="form-group row mb-0">
+          <%= f.label :customer_type, class: "col-form-label font-weight-bold col-md-5" %>
+          <div class="col-md-7 mt-2">
+            <div class="form-check form-check-inline">
+              <%= f.radio_button :customer_type, '0', class: "form-check-input", checked: true %>
+              <%= f.label "Cá nhân", class: "form-check-label" %>
+            </div>
+            <div class="form-check form-check-inline">
+              <%= f.radio_button :customer_type, '1', class: "form-check-input" %>
+              <%= f.label "Công ty", class: "form-check-label" %>
+            </div>
           </div>
-          <div class="form-check form-check-inline">
-            <%= f.radio_button :type, '1', class: "form-check-input" %>
-            <%= f.label "Công ty", class: "form-check-label" %>
+          <div class="col">
+            <%= f.text_field :company_name, class: "form-control form-control-sm d-none", placeholder: t('.company_name_placeholder')  %>
           </div>
         </div>
-      </div>
-    </div>
-  </div>
 
-<% end %>
+        <div class="form-group">
+          <%= f.label :address, class: "col-form-label font-weight-bold" %>
+          <%= f.text_field :address, class: "form-control form-control-sm", placeholder: t('.address_placeholder') %>
+        </div>
+
+        <div class="form-row">
+          <div class="col">
+            <%= f.label t(:label_province), class: "col-form-label font-weight-bold" %>
+            <%= f.select :province_id, options_for_select(Province.all.collect{|province| [province.name, province.id]}), {prompt: t(:prompt_province_select)}, class: "form-control form-control-sm" %>
+          </div>
+          <div class="col">
+            <%= f.label t(:label_district), class: "col-form-label font-weight-bold" %>
+            <%= f.select :district_id, [], {prompt: t(:prompt_district_select)}, class: "form-control form-control-sm" %>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <%= f.label t(:label_commune), class: "col-form-label font-weight-bold" %>
+          <%= f.select :commune_id, [], {prompt: t(:prompt_commune_select)}, class: "form-control form-control-sm" %>
+        </div>
+
+        <div class="form-group">
+          <%= f.label :tax, class: "col-form-label font-weight-bold" %>
+          <%= f.number_field :tax, class: "form-control form-control-sm", placeholder: t('.tax_placeholder') %>
+        </div>
+
+        <div class="form-group">
+          <%= f.label :description, class: "col-form-label font-weight-bold" %>
+          <%= f.text_area :description, class: "form-control form-control-sm", placeholder: t('.description_placeholder') %>
+        </div>
+
+      </div>
+
+      <%= f.submit t(:save), class: 'd-none' %>
+    </div>
+
+  <% end %>
+</div>
+
+<script>
+    $(document).ready(function () {
+        'use strict';
+
+        $('#customer_province_id').on('change', function () {
+            let province_id = this.value;
+            $.ajax({
+                url: '/get_district_list',
+                data: {
+                    province_id: province_id
+                },
+                success: function (data) {
+                    $('#customer_district_id').html(data);
+                    if (!province_id) {
+                        $('#customer_district_id').html('<option value=""><%= t(:prompt_district_select) %></option>');
+                    }
+                }
+            });
+        });
+
+        $('#customer_district_id').on('change', function () {
+            let district_id = this.value;
+            $.ajax({
+                url: '/get_commune_list',
+                data: {
+                    district_id: district_id
+                },
+                success: function (data) {
+                    $('#customer_commune_id').html(data);
+                    if (!district_id) {
+                        $('#customer_commune_id').html('<option value=""><%= t(:prompt_commune_select) %></option>');
+                    }
+                }
+            });
+        });
+
+        $('input[type=radio][name=customer\\[customer_type\\]]').change(function() {
+            if (this.value == 0) {
+                if (!$('#customer_company_name').hasClass('d-none')) {
+                    $('#customer_company_name').addClass('d-none');
+                    $('#customer_company_name').val('');
+                }
+            } else if (this.value == 1) {
+                if ($('#customer_company_name').hasClass('d-none')) {
+                    $('#customer_company_name').removeClass('d-none');
+                }
+            }
+        });
+
+
+        $('#submit_add_customer_btn').click(function () {
+            $('#new-customer').find('[type="submit"]').trigger('click');
+        });
+    })
+</script>

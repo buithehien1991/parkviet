@@ -1,0 +1,20 @@
+<div class="modal fade" id="park-modal" tabindex="-1" role="dialog" aria-labelledby="park-modal-label" aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <% if title.present? %>
+          <h5 class="modal-title" id="park-modal-title"><%= title %></h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        <% end %>
+      </div>
+      <div class="modal-body">
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal"><%= t(:close) %></button>
+        <button type="button" class="btn btn-success" id="<%= submit_id %>"><%= fa_icon "floppy-o", text: t(:save) %></button>
+      </div>
+    </div>
+  </div>
+</div>

@@ -18,6 +18,9 @@ vi:
         phone: Số điện thoại
         birthday: Ngày sinh
         address: Địa chỉ
+        sex: Giới tính
+        tax: Mã số thuế
+        description: Ghi chú
 
   # Translate views
   customers:
@@ -25,6 +28,11 @@ vi:
       name_placeholder: Nhập tên khách hàng
       code_placeholder: Nhập mã khách hàng (Để trống hệ thống sẽ tự tạo)
       phone_placeholder: Nhập số điện thoại của khách
+      address_placeholder: Nhập địa chỉ
+      tax_placeholder: Nhập mã số thuế
+      email_placeholder: Nhập email khách hàng
+      description_placeholder: Nhập ghi chú
+      company_name_placeholder: Nhập tên công ty
 
 
   customer_tab: Khách hàng
@@ -36,10 +44,18 @@ vi:
 
   # Common button
   close: Đóng
+  save: Lưu lại
 
   # Common Label
   label_fullname: Họ và tên
   label_province: Tỉnh/Thành phố
   label_district: Huyện/Quận
   label_commune: Xã/Phường
+  label_male: Nam
+  label_female: Nữ
+
+  # Common prompt
+  prompt_province_select: -- Chọn Tỉnh/Thành phố --
+  prompt_district_select: -- Chọn Huyện/Quận --
+  prompt_commune_select: -- Chọn Xã/Phường --
 
