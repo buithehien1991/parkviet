@@ -1,0 +1,12 @@
+<% if user_signed_in? %>
+var message = "<%= j render :partial => 'customers/form', locals: {customer: @customer} %>";
+message = message.replace(/(?:\r\n|\r|\n)/g, '');
+var modal = "<%= j render :partial => 'shared/modal_submit', locals: {title: t(:edit_customer_title), submit_id: 'submit_add_customer_btn'} %>";
+modal = modal.replace(/(?:\r\n|\r|\n)/g, '');
+$("body").append(modal);
+$(".modal-body").html(message);
+$("#park-modal").modal({
+    backdrop: 'static',
+    keyboard: false
+});
+<% end %>

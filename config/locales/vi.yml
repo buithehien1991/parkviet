@@ -13,7 +13,7 @@ vi:
       customer:
         name: Tên khách hàng
         code: Mã khách hàng
-        type: Loại khách hàng
+        customer_type: Loại khách hàng
         company_name: Tên công ty
         phone: Số điện thoại
         birthday: Ngày sinh
@@ -41,6 +41,7 @@ vi:
   add_new_supplier_button: Thêm NCC mới
   add_new_customer_title: Thêm khách hàng mới
   add_new_supplier_title: Thêm nhà cung cấp mới
+  edit_customer_title: Sửa thông tin khách hàng
 
   # Common button
   close: Đóng

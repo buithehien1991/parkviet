@@ -1,0 +1,3 @@
+<% if @customer.errors.present? %>
+  toastr.error("<%= @customer.errors.full_messages %>");
+<% end %>

@@ -22,9 +22,38 @@
       </ul>
     </div>
     <div class="card-body">
-      <h5 class="card-title">Special title treatment</h5>
-      <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-      <a href="#" class="btn btn-primary">Go somewhere</a>
+
+      <table class="table table-bordered">
+        <thead>
+        <th><%= t('activerecord.attributes.customer.code') %></th>
+        <th><%= t('activerecord.attributes.customer.name') %></th>
+        <th><%= t('activerecord.attributes.customer.phone') %></th>
+        <th><%= t('activerecord.attributes.customer.address') %></th>
+        <th>Lần mua hàng cuối cùng</th>
+        <th>Tổng tiền hàng</th>
+        <th>Tiền trả hàng</th>
+        <th>Nợ</th>
+        <th></th>
+        </thead>
+
+        <% @customers.each do |customer| %>
+          <tr id="customer-<%= customer.id %>">
+            <td><%= link_to customer.code, customer_path(customer) %></td>
+            <td><%= link_to customer.name, customer_path(customer) %></td>
+            <td><%= customer.phone %></td>
+            <td><%= customer.address %></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td>
+              <%= link_to fa_icon("pencil"), edit_customer_path(customer), remote: true %>
+              <%= link_to fa_icon("trash"), customer_path(customer), method: :delete, remote: true, class: "text-danger" %>
+            </td>
+          </tr>
+        <% end %>
+      </table>
+
     </div>
   </div>
 </div>

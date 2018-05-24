@@ -1,5 +1,5 @@
 class CustomersController < ApplicationController
-  before_action :set_producer, only: [:show, :edit, :update, :destroy]
+  before_action :set_customer, only: [:show, :edit, :update, :destroy]
   before_action :authenticate_user!
 
   def index
@@ -25,7 +25,14 @@ class CustomersController < ApplicationController
     end
   end
 
+  def update
+    if @customer.update(customer_params)
+      redirect_to customers_path, notice: "Cập nhật thông tin khách hàng thành công."
+    end
+  end
+
   def destroy
+    @customer.destroy
   end
 
   private
