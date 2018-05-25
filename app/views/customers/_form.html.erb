@@ -51,11 +51,11 @@
           <div class="col-md-7 mt-2">
             <div class="form-check form-check-inline">
               <%= f.radio_button :customer_type, '0', class: "form-check-input", checked: true %>
-              <%= f.label "Cá nhân", class: "form-check-label" %>
+              <%= f.label t('.type_personal'), class: "form-check-label" %>
             </div>
             <div class="form-check form-check-inline">
               <%= f.radio_button :customer_type, '1', class: "form-check-input" %>
-              <%= f.label "Công ty", class: "form-check-label" %>
+              <%= f.label t('.type_company'), class: "form-check-label" %>
             </div>
           </div>
           <div class="col">
@@ -106,36 +106,19 @@
     $(document).ready(function () {
         'use strict';
 
+        let province = $('#customer_province_id').val();
+        if (province) {
+            getDistrictAndCommuneOptions(province);
+        }
+
         $('#customer_province_id').on('change', function () {
             let province_id = this.value;
-            $.ajax({
-                url: '/get_district_list',
-                data: {
-                    province_id: province_id
-                },
-                success: function (data) {
-                    $('#customer_district_id').html(data);
-                    if (!province_id) {
-                        $('#customer_district_id').html('<option value=""><%= t(:prompt_district_select) %></option>');
-                    }
-                }
-            });
+            getDistrictOption(province_id);
         });
 
         $('#customer_district_id').on('change', function () {
             let district_id = this.value;
-            $.ajax({
-                url: '/get_commune_list',
-                data: {
-                    district_id: district_id
-                },
-                success: function (data) {
-                    $('#customer_commune_id').html(data);
-                    if (!district_id) {
-                        $('#customer_commune_id').html('<option value=""><%= t(:prompt_commune_select) %></option>');
-                    }
-                }
-            });
+            getCommuneOptions(district_id);
         });
 
         $('input[type=radio][name=customer\\[customer_type\\]]').change(function() {
@@ -151,9 +134,74 @@
             }
         });
 
-
         $('#submit_add_customer_btn').click(function () {
             $('#new-customer').find('[type="submit"]').trigger('click');
         });
+
+        function getDistrictOption(province_id) {
+            $.ajax({
+                url: '/get_district_list',
+                data: {
+                    province_id: province_id
+                },
+                success: function (data) {
+                    $('#customer_district_id').html(data);
+                    if (!province_id) {
+                        $('#customer_district_id').html('<option value=""><%= t(:prompt_district_select) %></option>');
+                    }
+                }
+            });
+        }
+
+        function getCommuneOptions(district_id) {
+            $.ajax({
+                url: '/get_commune_list',
+                data: {
+                    district_id: district_id
+                },
+                success: function (data) {
+                    $('#customer_commune_id').html(data);
+                    if (!district_id) {
+                        $('#customer_commune_id').html('<option value=""><%= t(:prompt_commune_select) %></option>');
+                    }
+                }
+            });
+        }
+
+        function getDistrictAndCommuneOptions(province_id) {
+            $.ajax({
+                url: '/get_district_list',
+                data: {
+                    province_id: province_id
+                },
+                success: function (data) {
+
+                    if (!province_id) {
+                        $('#customer_district_id').html('<option value=""><%= t(:prompt_district_select) %></option>');
+                    } else {
+                        $('#customer_district_id').html(data);
+                        $('#customer_district_id').find('option[value=<%= @customer.district_id %>]').attr('selected',true);
+                    }
+
+                    let district_id = $('#customer_district_id').val();
+                    if (district_id) {
+                        $.ajax({
+                            url: '/get_commune_list',
+                            data: {
+                                district_id: district_id
+                            },
+                            success: function (data) {
+                                if (!district_id) {
+                                    $('#customer_commune_id').html('<option value=""><%= t(:prompt_commune_select) %></option>');
+                                } else {
+                                    $('#customer_commune_id').html(data);
+                                    $('#customer_commune_id').find('option[value=<%= @customer.commune_id %>]').attr('selected', true);
+                                }
+                            }
+                        });
+                    }
+                }
+            });
+        }
     })
 </script>

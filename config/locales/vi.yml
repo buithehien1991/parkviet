@@ -33,6 +33,8 @@ vi:
       email_placeholder: Nhập email khách hàng
       description_placeholder: Nhập ghi chú
       company_name_placeholder: Nhập tên công ty
+      type_personal: Cá nhân
+      type_company: Công ty
 
 
   customer_tab: Khách hàng
