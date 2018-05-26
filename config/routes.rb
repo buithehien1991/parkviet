@@ -14,7 +14,11 @@ Rails.application.routes.draw do
   scope :manage do
     resources :invoices
     resources :products
-    resources :customers
+    resources :customers do
+      collection do
+        get 'search'
+      end
+    end
     resources :suppliers
     resources :product_groups
     resources :producers

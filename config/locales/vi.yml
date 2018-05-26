@@ -35,6 +35,8 @@ vi:
       company_name_placeholder: Nhập tên công ty
       type_personal: Cá nhân
       type_company: Công ty
+    index:
+      search_placeholer: Nhập mã KH, tên KH, chữ cái đầu, SĐT KH
 
 
   customer_tab: Khách hàng
@@ -48,6 +50,7 @@ vi:
   # Common button
   close: Đóng
   save: Lưu lại
+  search: Tìm kiếm
 
   # Common Label
   label_fullname: Họ và tên

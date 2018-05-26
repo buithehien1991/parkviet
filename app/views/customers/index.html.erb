@@ -22,6 +22,21 @@
       </ul>
     </div>
     <div class="card-body">
+      <div class="row mb-3">
+        <div class="col-md-6">
+          <%= form_with url: search_customers_path, method: :get do |f| %>
+            <div class="input-group">
+              <div class="input-group-prepend">
+                <div class="input-group-text"><%= t(:search) %></div>
+              </div>
+              <%= f.text_field :query, placeholder: t('.search_placeholer'), class: "form-control" %>
+              <div class="input-group-append">
+                <%= f.submit t(:search), class: "btn btn-info btn-park" %>
+              </div>
+            </div>
+          <% end %>
+        </div>
+      </div>
 
       <table class="table table-bordered">
         <thead>

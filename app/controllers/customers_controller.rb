@@ -13,6 +13,11 @@ class CustomersController < ApplicationController
   def edit
   end
 
+  def search
+    term = params[:query]
+    @customers = CustomersIndex.query{match name: term}.or.query{match code: term}
+  end
+
   def create
     @customer = Customer.new(customer_params)
     @customer.birthday = build_birthday(params)

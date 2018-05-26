@@ -61,6 +61,7 @@ gem 'devise', '~> 4.4.3'
 # Gem group for UI
 gem 'bootstrap', '~> 4.1.1'
 gem 'jquery-rails'
+gem 'jquery-ui-rails'
 gem 'font-awesome-rails'
 gem 'toastr-rails'
 gem 'acts_as_tree'
@@ -71,4 +72,13 @@ gem 'paper_trail', '~> 9.0.2'
 # Authorization to system
 gem 'pundit', '~> 1.1.0'
 gem 'wdm', '>= 0.1.0' if Gem.win_platform?
+
+# Translate date time class in date_select tag
 gem 'rails-i18n'
+
+# Search: Elasticsearch 6.0.2
+gem 'chewy', '~> 5.0.0'
+
+# Paginate
+gem 'will_paginate', '~> 3.1.6'
+gem 'will_paginate-bootstrap4' #https://github.com/delef/will_paginate-bootstrap4

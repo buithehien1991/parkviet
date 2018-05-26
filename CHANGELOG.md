@@ -1,4 +1,12 @@
 #CHANGE LOG
+## Ngày 256-05-2018
+### Thêm
+- Add gem for Auto complete search
+
+## Ngày 25-05-2018
+### Thêm
+- Add gem for paginate page.
+- Add gem for full text search
 
 ## Ngày 24-05-2018
 ### Thêm

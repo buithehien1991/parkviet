@@ -6,6 +6,9 @@
  - rails db:seed
 ### Bước 2: Import CSDL tỉnh/huyện/xã
  - CSDL tại db/diadanh_2018-05-05.sql
+### Bước 3: Cài đặt Redis & Elastic search
+
+### Bước 4
  
 ## Đăng nhập và sử dụng
 

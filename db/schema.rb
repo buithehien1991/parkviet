@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_05_25_050331) do
+ActiveRecord::Schema.define(version: 2018_05_25_102218) do
 
   create_table "active_storage_attachments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci", force: :cascade do |t|
     t.string "name", null: false
@@ -79,7 +79,7 @@ ActiveRecord::Schema.define(version: 2018_05_25_050331) do
     t.string "email"
     t.string "group"
     t.string "description"
-    t.integer "status"
+    t.integer "status", default: 0
     t.bigint "user_id"
     t.bigint "store_id"
     t.datetime "created_at", null: false
@@ -195,7 +195,7 @@ ActiveRecord::Schema.define(version: 2018_05_25_050331) do
     t.integer "producer_id"
     t.integer "product_type_id"
     t.integer "product_group_id"
-    t.integer "status"
+    t.integer "status", default: 0
     t.bigint "user_id"
     t.bigint "store_id"
     t.datetime "created_at", null: false
@@ -284,7 +284,7 @@ ActiveRecord::Schema.define(version: 2018_05_25_050331) do
     t.string "email"
     t.string "group"
     t.string "description"
-    t.integer "status"
+    t.integer "status", default: 0
     t.bigint "user_id"
     t.bigint "store_id"
     t.datetime "created_at", null: false
