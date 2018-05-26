@@ -21,6 +21,17 @@ vi:
         sex: Giới tính
         tax: Mã số thuế
         description: Ghi chú
+      supplier:
+        name: Tên nhà cung cấp
+        code: Mã nhà cung cấp
+        supplier_type: Loại NCC
+        company_name: Tên công ty
+        phone: Số điện thoại
+        birthday: Ngày sinh
+        address: Địa chỉ
+        sex: Giới tính
+        tax: Mã số thuế
+        description: Ghi chú
 
   # Translate views
   customers:
@@ -38,6 +49,21 @@ vi:
     index:
       search_placeholer: Nhập mã KH, tên KH, chữ cái đầu, SĐT KH
 
+  suppliers:
+    form:
+      name_placeholder: Nhập tên nhà cung cấp
+      code_placeholder: Nhập mã nhà cung cấp (Để trống hệ thống sẽ tự tạo)
+      phone_placeholder: Nhập số điện thoại của NCC
+      address_placeholder: Nhập địa chỉ
+      tax_placeholder: Nhập mã số thuế
+      email_placeholder: Nhập email nhà cung cấp
+      description_placeholder: Nhập ghi chú
+      company_name_placeholder: Nhập tên công ty
+      type_personal: Cá nhân
+      type_company: Công ty
+    index:
+      search_placeholer: Nhập mã KH, tên KH, chữ cái đầu, SĐT KH
+
 
   customer_tab: Khách hàng
   supplier_tab: Nhà cung cấp
@@ -46,6 +72,7 @@ vi:
   add_new_customer_title: Thêm khách hàng mới
   add_new_supplier_title: Thêm nhà cung cấp mới
   edit_customer_title: Sửa thông tin khách hàng
+  edit_supplier_title: Sửa thông tin nhà cung cấp
 
   # Common button
   close: Đóng
@@ -65,3 +92,8 @@ vi:
   prompt_district_select: -- Chọn Huyện/Quận --
   prompt_commune_select: -- Chọn Xã/Phường --
 
+  # Notice from controller
+  notice_create_customer_successfully: Tạo khách hàng thành công
+  notice_update_customer_successfully: Cập nhật khách hàng thành công
+  notice_create_supplier_successfully: Tạo nhà cung cấp thành công
+  notice_update_supplier_successfully: Cập nhật nhà cung cập thành công

@@ -19,7 +19,11 @@ Rails.application.routes.draw do
         get 'search'
       end
     end
-    resources :suppliers
+    resources :suppliers do
+      collection do
+        get 'search'
+      end
+    end
     resources :product_groups
     resources :producers
   end

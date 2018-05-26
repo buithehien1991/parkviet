@@ -1,11 +1,32 @@
+# MVC
 ## Manage
 ### Product Groups
 - Edit product group
 - Thêm position để order theo position bởi người dùng
+- Paginate: Should write to module and can be reused by other component.
 
 ### Producer
 - Edit producer
+- Paginate: Will be completed after Product
 
+### Customer
+- Show detail with more information of this customer: Invoice, ReturnOrder
+- Paginate: Will be completed after Product
+
+### Group Customer
+- Do not everything
+
+### Search & Filter module
+- Should be modularization to can be reused by many component 
+
+### Import & Export Excel
+- Cho phép import dữ liệu từ Kiot Việt, Suno
+
+### Printer
+- Support normal printer: 
+- Support invoice printer:
+
+# Other
 ## Common
 - Add checking permission for delete: Product Group | Producer. Prevent hacking by check permission. 
 - Add activity tracking to system. Should be put to background and should do after complete create new producer and before do other things

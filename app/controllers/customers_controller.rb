@@ -27,7 +27,7 @@ class CustomersController < ApplicationController
     if @customer.save
       @customer.code = build_customer_code unless @customer.code.present?
       @customer.save
-      redirect_to customers_path, notice: "Tạo khách hàng thành công."
+      redirect_to customers_path, notice: t(:notice_create_customer_successfully)
     end
   end
 
@@ -35,7 +35,7 @@ class CustomersController < ApplicationController
     @customer.code = build_customer_code unless params[:customer][:code].present?
     @customer.birthday = build_birthday(params)
     if @customer.update(customer_params)
-      redirect_to customers_path, notice: "Cập nhật thông tin khách hàng thành công."
+      redirect_to customers_path, notice: t(:notice_update_customer_successfully)
     end
   end
 
@@ -49,7 +49,9 @@ class CustomersController < ApplicationController
   end
 
   def build_birthday(params)
-    Date.new(params[:customer]["birthday(1i)"].to_i,params[:customer]["birthday(2i)"].to_i,params[:customer]["birthday(3i)"].to_i)
+    if params[:customer]["birthday(1i)"].present? && params[:customer]["birthday(2i)"].present? && params[:customer]["birthday(3i)"].present?
+      Date.new(params[:customer]["birthday(1i)"].to_i,params[:customer]["birthday(2i)"].to_i,params[:customer]["birthday(3i)"].to_i)
+    end
   end
 
   def set_customer

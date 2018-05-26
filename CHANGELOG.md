@@ -2,6 +2,7 @@
 ## Ngày 256-05-2018
 ### Thêm
 - Add gem for Auto complete search
+- Complete model supplier basically
 
 ## Ngày 25-05-2018
 ### Thêm

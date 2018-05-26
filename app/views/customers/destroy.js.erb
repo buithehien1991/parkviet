@@ -1,5 +1,5 @@
 <% if @customer.errors.present? %>
-  toastr.error("<%= @customer.errors.full_messages %>");
+  toastr.error("<%= @customer.errors.full_messages.to_sentence %>");
 <% else %>
   toastr.success("Xóa thành công khách hàng: <%= @customer.name %>")
   $("#customer-<%= @customer.id %>").remove();

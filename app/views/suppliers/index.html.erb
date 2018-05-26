@@ -22,9 +22,52 @@
       </ul>
     </div>
     <div class="card-body">
-      <h5 class="card-title">Special title treatment</h5>
-      <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-      <a href="#" class="btn btn-primary">Go somewhere</a>
+
+      <div class="row mb-3">
+        <div class="col-md-6">
+          <%= form_with url: search_suppliers_path, method: :get do |f| %>
+            <div class="input-group">
+              <div class="input-group-prepend">
+                <div class="input-group-text"><%= t(:search) %></div>
+              </div>
+              <%= f.text_field :query, placeholder: t('.search_placeholer'), class: "form-control" %>
+              <div class="input-group-append">
+                <%= f.submit t(:search), class: "btn btn-info btn-park" %>
+              </div>
+            </div>
+          <% end %>
+        </div>
+      </div>
+
+      <table class="table table-bordered">
+        <thead>
+        <th><%= t('activerecord.attributes.supplier.code') %></th>
+        <th><%= t('activerecord.attributes.supplier.name') %></th>
+        <th><%= t('activerecord.attributes.supplier.phone') %></th>
+        <th><%= t('activerecord.attributes.supplier.address') %></th>
+        <th>Nợ cần trả hiện tại</th>
+        <th>Tổng đã mua</th>
+        <th>Lần nhập hàng cuối cùng</th>
+        <th></th>
+        </thead>
+
+        <% @suppliers.each do |supplier| %>
+          <tr id="customer-<%= supplier.id %>">
+            <td><%= link_to supplier.code, supplier_path(supplier) %></td>
+            <td><%= link_to supplier.name, supplier_path(supplier) %></td>
+            <td><%= supplier.phone %></td>
+            <td><%= supplier.address %></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td>
+              <%= link_to fa_icon("pencil"), edit_supplier_path(supplier), remote: true %>
+              <%= link_to fa_icon("trash"), supplier_path(supplier), method: :delete, remote: true, class: "text-danger" %>
+            </td>
+          </tr>
+        <% end %>
+      </table>
+
     </div>
   </div>
 </div>

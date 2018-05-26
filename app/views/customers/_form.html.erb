@@ -59,7 +59,7 @@
             </div>
           </div>
           <div class="col">
-            <%= f.text_field :company_name, class: "form-control form-control-sm d-none", placeholder: t('.company_name_placeholder')  %>
+            <%= f.text_field :company_name, class: "form-control form-control-sm #{"d-none" if @customer.customer_type.present? && @customer.customer_type != 1}", placeholder: t('.company_name_placeholder')  %>
           </div>
         </div>
 
@@ -86,7 +86,7 @@
 
         <div class="form-group">
           <%= f.label :tax, class: "col-form-label font-weight-bold" %>
-          <%= f.number_field :tax, class: "form-control form-control-sm", placeholder: t('.tax_placeholder') %>
+          <%= f.text_field :tax, class: "form-control form-control-sm", placeholder: t('.tax_placeholder') %>
         </div>
 
         <div class="form-group">
@@ -125,7 +125,6 @@
             if (this.value == 0) {
                 if (!$('#customer_company_name').hasClass('d-none')) {
                     $('#customer_company_name').addClass('d-none');
-                    $('#customer_company_name').val('');
                 }
             } else if (this.value == 1) {
                 if ($('#customer_company_name').hasClass('d-none')) {
