@@ -10,6 +10,10 @@ vi:
             password_confirmation:
               confirmation: Xác nhận mật khẩu không đúng
     attributes:
+      product:
+        code: Mã hàng hóa (Tối đa 32 ký tự)
+        name: Tên hàng hóa
+        product_group_id: Nhóm hàng
       customer:
         name: Tên khách hàng
         code: Mã khách hàng
@@ -34,6 +38,19 @@ vi:
         description: Ghi chú
 
   # Translate views
+  products:
+    new:
+      tab_basic_information: Thông tin cơ bản
+      tab_detail_information: Mô tả chi tiết
+      tab_product_part: Thành phần
+    new_product_basic:
+      placeholder_code: Hệ thống sẽ tự tạo nếu để trống
+      placeholder_name: Nhập tên hàng hóa của bạn
+    new_product_detail:
+    new_product_part:
+    index:
+    show:
+
   customers:
     form:
       name_placeholder: Nhập tên khách hàng
@@ -48,7 +65,6 @@ vi:
       type_company: Công ty
     index:
       search_placeholer: Nhập mã KH, tên KH, chữ cái đầu, SĐT KH
-
   suppliers:
     form:
       name_placeholder: Nhập tên nhà cung cấp
@@ -77,7 +93,10 @@ vi:
   # Common button
   close: Đóng
   save: Lưu lại
+  save_only: Lưu
+  save_cont: Lưu và Thêm mới
   search: Tìm kiếm
+  cancel: Hủy bỏ
 
   # Common Label
   label_fullname: Họ và tên

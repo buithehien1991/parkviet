@@ -37,5 +37,6 @@ Xóa cổng đang chạy
 ### Error 
 While executing gem ... (Encoding::ConverterNotFoundError)
     code converter not found (UTF-16LE to Windows-1258)
-- chcp 850
+    
+`chcp 850`
  

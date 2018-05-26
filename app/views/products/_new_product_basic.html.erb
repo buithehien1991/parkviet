@@ -1,17 +1,17 @@
 <div class="row">
   <div class="col-md-6">
     <div class="form-group">
-      <%= f.label :code, "Mã hàng hóa (Tối đa 32 ký tự)" %>
-      <%= f.text_field :code, class: "form-control form-control-sm", placeholder: "Hệ thống sẽ tự tạo nếu để trống" %>
+      <%= f.label :code %>
+      <%= f.text_field :code, class: "form-control form-control-sm", placeholder: t('.placeholder_code') %>
     </div>
 
     <div class="form-group">
-      <%= f.label :name, "Tên hàng hóa" %> <span style="color: red;">*</span>
-      <%= f.text_field :name, class: "form-control form-control-sm", placeholder: "Nhập tên hàng hóa của bạn" %>
+      <%= f.label :name %> <span style="color: red;">*</span>
+      <%= f.text_field :name, class: "form-control form-control-sm", placeholder: t('.placeholder_name') %>
     </div>
 
     <div class="form-group">
-      <%= f.label :product_group_id, "Nhóm hàng" %>
+      <%= f.label :product_group_id %>
       <div class="input-group">
         <%= f.select :product_group_id, options_for_select(@product_group_options), {prompt: "-- Chọn nhóm hàng nếu có --"}, {class: "custom-select form-control form-control-sm"} %>
         <div class="input-group-append">
@@ -84,6 +84,9 @@
     </div>
 
   </div>
+
+  <%= f.button t(:save_only), type: 'submit', name: 'kind', value: 'save', class: 'd-none', id: 'save_only_product' %>
+  <%= f.button t(:save_cont), type: 'submit', name: 'kind', value: 'cont', class: 'd-none', id: 'save_product_and_add_new' %>
 </div>
 
 <div class="row">

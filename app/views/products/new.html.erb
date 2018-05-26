@@ -4,32 +4,27 @@
     <ul class="nav nav-tabs new-product-tabs" id="new-product" role="tab">
       <li class="nav-item">
         <a href="#basic-content" id="basic-tab" data-toggle="tab" role="tab" aria-controls="basic" aria-selected="true" class="nav-link active">
-          <%= fa_icon "barcode" %> <span class="tab-name">Thông tin cơ bản</span>
+          <%= fa_icon "barcode" %> <span class="tab-name"><%= t('.tab_basic_information') %></span>
         </a>
       </li>
       <li class="nav-item">
         <a href="#detail-content" id="detail-tab" data-toggle="tab" role="tab" aria-controls="detail" aria-selected="true" class="nav-link">
-          <%= fa_icon "file-text-o" %> <span class="tab-name">Mô tả chi tiết</span>
+          <%= fa_icon "file-text-o" %> <span class="tab-name"><%= t('.tab_detail_information') %></span>
         </a>
       </li>
       <li class="nav-item">
         <a href="#part-content" id="part-tab" data-toggle="tab" role="tab" aria-controls="part" aria-selected="true" class="nav-link">
-          <%= fa_icon "info-circle" %> <span>Thành phần</span>
+          <%= fa_icon "info-circle" %> <span><%= t('.tab_product_part') %></span>
         </a>
       </li>
 
 
       <li class="nav-item ml-auto">
-        <%= link_to "#", class: "btn btn-success" do %>
-          <%= fa_icon "floppy-o", text: "Lưu" %>
-        <% end %>
+        <button type="button" class="btn btn-success" id="btn_save_product"><%= fa_icon "floppy-o", text: t(:save_only) %></button>
+        <button type="button" class="btn btn-success" id="btn_save_product_and_add_new"><%= fa_icon "floppy-o", text: t(:save_cont) %></button>
 
-        <%= link_to "#", class: "btn btn-success" do %>
-          <%= fa_icon "floppy-o", text: "Lưu & Thêm mới" %>
-        <% end %>
-
-        <%= link_to "#", class: "btn btn-secondary" do %>
-          <%= fa_icon "ban", text: "Hủy bỏ" %>
+        <%= link_to products_path, class: "btn btn-secondary" do %>
+          <%= fa_icon "ban", text: t(:cancel) %>
         <% end %>
       </li>
 
@@ -56,5 +51,15 @@
 
 <script src="https://cdn.ckeditor.com/4.9.2/standard/ckeditor.js"></script>
 <script>
-    CKEDITOR.replace('product[description]');
+    $(document).ready(function () {
+        CKEDITOR.replace('product[description]');
+
+        $("#btn_save_product").click(function () {
+            $('#save_only_product').trigger('click');
+        });
+
+        $("#btn_save_product_and_add_new").click(function () {
+            $('#save_product_and_add_new').trigger('click');
+        });
+    });
 </script>
