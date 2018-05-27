@@ -5,7 +5,7 @@
       <div>
         <ul class="navbar-nav mr-auto">
           <li class="nav-item">
-            <span class="title">Hàng hóa</span>
+            <span class="title"><%= t('activerecord.attributes.product.title') %></span>
           </li>
         </ul>
       </div>
@@ -16,7 +16,7 @@
         <ul class="navbar-nav ml-auto">
           <li class="nav-item">
             <%= link_to new_product_path, class: "btn btn-info header-menu" do %>
-              <%= fa_icon "plus", text: "Thêm hàng hóa" %>
+              <%= fa_icon "plus", text: t('.add_product') %>
             <% end %>
           </li>
 
@@ -64,7 +64,59 @@
   </div>
 
   <div class="list">
+    <table class="table table-bordered table-hover">
+      <thead class="thead-light">
+      <th><%= t('activerecord.attributes.product.code') %></th>
+      <th><%= t('activerecord.attributes.product.name') %></th>
+      <th><%= t('activerecord.attributes.product.cost_price') %></th>
+      <th><%= t('activerecord.attributes.product.sale_price') %></th>
+      <th><%= t('activerecord.attributes.product.in_stock_short') %></th>
+      <th></th>
+      </thead>
 
+      <tbody>
+      <% @products.each do |product| %>
+        <tr>
+          <td>
+            <%= link_to product.code, product_path(product) %>
+          </td>
+          <td class="font-weight-bold">
+            <%= link_to product.name, product_path(product) %>
+          </td>
+          <td>
+            <%= product.cost_price %>
+          </td>
+          <td>
+            <%= product.sale_price %>
+          </td>
+          <td>
+            <%= product.in_stock %>
+          </td>
+          <td>
+            <%= link_to fa_icon("pencil"), edit_product_path(product) %>
+            <%= link_to fa_icon("trash"), product_path(product), method: :delete, class: "text-danger", data: { confirm: "Bạn có chắc chắn muốn xóa hàng hóa này ?" } %>
+          </td>
+        </tr>
+      <% end %>
+      </tbody>
+
+      <tfoot>
+      <tr>
+        <td colspan="6">
+          <div class="d-flex justify-content-between">
+            <div class="mt-1"></div>
+            <div class="mt-1"><%= page_entries_info @products %></div>
+            <div class="d-flex justify-content-end">
+              <div><%= will_paginate @products %></div>
+              <div class="select-per-page ml-2">
+                <%= select_tag :per_page, options_for_select([10,25,50,100], params[:per_page].to_i), :onchange => "if(this.value){window.location='?per_page='+this.value;}", class: "form-control" %>
+              </div>
+            </div>
+          </div>
+        </td>
+      </tr>
+      </tfoot>
+    </table>
   </div>
 
 </div>

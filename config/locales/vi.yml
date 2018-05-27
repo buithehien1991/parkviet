@@ -11,9 +11,17 @@ vi:
               confirmation: Xác nhận mật khẩu không đúng
     attributes:
       product:
-        code: Mã hàng hóa (Tối đa 32 ký tự)
+        title: Hàng hóa
+        code: Mã hàng hóa
         name: Tên hàng hóa
         product_group_id: Nhóm hàng
+        cost_price: Giá vốn
+        sale_price: Giá bán
+        producer_id: Nhà sản xuất
+        in_stock: Số lượng hàng trong kho
+        in_stock_short: Tồn kho
+        in_stock_min: Tồn kho tối thiểu
+        in_stock_max: Tồn kho tối đa
       customer:
         name: Tên khách hàng
         code: Mã khách hàng
@@ -39,7 +47,7 @@ vi:
 
   # Translate views
   products:
-    new:
+    form:
       tab_basic_information: Thông tin cơ bản
       tab_detail_information: Mô tả chi tiết
       tab_product_part: Thành phần
@@ -49,6 +57,7 @@ vi:
     new_product_detail:
     new_product_part:
     index:
+      add_product: Thêm hàng hóa
     show:
 
   customers:
@@ -116,3 +125,29 @@ vi:
   notice_update_customer_successfully: Cập nhật khách hàng thành công
   notice_create_supplier_successfully: Tạo nhà cung cấp thành công
   notice_update_supplier_successfully: Cập nhật nhà cung cập thành công
+  notice_create_product_successfully: Tạo hàng hóa thành công
+  notice_update_product_successfully: Cập nhật hàng hóa thành công
+  notice_delete_product_successfully: Xóa hàng hóa thành công
+  notice_delete_product_error: Lỗi khi xóa hàng hóa.
+
+  will_paginate:
+    previous_label: "&#8592;"
+    next_label: "&#8594;"
+    page_gap: "&hellip;"
+    page_entries_info:
+      single_page:
+        zero:  "Không có %{model}"
+        one:   "Hiển thị một %{model}"
+        other: "Hiển thị tất cả %{count} %{model}"
+      single_page_html:
+        zero:  "Không có thông tin"
+        one:   "Hiển thị <b>một</b> %{model}"
+        other: "Hiển thị <b>tất cả&nbsp;%{count}</b> %{model}"
+
+      multi_page: "Hiển thị %{from} - %{to} trên tổng số %{count} %{model}"
+      multi_page_html: "Hiển thị <b>%{from}&nbsp;-&nbsp;%{to}</b> trên tổng số <b>%{count}</b> %{model}"
+    models:
+      product:
+        zero:  hàng hóa
+        one:   hàng hóa
+        other: hàng hóa

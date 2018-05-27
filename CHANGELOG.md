@@ -1,5 +1,11 @@
 #CHANGE LOG
-## Ngày 256-05-2018
+
+## Ngày 27-05-2018
+### Thêm
+- Create/Edit/Update/Index/Delete for Product
+- Paginate for Product
+
+## Ngày 26-05-2018
 ### Thêm
 - Add gem for Auto complete search
 - Complete model supplier basically

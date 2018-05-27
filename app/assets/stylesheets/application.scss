@@ -33,3 +33,17 @@ a {
 .btn-park {
   background-color: #0084b4;
 }
+
+.page-item.active .page-link {
+  background-color: #0084b4;
+}
+
+.page-link {
+  color: #0084b4;
+}
+
+#per_page {
+  height: 36px;
+  padding-top: 0.2rem;
+  padding-bottom: 0.2rem;
+}

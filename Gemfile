@@ -81,4 +81,3 @@ gem 'chewy', '~> 5.0.0'
 
 # Paginate
 gem 'will_paginate', '~> 3.1.6'
-gem 'will_paginate-bootstrap4' #https://github.com/delef/will_paginate-bootstrap4
