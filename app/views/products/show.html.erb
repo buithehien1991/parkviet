@@ -1,2 +1,52 @@
-<h1>Products#show</h1>
-<p>Find me in app/views/products/show.html.erb</p>
+<% set_meta_tags title: @product.name, site: t(:short_title), reverse: true %>
+<div class="m-3">
+  <div class="card">
+    <div class="card-header">
+      <h5 class="product-name font-weight-bold mb-0"><%= @product.name %></h5>
+    </div>
+    <div class="card-header">
+      <ul class="nav nav-tabs card-header-tabs">
+        <li class="nav-item">
+          <a class="nav-link active">
+            <%= fa_icon("info-circle", text: t('.tab_information')) %>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link">
+            <%= fa_icon("server", text: t('.tab_in_stock_event')) %>
+          </a>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link">
+            <%= fa_icon("list-alt", text: t('.tab_in_stock')) %>
+          </a>
+        </li>
+
+        <li class="nav-item ml-auto">
+          <%= link_to edit_product_path(@product), class: "btn btn-success", remote: true do %>
+            <%= fa_icon "pencil", text: t(:update) %>
+          <% end %>
+
+          <%= link_to edit_product_path(@product), class: "btn btn-danger", remote: true do %>
+            <%= fa_icon "lock", text: t(:stop_sale) %>
+          <% end %>
+
+          <%= link_to edit_product_path(@product), class: "btn btn-danger", remote: true do %>
+            <%= fa_icon "trash", text: t(:delete) %>
+          <% end %>
+
+          <%= link_to products_path, class: "btn btn-secondary" do %>
+            <%= fa_icon "arrow-left", text: t(:back) %>
+          <% end %>
+        </li>
+
+      </ul>
+    </div>
+    <div class="card-body">
+      <div class="row mb-3">
+
+      </div>
+    </div>
+  </div>
+</div>

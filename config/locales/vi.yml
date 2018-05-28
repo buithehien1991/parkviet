@@ -1,4 +1,7 @@
 vi:
+  title: Part Việt - Phần mềm Quản lý bán hàng trực tuyến
+  short_title: Part Việt
+  full_title: Part Việt - Phần mềm Quản lý bán hàng trực tuyến NHANH - GỌN - NHẸ
   activerecord:
     errors:
       models:
@@ -59,6 +62,10 @@ vi:
     index:
       add_product: Thêm hàng hóa
     show:
+      tab_information: Thông tin
+      tab_in_stock_event: Thẻ kho
+      tab_in_stock: Tồn kho
+
 
   customers:
     form:
@@ -106,6 +113,10 @@ vi:
   save_cont: Lưu và Thêm mới
   search: Tìm kiếm
   cancel: Hủy bỏ
+  back: Trở về
+  update: Cập nhật
+  delete: Xóa
+  stop_sale: Ngừng kinh doanh
 
   # Common Label
   label_fullname: Họ và tên
