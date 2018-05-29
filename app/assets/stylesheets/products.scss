@@ -87,3 +87,17 @@
   border-radius: .25rem !important;
   margin: 0.25rem !important;
 }
+
+.preview-image-big {
+  width: 166px;
+  height: 166px;
+  object-fit: cover;
+  object-position: center;
+}
+
+.preview-image {
+  width: 78px;
+  height: 78px;
+  object-fit: cover;
+  object-position: center;
+}

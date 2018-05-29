@@ -60,7 +60,7 @@
         });
 
         $("#product_images").change(function () {
-            let files = input.files;
+            let files = this.files;
             if(!files) return;
 
             let upload_positions = [];
@@ -70,8 +70,10 @@
                 }
             }
 
+            let fileArr = Array.from(this.files);
+
             for (let i = 0; i < upload_positions.length; i++) {
-              let image_file = input.files.shift();
+              let image_file = fileArr.shift();
               if (image_file) {
                   showPreview(image_file, upload_positions[i])
               }
@@ -81,8 +83,12 @@
         function showPreview(image_file, position) {
               let reader = new FileReader();
               reader.onload = function(e) {
-                  $('#preview-image-' + position).html();
-                  // attr('src', e.target.result);
+                  if (position === 1) {
+                      $('#preview-image-' + position).html('<img src="' + e.target.result + '" class="rounded preview-image-big">');
+                  } else {
+                      $('#preview-image-' + position).html('<img src="' + e.target.result + '" class="rounded preview-image">');
+                  }
+
               };
               reader.readAsDataURL(image_file);
         }
