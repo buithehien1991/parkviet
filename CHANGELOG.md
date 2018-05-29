@@ -1,5 +1,10 @@
 #CHANGE LOG
 
+## Ngày 29-05-2018
+### Thêm
+- Upload image for Product
+- Begin do Show page: Title
+
 ## Ngày 27-05-2018
 ### Thêm
 - Create/Edit/Update/Index/Delete for Product

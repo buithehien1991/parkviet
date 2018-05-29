@@ -58,7 +58,39 @@
 
   </div>
   <div class="col-md-6">
-    <div class="images"></div>
+    <div class="images">
+      <div class="upload-images row m-0">
+        <div class="preview-image-container-big" id="preview-image-1">
+
+        </div>
+
+        <div class="col row">
+          <div class="preview-image-container" id="preview-image-2">
+
+          </div>
+
+          <div class="preview-image-container" id="preview-image-3">
+
+          </div>
+
+          <div class="preview-image-container" id="preview-image-4">
+
+          </div>
+
+          <div class="preview-image-container" id="preview-image-5">
+
+          </div>
+        </div>
+
+      </div>
+
+      <div class="form-group">
+        <div class="custom-file">
+          <%= f.file_field :images, multiple: true, direct_upload: true, class: "custom-file-input", lang: "vi" %>
+          <label class="custom-file-label" for="customFile">Chọn nhiều ảnh (tối đa 5 ảnh)</label>
+        </div>
+      </div>
+    </div>
 
     <div class="manage-stock">
       <div class="form-group row">

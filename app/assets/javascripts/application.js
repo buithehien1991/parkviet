@@ -17,4 +17,5 @@
 //= require jquery-ui/widgets/autocomplete
 //= require toastr
 //= require bootstrap
+//= require activestorage
 //= require_tree .

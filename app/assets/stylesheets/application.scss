@@ -1,3 +1,8 @@
+@import "bootstrap/functions";
+$custom-file-text: (
+        en: "Browse",
+        vi: "Chọn"
+);
 @import "bootstrap";
 @import "font-awesome";
 @import "toastr";

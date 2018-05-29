@@ -69,3 +69,21 @@
   font-size: 0.9rem;
 
 }
+
+.preview-image-container-big {
+  width: 168px;
+  height: 168px;
+
+  border: 1px dashed #dee2e6 !important;
+  border-radius: .25rem !important;
+  margin: 0.25rem !important;
+}
+
+.preview-image-container {
+  width: 80px;
+  height: 80px;
+
+  border: 1px dashed #dee2e6 !important;
+  border-radius: .25rem !important;
+  margin: 0.25rem !important;
+}
