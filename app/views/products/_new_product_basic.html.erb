@@ -47,7 +47,7 @@
     <div class="form-group">
       <%= f.label :producer_id %>
       <div class="input-group">
-        <%= f.select :producer_id, options_for_select(@producers.collect{|producer| [producer.name, producer.id]}, @product.producer_id.present? ? @product.producer_id : ''), {prompt: "-- Không có nhà sản xuất --"}, { class: "form-control form-control-sm" } %>
+        <%= f.select :producer_id, options_for_select(@producers.collect{|producer| [producer.name, producer.id]}, @product.producer_id.present? ? @product.producer_id : ''), {prompt: "-- Không có nhà sản xuất --"}, { class: "custom-select form-control form-control-sm" } %>
         <div class="input-group-append">
           <%= link_to producers_path, class: "btn btn-outline-secondary btn-sm", remote: true do %>
             <%= fa_icon("ellipsis-h") %>

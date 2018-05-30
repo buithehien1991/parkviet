@@ -25,6 +25,9 @@ vi:
         in_stock_short: Tồn kho
         in_stock_min: Tồn kho tối thiểu
         in_stock_max: Tồn kho tối đa
+        in_stock_range: Định mức tồn
+        description: Mô tả chi tiết
+        note: Ghi chú
       customer:
         name: Tên khách hàng
         code: Mã khách hàng

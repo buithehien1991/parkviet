@@ -1,5 +1,8 @@
 #CHANGE LOG
 
+## Ngày 30-05-2018
+- Show page
+
 ## Ngày 29-05-2018
 ### Thêm
 - Upload image for Product

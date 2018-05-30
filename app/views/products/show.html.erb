@@ -1,5 +1,5 @@
 <% set_meta_tags title: @product.name, site: t(:short_title), reverse: true %>
-<div class="m-3">
+<div class="m-3 product">
   <div class="card">
     <div class="card-header">
       <h5 class="product-name font-weight-bold mb-0"><%= @product.name %></h5>
@@ -45,14 +45,90 @@
     </div>
     <div class="card-body">
       <div class="row mb-3">
-        <div class="col-md-6 col-sm-6">
+        <div class="col-md-6 col-sm-6 row">
+          <div class="col-10 p-2">
+            <%= image_tag @product.images.first.variant(resize: '320x320'), class: 'img-fluid product-show-image-big' %>
+          </div>
+
+          <div class="col-2 p-2">
+            <% @product.images.each do |image| %>
+              <%= image_tag image.variant(size: '320x320'), class: 'img-fluid img-thumbnail product-show-image-icon' %>
+            <% end %>
+          </div>
 
         </div>
 
         <div class="col-md-6 col-sm-6">
+          <div class="row">
+            <div class="col">
+              <%= fa_icon "check", class: "text-success", text: "Được bán trực tiếp," %>
+              <%= fa_icon "times", class: "text-danger", text: "Không tích điểm" %>
+            </div>
 
+          </div>
+
+          <hr>
+
+          <div class="row">
+            <div class="col-4"><%= t('activerecord.attributes.product.code') %></div>
+            <div class="col-8 font-weight-bold"><%= @product.code %></div>
+          </div>
+
+          <hr>
+
+          <% if @product.product_group %>
+          <div class="row">
+            <div class="col-4"><%= t('activerecord.attributes.product.product_group_id') %></div>
+            <div class="col-8"><%= @product.product_group.name %></div>
+          </div>
+          <hr>
+          <% end %>
+
+          <div class="row">
+            <div class="col-4"><%= t('activerecord.attributes.product.sale_price') %></div>
+            <div class="col-8"><%= number_to_currency @product.sale_price, locale: :vi, precision: 0, delimiter: ' ' %></div>
+          </div>
+
+          <hr>
+
+          <div class="row">
+            <div class="col-4"><%= t('activerecord.attributes.product.cost_price') %></div>
+            <div class="col-8"><%= number_to_currency @product.cost_price, locale: :vi, precision: 0, delimiter: ' ' %></div>
+          </div>
+
+          <hr>
+
+          <div class="row">
+            <div class="col-4"><%= t('activerecord.attributes.product.in_stock_range') %></div>
+            <div class="col-8"><%= @product.in_stock_min %> -> <%= @product.in_stock_max %></div>
+          </div>
+
+          <hr>
+
+          <% if @product.producer %>
+          <div class="row">
+            <div class="col-4"><%= t('activerecord.attributes.product.producer_id') %></div>
+            <div class="col-8"><%= @product.producer.name %></div>
+          </div>
+          <% end %>
         </div>
       </div>
+
+      <div class="row mb-3">
+        <div class="col">
+          <label><%= t('activerecord.attributes.product.description') %></label> <br>
+          <%= @product.description.present? ? @product.description : 'Chưa cập nhât' %>
+        </div>
+      </div>
+
+      <div class="row mb-3">
+        <div class="col">
+          <label><%= t('activerecord.attributes.product.note') %></label> <br>
+          <%= @product.note.present? ? @product.note : 'Chưa cập nhật' %>
+        </div>
+      </div>
+
+
     </div>
   </div>
 </div>

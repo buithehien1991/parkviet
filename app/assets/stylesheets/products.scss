@@ -63,6 +63,15 @@
   label {
     font-weight: bold;
   }
+
+  .custom-select {
+    padding-top: 3px !important;
+  }
+
+  hr {
+    margin-top: 0.5rem;
+    margin-bottom: 0.4rem;
+  }
 }
 
 .product-groups {
@@ -98,6 +107,21 @@
 .preview-image {
   width: 78px;
   height: 78px;
+  object-fit: cover;
+  object-position: center;
+}
+
+.product-show-image-big {
+  max-width: 320px;
+  max-height: 320px;
+  object-fit: cover;
+  object-position: center;
+}
+
+.product-show-image-icon {
+  margin-bottom: 5px;
+  max-width: 50px;
+  max-height: 50px;
   object-fit: cover;
   object-position: center;
 }

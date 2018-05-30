@@ -26,6 +26,9 @@
 - Support normal printer: 
 - Support invoice printer:
 
+### Product
+- Upload images for product: Need switch to upload image before create product. Write script to clean file if user close the create product without save.
+
 # Other
 ## Common
 - Add checking permission for delete: Product Group | Producer. Prevent hacking by check permission. 
