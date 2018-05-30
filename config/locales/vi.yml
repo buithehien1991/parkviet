@@ -120,6 +120,8 @@ vi:
   update: Cập nhật
   delete: Xóa
   stop_sale: Ngừng kinh doanh
+  allow_sale: Cho phép kinh doanh
+  not_update: Chưa cập nhật
 
   # Common Label
   label_fullname: Họ và tên

@@ -2,6 +2,8 @@
 
 ## Ngày 30-05-2018
 - Show page
+- Allow/Stop sale on show page
+- Delete from show page
 
 ## Ngày 29-05-2018
 ### Thêm

@@ -1,5 +1,5 @@
 class ProductsController < ApplicationController
-  before_action :set_product, only: [:show, :edit, :update, :destroy]
+  before_action :set_product, only: [:show, :edit, :update, :destroy, :update_status]
   before_action :authenticate_user!
   def index
     @per_page = params[:per_page] || Product.per_page || 20
@@ -45,6 +45,11 @@ class ProductsController < ApplicationController
     end
 
     @producers = Producer.by_store(current_store.id)
+  end
+
+  def update_status
+    @product.status = params[:status]
+    @product.save
   end
 
   def update

@@ -24,15 +24,16 @@
         </li>
 
         <li class="nav-item ml-auto">
-          <%= link_to edit_product_path(@product), class: "btn btn-success", remote: true do %>
+          <%= link_to edit_product_path(@product), class: "btn btn-success" do %>
             <%= fa_icon "pencil", text: t(:update) %>
           <% end %>
 
-          <%= link_to edit_product_path(@product), class: "btn btn-danger", remote: true do %>
-            <%= fa_icon "lock", text: t(:stop_sale) %>
+          <% is_active = @product.status.eql?("active") %>
+          <%= link_to update_status_product_path(@product, status: is_active ? "inactive" : "active"), class: "btn #{is_active ? "btn-danger" : "btn-success"}", remote: true, 'data-turbolinks': "false" do %>
+            <%= fa_icon "lock", text: is_active ? t(:stop_sale) : t(:allow_sale)%>
           <% end %>
 
-          <%= link_to edit_product_path(@product), class: "btn btn-danger", remote: true do %>
+          <%= link_to product_path(@product), method: :delete, class: "btn btn-danger", data: { confirm: "Bạn có chắc chắn muốn xóa hàng hóa này ?", remote: true } do %>
             <%= fa_icon "trash", text: t(:delete) %>
           <% end %>
 
@@ -45,6 +46,7 @@
     </div>
     <div class="card-body">
       <div class="row mb-3">
+        <% if @product.images.present? %>
         <div class="col-md-6 col-sm-6 row">
           <div class="col-10 p-2">
             <%= image_tag @product.images.first.variant(resize: '320x320'), class: 'img-fluid product-show-image-big' %>
@@ -55,8 +57,8 @@
               <%= image_tag image.variant(size: '320x320'), class: 'img-fluid img-thumbnail product-show-image-icon' %>
             <% end %>
           </div>
-
         </div>
+        <% end %>
 
         <div class="col-md-6 col-sm-6">
           <div class="row">
@@ -117,18 +119,16 @@
       <div class="row mb-3">
         <div class="col">
           <label><%= t('activerecord.attributes.product.description') %></label> <br>
-          <%= @product.description.present? ? @product.description : 'Chưa cập nhât' %>
+          <%= @product.description.present? ? @product.description : t(:not_update) %>
         </div>
       </div>
 
       <div class="row mb-3">
         <div class="col">
           <label><%= t('activerecord.attributes.product.note') %></label> <br>
-          <%= @product.note.present? ? @product.note : 'Chưa cập nhật' %>
+          <%= @product.note.present? ? @product.note : t(:not_update) %>
         </div>
       </div>
-
-
     </div>
   </div>
 </div>
