@@ -2,42 +2,47 @@
 
 ## Pricing / Bảng giá
 
-|Nội dung/Gói|Miễn phí|Cơ bản|Nâng cao|
+|Nội dung\Gói|Miễn phí|Cơ bản|Nâng cao|
 |--- | :---: | :---: | :---: |
 |Giá/tháng|0đ|59.000đ|99.0000đ|
-|Số lượng hàng hóa thêm mới|100|Không giới hạn|Không giới hạn|
+|Số lượng hàng hóa|100|Không giới hạn|Không giới hạn|
 |Upload ảnh/hàng hóa|1|5|5|
-|Trợ giúp|Online<br>Trong 24h|Online+Offline<br>Trong 12h|Online+Offline<br>Trong 12h|
+|Trợ giúp|Online Trong 24h|Online+Offline Trong 12h|Online+Offline Trong 12h|
+|Mẫu hóa đơn|Watermark|Logo CH|Logo CH|
+|Người dùng|1 Chủ CH|1 Chủ CH + 1 NV|Không giới hạn *|
+|Quản lý đặt hàng|Có|Có|Có|
+|Quản lý tồn kho|Có|Có|Có|
+|Báo cáo kinh doanh|Có|Có|Có|
+|Quản lý thẻ kho|Không|Có|Có|
+|Quản lý định lượng|Không|Có|Có|
+|Quản lý công nợ|Không|Có|Có|
+|Hỗ trợ thiết lập|Không|Có|Có|
+|Quản lý phòng/bàn|Không|Không|Có|
+|Quản lý sổ quỹ/thu chi|Không|Không|Có|
+|Hỗ trợ khôi phục dữ liệu|Không|Không|Có|
+|CRM**|Không|Hỗ trợ|Hỗ trợ|
 
-### Miễn phí 
-- Price: Miễn phí
-- Số lượng hàng hóa thêm mới: 100 sản phẩm
-- Upload ảnh: 1 ảnh / 1 sản phẩm
-- Trợ giúp: Online. Trả lời trong vòng 24h và trong giờ hành chính
-- Mẫu hóa đơn: Luôn có watermark từ Part Việt.
-- Hỗ trợ nhiều người sử dụng: 1 người
-- Hỗ trợ nhập từ đầu đọc mã vạch: Không
+##### Ghi chú
+- CH: Cửa hàng
+- Offline: Hỗ trợ cài đặt thiết lập tận nơi (Miễn phí trong phạm vi 100km)
+- `*` Đầy đủ các chức vụ: Chủ cửa hàng + Quản lý + Nhân viên bán hàng + QL Kho + Thu ngân + Giao hàng
+- `**` CRM là phần mềm quản lý quan hệ khách hàng. Để hiểu được CRM là gì ? Tại sao CRM giúp khách hàng thân thiết với CH ? Làm sao để người dùng quay lại mua hàng thường xuyên hơn? ... Xem tại đây 
 
-### Miễn phí cho đối tượng đặc biệt (Cửa hàng NVL Xây dựng, Người quen - Không công bố trên trang chủ)
-- Price: Miễn phí
-- Số lượng hàng hóa thêm mới: Không giới hạn
-- Upload ảnh 5 ảnh / 1 sản phầm
-- Trợ giúp: Online + Offline
-- Mẫu hóa đơn: Luôn có watermark từ Part Việt.
-- Hỗ trợ nhiều người sử dụng: Chủ cửa hàng + Nhân viên
-- Hỗ trợ nhập từ đầu đọc mã vạch: Có
+#### Chính sách thanh toán
+- Thanh toán tối thiểu 6 tháng. 
+- Thanh toán 1 năm tặng 2 tháng miễn phí. 
+- Thanh toán 2 năm tặng 6 tháng miễn phí.
 
-### Trả phí cơ bản 1 cửa hàng
-- Price: 59.000đ / tháng. Thanh toán ít nhất 6 tháng. Thanh toán 1 năm tặng 2 tháng miễn phí. Thanh toán 2 năm tặng 6 tháng miễn phí.
-- Số lượng hàng hóa thêm mới: Không giới hạn
-- Upload ảnh 5 ảnh / 1 sản phầm
-- Trợ giúp: Online + Tận nơi. Trả lời trong vòng 12h vào tất cả các giờ
-- Mẫu hóa đơn: Được phép chỉnh sửa với logo của cửa hàng
-- Hỗ trợ nhiều người sử dụng: Chủ cửa hàng + Quản lý + Nhân viên + QL Kho + Giao hàng
-- Hỗ trợ nhập từ đầu đọc mã vạch: Có 
+#### Chinh sách đa cửa hàng
+- Thêm 99.000đ/chi nhánh. Tại sao giá cho 1 chi nhánh lại cao hơn giá cửa hàng cơ bản, Vì: Dữ liệu được liên kết khắp các chi nhánh, đảm bảo không xung đột đơn từ, hàng hóa, chuyển đổi nhân viên,...
 
-### Trả phí nâng cao
-
-### Trả phí 1 cửa hàng chính + các chi nhánh con
-- Price: 59.000đ / tháng cửa hàng chính + 99.000đ/chi nhánh. Tại sao giá cho 1 chi nhánh lại cao hơn giá cửa hàng vì: Dữ liệu được liên kết khắp các chi nhánh, đảm bảo không xung đột đơn từ, hàng hóa, chuyển đổi nhân viên,...
-- Các chứ năng khác tương tự. 
+#### Gói khác
+##### Miễn phí cho đối tượng đặc biệt (Cửa hàng NVL Xây dựng, Người quen)
+- Giống gói cơ bản 
+- Luôn có Watermark từ Part Việt trong hóa đơn.
+##### Gói tự quản lý
+- Price: 5.999.000 đồng
+- Hỗ trợ cài đặt và quản lý tại máy chủ của khách hàng
+- Hỗ trợ đào tạo quản lý và sử dụng phần mềm
+- Hỗ trợ nâng cấp lên các phiên bản mới
+- Phí duy trì hoạt động từ năm thứ 2: 10% phí hợp đồng
