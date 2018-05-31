@@ -44,5 +44,5 @@
 - Price: 5.999.000 đồng
 - Hỗ trợ cài đặt và quản lý tại máy chủ của khách hàng
 - Hỗ trợ đào tạo quản lý và sử dụng phần mềm
-- Hỗ trợ nâng cấp lên các phiên bản mới
+- Hỗ trợ nâng cấp lên các phiên bản mới (trong 3 năm)
 - Phí duy trì hoạt động từ năm thứ 2: 10% phí hợp đồng
