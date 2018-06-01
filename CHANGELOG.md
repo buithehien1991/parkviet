@@ -1,5 +1,8 @@
 #CHANGE LOG
 
+## Ngày 01-06-2018
+- Allow login with username & email
+
 ## Ngày 30-05-2018
 - Show page
 - Allow/Stop sale on show page

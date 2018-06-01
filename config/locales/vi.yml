@@ -50,6 +50,12 @@ vi:
         sex: Giới tính
         tax: Mã số thuế
         description: Ghi chú
+      user:
+        login: Tên đăng nhập hoặc Email
+        password: Mật khẩu
+        remember_me: Nhớ mật khẩu
+        current_sign_in_at: Đăng nhập lúc
+        last_sign_in_at: Đăng nhập lần cuối lúc
 
   # Translate views
   products:
@@ -110,6 +116,8 @@ vi:
   edit_supplier_title: Sửa thông tin nhà cung cấp
 
   # Common button
+  btn_manage: Quản lý
+  btn_sale: Bán hàng
   close: Đóng
   save: Lưu lại
   save_only: Lưu

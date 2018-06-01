@@ -11,9 +11,16 @@ class Users::SessionsController < Devise::SessionsController
   # end
 
   # POST /resource/sign_in
-  # def create
-  #   super
-  # end
+  def create
+    super do |resource|
+      if params[:type].present? && params[:type].eql?("sale")
+        respond_with resource, location: sale_path
+      else
+        respond_with resource, location: manage_path
+      end
+      return
+    end
+  end
 
   # DELETE /resource/sign_out
   # def destroy

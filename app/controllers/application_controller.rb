@@ -1,5 +1,6 @@
 class ApplicationController < ActionController::Base
   before_action :set_paper_trail_whodunnit
+  before_action :configure_permitted_parameters, if: :devise_controller?
 
   def get_districts
     html = ''
@@ -38,4 +39,10 @@ class ApplicationController < ActionController::Base
   def info_for_paper_trail
     { ip: request.remote_ip, user_agent: request.user_agent }
   end
+
+  protected
+  def configure_permitted_parameters
+    devise_parameter_sanitizer.permit(:sign_in, keys: [:login, :password, :password_confirmation])
+  end
+
 end

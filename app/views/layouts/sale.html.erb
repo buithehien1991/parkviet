@@ -12,11 +12,14 @@
   </head>
 
   <body>
-    <div class="navbar-container">
-      <%= render 'shared/navbar_sale' %>
+    <div class="container-fluid">
+      <div class="navbar-container">
+        <%= render 'shared/navbar_sale' %>
+      </div>
+
+      <div class="main-container">
+        <%= yield %>
+      </div>
     </div>
-
-    <%= yield %>
-
   </body>
 </html>
