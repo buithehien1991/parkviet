@@ -17,6 +17,7 @@
 |Quản lý định lượng|Không|Có|Có|
 |Quản lý công nợ|Không|Có|Có|
 |Hỗ trợ thiết lập|Không|Có|Có|
+|Sử dụng khi mất mạng|Không|Có|Có|
 |Quản lý phòng/bàn|Không|Không|Có|
 |Quản lý sổ quỹ/thu chi|Không|Không|Có|
 |Hỗ trợ khôi phục dữ liệu|Không|Không|Có|
