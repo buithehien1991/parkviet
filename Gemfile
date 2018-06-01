@@ -85,3 +85,6 @@ gem 'will_paginate', '~> 3.1.6'
 
 # Search Engine Optimization (SEO) plugin for Ruby on Rails applications.
 gem 'meta-tags'
+
+# ActiveRecord utilities
+gem 'ransack', '~> 1.8.8'

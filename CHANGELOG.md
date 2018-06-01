@@ -2,6 +2,8 @@
 
 ## Ngày 01-06-2018
 - Allow login with username & email
+- Add navbar of sale page. Think about use Vue to make SPA to allow offline mode
+- Add sanrack gem for filter/sort/search for model: Todo: Make filter/sort/search
 
 ## Ngày 30-05-2018
 - Show page
