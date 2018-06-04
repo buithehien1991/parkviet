@@ -31,6 +31,4 @@ function toggleFullScreen() {
 
         $("#btn-fullscreen-sale").attr("class", "fa fa-arrows-alt");
     }
-
-
 }

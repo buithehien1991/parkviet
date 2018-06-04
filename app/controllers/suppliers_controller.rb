@@ -3,7 +3,9 @@ class SuppliersController < ApplicationController
   before_action :authenticate_user!
 
   def index
-    @suppliers = Supplier.by_store(current_store.id)
+    @per_page = params[:per_page] || Product.per_page || 20
+    @q = Customer.ransack(params[:q])
+    @suppliers = @q.result.by_store(current_store.id).paginate(:page => params[:page], :per_page => @per_page)
   end
 
   def new

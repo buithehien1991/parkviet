@@ -25,12 +25,12 @@
 
       <div class="row mb-3">
         <div class="col-md-6">
-          <%= form_with url: search_suppliers_path, method: :get do |f| %>
+          <%= search_form_for @q, url: suppliers_path, method: :get do |f| %>
             <div class="input-group">
               <div class="input-group-prepend">
                 <div class="input-group-text"><%= t(:search) %></div>
               </div>
-              <%= f.text_field :query, placeholder: t('.search_placeholer'), class: "form-control" %>
+              <%= f.text_field :name_or_phone_or_code_or_abbr_name_cont, placeholder: t('.search_placeholer'), class: "form-control" %>
               <div class="input-group-append">
                 <%= f.submit t(:search), class: "btn btn-info btn-park" %>
               </div>
@@ -41,10 +41,10 @@
 
       <table class="table table-bordered">
         <thead>
-        <th><%= t('activerecord.attributes.supplier.code') %></th>
-        <th><%= t('activerecord.attributes.supplier.name') %></th>
+        <th><%= sort_link @q, :code, t('activerecord.attributes.supplier.code'), default_order: :desc %></th>
+        <th><%= sort_link @q, :name, t('activerecord.attributes.supplier.name') %></th>
         <th><%= t('activerecord.attributes.supplier.phone') %></th>
-        <th><%= t('activerecord.attributes.supplier.address') %></th>
+        <th><%= sort_link @q, :address, t('activerecord.attributes.supplier.address') %></th>
         <th>Nợ cần trả hiện tại</th>
         <th>Tổng đã mua</th>
         <th>Lần nhập hàng cuối cùng</th>
@@ -54,7 +54,7 @@
         <% @suppliers.each do |supplier| %>
           <tr id="customer-<%= supplier.id %>">
             <td><%= link_to supplier.code, supplier_path(supplier) %></td>
-            <td><%= link_to supplier.name, supplier_path(supplier) %></td>
+            <td class="font-weight-bold"><%= link_to supplier.name, supplier_path(supplier) %></td>
             <td><%= supplier.phone %></td>
             <td><%= supplier.address %></td>
             <td></td>
@@ -66,6 +66,14 @@
             </td>
           </tr>
         <% end %>
+
+        <tfoot>
+        <tr>
+          <td colspan="8">
+            <%= render partial: 'shared/pagination_footer_table', locals: {objects: @suppliers} %>
+          </td>
+        </tr>
+        </tfoot>
       </table>
 
     </div>

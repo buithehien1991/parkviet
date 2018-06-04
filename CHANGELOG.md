@@ -1,5 +1,8 @@
 #CHANGE LOG
 
+## Ngày 04-06-2018
+- Complete Filter/Search/Paginate for Customer/Supplier. Về cơ bản OK với RESTfull của 2 model này. Chỉ hiển thị thêm các thông tin liên quan... Tiếp tục chuyển qua tìm kiếm Product. và Trang page
+
 ## Ngày 01-06-2018
 - Allow login with username & email
 - Add navbar of sale page. Think about use Vue to make SPA to allow offline mode

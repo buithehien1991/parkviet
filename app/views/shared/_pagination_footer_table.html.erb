@@ -1,0 +1,10 @@
+<div class="d-flex justify-content-between">
+  <div class="mt-1"></div>
+  <div class="mt-1"><%= page_entries_info objects %></div>
+  <div class="d-flex justify-content-end">
+    <div><%= will_paginate objects %></div>
+    <div class="select-per-page ml-2">
+      <%= select_tag :per_page, options_for_select([10,25,50,100], params[:per_page].to_i), :onchange => "if(this.value){window.location='?per_page='+this.value;}", class: "form-control" %>
+    </div>
+  </div>
+</div>

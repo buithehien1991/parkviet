@@ -29,7 +29,7 @@
               <div class="input-group-prepend">
                 <div class="input-group-text"><%= t(:search) %></div>
               </div>
-              <%= f.text_field :name_or_phone_or_code_cont, placeholder: t('.search_placeholer'), class: "form-control" %>
+              <%= f.text_field :name_or_phone_or_code_or_abbr_name_cont, placeholder: t('.search_placeholer'), class: "form-control" %>
               <div class="input-group-append">
                 <%= f.submit t(:search), class: "btn btn-info btn-park" %>
               </div>
@@ -41,7 +41,7 @@
       <table class="table table-bordered table-hover">
         <thead class="thead-light">
         <th><%= sort_link @q, :code, t('activerecord.attributes.customer.code'), default_order: :desc %></th>
-        <th><%= sort_link(@q, :name, t('activerecord.attributes.customer.name')) %></th>
+        <th><%= sort_link @q, :name, t('activerecord.attributes.customer.name') %></th>
         <th><%= t('activerecord.attributes.customer.phone') %></th>
         <th><%= sort_link @q, :address, t('activerecord.attributes.customer.address') %></th>
         <th>Lần mua hàng cuối cùng</th>
@@ -51,6 +51,7 @@
         <th></th>
         </thead>
 
+        <tbody>
         <% @customers.each do |customer| %>
           <tr id="customer-<%= customer.id %>">
             <td><%= link_to customer.code, customer_path(customer) %></td>
@@ -63,10 +64,18 @@
             <td></td>
             <td>
               <%= link_to fa_icon("pencil"), edit_customer_path(customer), remote: true %>
-              <%= link_to fa_icon("trash"), customer_path(customer), method: :delete, remote: true, class: "text-danger" %>
+              <%= link_to fa_icon("trash"), customer_path(customer), method: :delete, class: "text-danger", data: {remote: true, confirm: 'Bạn có chắc muốn xóa KH này?'} %>
             </td>
           </tr>
         <% end %>
+        </tbody>
+        <tfoot>
+        <tr>
+          <td colspan="9">
+            <%= render partial: 'shared/pagination_footer_table', locals: {objects: @products} %>
+          </td>
+        </tr>
+        </tfoot>
       </table>
 
     </div>
