@@ -3,7 +3,8 @@ class CustomersController < ApplicationController
   before_action :authenticate_user!
 
   def index
-    @customers = Customer.by_store(current_store.id)
+    @q = Customer.ransack(params[:q])
+    @customers = @q.result(distinct: true).by_store(current_store.id)
   end
 
   def new
