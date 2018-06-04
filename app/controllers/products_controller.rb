@@ -3,7 +3,8 @@ class ProductsController < ApplicationController
   before_action :authenticate_user!
   def index
     @per_page = params[:per_page] || Product.per_page || 20
-    @products = Product.by_store(current_store.id).paginate(:page => params[:page], :per_page => @per_page)
+    @q = Product.ransack(params[:q])
+    @products = @q.result.by_store(current_store.id).paginate(:page => params[:page], :per_page => @per_page)
   end
 
   def new

@@ -60,14 +60,26 @@
   </div>
 
   <div class="search">
-
+    <div class="col-md-6">
+      <%= search_form_for @q, url: products_path, method: :get do |f| %>
+        <div class="input-group">
+          <div class="input-group-prepend">
+            <div class="input-group-text"><%= t(:search) %></div>
+          </div>
+          <%= f.text_field :name_or_code_or_abbr_name_cont, placeholder: t('.search_placeholer'), class: "form-control" %>
+          <div class="input-group-append">
+            <%= f.submit t(:search), class: "btn btn-info btn-park" %>
+          </div>
+        </div>
+      <% end %>
+    </div>
   </div>
 
   <div class="list">
     <table class="table table-bordered table-hover">
       <thead class="thead-light">
-      <th><%= t('activerecord.attributes.product.code') %></th>
-      <th><%= t('activerecord.attributes.product.name') %></th>
+      <th><%= sort_link @q, :code, t('activerecord.attributes.product.code'), default_order: :desc %></th>
+      <th><%= sort_link @q, :name, t('activerecord.attributes.product.name') %></th>
       <th><%= t('activerecord.attributes.product.cost_price') %></th>
       <th><%= t('activerecord.attributes.product.sale_price') %></th>
       <th><%= t('activerecord.attributes.product.in_stock_short') %></th>

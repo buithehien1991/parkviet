@@ -70,6 +70,7 @@ vi:
     new_product_part:
     index:
       add_product: Thêm hàng hóa
+      search_placeholer: Nhập mã, chữ cái đầu hoặc tên hàng hóa
     show:
       tab_information: Thông tin
       tab_in_stock_event: Thẻ kho
