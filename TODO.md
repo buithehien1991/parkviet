@@ -11,7 +11,7 @@
 
 ### Customer
 - Show detail with more information of this customer: Invoice, ReturnOrder
-- Paginate: Will be completed after Product
+- ~~Paginate: Will be completed after Product~~
 
 ### Group Customer
 - Do not everything
@@ -28,6 +28,9 @@
 
 ### Product
 - Upload images for product: Need switch to upload image before create product. Write script to clean file if user close the create product without save.
+
+### Branch
+- Remove this model and use Store model with parent_id
 
 # Other
 ## Common

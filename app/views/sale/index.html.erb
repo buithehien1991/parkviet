@@ -1,2 +1,84 @@
-<h1>Sale#index</h1>
-<p>Find me in app/views/sale/index.html.erb</p>
+<div class="wrap-container">
+  <div class="col-right">
+
+  </div>
+
+  <div class="col-left">
+    <div class="product-cart">
+      <div class="product-card-list"></div>
+    </div>
+
+    <%= link_to '', class: "chevron-btn", title: "Thu gọn", id: "chevron-btn" do %>
+      <%= fa_icon "chevron-down", class: "text-white", id: "chevron-fa-icon" %>
+    <% end %>
+  </div>
+
+
+
+</div>
+
+<script>
+  $(document).ready(function () {
+      $("#chevron-btn").removeAttr('href');
+      $("#chevron-btn").click(function (e) {
+          e.preventDefault();
+          e.stopImmediatePropagation();
+
+          if ($(this).attr('class') === 'chevron-btn') {
+              $(this).attr('class', 'chevron-btn active');
+              $("#chevron-fa-icon").attr('class', 'fa fa-chevron-up text-white');
+              $(".col-left").attr('class', 'col-left active');
+          } else {
+              $(this).attr('class', 'chevron-btn');
+              $("#chevron-fa-icon").attr('class', 'fa fa-chevron-down text-white');
+              $(".col-left").attr('class', 'col-left');
+          }
+      });
+
+      window.addEventListener('keydown', function (e) {
+          switch (e.key) {
+              case 'F1': // Hiện hướng dẫn
+                  e.preventDefault();
+                  e.stopImmediatePropagation();
+
+                  break;
+              case 'F2': // Thêm hóa đơn mới
+                  e.preventDefault();
+                  e.stopImmediatePropagation();
+
+                  break;
+              case 'F3': // Tìm hàng hóa
+                  e.preventDefault();
+                  e.stopImmediatePropagation();
+                  $('#search-product-input').focus();
+                  break;
+              case 'F4': // Tìm khách hàng
+                  e.preventDefault();
+                  e.stopImmediatePropagation();
+
+                  break;
+              case 'F7':
+                  break;
+              case 'F8': // Khách thanh toán
+                  e.preventDefault();
+                  e.stopImmediatePropagation();
+
+                  break;
+              case 'F9': // Lưu
+                  e.preventDefault();
+                  e.stopImmediatePropagation();
+                  if (e.ctrlKey) {
+                      // Ctrl + F9 : Đặt hàng
+                  } else {
+                      // Only F9 : Lưu
+                  }
+                  break;
+              case 'F10': // Lưu và in - Thanh toán
+                  e.preventDefault();
+                  e.stopImmediatePropagation();
+
+                  break;
+          }
+      })
+  });
+</script>

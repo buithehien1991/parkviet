@@ -1,5 +1,10 @@
 #CHANGE LOG
 
+## Ngày 05-06-2018
+- UI for sale
+- Add store reference to Invoice & Purchase model
+- Think about replace Branch to Store with parent_id to ease manage
+
 ## Ngày 04-06-2018
 - Complete Filter/Search/Paginate for Customer/Supplier. Về cơ bản OK với RESTfull của 2 model này. Chỉ hiển thị thêm các thông tin liên quan... Tiếp tục chuyển qua tìm kiếm Product. và Trang page
 

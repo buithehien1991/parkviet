@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_05_25_102218) do
+ActiveRecord::Schema.define(version: 2018_06_05_121658) do
 
   create_table "active_storage_attachments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci", force: :cascade do |t|
     t.string "name", null: false
@@ -117,7 +117,9 @@ ActiveRecord::Schema.define(version: 2018_05_25_102218) do
     t.datetime "date"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "store_id"
     t.index ["customer_id"], name: "index_invoices_on_customer_id"
+    t.index ["store_id"], name: "index_invoices_on_store_id"
     t.index ["user_id"], name: "index_invoices_on_user_id"
   end
 
@@ -225,6 +227,8 @@ ActiveRecord::Schema.define(version: 2018_05_25_102218) do
     t.datetime "date"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "store_id"
+    t.index ["store_id"], name: "index_purchases_on_store_id"
     t.index ["supplier_id"], name: "index_purchases_on_supplier_id"
     t.index ["user_id"], name: "index_purchases_on_user_id"
   end
@@ -268,7 +272,7 @@ ActiveRecord::Schema.define(version: 2018_05_25_102218) do
   end
 
   create_table "suppliers", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci", force: :cascade do |t|
-    t.integer "supplier_typer"
+    t.integer "supplier_type"
     t.string "name"
     t.string "code"
     t.string "abbr_name"
@@ -362,6 +366,7 @@ ActiveRecord::Schema.define(version: 2018_05_25_102218) do
   add_foreign_key "customers", "stores"
   add_foreign_key "customers", "users"
   add_foreign_key "invoices", "customers"
+  add_foreign_key "invoices", "stores"
   add_foreign_key "invoices", "users"
   add_foreign_key "producers", "stores"
   add_foreign_key "producers", "users"
@@ -375,6 +380,7 @@ ActiveRecord::Schema.define(version: 2018_05_25_102218) do
   add_foreign_key "product_types", "users"
   add_foreign_key "products", "stores"
   add_foreign_key "products", "users"
+  add_foreign_key "purchases", "stores"
   add_foreign_key "purchases", "suppliers"
   add_foreign_key "purchases", "users"
   add_foreign_key "stores", "communes"
