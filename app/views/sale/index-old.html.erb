@@ -1,0 +1,258 @@
+<div class="wrap-container">
+  <div class="col-right">
+    <div class="sale-user d-flex mt-2">
+      <div class="mr-auto">
+        <%= fa_icon "user-circle-o" %> <%= current_user.fullname %>
+      </div>
+      <div>
+        <%= Time.now %>
+      </div>
+    </div>
+
+    <div class="mt-2">
+      <div class="input-group">
+        <%= text_field_tag "customer_id", '', class: "form-control form-control-sm", placeholder: 'Tìm khách hàng (F4)' %>
+        <div class="input-group-append">
+          <%= fa_icon "plus", class: "input-group-text"%>
+        </div>
+      </div>
+
+    </div>
+
+    <hr style="margin: 0.8rem -10px;">
+
+    <div class="">
+      <div>
+        <h5>HÓA ĐƠN</h5>
+      </div>
+
+      <div class="d-flex">
+        <div class="mr-auto">
+          Tổng tiền hàng
+        </div>
+        <div>
+          100,000
+        </div>
+      </div>
+
+      <div class="d-flex">
+        <div class="mr-auto">
+          Giảm giá
+        </div>
+        <div>
+          0
+        </div>
+      </div>
+
+      <div class="d-flex">
+        <div class="mr-auto font-weight-bold">
+          Khách cần trả
+        </div>
+        <div class="paid-price">
+          100,000
+        </div>
+      </div>
+
+      <div class="d-flex">
+        <div class="mr-auto">
+          Khách thanh toán (F8)
+        </div>
+        <div>
+          <%= text_field_tag "give-price", 0 %>
+        </div>
+      </div>
+
+      <div class="d-flex">
+        <div class="mr-auto ">
+          Tiền thừa trả khách
+        </div>
+        <div>
+          100,000
+        </div>
+      </div>
+
+      <div>
+        Ghi chú
+      </div>
+      <div>
+        <%= text_area_tag 'note', '', class: 'form-control' %>
+      </div>
+    </div>
+
+    <hr style="margin: 0.8rem -10px;">
+
+    <div>
+
+    </div>
+
+  </div>
+
+  <div class="col-left">
+    <div class="product-cart">
+      <div class="product-card-list">
+        <div class="d-flex">
+          <ul class="nav nav-tabs flex-grow-1" id="cart-tabs" role="tablist">
+            <li class="nav-item">
+              <a class="nav-link active" id="home-tab" data-toggle="tab" href="#page1" role="tab" aria-controls="home" aria-selected="true">Hóa đơn 1</a>
+            </li>
+          </ul>
+
+          <div style="min-width: 64px;">
+            <button type="button" class="btn btn-secondary btn-sm" id="btn-remove-order"><%= fa_icon "minus" %></button>
+            <button type="button" class="btn btn-warning text-white btn-sm" id="btn-add-new-order"><%= fa_icon "plus" %></button>
+          </div>
+        </div>
+
+        <div class="tab-content" id="cart-tabs-content">
+          <div class="tab-pane fade show active" id="page1" role="tabpanel" aria-labelledby="home-tab">
+            <table class="table table-bordered">
+              <tr>
+                <td>Tên sản phẩm</td>
+                <td>1</td>
+                <td>50000</td>
+                <td>50000</td>
+                <td><%= link_to fa_icon("trash"), '#' %></td>
+              </tr>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <%= link_to '', class: "chevron-btn", title: "Thu gọn", id: "chevron-btn" do %>
+      <%= fa_icon "chevron-down", class: "text-white", id: "chevron-fa-icon" %>
+    <% end %>
+
+    <div class="product-list">
+      <div class="action-toolbar"></div>
+      <div class="row" style="margin: 0 10px;">
+        <% @products.each do |product| %>
+          <div class="card" style="margin: 10px; width: 110px;">
+            <% image_link = product.images.present? ? product.images.first : 'no-image.png' %>
+            <%= image_tag image_link, class: "card-img-top product-img" %>
+            <span class="product-price"><%= number_to_currency product.sale_price, precision: 0, unit: '' %></span>
+            <div class="card-body">
+              <p class="card-text"><%= product.name %></p>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+    $(document).ready(function () {
+        $("#chevron-btn").removeAttr('href');
+        $("#chevron-btn").click(function (e) {
+            e.preventDefault();
+            e.stopImmediatePropagation();
+
+            if ($(this).attr('class') === 'chevron-btn') {
+                $(this).attr('class', 'chevron-btn active');
+                $("#chevron-fa-icon").attr('class', 'fa fa-chevron-up text-white');
+                $(".col-left").attr('class', 'col-left active');
+            } else {
+                $(this).attr('class', 'chevron-btn');
+                $("#chevron-fa-icon").attr('class', 'fa fa-chevron-down text-white');
+                $(".col-left").attr('class', 'col-left');
+            }
+        });
+
+        window.addEventListener('keydown', function (e) {
+            switch (e.key) {
+                case 'F1': // Hiện hướng dẫn
+                    e.preventDefault();
+                    e.stopImmediatePropagation();
+
+                    break;
+                case 'F2': // Thêm hóa đơn mới
+                    e.preventDefault();
+                    e.stopImmediatePropagation();
+
+                    break;
+                case 'F3': // Tìm hàng hóa
+                    e.preventDefault();
+                    e.stopImmediatePropagation();
+                    $('#search-product-input').focus();
+                    break;
+                case 'F4': // Tìm khách hàng
+                    e.preventDefault();
+                    e.stopImmediatePropagation();
+
+                    break;
+                case 'F7':
+                    break;
+                case 'F8': // Khách thanh toán
+                    e.preventDefault();
+                    e.stopImmediatePropagation();
+
+                    break;
+                case 'F9': // Lưu
+                    e.preventDefault();
+                    e.stopImmediatePropagation();
+                    if (e.ctrlKey) {
+                        // Ctrl + F9 : Đặt hàng
+                    } else {
+                        // Only F9 : Lưu
+                    }
+                    break;
+                case 'F10': // Lưu và in - Thanh toán
+                    e.preventDefault();
+                    e.stopImmediatePropagation();
+
+                    break;
+            }
+        });
+
+        var pageNum = 1;
+        /**
+         * Reset numbering on tab buttons
+         */
+        function reNumberPages() {
+            pageNum = 1;
+            var tabCount = $('#pageTab > li').length;
+            $('#pageTab > li').each(function() {
+                var pageId = $(this).children('a').attr('href');
+                if (pageId == "#page1") {
+                    return true;
+                }
+                pageNum++;
+                $(this).children('a').html('Page ' + pageNum +
+                    '<button class="close" type="button" ' +
+                    'title="Remove this page">×</button>');
+            });
+        }
+
+        /**
+         * Add a Tab
+         */
+        $('#btn-add-new-order').click(function() {
+            pageNum++;
+            $('#cart-tabs').append($('<li class="nav-item"><a class="nav-link" href="#page' + pageNum + '">' + 'Hóa đơn ' + pageNum + '</a></li>'));
+            $('#cart-tabs-content').append($('<div class="tab-pane" id="page' + pageNum + '">Content page' + pageNum + '</div>'));
+
+            $('#page' + pageNum).tab('show');
+        });
+
+        /**
+         * Remove a Tab
+         */
+        $('#btn-remove-order').click(function() {
+            var tabId = $(this).parents('li').children('a').attr('href');
+            $(this).parents('li').remove('li');
+            $(tabId).remove();
+            reNumberPages();
+            $('#pageTab a:first').tab('show');
+        });
+
+        /**
+         * Click Tab to show its content
+         */
+        $("#pageTab").on("click", "a", function(e) {
+            e.preventDefault();
+            $(this).tab('show');
+        });
+
+    });
+</script>

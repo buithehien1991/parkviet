@@ -21,7 +21,9 @@ Park Việt là phần mềm quản lý bán hàng, kinh doanh sử dụng tại
  - CSDL tại db/diadanh_2018-05-05.sql
 ### Bước 3: Cài đặt Redis & Elastic search
 
-### Bước 4
+### Bước 4: Run server
+- Rails s
+- 
  
 ## Đăng nhập và sử dụng
 
@@ -29,9 +31,16 @@ Park Việt là phần mềm quản lý bán hàng, kinh doanh sử dụng tại
 ## Tips
 Xóa cổng đang chạy
 
-`lsof -wni tcp:3000`
+```
+Mac & Linux: 
+lsof -wni tcp:3000 
+kill -9 xxxx
 
-`kill -9 xxxx` 
+Windows: 
+netstat -ano | findstr :3000
+taskkill /PID xxx /F
+```
+ 
  
 ## Install & Run on Windows
 ### Error 

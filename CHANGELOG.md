@@ -1,4 +1,10 @@
 #CHANGE LOG
+## Ngày 11-06-2018
+- Using Vue framework in front-end for Sale Page. Lý do phải sử dụng Vue cho trang bán hàng vì: 
+  + Trang bán hàng xử lý nhiều công việc trực tiếp như thêm mặt hàng vào giỏ hàng, điều chỉnh giá bán, khuyến mại; xóa mặt hàng khỏi giỏ hàng. 
+  + Tự động tính toán giá cả dựa trên số lượng mặt hàng
+  + Xử lý các mẫu in ấn
+  + Xử lý dữ liệu khi mất kết nối Internet, cho phép có thể thanh toán bình thường khi mất mạng và đồng bộ dữ liệu ngay khi có mạng
 
 ## Ngày 05-06-2018
 - UI for sale
