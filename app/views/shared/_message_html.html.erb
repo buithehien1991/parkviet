@@ -1,0 +1,9 @@
+<% flash.each do |name, msg| %>
+  <% if msg.class == Array %>
+    <% msg.each do |message| %>
+      <%= content_tag :div, message, :id => "flash_#{name}" %>
+    <% end %>
+  <% else %>
+    <%= content_tag :div, msg, :id => "flash_#{name}", class: "my-3 text-danger" %>
+  <% end %>
+<% end %>

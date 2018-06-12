@@ -10,6 +10,7 @@ Rails.application.routes.draw do
   get 'get_commune_list', to: "application#get_communes"
   get 'manage', to: "manage#index"
   get 'sale', to: "sale#index"
+  get 'bang-gia', to: "home#pricing", as: :pricing
 
   scope :manage do
     resources :invoices

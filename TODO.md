@@ -17,7 +17,7 @@
 - Do not everything
 
 ### Search & Filter module
-- Should be modularization to can be reused by many component 
+- ~~Should be modularization to can be reused by many component~~ 
 
 ### Import & Export Excel
 - Cho phép import dữ liệu từ Kiot Việt, Suno
@@ -45,6 +45,7 @@
 
 #### Admin dashboard
 - For manage user/product
+- Maintenance mode: http://blog.mohamad.im/2015/08/30/adding-a-dynamic-maintenance-mode-to-your-rails-app.html https://gist.github.com/necojackarc/35bac9f8cdeed5cf828e22d318bdb5d3
 
 ### Background processing
 #### What use background jobs
