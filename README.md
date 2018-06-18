@@ -48,4 +48,9 @@ While executing gem ... (Encoding::ConverterNotFoundError)
     code converter not found (UTF-16LE to Windows-1258)
     
 `chcp 850`
+
+### Set proxy on windows
+#### Yarn
+yarn config set proxy %HTTP_PROXY%
+yarn config set https-proxy %HTTPS_PROXY%
  
