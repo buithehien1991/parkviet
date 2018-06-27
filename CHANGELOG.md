@@ -1,4 +1,8 @@
 #CHANGE LOG
+
+## Ngày 27-06-2018
+- Add Vue component for Sale Page. Finish header nav bar. Prepare autocomplete
+
 ## Ngày 11-06-2018
 - Using Vue framework in front-end for Sale Page. Lý do phải sử dụng Vue cho trang bán hàng vì: 
   + Trang bán hàng xử lý nhiều công việc trực tiếp như thêm mặt hàng vào giỏ hàng, điều chỉnh giá bán, khuyến mại; xóa mặt hàng khỏi giỏ hàng. 

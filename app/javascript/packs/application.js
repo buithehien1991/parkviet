@@ -9,13 +9,24 @@
 import 'babel-polyfill'
 import Vue from 'vue/dist/vue.esm'
 import App from '../app.vue'
+import state from './state'
+import * as filters from './filters'
+import './plugins'
+import './components'
+
+// Global filters
+for (const key in filters) {
+  Vue.filter(key, filters[key])
+}
 
 document.addEventListener('DOMContentLoaded', () => {
-  const app = new Vue({
-    el: '#sale-page',
-    data: {
-      message: "Can you say hello?"
-    },
-    components: { App }
-  })
+    async function main() {
+        new Vue({
+            el: '#sale-page',
+            data: state,
+            ...App
+        })
+    }
+
+    main()
 })

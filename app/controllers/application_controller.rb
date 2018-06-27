@@ -2,6 +2,14 @@ class ApplicationController < ActionController::Base
   before_action :set_paper_trail_whodunnit
   before_action :configure_permitted_parameters, if: :devise_controller?
 
+  def get_current_user
+    if current_user.present?
+      render :json => current_user.to_json
+    else
+      render :json => {}
+    end
+  end
+
   def get_districts
     html = ''
     if params[:province_id].present?

@@ -5,6 +5,13 @@ class ProductsController < ApplicationController
     @per_page = params[:per_page] || Product.per_page || 20
     @q = Product.ransack(params[:q])
     @products = @q.result.by_store(current_store.id).paginate(:page => params[:page], :per_page => @per_page)
+
+    respond_to do |format|
+      format.html {}
+      format.json {
+        render json: @products
+      }
+    end
   end
 
   def new

@@ -22,8 +22,8 @@ Park Việt là phần mềm quản lý bán hàng, kinh doanh sử dụng tại
 ### Bước 3: Cài đặt Redis & Elastic search
 
 ### Bước 4: Run server
-- Rails s
-- 
+- Run rails server: Rails s
+- Run front-end server: ruby ./bin/webpack-dev-server
  
 ## Đăng nhập và sử dụng
 

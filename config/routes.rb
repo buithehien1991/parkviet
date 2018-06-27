@@ -10,6 +10,8 @@ Rails.application.routes.draw do
   get 'get_commune_list', to: "application#get_communes"
   get 'manage', to: "manage#index"
   get 'sale', to: "sale#index"
+  get 'dashboard', to: "sale#dashboard"
+  get 'get_current_user', to: "application#get_current_user"
 
   scope :manage do
     resources :invoices
