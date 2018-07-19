@@ -6,14 +6,14 @@
 
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
-      <li class="nav-item active">
-        <a class="nav-link" href="#">Trang chủ <span class="sr-only">(current)</span></a>
+      <li class="nav-item <%= "active" if current_page?(root_path) %>">
+        <%= link_to "Trang chủ", root_path, class: "nav-link" %>
       </li>
       <li class="nav-item">
         <a class="nav-link" href="#">Tính năng</a>
       </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">Bảng giá</a>
+      <li class="nav-item <%= "active" if current_page?(pricing_path) %>">
+        <%= link_to "Bảng giá", pricing_path, class: "nav-link" %>
       </li>
       <li class="nav-item">
         <a class="nav-link" href="#">Thiết bị</a>

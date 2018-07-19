@@ -12,6 +12,7 @@ Rails.application.routes.draw do
   get 'sale', to: "sale#index"
   get 'dashboard', to: "sale#dashboard"
   get 'get_current_user', to: "application#get_current_user"
+  get 'bang-gia', to: "home#pricing", as: :pricing
 
   scope :manage do
     resources :invoices

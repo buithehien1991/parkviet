@@ -10,6 +10,9 @@
       <h3 class="card-title"><%= fa_icon "sign-in", text: "Đăng nhập" %></h3>
 
       <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+
+        <%= render 'shared/message_html' %>
+
         <div class="form-group">
           <%= f.label :login, class: "label-text" %><br/>
           <%= f.text_field :login, autofocus: true, autocomplete: "email", class: "form-control" %>
