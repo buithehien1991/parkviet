@@ -15,7 +15,7 @@
             <SaleUser />
           </div>
           <div class="col-left">
-
+            <NewTab />
           </div>
         </div>
       </div>
@@ -27,9 +27,10 @@
     import RemoteData from './packs/mixins/RemoteData'
     import Loading from 'vue-loading-overlay';
     import SaleHeader from "./packs/components/SaleHeader"
+    import NewTab from "./packs/components/NewTab"
 
     export default {
-        components: {SaleHeader, Loading, SaleUser},
+        components: {NewTab, SaleHeader, Loading, SaleUser},
         mixins: [
             RemoteData({
                 user () {

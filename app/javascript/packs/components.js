@@ -1,6 +1,6 @@
 import Vue from 'vue'
 
-import 'vue-loaders/dist/vue-loaders.css';
-import BaseLoading from './components/BaseLoading.vue'
-
-Vue.component('BaseLoading', BaseLoading)
+// For Auto Complete
+import 'vue-instant/dist/vue-instant.css'
+import VueInstant from 'vue-instant/dist/vue-instant.common'
+Vue.use(VueInstant)
