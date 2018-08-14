@@ -1,4 +1,6 @@
 export default {
     user: null,
-    products: null
+    products: null,
+    showProductList: true,
+    orders: []
 }

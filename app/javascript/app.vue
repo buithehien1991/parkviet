@@ -14,8 +14,13 @@
           <div class="col-right">
             <SaleUser />
           </div>
-          <div class="col-left">
-            <NewTab />
+          <div :class="['col-left', {active: !this.$state.showProductList}]">
+            <div class="product-cart">
+              <NewTab />
+            </div>
+
+            <ProductList />
+
           </div>
         </div>
       </div>
@@ -28,9 +33,10 @@
     import Loading from 'vue-loading-overlay';
     import SaleHeader from "./packs/components/SaleHeader"
     import NewTab from "./packs/components/NewTab"
+    import ProductList from "./packs/components/ProductList"
 
     export default {
-        components: {NewTab, SaleHeader, Loading, SaleUser},
+        components: {ProductList, NewTab, SaleHeader, Loading, SaleUser},
         mixins: [
             RemoteData({
                 user () {
