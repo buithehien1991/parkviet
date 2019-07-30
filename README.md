@@ -8,9 +8,16 @@ Park Việt là phần mềm quản lý bán hàng, kinh doanh sử dụng tại
 
 Ưu điểm của Part Việt so với các phần mềm bán hàng nền web khác
 - Sử dụng học máy AI, deep learning để phân tích dữ liệu người dùng, đưa ra thói quen gợi ý trong quá trình bán hàng hoặc tiếp thị lại.
-- Cho phép khách hàng có thể đặt hàng trước qua mạng.  
-- Giá rẻ chỉ bằng nửa so với phần mềm rẻ nhất đang được bày bán. **Miễn phí** với toàn bộ cửa hàng vật liệu xây dựng.  
+- Cho phép khách hàng có thể đặt hàng trước qua mạng.    
 - Được tư vấn và hỗ trợ tận nơi, bổ sung các chức năng cần thiết cho từng mục đích của mỗi cửa hàng. Phù hợp với cá nhân, hộ gia đình kinh doanh nhỏ lẻ.  
+- Miễn phí & Mã nguồn mở
+
+# Tiến độ dự án
+- Hoàn thành cơ bản phần quản lý cho chủ cửa hàng
+- Đang hoàn thiện chức năng bán hàng
+
+# Tìm bạn hợp tác làm kinh doanh
+Phần mềm đương nhiên vẫn là miễn phí nhé mọi người. Ở đây mình muốn hợp tác để làm bản thương mại mà người dùng không cần phải cài đặt server mà sử dụng được ngay. Mình là dân lập trình nên không có kinh nghiệm trong việc kinh doanh nên bạn nào có kinh nghiệm có thể hợp tác với mình nhé. Vì kinh doanh thì phải có bộ phận bán hàng, marketing và thiết bị còn mình thì chỉ biết code thôi :)) 
 
 # Hướng dẫn sử dụng
 ## Cài đặt
@@ -27,30 +34,7 @@ Park Việt là phần mềm quản lý bán hàng, kinh doanh sử dụng tại
  
 ## Đăng nhập và sử dụng
 
+# Mua cho mình cốc cà phê
+Mình phát triển ứng dụng miễn phí cho tất cả mọi người sử dụng, nếu mọi người thấy ứng dụng giúp ích và có giá trị thì đừng quên mua cho mình cốc cà phê nhé. Cảm ơn các bạn.
 
-## Tips
-Xóa cổng đang chạy
-
-```
-Mac & Linux: 
-lsof -wni tcp:3000 
-kill -9 xxxx
-
-Windows: 
-netstat -ano | findstr :3000
-taskkill /PID xxx /F
-```
- 
- 
-## Install & Run on Windows
-### Error 
-While executing gem ... (Encoding::ConverterNotFoundError)
-    code converter not found (UTF-16LE to Windows-1258)
-    
-`chcp 850`
-
-### Set proxy on windows
-#### Yarn
-yarn config set proxy %HTTP_PROXY%
-yarn config set https-proxy %HTTPS_PROXY%
- 
+TK Vietcombank: 0611001909717, Bùi Thế Hiển, chi nhánh Ba Đình.

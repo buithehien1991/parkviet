@@ -1,5 +1,5 @@
 {
-  "name": "ParkViet",
+  "name": "parkviet",
   "private": true,
   "dependencies": {
     "@rails/webpacker": "3.5",
