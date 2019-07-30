@@ -16,8 +16,10 @@ Park Việt là phần mềm quản lý bán hàng, kinh doanh sử dụng tại
 - Hoàn thành cơ bản phần quản lý cho chủ cửa hàng
 - Đang hoàn thiện chức năng bán hàng
 
-# Tìm bạn hợp tác làm kinh doanh
-Phần mềm đương nhiên vẫn là miễn phí nhé mọi người. Ở đây mình muốn hợp tác để làm bản thương mại mà người dùng không cần phải cài đặt server mà sử dụng được ngay. Mình là dân lập trình nên không có kinh nghiệm trong việc kinh doanh nên bạn nào có kinh nghiệm có thể hợp tác với mình nhé. Vì kinh doanh thì phải có bộ phận bán hàng, marketing và thiết bị còn mình thì chỉ biết code thôi :)) 
+# Tìm bạn hợp tác & kinh doanh
+Một mình làm thì không xuể vậy nên các bạn có thể cùng tham gia phát triển dự án với mình nhé,
+
+Phần mềm đương nhiên vẫn là miễn phí nhé mọi người. Ngoài ra, mình muốn hợp tác để làm bản thương mại mà người dùng không cần phải cài đặt server mà sử dụng được ngay. Mình là dân lập trình nên không có kinh nghiệm trong việc kinh doanh nên bạn nào có kinh nghiệm có thể hợp tác với mình nhé. Vì kinh doanh thì phải có bộ phận bán hàng, marketing và thiết bị còn mình thì chỉ biết code thôi :)) 
 
 # Hướng dẫn sử dụng
 ## Cài đặt
