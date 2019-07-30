@@ -16,6 +16,8 @@ Park Việt là phần mềm quản lý bán hàng, kinh doanh sử dụng tại
 - Hoàn thành cơ bản phần quản lý cho chủ cửa hàng
 - Đang hoàn thiện chức năng bán hàng
 
+![QuanLy](screenshots/quanly.png)
+
 # Tìm bạn hợp tác & kinh doanh
 Một mình làm thì không xuể vậy nên các bạn có thể cùng tham gia phát triển dự án với mình nhé,
 
