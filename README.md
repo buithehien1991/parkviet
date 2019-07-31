@@ -27,6 +27,9 @@ Park Việt là phần mềm quản lý bán hàng, kinh doanh sử dụng tại
 - Sao lưu dữ liệu hàng ngày. Tối đa lên đến 7 ngày. Nhằm ngăn chặn mất mát dữ liệu.
 - Cho phép thanh toán trên máy tính bảng
 - Cho phép quản lý trên điện thoại, máy tính bảng
+- Cho phép đồng bộ dữ liệu từ trên trang TMĐT khác: Tiki, Shopee, Lazada, Sendo
+- Tạo trang web bán hàng đơn giản
+- Kết nối với Facebook Fanpage để quản lý và thực thi QC, chiến dịch Marketing...
 
 # Tìm bạn hợp tác & kinh doanh
 Một mình làm thì không xuể vậy nên các bạn có thể cùng tham gia phát triển dự án với mình nhé,
