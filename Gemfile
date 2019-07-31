@@ -88,3 +88,6 @@ gem 'meta-tags'
 
 # ActiveRecord utilities
 gem 'ransack', '~> 1.8.8'
+
+# JSON format
+gem 'active_model_serializers'

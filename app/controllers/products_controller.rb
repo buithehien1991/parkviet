@@ -9,7 +9,7 @@ class ProductsController < ApplicationController
     respond_to do |format|
       format.html {}
       format.json {
-        render json: @products
+        render json: @products, each_serializer: ProductSerializer
       }
     end
   end

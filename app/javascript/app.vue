@@ -10,7 +10,7 @@
           <div class="col-right">
             <SaleUser />
           </div>
-          <div :class="['col-left', {active: true}]">
+          <div :class="['col-left', {active: !showProductList}]">
             <div class="product-cart">
               <NewTab />
             </div>
@@ -29,9 +29,13 @@
     import SaleHeader from "./packs/components/SaleHeader"
     import NewTab from "./packs/components/NewTab"
     import ProductList from "./packs/components/ProductList"
+    import { mapGetters } from 'vuex'
 
     export default {
       components: {ProductList, NewTab, SaleHeader, Loading, SaleUser},
+      computed: {
+        ...mapGetters(['showProductList'])
+      },
       created() {
         this.$store.dispatch('getProductItems')
         this.$store.dispatch('getUserInfo')

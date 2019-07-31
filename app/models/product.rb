@@ -4,6 +4,7 @@ class Product < ApplicationRecord
   belongs_to :store
   belongs_to :product_group, optional: true
   belongs_to :producer, optional: true
+  belongs_to :product_type, optional: true
   has_many_attached :images
 
   validates :name, presence: true, length: {minimum: 2, maximum: 64}

@@ -1,4 +1,6 @@
 class SaleController < ApplicationController
+  before_action :authenticate_user!
+
   layout 'sale'
   layout 'sale_html', only: 'dashboard'
   def index
