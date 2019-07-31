@@ -30,7 +30,7 @@ gem 'redis', '~> 4.0'
 gem 'bcrypt', git: 'https://github.com/codahale/bcrypt-ruby.git', :require => 'bcrypt'
 
 # Use ActiveStorage variant
-gem 'mini_magick', '~> 4.8'
+gem 'mini_magick', '~> 4.9'
 gem 'image_processing', '~> 1.2'
 
 # Use Capistrano for deployment
