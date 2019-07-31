@@ -18,6 +18,16 @@ Park Việt là phần mềm quản lý bán hàng, kinh doanh sử dụng tại
 
 ![QuanLy](screenshots/quanly.png)
 
+# Chức năng cần bổ sung
+- In hóa đơn & Tùy chỉnh mẫu hóa đơn
+- Cho phép làm việc Offline ngay cả khi mất mạng. Đồng bộ dữ liệu khi có mạng trở lại
+- Cho phép lưu phiên làm việc và phục hồi khi có sự cố mất điện
+- Cho phép thanh toán nhiều hóa đơn
+- Cho phép in lại hóa đơn đã thanh toán
+- Sao lưu dữ liệu hàng ngày. Tối đa lên đến 7 ngày. Nhằm ngăn chặn mất mát dữ liệu.
+- Cho phép thanh toán trên máy tính bảng
+- Cho phép quản lý trên điện thoại, máy tính bảng
+
 # Tìm bạn hợp tác & kinh doanh
 Một mình làm thì không xuể vậy nên các bạn có thể cùng tham gia phát triển dự án với mình nhé,
 
