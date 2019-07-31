@@ -1,35 +1,14 @@
-import Vue from 'vue'
-import Vuex from 'vuex'
+import Vue from 'vue/dist/vue.esm'
+import Vuex from 'vuex/dist/vuex.esm'
 
-import ui from './ui'
+import product from './modules/product'
+import user from './modules/user'
+import order from './modules/order'
 
 Vue.use(Vuex)
 
-export function createStore() {
-    const store = new Vuex.Store({
-        strict: process.env.NODE_ENV !== 'production',
-
-        actions: {
-            init() {
-
-            }
-        },
-
-        modules: {
-            ui
-        }
-    })
-
-    if (module.hot) {
-        module.hot.accept([
-            './ui'
-        ], () => {
-            store.hotUpdate({
-                modules: {
-                    ui: require('./ui').default,
-                }
-            })
-        })
+export default new Vuex.Store({
+    modules: {
+        product, user, order
     }
-
-}
+})

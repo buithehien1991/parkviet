@@ -1,12 +1,8 @@
 <template>
   <div>
-    <loading v-if="remoteDataBusy" :active.sync="remoteDataBusy"
-             :can-cancel="true"
-             :is-full-page="true"></loading>
-
-    <div v-else>
+    <div>
       <div class="navbar-container">
-        <SaleHeader :user="user" />
+        <SaleHeader />
       </div>
 
       <div class="sale-container">
@@ -14,7 +10,7 @@
           <div class="col-right">
             <SaleUser />
           </div>
-          <div :class="['col-left', {active: !this.$state.showProductList}]">
+          <div :class="['col-left', {active: true}]">
             <div class="product-cart">
               <NewTab />
             </div>
@@ -29,23 +25,17 @@
 </template>
 <script>
     import SaleUser from "./packs/components/SaleUser"
-    import RemoteData from './packs/mixins/RemoteData'
     import Loading from 'vue-loading-overlay';
     import SaleHeader from "./packs/components/SaleHeader"
     import NewTab from "./packs/components/NewTab"
     import ProductList from "./packs/components/ProductList"
 
     export default {
-        components: {ProductList, NewTab, SaleHeader, Loading, SaleUser},
-        mixins: [
-            RemoteData({
-                user () {
-                    return 'get_current_user'
-                },
-                products () {
-                    return 'manage/products.json'
-                }
-            })
-        ]
+      components: {ProductList, NewTab, SaleHeader, Loading, SaleUser},
+      created() {
+        this.$store.dispatch('getProductItems')
+        this.$store.dispatch('getUserInfo')
+        this.$store.dispatch('getOrderItems')
+      }
     }
 </script>

@@ -1,7 +1,7 @@
 <template>
     <div class="new-tab">
         <ul class="nav nav-tabs">
-            <li v-for="order of this.$state.orders" class="nav-item">
+            <li v-for="order of orders" class="nav-item">
                 <a :class="['nav-link', {active: order === selectedOrder}]" @click="selectOrder(order)">
                     {{ order.title }}
                     <button type="button" class="close" aria-label="Close" @click.stop="removeOrder(order)">
@@ -18,6 +18,7 @@
 </template>
 
 <script>
+    import { mapGetters } from 'vuex'
     export default {
         data () {
             return {
@@ -31,15 +32,16 @@
         },
 
         computed: {
+            ...mapGetters(['orders']),
             selectedOrder () {
-                return this.$state.orders.find(order => order.id === this.selectedId)
+                return this.orders.find(order => order.id === this.selectedId)
             },
             nextNumber() {
-                if (this.$state.orders.length === 0) {
+                if (this.orders.length === 0) {
                     return 1;
                 }
 
-                return Math.max.apply(Math, this.$state.orders.map(function(o) { return o.number; })) + 1
+                return Math.max.apply(Math, this.orders.map(function(o) { return o.number; })) + 1
             }
         },
 
@@ -59,7 +61,7 @@
                     created: time,
                 }
 
-                this.$state.orders.push(order)
+                this.$store.dispatch('addOrderItem', order)
                 this.selectOrder(order)
             },
             removeOrder (order) {

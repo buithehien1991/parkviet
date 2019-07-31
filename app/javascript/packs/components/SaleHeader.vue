@@ -55,12 +55,16 @@
 </template>
 
 <script>
+    import { mapGetters } from 'vuex';
     export default {
         data: () => ({
             showUserMenu: false
         }),
-        props: ['user'],
+
         computed: {
+            ...mapGetters([
+                'user'
+            ]),
             welcome_user () {
                 return "Xin chào<br>" + this.user.fullname
             }

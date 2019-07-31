@@ -4,6 +4,10 @@ export function date(value) {
     return moment(value).format('L')
 }
 
+export function dateFormat(value, format) {
+    return moment(value).format(format)
+}
+
 /**
  * Formats a percentage. Ex: .12 => '12%'
  *
