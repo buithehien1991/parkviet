@@ -34,7 +34,9 @@
         </div>
 
         <div class="navbar-select-branch">
-
+            <select id="branch" name="branch" class="form-control form-control-sm">
+                <option value="Chi nhánh trung tâm" selected="selected">Chi nhánh trung tâm</option>
+            </select>
         </div>
 
         <ul class="navbar-nav">
@@ -77,14 +79,45 @@
                 window.open('/manage', '_blank')
             },
             toggleFullScreen () {
-                // Should write by state of VueJS
+                var isInFullScreen = (document.fullscreenElement && document.fullscreenElement !== null) ||
+                    (document.webkitFullscreenElement && document.webkitFullscreenElement !== null) ||
+                    (document.mozFullScreenElement && document.mozFullScreenElement !== null) ||
+                    (document.msFullscreenElement && document.msFullscreenElement !== null);
+
+                var docElm = document.documentElement;
+                if (!isInFullScreen) {
+                    if (docElm.requestFullscreen) {
+                        docElm.requestFullscreen();
+                    } else if (docElm.mozRequestFullScreen) {
+                        docElm.mozRequestFullScreen();
+                    } else if (docElm.webkitRequestFullScreen) {
+                        docElm.webkitRequestFullScreen();
+                    } else if (docElm.msRequestFullscreen) {
+                        docElm.msRequestFullscreen();
+                    }
+
+                    document.getElementById("btn-fullscreen-sale").className = "fa fa-compress";
+                } else {
+                    if (document.exitFullscreen) {
+                        document.exitFullscreen();
+                    } else if (document.webkitExitFullscreen) {
+                        document.webkitExitFullscreen();
+                    } else if (document.mozCancelFullScreen) {
+                        document.mozCancelFullScreen();
+                    } else if (document.msExitFullscreen) {
+                        document.msExitFullscreen();
+                    }
+
+                    document.getElementById("btn-fullscreen-sale").className = "fa fa-arrows-alt";
+                }
             },
             toggleUserMenu () {
                 this.showUserMenu = !this.showUserMenu
             },
             closeUserMenu () {
                 this.showUserMenu = false
-            }
+            },
+
         }
     }
 </script>

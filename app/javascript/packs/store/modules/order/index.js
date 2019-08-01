@@ -2,7 +2,8 @@ import axios from 'axios'
 import config from '../../../config'
 
 const state = {
-    orders: []
+    orders: [],
+    selectedOrderId: null
 }
 
 const mutations = {
@@ -12,6 +13,10 @@ const mutations = {
 
     ADD_ORDER_ITEMS(state, orderItem) {
         state.orders.push(orderItem)
+    },
+
+    UPDATE_SELECTED_ORDER_ID(state, payload) {
+        state.selectedOrderId = payload
     }
 }
 
@@ -68,6 +73,10 @@ const actions = {
      */
     removeAllIteminOrder({ commit }, orderItem) {
 
+    },
+
+    updateSelectedOrderId({ commit }, id) {
+        commit('UPDATE_SELECTED_ORDER_ID', id)
     }
 }
 
@@ -78,8 +87,8 @@ const getters = {
     },
     quantityByOrderId: (state) => (orderId) => {
         // TODO tính tổng số hàng hóa cho 1 hóa đơn
-    }
-
+    },
+    selectedId: state => state.selectedOrderId
 }
 
 const orderModule = {

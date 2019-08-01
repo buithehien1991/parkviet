@@ -16,8 +16,7 @@ function toggleFullScreen() {
             docElm.msRequestFullscreen();
         }
 
-        $("#btn-fullscreen-sale").attr("class", "fa fa-compress");
-
+        document.getElementById("btn-fullscreen-sale").className = "fa fa-compress";
     } else {
         if (document.exitFullscreen) {
             document.exitFullscreen();
@@ -29,6 +28,6 @@ function toggleFullScreen() {
             document.msExitFullscreen();
         }
 
-        $("#btn-fullscreen-sale").attr("class", "fa fa-arrows-alt");
+        document.getElementById("btn-fullscreen-sale").className = "fa fa-arrows-alt";
     }
 }

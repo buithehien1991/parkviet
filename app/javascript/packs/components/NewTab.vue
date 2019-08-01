@@ -20,19 +20,13 @@
 <script>
     import { mapGetters } from 'vuex'
     export default {
-        data () {
-            return {
-                selectedId: null,
-            }
-        },
-
         created: function() {
             // Add fist order
             this.addOrder()
         },
 
         computed: {
-            ...mapGetters(['orders']),
+            ...mapGetters(['orders', 'selectedId']),
             selectedOrder () {
                 return this.orders.find(order => order.id === this.selectedId)
             },
@@ -65,16 +59,16 @@
                 this.selectOrder(order)
             },
             removeOrder (order) {
-                const index = this.$state.orders.indexOf(order)
+                const index = this.orders.indexOf(order)
                 if (index !== -1) {
-                    this.$state.orders.splice(index, 1)
-                    if (this.$state.orders.length > 0) {
-                        this.selectOrder(this.$state.orders[this.$state.orders.length - 1])
+                    this.orders.splice(index, 1)
+                    if (this.orders.length > 0) {
+                        this.selectOrder(this.orders[this.orders.length - 1])
                     }
                 }
             },
             selectOrder (order) {
-                this.selectedId = order.id
+                this.$store.dispatch('updateSelectedOrderId', order.id)
             },
 
             saveOrders () {
