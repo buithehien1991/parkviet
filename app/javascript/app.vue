@@ -13,6 +13,8 @@
           <div :class="['col-left', {active: !showProductList}]">
             <div class="product-cart">
               <NewTab />
+
+              <OrderProductList></OrderProductList>
             </div>
 
             <ProductList />
@@ -29,10 +31,11 @@
     import SaleHeader from "./packs/components/SaleHeader"
     import NewTab from "./packs/components/NewTab"
     import ProductList from "./packs/components/ProductList"
+    import OrderProductList from './packs/components/OrderProductList'
     import { mapGetters } from 'vuex'
 
     export default {
-      components: {ProductList, NewTab, SaleHeader, Loading, SaleUser},
+      components: {ProductList, NewTab, SaleHeader, Loading, SaleUser, OrderProductList},
       computed: {
         ...mapGetters(['showProductList'])
       },

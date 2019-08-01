@@ -117,7 +117,6 @@
             closeUserMenu () {
                 this.showUserMenu = false
             },
-
         }
     }
 </script>

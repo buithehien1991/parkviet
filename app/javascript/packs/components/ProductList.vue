@@ -8,7 +8,7 @@
             <div class="action-toolbar"></div>
             <div class="row" style="margin: 0 10px;">
                 <div v-for="product in products" class="card" style="margin: 10px; width: 110px;">
-                    <Product :product="product"></Product>
+                    <ProductListItem :product="product"></ProductListItem>
                 </div>
             </div>
         </div>
@@ -17,10 +17,10 @@
 
 <script>
     import { mapGetters } from 'vuex'
-    import Product from "./Product"
+    import ProductListItem from "./ProductListItem"
     export default {
         name: "ProductList",
-        components: {Product},
+        components: {ProductListItem},
         computed: {
             ...mapGetters(['showProductList', 'products'])
         },

@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div @click="addProductToOrder(product)" class="product-list-item">
         <img :src="product.avatar_url" class="card-img-top product-img">
         <span class="product-price">{{ product.sale_price }}</span>
         <div class="card-body">
@@ -16,11 +16,12 @@
 
         },
         methods: {
-
+            addProductToOrder(product) {
+                this.$store.dispatch('addItemToOrder', product)
+            }
         }
     }
 </script>
 
 <style scoped>
-
 </style>

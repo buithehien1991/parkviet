@@ -28,10 +28,27 @@ Park Việt là phần mềm quản lý bán hàng, kinh doanh sử dụng tại
 - Cho phép thanh toán trên máy tính bảng
 - Cho phép quản lý trên điện thoại, máy tính bảng
 - Cho phép đồng bộ dữ liệu từ trên trang TMĐT khác: Tiki, Shopee, Lazada, Sendo
-- Tạo trang web bán hàng đơn giản
+- Tạo trang web bán hàng
 - Kết nối với Facebook Fanpage để quản lý và thực thi QC, chiến dịch Marketing...
+- Bán hàng trên facebook, sàn TMĐT, website khác
 - Hỗ trợ nhiều chi nhánh
-- 
+- Chức năng quản lý nhân sự - lương nhân viên
+- Chức năng quản lý quan hệ khách hàng (CRM)
+- Quản lý kho
+- Quản lý hàng hóa
+- Quản lý sản xuất
+- Quản lý thuế
+- Quản lý tài sản cố định
+- Quản lý tài chính - kế toán
+- Báo cáo quản trị
+- Quản lý và bán hàng đa kênh
+- Quản lý khuyến mại
+- Quản lý nhà cung cấp	
+- Quản lý chuỗi cửa hàng	
+- Quản lý giao hàng	
+- Tích hợp đối tác vận chuyển
+- Quản lý công nợ
+- Chăm sóc khách hàng
 
 # Tìm bạn hợp tác & kinh doanh
 Một mình làm thì không xuể vậy nên các bạn có thể cùng tham gia phát triển dự án với mình nhé,

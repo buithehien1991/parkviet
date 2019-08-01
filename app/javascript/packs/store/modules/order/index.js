@@ -15,6 +15,51 @@ const mutations = {
         state.orders.push(orderItem)
     },
 
+    REMOVE_ORDER_ITEMS(state, orderItem) {
+        const index = state.orders.findIndex(order => order.id === orderItem.id)
+        state.orders.splice(index, 1)
+    },
+
+    ADD_ITEM_TO_ORDER(state, item) {
+        var currentOrder = state.orders.find(
+            order => order.id === state.selectedOrderId
+        )
+        if (currentOrder) {
+            let currentOrderProducts = currentOrder.orderProducts
+
+            let orderProductExists = false;
+            currentOrderProducts.map((orderProduct) => {
+                if (orderProduct.id === item.id) {
+                    orderProduct.quantity++;
+                    orderProductExists = true;
+                }
+            })
+
+            if (!orderProductExists) {
+                item.quantity = 1
+                currentOrderProducts.push(item)
+            }
+
+            currentOrder.orderProducts = currentOrderProducts
+
+            state.orders = state.orders.map((order) => {
+                if (order.id === state.selectedOrderId) {
+                    order = currentOrder
+                }
+                return order
+            })
+
+            // TODO Sync to server
+        } else {
+            // TODO thông báo lỗi cho khách hàng
+            console.log("Có lỗi khi lựa chọn sản phẩm. Vui lòng thử lại")
+        }
+    },
+
+    REMOVE_ITEM_FROM_ORDER(state, item) {
+
+    },
+
     UPDATE_SELECTED_ORDER_ID(state, payload) {
         state.selectedOrderId = payload
     }
@@ -43,7 +88,7 @@ const actions = {
      * @param orderItem
      */
     removeOrderItem({ commit }, orderItem) {
-
+        commit('REMOVE_ORDER_ITEMS', orderItem)
     },
 
     /**
@@ -52,8 +97,8 @@ const actions = {
      * @param orderItem
      * @param item
      */
-    addItemToOrder({ commit }, orderItem, item) {
-
+    addItemToOrder({ commit }, item) {
+        commit('ADD_ITEM_TO_ORDER', item)
     },
 
     /**
@@ -88,7 +133,12 @@ const getters = {
     quantityByOrderId: (state) => (orderId) => {
         // TODO tính tổng số hàng hóa cho 1 hóa đơn
     },
-    selectedId: state => state.selectedOrderId
+    selectedId: state => state.selectedOrderId,
+    currentOrder: state => {
+        return state.orders.find(
+            order => order.id === state.selectedOrderId
+        )
+    }
 }
 
 const orderModule = {

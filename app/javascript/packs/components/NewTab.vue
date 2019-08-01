@@ -52,6 +52,7 @@
                     id: String(time),
                     title: 'Hóa đơn ' + this.nextNumber,
                     number: this.nextNumber,
+                    orderProducts: [],
                     created: time,
                 }
 
@@ -61,7 +62,8 @@
             removeOrder (order) {
                 const index = this.orders.indexOf(order)
                 if (index !== -1) {
-                    this.orders.splice(index, 1)
+                    // this.orders.splice(index, 1)
+                    this.$store.dispatch('removeOrderItem', order)
                     if (this.orders.length > 0) {
                         this.selectOrder(this.orders[this.orders.length - 1])
                     }
