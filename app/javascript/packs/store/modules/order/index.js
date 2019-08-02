@@ -127,8 +127,19 @@ const actions = {
 
 const getters = {
     orders: state => state.orders,
-    totalPriceByOrderId: (state) => (orderId) => {
-        // TODO tính tổng tiền cho 1 hóa đơn
+    totalPriceByOrder: state => {
+        console.log(state)
+        let currentOrder = state.orders.find(
+            order => order.id === state.selectedOrderId
+        )
+
+        if (currentOrder) {
+            return currentOrder.orderProducts.reduce((acc, orderProduct) => {
+                return (orderProduct.quantity * orderProduct.sale_price) + acc
+            }, 0)
+        } else {
+            return 0
+        }
     },
     quantityByOrderId: (state) => (orderId) => {
         // TODO tính tổng số hàng hóa cho 1 hóa đơn

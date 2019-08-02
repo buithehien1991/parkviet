@@ -15,29 +15,27 @@
                         <td>{{ index + 1 }}</td>
                         <td>{{ orderProduct.name }}</td>
                         <td>
-                            {{ orderProduct.quantity }}
-                            <span>
-                                <i @click="addCartItem(cartItem)"
-                                   class="fa fa-arrow-circle-up cart-item__modify"></i>
-                                <i @click="removeCartItem(cartItem)"
-                                   class="fa fa-arrow-circle-down cart-item__modify"></i>
-                            </span>
+                            <div class="d-flex justify-content-between">
+                                <span>{{ orderProduct.quantity }}</span>
+                                <span>
+                                    <i @click="addItemToOrder(orderProduct)"
+                                       class="fa fa-arrow-circle-up cart-item__modify"></i>
+                                    <i @click="removeItemFromOrder(orderProduct)"
+                                       class="fa fa-arrow-circle-down cart-item__modify"></i>
+                                </span>
+                            </div>
                         </td>
                         <td>{{ orderProduct.sale_price }}</td>
-                        <td>{{ orderProduct.quantity * orderProduct.sale_price }}</td>
                         <td>
-                            <a href="#" @click="">
-                                <i class="fa fa-plus-circle"></i>
-                            </a>
+                            <div class="d-flex justify-content-between">
+                                <span>{{ orderProduct.quantity * orderProduct.sale_price }}</span>
+                                <span>
+                                    <i class="fa fa-cart-arrow-down cart-item__modify"></i>
+                                </span>
+                            </div>
 
-                            <a href="#">
-                                <i class="fa fa-minus-circle"></i>
-                            </a>
-
-                            <a href="#">
-                                <i class="fa fa-cart-arrow-down"></i>
-                            </a>
-
+                        </td>
+                        <td>
                             <a href="#">
                                 <i class="fa fa-trash"></i>
                             </a>
@@ -60,6 +58,14 @@
         },
         components: {
             OrderProductListItem
+        },
+        methods: {
+            addItemToOrder(item) {
+
+            },
+            removeItemFromOrder(item) {
+
+            }
         }
     }
 </script>

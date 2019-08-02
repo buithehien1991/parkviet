@@ -2,7 +2,9 @@ import axios from 'axios'
 import config from '../../../config'
 
 const state = {
-    user: {}
+    user: {},
+    customers: [],
+    currentCustomer: null
 }
 
 const mutations = {
@@ -16,6 +18,9 @@ const actions = {
         axios.get(config.USER_INFO_PATH).then((response) => {
             commit('UPDATE_USER_INFO', response.data)
         })
+    },
+    getCustomers({ commit }) {
+
     }
 }
 

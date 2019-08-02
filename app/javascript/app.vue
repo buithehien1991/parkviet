@@ -8,7 +8,7 @@
       <div class="sale-container">
         <div class="wrap-container">
           <div class="col-right">
-            <SaleUser />
+            <SaleUser :user="user"/>
           </div>
           <div :class="['col-left', {active: !showProductList}]">
             <div class="product-cart">
@@ -37,7 +37,7 @@
     export default {
       components: {ProductList, NewTab, SaleHeader, Loading, SaleUser, OrderProductList},
       computed: {
-        ...mapGetters(['showProductList'])
+        ...mapGetters(['showProductList', 'user'])
       },
       created() {
         this.$store.dispatch('getProductItems')
