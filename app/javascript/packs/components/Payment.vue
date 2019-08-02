@@ -18,7 +18,7 @@
                 Giảm giá
             </div>
             <div>
-                0
+                {{ saleOff }}
             </div>
         </div>
 
@@ -63,7 +63,7 @@
     export default {
         name: "Payment",
         computed: {
-            ...mapGetters(['totalPriceByOrder'])
+            ...mapGetters(['totalPriceByOrder', 'saleOff'])
         }
     }
 </script>

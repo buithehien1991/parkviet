@@ -37,6 +37,9 @@ const mutations = {
 
             if (!orderProductExists) {
                 item.quantity = 1
+                item.discount_percent = 0
+                item.discount_money = 0
+                item.final_price = item.sale_price
                 currentOrderProducts.push(item)
             }
 
@@ -140,6 +143,22 @@ const getters = {
         } else {
             return 0
         }
+    },
+    saleOff: state => {
+        let currentOrder = state.orders.find(
+            order => order.id === state.selectedOrderId
+        )
+
+        if (currentOrder) {
+            return currentOrder.orderProducts.reduce((acc, orderProduct) => {
+                return (orderProduct.discount_money + acc)
+            }, 0)
+        } else {
+            return 0
+        }
+    },
+    totalFinalPriceByOrder: state => {
+
     },
     quantityByOrderId: (state) => (orderId) => {
         // TODO tính tổng số hàng hóa cho 1 hóa đơn
