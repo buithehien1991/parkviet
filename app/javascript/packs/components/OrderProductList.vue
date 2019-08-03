@@ -36,7 +36,7 @@
 
                         </td>
                         <td>
-                            <a href="#">
+                            <a href="#" @click="removeAllItemFromOrder(orderProduct)">
                                 <i class="fa fa-trash"></i>
                             </a>
                         </td>
@@ -61,10 +61,13 @@
         },
         methods: {
             addItemToOrder(item) {
-
+                this.$store.dispatch('addItemToOrder', item)
             },
             removeItemFromOrder(item) {
-
+                this.$store.dispatch('removeItemFromOrder', item)
+            },
+            removeAllItemFromOrder(item) {
+                this.$store.dispatch('removeAllItemFromOrder', item)
             }
         }
     }

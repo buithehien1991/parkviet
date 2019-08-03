@@ -56,7 +56,7 @@
                     total_price: 0,
                     sale_off: 0,
                     paid: 0,
-                    given_money: null,
+                    given_money: 0,
                     returned_money: null,
                     note: "",
                     created: time,

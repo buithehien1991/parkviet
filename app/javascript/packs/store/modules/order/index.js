@@ -60,11 +60,93 @@ const mutations = {
     },
 
     REMOVE_ITEM_FROM_ORDER(state, item) {
+        let currentOrder = state.orders.find(
+            order => order.id === state.selectedOrderId
+        )
+        if (currentOrder) {
+            let currentOrderProducts = currentOrder.orderProducts
+            currentOrderProducts.map((orderProduct) => {
+                if (orderProduct.id === item.id && orderProduct.quantity > 1) {
+                    orderProduct.quantity--;
+                } else if (orderProduct.id === item.id && orderProduct.quantity === 1){
+                    const indexToRemove = currentOrderProducts.findIndex(orderProduct => orderProduct.id === item.id)
+                    currentOrderProducts.splice(indexToRemove, 1)
+                }
+            })
 
+            currentOrder.orderProducts = currentOrderProducts
+
+            state.orders = state.orders.map((order) => {
+                if (order.id === state.selectedOrderId) {
+                    order = currentOrder
+                }
+                return order
+            })
+
+            // TODO Sync to server
+        } else {
+            // TODO thông báo lỗi cho khách hàng
+
+        }
+    },
+
+    REMOVE_ALL_ITEM_FROM_ORDER(state, item) {
+        let currentOrder = state.orders.find(
+            order => order.id === state.selectedOrderId
+        )
+        if (currentOrder) {
+            const indexToRemove = currentOrder.orderProducts.findIndex(orderProduct => orderProduct.id === item.id)
+            currentOrder.orderProducts.splice(indexToRemove, 1)
+
+            state.orders = state.orders.map((order) => {
+                if (order.id === state.selectedOrderId) {
+                    order = currentOrder
+                }
+                return order
+            })
+        } else {
+            // TODO thông báo lỗi cho khách hàng
+            console.log("Có lỗi khi bỏ toàn bộ sản phẩm. Vui lòng thử lại")
+        }
     },
 
     UPDATE_SELECTED_ORDER_ID(state, payload) {
         state.selectedOrderId = payload
+    },
+
+    UPDATE_GIVEN_MONEY(state, payload) {
+        let currentOrder = state.orders.find(
+            order => order.id === state.selectedOrderId
+        )
+        if (currentOrder) {
+            currentOrder.given_money = payload
+
+            state.orders = state.orders.map((order) => {
+                if (order.id === state.selectedOrderId) {
+                    order = currentOrder
+                }
+                return order
+            })
+        }
+        else {
+            // TODO thông báo lỗi cho khách hàng
+            console.log("Có lỗi khi cập nhật số tiền khách hàng đưa")
+        }
+    },
+
+    CHECKOUT(state) {
+        let currentOrder = state.orders.find(
+            order => order.id === state.selectedOrderId
+        )
+        if (currentOrder) {
+            let data = currentOrder
+            axios.post(config.INVOICES_PATH, data).then((response) => {
+                // TODO làm gì nhỉ không biết @_@
+            });
+        } else {
+            // TODO thông báo lỗi cho khách hàng
+            console.log("Có lỗi xảy ra khi thanh toán. Vui lòng thử lại")
+        }
     }
 }
 
@@ -110,8 +192,8 @@ const actions = {
      * @param orderItem
      * @param item
      */
-    removeItemInOrder({ commit }, orderItem, item) {
-
+    removeItemFromOrder({ commit }, item) {
+        commit('REMOVE_ITEM_FROM_ORDER', item)
     },
 
     /**
@@ -119,12 +201,20 @@ const actions = {
      * @param commit
      * @param orderItem
      */
-    removeAllIteminOrder({ commit }, orderItem) {
-
+    removeAllItemFromOrder({ commit }, orderItem) {
+        commit('REMOVE_ALL_ITEM_FROM_ORDER', orderItem)
     },
 
     updateSelectedOrderId({ commit }, id) {
         commit('UPDATE_SELECTED_ORDER_ID', id)
+    },
+
+    updateGivenMoney({ commit }, giveMoney) {
+        commit('UPDATE_GIVEN_MONEY', giveMoney)
+    },
+
+    checkout({ commit }) {
+        commit('CHECKOUT')
     }
 }
 
@@ -160,14 +250,34 @@ const getters = {
     totalFinalPriceByOrder: state => {
 
     },
-    quantityByOrderId: (state) => (orderId) => {
-        // TODO tính tổng số hàng hóa cho 1 hóa đơn
+    quantityByOrder: state => {
+        let currentOrder = state.orders.find(
+            order => order.id === state.selectedOrderId
+        )
+
+        if (currentOrder) {
+            return currentOrder.orderProducts.reduce((acc, orderProduct) => {
+                return (orderProduct.quantity + acc)
+            }, 0)
+        } else {
+            return 0
+        }
     },
     selectedId: state => state.selectedOrderId,
     currentOrder: state => {
         return state.orders.find(
             order => order.id === state.selectedOrderId
         )
+    },
+    givenMoney: state => {
+        let currentOrder = state.orders.find(
+            order => order.id === state.selectedOrderId
+        )
+        if (currentOrder) {
+            return currentOrder.given_money
+        } else {
+            return 0
+        }
     }
 }
 

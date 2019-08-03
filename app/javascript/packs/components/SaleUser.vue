@@ -20,7 +20,7 @@
 
         <hr style="margin: 0.8rem -10px;">
 
-        <button class="btn btn-park btn-lg w-100 text-white">
+        <button class="btn btn-park btn-lg w-100 text-white" @click="checkout">
             <i class="fa fa-shopping-cart"></i>
             Thanh toán
         </button>
@@ -43,6 +43,15 @@
         components: {
             Payment,
             SaleCustomer
+        },
+        methods: {
+            checkout() {
+                this.$store.dispatch('checkout').then(() => {
+                    //  Show dialog đã thanh toán thành công. bạn có muốn đóng hóa đơn này không ?
+
+                    // In hóa đơn ???
+                })
+            }
         }
     }
 </script>
