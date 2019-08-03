@@ -30,7 +30,7 @@ gem 'redis', '~> 4.0'
 gem 'bcrypt', git: 'https://github.com/codahale/bcrypt-ruby.git', :require => 'bcrypt'
 
 # Use ActiveStorage variant
-gem 'mini_magick', '~> 4.8'
+gem 'mini_magick', '~> 4.9'
 gem 'image_processing', '~> 1.2'
 
 # Use Capistrano for deployment
@@ -57,10 +57,10 @@ end
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
-gem 'devise', '~> 4.4.3'
+gem 'devise', '~> 4.6.0'
 
 # Gem group for UI
-gem 'bootstrap', '~> 4.1.1'
+gem 'bootstrap', '~> 4.3.1'
 gem 'jquery-rails'
 gem 'jquery-ui-rails'
 gem 'font-awesome-rails'
