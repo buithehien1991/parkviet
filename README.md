@@ -17,6 +17,7 @@ Park Việt là phần mềm quản lý bán hàng, kinh doanh sử dụng tại
 - Đang hoàn thiện chức năng bán hàng
 
 ![QuanLy](screenshots/quanly.png)
+![BanHang](screenshots/banhang.png)
 
 # Chức năng cần bổ sung
 - In hóa đơn & Tùy chỉnh mẫu hóa đơn
