@@ -40,7 +40,7 @@ class ProductsController < ApplicationController
       if params[:kind].eql?('save')
         redirect_to products_path, notice: t(:notice_create_product_successfully)
       elsif params[:kind].eql?('cont')
-        redirect_to new_producer_path, notice: t(:notice_create_product_successfully)
+        redirect_to new_product_path, notice: t(:notice_create_product_successfully)
       end
     end
   end
