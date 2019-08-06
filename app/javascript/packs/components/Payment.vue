@@ -20,7 +20,7 @@
                 Tổng tiền hàng
             </div>
             <div>
-                {{ totalPriceByOrder }}
+                {{ totalPriceByOrder | priceFormat }}
             </div>
         </div>
 
@@ -31,7 +31,7 @@
                 Giảm giá
             </div>
             <div>
-                {{ saleOff }}
+                {{ saleOff | priceFormat }}
             </div>
         </div>
 
@@ -42,7 +42,7 @@
                 Khách cần trả
             </div>
             <div class="paid-price">
-                {{ totalPriceByOrder - saleOff }}
+                {{ (totalPriceByOrder - saleOff) | priceFormat }}
             </div>
         </div>
 
@@ -64,7 +64,7 @@
                 Tiền thừa trả khách
             </div>
             <div>
-                {{ returned_money }}
+                {{ returned_money | priceFormat }}
             </div>
         </div>
 

@@ -25,10 +25,10 @@
                                 </span>
                             </div>
                         </td>
-                        <td>{{ orderProduct.sale_price }}</td>
+                        <td>{{ orderProduct.sale_price | priceFormat }}</td>
                         <td>
                             <div class="d-flex justify-content-between">
-                                <span>{{ orderProduct.quantity * orderProduct.sale_price }}</span>
+                                <span>{{ orderProduct.quantity * orderProduct.sale_price | priceFormat }}</span>
                                 <span>
                                     <i class="fa fa-cart-arrow-down cart-item__modify"></i>
                                 </span>
