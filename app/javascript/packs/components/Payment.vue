@@ -53,7 +53,7 @@
                 Khách thanh toán (F8)
             </div>
             <div>
-                <input type="text" :value="givenMoney" @input="updateGivenMoney">
+                <vue-numeric currency="₫" separator="," v-model="giveMoney"></vue-numeric>
             </div>
         </div>
 
@@ -82,21 +82,31 @@
 
 <script>
     import { mapGetters } from 'vuex'
+    import VueNumeric from 'vue-numeric'
     export default {
         name: "Payment",
         computed: {
-            ...mapGetters(['totalPriceByOrder', 'saleOff', 'quantityByOrder', 'givenMoney']),
+            ...mapGetters(['totalPriceByOrder', 'saleOff', 'quantityByOrder']),
+            giveMoney: {
+                get() {
+                    return this.$store.getters.givenMoney
+                },
+                set(value) {
+                    this.$store.dispatch('updateGivenMoney', value)
+                }
+            },
             totalFinalPrice: function () {
                 return this.totalPriceByOrder - this.saleOff
             },
             returned_money: function(){
-                return this.givenMoney - this.totalFinalPrice
+                return this.giveMoney - this.totalFinalPrice
             }
         },
         methods: {
-            updateGivenMoney(e) {
-                this.$store.dispatch('updateGivenMoney', e.target.value)
-            }
+
+        },
+        components: {
+            VueNumeric
         }
     }
 </script>
