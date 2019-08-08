@@ -21,7 +21,7 @@ const mutations = {
     },
 
     ADD_ITEM_TO_ORDER(state, item) {
-        var currentOrder = state.orders.find(
+        let currentOrder = state.orders.find(
             order => order.id === state.selectedOrderId
         )
         if (currentOrder) {
@@ -35,12 +35,14 @@ const mutations = {
                 }
             })
 
+            let newOrderProductItem = {}
+            Object.assign(newOrderProductItem, item)
             if (!orderProductExists) {
-                item.quantity = 1
-                item.discount_percent = 0
-                item.discount_money = 0
-                item.final_price = item.sale_price
-                currentOrderProducts.push(item)
+                newOrderProductItem.quantity = 1
+                newOrderProductItem.discount_percent = 0
+                newOrderProductItem.discount_money = 0
+                newOrderProductItem.final_price = item.sale_price
+                currentOrderProducts.push(newOrderProductItem)
             }
 
             currentOrder.orderProducts = currentOrderProducts
