@@ -1,3 +1,37 @@
+# Chức năng cần bổ sung
+## Trang bán hàng
+### Chung
+- Chế độ Offline
+### Thanh trạng thái
+- Chế độ sử dụng cân điện tử
+- Chế độ nhập: Nhanh & thường
+- Cho phép chọn chi nhánh
+- Trả hàng
+- Thiết lập in
+- Menu
+   Xem báo cáo cuối ngày
+   Xử lý đặt hàng
+   Chọn hóa đơn trả hàng
+   Lập phiếu thu
+   Phát hành voucher
+   Import
+   Tùy chọn hiển thị
+   Quản lý
+   Thoát
+### Phần thanh toán
+- Tìm và Chọn người thanh toán
+- Sửa | chọn ngày giờ thanh toán
+- Chọn bảng giá: Bảng giá chung | Giá vốn | Giá VIP km 5%...
+- Tùy chọn Giao hàng: Có | Không
+- Chọn kênh bán hàng: Trực tiếp | Facebook | Khác... thêm kênh bán hàng
+- Hóa đơn | Đặt hàng | Sửa chữa
+- Thu khác: Giao hàng, ...
+### Phần danh sách sản phẩm
+- Sắp xếp sản phẩm trong giỏ hàng
+- Gộp hàng hóa liên quan ??
+- Lọc theo nhóm 
+- Lọc theo thuộc tính hàng hóa
+
 # MVC
 ## Manage
 ### Product Groups
