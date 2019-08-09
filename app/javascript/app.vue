@@ -43,6 +43,7 @@
         this.$store.dispatch('getProductItems')
         this.$store.dispatch('getUserInfo')
         this.$store.dispatch('getOrderItems')
+        this.$store.dispatch('getCustomers')
       }
     }
 </script>

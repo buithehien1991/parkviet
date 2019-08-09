@@ -10,6 +10,10 @@ const state = {
 const mutations = {
     UPDATE_USER_INFO(state, payload) {
         state.user = payload
+    },
+
+    UPDATE_CUSTOMERS(state, payload) {
+        state.customers = payload
     }
 }
 
@@ -20,7 +24,9 @@ const actions = {
         })
     },
     getCustomers({ commit }) {
-
+        axios.get(config.CUSTOMERS_PATH).then((response) => {
+            commit('UPDATE_CUSTOMERS', response.data)
+        })
     }
 }
 

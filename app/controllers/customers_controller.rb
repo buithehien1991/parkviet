@@ -3,9 +3,18 @@ class CustomersController < ApplicationController
   before_action :authenticate_user!
 
   def index
-    @per_page = params[:per_page] || Product.per_page || 20
-    @q = Customer.ransack(params[:q])
-    @customers = @q.result.by_store(current_store.id).paginate(:page => params[:page], :per_page => @per_page)
+    respond_to do |format|
+      format.html {
+        @per_page = params[:per_page] || Product.per_page || 20
+        @q = Customer.ransack(params[:q])
+        @customers = @q.result.by_store(current_store.id).paginate(:page => params[:page], :per_page => @per_page)
+      }
+      format.json {
+        @q = Customer.ransack(params[:q])
+        @customers = @q.result.by_store(current_store.id)
+        render json: @customers, each_serializer: CustomerSerializer
+      }
+    end
   end
 
   def new
