@@ -1,0 +1,43 @@
+<%= form_with(model: purchase_order, local: true) do |f| %>
+  <% if purchase_order.errors.any? %>
+    <div id="error_explanation">
+      <h2>Có <%= pluralize(purchase_order.errors.count, "lỗi", locale: :vi) %> đã xảy ra</h2>
+
+      <ul>
+      <% purchase_order.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="row">
+    <div class="col-md-6">
+      <div class="form-group">
+        <%= f.label :name, class: "col-form-label font-weight-bold" %>
+        <%= f.text_field :name, class: "form-control form-control-sm", placeholder: t('.name_placeholder'), required: true %>
+      </div>
+
+      <div class="form-group">
+        <%= f.label :code, class: "col-form-label font-weight-bold" %>
+        <%= f.text_field :code, class: "form-control form-control-sm", placeholder: t('.code_placeholder') %>
+      </div>
+
+      <div class="form-group">
+        <%= f.label :supplier, class: "col-form-label font-weight-bold" %>
+        <% @suppliers = Supplier.by_store(current_store).collect { |p| [ p.name, p.id ] } %>
+        <%= f.select :supplier_id, options_for_select(@suppliers, @purchase_order.supplier ? @purchase_order.supplier.id : ""), {prompt: t(:prompt_supplier)}, class: "form-control form-control-sm" %>
+      </div>
+
+      <div class="form-group">
+        <%= f.label :note, class: "col-form-label font-weight-bold" %>
+        <%= f.text_area :note, class: "form-control form-control-sm", placeholder: t('.note_placeholder') %>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

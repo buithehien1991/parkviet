@@ -1,0 +1,51 @@
+<div class="m-3">
+  <h3>
+    #<%= @purchase_order.code %> <%= @purchase_order.name %>
+  </h3>
+
+
+  <div class="form-group">
+    <label class="font-weight-bold"><%= t(:'activerecord.attributes.purchase_order.supplier') %>:</label>
+    <% if @purchase_order.supplier %>
+      <%= @purchase_order.supplier.name %>
+    <% else %>
+      vui lòng chọn nhà cung cấp
+    <% end %>
+  </div>
+
+
+  <div class="form-group">
+    <label class="font-weight-bold"><%= t(:'activerecord.attributes.purchase_order.note') %>:</label>
+    <%= @purchase_order.note %>
+  </div>
+
+
+  <div class="row">
+  <div class="col-md-6">
+    <div class="form-group">
+      <label class="font-weight-bold"><%= t(:'activerecord.attributes.purchase_order.product') %></label>
+      <small style="color: green">Chỉ thêm hàng hóa mà nhà cung cấp bạn đã chọn</small>
+
+      <table class="table table-bordered">
+        <thead>
+        <th>Mã hàng hóa</th>
+        <th>Tên hàng hóa</th>
+        <th>Số lượng</th>
+        <th>Đơn giá</th>
+        <th></th>
+        </thead>
+        <tbody>
+
+        </tbody>
+      </table>
+    </div>
+
+
+    <%= link_to new_product_purchase_order_path, class: "btn btn-success", remote: true do %>
+      <%= fa_icon "plus", text: t('.add_product') %>
+    <% end %>
+  </div>
+  </div>
+</div>
+
+

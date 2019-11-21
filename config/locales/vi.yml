@@ -56,6 +56,14 @@ vi:
         remember_me: Nhớ mật khẩu
         current_sign_in_at: Đăng nhập lúc
         last_sign_in_at: Đăng nhập lần cuối lúc
+      purchase_order:
+        title: Yêu cầu Nhập hàng
+        name: Tên yêu cầu
+        code: Mã yêu cầu
+        supplier: Nhà cung cấp
+        note: Ghi chú
+        product: Hàng hóa
+        status: Trạng thái
 
   # Translate views
   products:
@@ -106,6 +114,20 @@ vi:
   shared:
     navbar_sale:
       label_search_product: Nhập mã hoặc tên mặt hàng (F3)
+  purchase_orders:
+    index:
+      add_purchase_order: Thêm yêu cầu mới
+      search_placeholer: Nhập tên hoặc mã yêu cầu
+    new:
+      new_purchase_order: Yêu cầu nhập hàng mới
+    edit:
+      edit_purchase_order: Cập nhật yêu cầu nhập hàng
+    form:
+      name_placeholder: Nhập tên yêu cầu nhập hàng
+      code_placeholder: Nhập mã yêu cầu nhập hàng (Để trống hệ thống sẽ tự tạo)
+      note_placeholder: Nhập ghi chú
+    show:
+      add_product: Thêm hàng hóa
 
   customer_tab: Khách hàng
   supplier_tab: Nhà cung cấp
@@ -113,8 +135,10 @@ vi:
   add_new_supplier_button: Thêm NCC mới
   add_new_customer_title: Thêm khách hàng mới
   add_new_supplier_title: Thêm nhà cung cấp mới
+  add_product: Thêm hàng hóa
   edit_customer_title: Sửa thông tin khách hàng
   edit_supplier_title: Sửa thông tin nhà cung cấp
+
 
   # Common button
   btn_manage: Quản lý
@@ -144,6 +168,7 @@ vi:
   prompt_province_select: -- Chọn Tỉnh/Thành phố --
   prompt_district_select: -- Chọn Huyện/Quận --
   prompt_commune_select: -- Chọn Xã/Phường --
+  prompt_supplier: -- Chọn nhà cung cấp --
 
   # Notice from controller
   notice_create_customer_successfully: Tạo khách hàng thành công

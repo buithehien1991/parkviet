@@ -33,6 +33,9 @@ Rails.application.routes.draw do
     end
     resources :product_groups
     resources :producers
+
+    resources :purchase_orders
+    resources :product_purchase_orders
   end
 
   namespace :api, defaults: {format: :json} do

@@ -53,4 +53,8 @@ class ApplicationController < ActionController::Base
     devise_parameter_sanitizer.permit(:sign_in, keys: [:login, :password, :password_confirmation])
   end
 
+  def build_code(suffix, model)
+    suffix + model.id.to_s.rjust(6, '0')
+  end
+
 end

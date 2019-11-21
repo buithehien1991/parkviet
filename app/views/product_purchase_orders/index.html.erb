@@ -1,0 +1,33 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Product Purchase Orders</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Product</th>
+      <th>Purchase order</th>
+      <th>Quantity</th>
+      <th>Unit price</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @product_purchase_orders.each do |product_purchase_order| %>
+      <tr>
+        <td><%= product_purchase_order.product_id %></td>
+        <td><%= product_purchase_order.purchase_order_id %></td>
+        <td><%= product_purchase_order.quantity %></td>
+        <td><%= product_purchase_order.unit_price %></td>
+        <td><%= link_to 'Show', product_purchase_order %></td>
+        <td><%= link_to 'Edit', edit_product_purchase_order_path(product_purchase_order) %></td>
+        <td><%= link_to 'Destroy', product_purchase_order, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Product Purchase Order', new_product_purchase_order_path %>

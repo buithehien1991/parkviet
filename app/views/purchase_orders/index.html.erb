@@ -1,0 +1,108 @@
+<div class="products">
+  <div class="header">
+    <nav class="navbar navbar-expand navbar-light bg-light">
+      <div>
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item">
+            <span class="title"><%= t('activerecord.attributes.purchase_order.title') %></span>
+          </li>
+        </ul>
+      </div>
+      <div class="mx-auto order-0">
+
+      </div>
+      <div class="navbar-nav">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item">
+            <%= link_to new_purchase_order_path, class: "btn btn-info header-menu" do %>
+              <%= fa_icon "plus", text: t('.add_purchase_order') %>
+            <% end %>
+          </li>
+
+          <li class="nav-item">
+            <%= link_to new_purchase_order_path, class: "btn btn-info header-menu" do %>
+              <%= fa_icon "upload", text: "Nhập excel" %>
+            <% end %>
+          </li>
+          <li class="nav-item">
+            <%= link_to new_purchase_order_path, class: "btn btn-info header-menu" do %>
+              <%= fa_icon "download", text: "Xuất excel" %>
+            <% end %>
+          </li>
+        </ul>
+      </div>
+    </nav>
+  </div>
+
+
+  <div class="notification">
+    <% if @purchase_orders.size == 0 %>
+      <div class="alert alert-success alert-dismissible fade show" role="alert">
+        Chưa có yêu cầu nào. Vui lòng chọn <strong>"<%= t('.add_purchase_order') %>"</strong> để thêm yêu cầu mới!
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+    <% end %>
+  </div>
+
+  <div class="search">
+    <div class="col-md-6">
+      <%= search_form_for @q, url: purchase_orders_path, method: :get do |f| %>
+        <div class="input-group">
+          <div class="input-group-prepend">
+            <div class="input-group-text"><%= t(:search) %></div>
+          </div>
+          <%= f.text_field :name_or_code, placeholder: t('.search_placeholer'), class: "form-control" %>
+          <div class="input-group-append">
+            <%= f.submit t(:search), class: "btn btn-info btn-park" %>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+
+  <div class="list">
+    <table class="table table-bordered table-hover">
+      <thead class="thead-light">
+      <th><%= sort_link @q, :code, t('activerecord.attributes.purchase_order.code'), default_order: :desc %></th>
+      <th><%= sort_link @q, :name, t('activerecord.attributes.purchase_order.name') %></th>
+      <th><%= sort_link @q, :supplier, t('activerecord.attributes.purchase_order.supplier') %></th>
+      <th><%= sort_link @q, :status, t('activerecord.attributes.purchase_order.status') %></th>
+      <th></th>
+      </thead>
+
+      <tbody>
+      <% @purchase_orders.each do |order| %>
+        <tr>
+          <td>
+            <%= link_to order.code, purchase_order_path(order) %>
+          </td>
+          <td class="font-weight-bold">
+            <%= link_to order.name, purchase_order_path(order) %>
+          </td>
+          <td>
+            <%= order.supplier.name if order.supplier.present? %>
+          </td>
+          <td>
+            <%= order.status %>
+          </td>
+          <td>
+            <%= link_to fa_icon("pencil"), edit_purchase_order_path(order) %>
+            <%= link_to fa_icon("trash"), purchase_order_path(order), method: :delete, class: "text-danger", data: { confirm: "Bạn có chắc chắn muốn xóa yêu cầu này ?" } %>
+          </td>
+        </tr>
+      <% end %>
+      </tbody>
+
+      <tfoot>
+      <tr>
+        <td colspan="6">
+          <%= render partial: 'shared/pagination_footer_table', locals: {objects: @purchase_orders} %>
+        </td>
+      </tr>
+      </tfoot>
+    </table>
+  </div>
+
+</div>

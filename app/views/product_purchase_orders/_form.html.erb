@@ -1,0 +1,38 @@
+<% product_purchase_order = @product_purchase_order %>
+<%= form_with(model: product_purchase_order, local: true) do |form| %>
+  <% if product_purchase_order.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(product_purchase_order.errors.count, "error") %> prohibited this product_purchase_order from being saved:</h2>
+
+      <ul>
+      <% product_purchase_order.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :product_id %>
+    <%= form.text_field :product_id %>
+  </div>
+
+  <div class="field">
+    <%= form.label :purchase_order_id %>
+    <%= form.text_field :purchase_order_id %>
+  </div>
+
+  <div class="field">
+    <%= form.label :quantity %>
+    <%= form.text_field :quantity %>
+  </div>
+
+  <div class="field">
+    <%= form.label :unit_price %>
+    <%= form.text_field :unit_price %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>
