@@ -1,0 +1,71 @@
+<div class="products">
+  <div class="header">
+    <nav class="navbar navbar-expand navbar-light bg-light">
+      <div>
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item">
+            <span class="title"><%= t('.user_list') %></span>
+          </li>
+        </ul>
+      </div>
+      <div class="mx-auto order-0">
+
+      </div>
+      <div class="navbar-nav">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item">
+            <%= link_to new_user_path, class: "btn btn-info header-menu", remote: true do %>
+              <%= fa_icon "plus", text: t('add_new_member') %>
+            <% end %>
+          </li>
+        </ul>
+      </div>
+    </nav>
+  </div>
+
+
+  <div class="notification">
+    <% if @users.size == 0 %>
+      <div class="alert alert-success alert-dismissible fade show" role="alert">
+        Chưa có người dùng nào. Vui lòng chọn <strong>"<%= t('.add_new_member') %>"</strong> để thêm người dùng mới!
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+    <% end %>
+  </div>
+
+  <div class="list">
+    <table class="table table-bordered table-hover">
+      <thead class="thead-light">
+      <th>Tên đăng nhập</th>
+      <th>Tên người dùng</th>
+      <th>Số điện thoại</th>
+      <th></th>
+      </thead>
+
+      <tbody>
+      <% @users.each do |user| %>
+        <tr>
+          <td><%= user.username %></td>
+          <td><%= user.fullname %></td>
+          <td><%= user.phone %></td>
+          <td>
+            <%= link_to fa_icon("pencil", class: "btn btn-success"), edit_user_path(user), remote: true %>
+            <%= link_to fa_icon("trash", class: "btn btn-danger"), user_path(user), method: :delete, class: "text-danger", data: { confirm: "Bạn có chắc chắn muốn xóa yêu cầu này ?" } %>
+          </td>
+        </tr>
+      <% end %>
+      </tbody>
+
+      <tfoot>
+      <tr>
+        <td colspan="6">
+          <%= render partial: 'shared/pagination_footer_table', locals: {objects: @users} %>
+        </td>
+      </tr>
+      </tfoot>
+    </table>
+  </div>
+
+</div>

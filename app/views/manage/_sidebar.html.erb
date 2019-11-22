@@ -74,6 +74,13 @@
           <% end %>
         </li>
 
+        <li class="<%= request.path.start_with?(users_path) ? "active" : '' %>">
+          <%= link_to users_path do %>
+            <%= fa_icon "user", class: "sidebar-icon" %>
+            <span class="sidebar-name">Quản lý người dùng</span>
+          <% end %>
+        </li>
+
         <li>
           <%= link_to "#" do %>
             <%= fa_icon "cogs", class: "sidebar-icon" %>

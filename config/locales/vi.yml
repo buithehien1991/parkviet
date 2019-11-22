@@ -54,9 +54,16 @@ vi:
       user:
         login: Tên đăng nhập hoặc Email
         password: Mật khẩu
+        password_confirmation: Xác nhận mật khẩu
         remember_me: Nhớ mật khẩu
         current_sign_in_at: Đăng nhập lúc
         last_sign_in_at: Đăng nhập lần cuối lúc
+        phone: Số điện thoại
+        fullname: Họ và tên
+        username: Tên đăng nhập
+        birthday: Ngày sinh
+        address: Địa chỉ
+        role: Vai trò
       purchase_order:
         title: Yêu cầu Nhập hàng
         name: Tên yêu cầu
@@ -130,6 +137,16 @@ vi:
       note_placeholder: Nhập ghi chú
     show:
       add_product: Thêm hàng hóa
+  users:
+    index:
+      user_list: Danh sách người dùng
+    form:
+      fullname_placeholder: Nhập họ và tên đầy đủ của bạn
+      phone_placeholder: Nhập số điện thoại
+      email_placeholder: Nhập email
+      username_placeholder: Nhập tên đăng nhập
+      address_placeholder: Nhập địa chỉ
+
 
   customer_tab: Khách hàng
   supplier_tab: Nhà cung cấp
@@ -141,6 +158,8 @@ vi:
   edit_product: Sửa hàng hóa
   edit_customer_title: Sửa thông tin khách hàng
   edit_supplier_title: Sửa thông tin nhà cung cấp
+  add_new_member: Thêm người dùng mới
+  edit_member: Sửa thông tin người dùng
 
 
   # Common button
@@ -173,6 +192,7 @@ vi:
   prompt_commune_select: -- Chọn Xã/Phường --
   prompt_supplier: -- Chọn nhà cung cấp --
   prompt_product: -- Chọn hàng hóa --
+  prompt_role: -- Chọn vai trò --
 
   # Notice from controller
   notice_create_customer_successfully: Tạo khách hàng thành công
