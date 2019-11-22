@@ -155,7 +155,12 @@
       </div>
       <div class="collapse" aria-labelledby="header-unit" id="collapseUnit">
         <div class="card-body">
-          Unit
+          <div class="form-group row">
+            <%= f.label :basic_unit, class: "col-1 mt-1" %>
+            <div class="col-1">
+              <%= f.text_field :basic_unit, class: "form-control form-control-sm" %>
+            </div>
+          </div>
         </div>
       </div>
 

@@ -80,7 +80,7 @@ class ProductsController < ApplicationController
   end
 
   def product_params
-    params.require(:product).permit(:name, :code, :description, :note, :cost_price, :sale_price, :vat, :in_stock, :in_stock_min, :in_stock_max, :producer_id, :product_group_id, images: [])
+    params.require(:product).permit(:name, :code, :description, :note, :cost_price, :sale_price, :vat, :in_stock, :in_stock_min, :in_stock_max, :producer_id, :product_group_id, :basic_unit, images: [])
   end
 
   def set_product

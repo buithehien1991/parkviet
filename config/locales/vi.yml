@@ -28,6 +28,7 @@ vi:
         in_stock_range: Định mức tồn
         description: Mô tả chi tiết
         note: Ghi chú
+        basic_unit: Đơn vị cơ bản
       customer:
         name: Tên khách hàng
         code: Mã khách hàng

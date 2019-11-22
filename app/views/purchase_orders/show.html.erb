@@ -41,14 +41,15 @@
           <% @purchase_order.product_purchase_orders.each do |product_ordered| %>
             <tr>
               <td><%= product_ordered.product.code %></td>
-              <td><%= product_ordered.product.name %></td>
+              <td><%= link_to product_ordered.product.name, product_path(product_ordered.product),  target: "_blank" %></td>
               <td><%= product_ordered.quantity %></td>
-              <td></td>
-              <td><%= product_ordered.unit_price %></td>
+              <td><%= product_ordered.product.basic_unit.capitalize if product_ordered.product.basic_unit.present? %></td>
+              <td><%= number_to_currency(product_ordered.unit_price, precision: 0, unit: '') %></td>
 
               <td><%= product_ordered.supplier.name if product_ordered.supplier.present? %></td>
               <% if product_ordered.quantity.present? && product_ordered.unit_price.present? %>
-                <td><%= price = product_ordered.quantity * product_ordered.unit_price %></td>
+                <% price = product_ordered.quantity * product_ordered.unit_price %>
+                <td><%= number_to_currency(price, precision: 0, unit: '') %></td>
                 <% total += price %>
               <% else %>
                 <td></td>
@@ -62,7 +63,8 @@
           <% end %>
           <tr>
             <td colspan="6">Tổng tiền hàng hóa</td>
-            <td style="font-weight: bold"><%= total %></td>
+            <td style="font-weight: bold"><%= number_to_currency(total, precision: 0, unit: '') %></td>
+            <td><%= I18n.with_locale(:vi) { total.to_words }.capitalize %> đồng</td>
           </tr>
         </tbody>
       </table>
