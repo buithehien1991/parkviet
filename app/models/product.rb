@@ -20,4 +20,7 @@ class Product < ApplicationRecord
 
   scope :by_store, -> (store_id) { where(store_id: store_id) }
   self.per_page = 10
+
+  has_many :product_purchase_orders
+  has_many :purchase_orders, through: :product_purchase_orders
 end

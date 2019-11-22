@@ -15,10 +15,16 @@ class ProductPurchaseOrdersController < ApplicationController
   # GET /product_purchase_orders/new
   def new
     @product_purchase_order = ProductPurchaseOrder.new
+    if params[:purchase_order_id].present? && PurchaseOrder.where(id: params[:purchase_order_id]).first.present?
+      @purchase_order = PurchaseOrder.find(params[:purchase_order_id])
+    else
+      @error = true
+    end
   end
 
   # GET /product_purchase_orders/1/edit
   def edit
+    @purchase_order = @product_purchase_order.purchase_order
   end
 
   # POST /product_purchase_orders
@@ -28,7 +34,7 @@ class ProductPurchaseOrdersController < ApplicationController
 
     respond_to do |format|
       if @product_purchase_order.save
-        format.html { redirect_to @product_purchase_order, notice: 'Product purchase order was successfully created.' }
+        format.html { redirect_to @product_purchase_order.purchase_order, notice: 'Product purchase order was successfully created.' }
         format.json { render :show, status: :created, location: @product_purchase_order }
       else
         format.html { render :new }
@@ -42,7 +48,7 @@ class ProductPurchaseOrdersController < ApplicationController
   def update
     respond_to do |format|
       if @product_purchase_order.update(product_purchase_order_params)
-        format.html { redirect_to @product_purchase_order, notice: 'Product purchase order was successfully updated.' }
+        format.html { redirect_to @product_purchase_order.purchase_order, notice: 'Product purchase order was successfully updated.' }
         format.json { render :show, status: :ok, location: @product_purchase_order }
       else
         format.html { render :edit }
@@ -69,6 +75,6 @@ class ProductPurchaseOrdersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def product_purchase_order_params
-      params.require(:product_purchase_order).permit(:product_id, :purchase_order_id, :quantity, :unit_price)
+      params.require(:product_purchase_order).permit(:product_id, :purchase_order_id, :quantity, :unit_price, :supplier_id)
     end
 end

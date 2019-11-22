@@ -21,31 +21,67 @@
 
 
   <div class="row">
-  <div class="col-md-6">
+  <div class="col-md-9">
     <div class="form-group">
       <label class="font-weight-bold"><%= t(:'activerecord.attributes.purchase_order.product') %></label>
-      <small style="color: green">Chỉ thêm hàng hóa mà nhà cung cấp bạn đã chọn</small>
 
       <table class="table table-bordered">
         <thead>
         <th>Mã hàng hóa</th>
         <th>Tên hàng hóa</th>
         <th>Số lượng</th>
+        <th>Đơn vị</th>
         <th>Đơn giá</th>
+        <th>Nhà cung cấp</th>
+        <th>Thành tiền</th>
         <th></th>
         </thead>
         <tbody>
+          <% total = 0 %>
+          <% @purchase_order.product_purchase_orders.each do |product_ordered| %>
+            <tr>
+              <td><%= product_ordered.product.code %></td>
+              <td><%= product_ordered.product.name %></td>
+              <td><%= product_ordered.quantity %></td>
+              <td></td>
+              <td><%= product_ordered.unit_price %></td>
 
+              <td><%= product_ordered.supplier.name if product_ordered.supplier.present? %></td>
+              <% if product_ordered.quantity.present? && product_ordered.unit_price.present? %>
+                <td><%= price = product_ordered.quantity * product_ordered.unit_price %></td>
+                <% total += price %>
+              <% else %>
+                <td></td>
+              <% end %>
+
+              <td>
+                <%= link_to fa_icon("pencil", class: "btn btn-success"), edit_product_purchase_order_path(product_ordered) %>
+                <%= link_to fa_icon("trash", class: "btn btn-danger"), product_purchase_order_path(product_ordered), method: :delete, class: "text-danger", data: { confirm: "Bạn có chắc chắn muốn xóa yêu cầu này ?" } %>
+              </td>
+            </tr>
+          <% end %>
+          <tr>
+            <td colspan="6">Tổng tiền hàng hóa</td>
+            <td style="font-weight: bold"><%= total %></td>
+          </tr>
         </tbody>
       </table>
     </div>
 
 
-    <%= link_to new_product_purchase_order_path, class: "btn btn-success", remote: true do %>
+    <%= link_to new_product_purchase_order_path(purchase_order_id: @purchase_order.id), class: "btn btn-success", remote: true do %>
       <%= fa_icon "plus", text: t('.add_product') %>
     <% end %>
   </div>
   </div>
+
+  <hr>
+
+  <% if current_user == current_store.user %>
+    <%= link_to new_product_purchase_order_path(purchase_order_id: @purchase_order.id), class: "btn btn-warning", remote: true do %>
+      <%= fa_icon "check", text: "Phê duyệt" %>
+    <% end %>
+  <% end %>
 </div>
 
 

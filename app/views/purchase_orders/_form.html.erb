@@ -24,7 +24,7 @@
       </div>
 
       <div class="form-group">
-        <%= f.label :supplier, class: "col-form-label font-weight-bold" %>
+        <%= f.label :supplier_choose, class: "col-form-label font-weight-bold" %>
         <% @suppliers = Supplier.by_store(current_store).collect { |p| [ p.name, p.id ] } %>
         <%= f.select :supplier_id, options_for_select(@suppliers, @purchase_order.supplier ? @purchase_order.supplier.id : ""), {prompt: t(:prompt_supplier)}, class: "form-control form-control-sm" %>
       </div>
@@ -38,6 +38,6 @@
   </div>
 
   <div class="actions">
-    <%= f.submit %>
+    <%= f.submit t(:save), class: "btn btn-success" %>
   </div>
 <% end %>

@@ -1,38 +1,88 @@
 <% product_purchase_order = @product_purchase_order %>
-<%= form_with(model: product_purchase_order, local: true) do |form| %>
-  <% if product_purchase_order.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(product_purchase_order.errors.count, "error") %> prohibited this product_purchase_order from being saved:</h2>
+<div class="new-product-purchase-order">
+  <%= form_with(model: product_purchase_order, local: true, id: 'new-product-purchase-order') do |form| %>
+    <div class="row">
+      <div class="col">
+        <% if product_purchase_order.errors.any? %>
+          <div id="error_explanation">
+            <h2><%= pluralize(product_purchase_order.errors.count, "error") %> prohibited this product_purchase_order from being saved:</h2>
 
-      <ul>
-      <% product_purchase_order.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
+            <ul>
+              <% product_purchase_order.errors.full_messages.each do |message| %>
+                <li><%= message %></li>
+              <% end %>
+            </ul>
+          </div>
+        <% end %>
+
+        <%= form.hidden_field :purchase_order_id, value: @purchase_order.id %>
+
+        <div class="form-group">
+          <div class="row">
+            <div class="col-2">
+              <%= form.label :product_id, class: "col-form-label font-weight-bold" %>
+            </div>
+            <div class="col-8">
+              <% @products = Product.by_store(current_store.id).collect { |p| [ p.name, p.id ] } %>
+              <%= form.select :product_id, options_for_select(@products, product_purchase_order.product ? product_purchase_order.product.id : ""), {prompt: t(:prompt_product)}, class: "form-control form-control-sm" %>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <div class="row">
+            <div class="col-2">
+              <%= form.label :quantity, class: "col-form-label font-weight-bold" %>
+            </div>
+            <div class="col-8">
+              <%= form.number_field :quantity, class: "form-control form-control-sm", min: 0 %>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <div class="row">
+            <div class="col-2">
+              <%= form.label :unit_price, class: "col-form-label font-weight-bold" %>
+            </div>
+            <div class="col-8">
+              <%= form.number_field :unit_price, class: "form-control form-control-sm", min: 0 %>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <div class="row">
+            <div class="col-2">
+              <%= form.label :supplier, class: "col-form-label font-weight-bold" %>
+            </div>
+            <div class="col-8">
+              <% if @purchase_order.supplier.present? %>
+                <%= form.label @purchase_order.supplier.name, class: "col-form-label font-weight-bold" %>
+                <%= form.hidden_field :supplier_id, value: @purchase_order.supplier.id %>
+              <% else %>
+                <% @suppliers = Supplier.by_store(current_store).collect { |p| [ p.name, p.id ] } %>
+                <%= form.select :supplier_id, options_for_select(@suppliers, product_purchase_order.supplier ? product_purchase_order.supplier.id : ""), {prompt: t(:prompt_supplier)}, class: "form-control form-control-sm" %>
+              <% end %>
+            </div>
+          </div>
+        </div>
+
+        <div class="actions">
+          <%= form.submit "Save", class: 'd-none' %>
+        </div>
+      </div>
     </div>
   <% end %>
+</div>
 
-  <div class="field">
-    <%= form.label :product_id %>
-    <%= form.text_field :product_id %>
-  </div>
+<script>
+    $(document).ready(function () {
+        'use strict';
 
-  <div class="field">
-    <%= form.label :purchase_order_id %>
-    <%= form.text_field :purchase_order_id %>
-  </div>
+        $('#submit_add_product_btn').click(function () {
+            $('#new-product-purchase-order').find('[type="submit"]').trigger('click');
+        });
+    })
+</script>
 
-  <div class="field">
-    <%= form.label :quantity %>
-    <%= form.text_field :quantity %>
-  </div>
-
-  <div class="field">
-    <%= form.label :unit_price %>
-    <%= form.text_field :unit_price %>
-  </div>
-
-  <div class="actions">
-    <%= form.submit %>
-  </div>
-<% end %>

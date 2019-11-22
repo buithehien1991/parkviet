@@ -61,6 +61,7 @@ vi:
         name: Tên yêu cầu
         code: Mã yêu cầu
         supplier: Nhà cung cấp
+        supplier_choose: Nhà cung cấp (Không chọn nếu có nhiều nhà cung cấp)
         note: Ghi chú
         product: Hàng hóa
         status: Trạng thái
@@ -169,6 +170,7 @@ vi:
   prompt_district_select: -- Chọn Huyện/Quận --
   prompt_commune_select: -- Chọn Xã/Phường --
   prompt_supplier: -- Chọn nhà cung cấp --
+  prompt_product: -- Chọn hàng hóa --
 
   # Notice from controller
   notice_create_customer_successfully: Tạo khách hàng thành công
