@@ -1,0 +1,17 @@
+<% if user_signed_in? %>
+<% if @error.present? %>
+toastr.error("Đã có lỗi khi thêm hàng hóa, vui lòng refresh trình duyệt");
+<% else %>
+
+var message = "<%= j render :partial => 'product_purchase_orders/form' %>";
+message = message.replace(/(?:\r\n|\r|\n)/g, '');
+var modal = "<%= j render :partial => 'shared/modal_submit', locals: {title: t(:edit_product), submit_id: 'submit_add_product_btn'} %>";
+modal = modal.replace(/(?:\r\n|\r|\n)/g, '');
+$("body").append(modal);
+$(".modal-body").html(message);
+$("#park-modal").modal({
+    backdrop: 'static',
+    keyboard: false
+});
+<% end %>
+<% end %>

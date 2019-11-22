@@ -62,7 +62,7 @@ class ProductPurchaseOrdersController < ApplicationController
   def destroy
     @product_purchase_order.destroy
     respond_to do |format|
-      format.html { redirect_to product_purchase_orders_url, notice: 'Product purchase order was successfully destroyed.' }
+      format.html { redirect_to @product_purchase_order.purchase_order, notice: 'Product purchase order was successfully destroyed.' }
       format.json { head :no_content }
     end
   end

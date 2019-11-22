@@ -137,6 +137,7 @@ vi:
   add_new_customer_title: Thêm khách hàng mới
   add_new_supplier_title: Thêm nhà cung cấp mới
   add_product: Thêm hàng hóa
+  edit_product: Sửa hàng hóa
   edit_customer_title: Sửa thông tin khách hàng
   edit_supplier_title: Sửa thông tin nhà cung cấp
 

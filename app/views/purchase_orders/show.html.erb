@@ -55,7 +55,7 @@
               <% end %>
 
               <td>
-                <%= link_to fa_icon("pencil", class: "btn btn-success"), edit_product_purchase_order_path(product_ordered) %>
+                <%= link_to fa_icon("pencil", class: "btn btn-success"), edit_product_purchase_order_path(product_ordered), remote: true %>
                 <%= link_to fa_icon("trash", class: "btn btn-danger"), product_purchase_order_path(product_ordered), method: :delete, class: "text-danger", data: { confirm: "Bạn có chắc chắn muốn xóa yêu cầu này ?" } %>
               </td>
             </tr>
