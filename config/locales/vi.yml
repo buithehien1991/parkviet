@@ -76,6 +76,8 @@ vi:
         note: Ghi chú
         product: Hàng hóa
         status: Trạng thái
+      role:
+        name: Tên vai trò
 
   # Translate views
   products:
@@ -152,6 +154,9 @@ vi:
     show:
       tab_information: Thông tin
       tab_role: Phân quyền
+  roles:
+    form:
+      name_placeholder: Nhập tên vai trò
 
 
   customer_tab: Khách hàng
@@ -166,6 +171,8 @@ vi:
   edit_supplier_title: Sửa thông tin nhà cung cấp
   add_new_member: Thêm người dùng mới
   edit_member: Sửa thông tin người dùng
+  add_new_role: Thêm vai trò mới
+  edit_role: Sửa vai trò
 
 
   # Common button
@@ -179,6 +186,7 @@ vi:
   cancel: Hủy bỏ
   back: Trở về
   update: Cập nhật
+  edit: Sửa
   delete: Xóa
   stop_sale: Ngừng kinh doanh
   allow_sale: Cho phép kinh doanh
