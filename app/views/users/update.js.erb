@@ -1,0 +1,3 @@
+<% if @user.errors.present? %>
+  toastr.error("<%= @user.errors.full_messages.to_sentence %>");
+<% end %>

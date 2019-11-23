@@ -1,0 +1,33 @@
+<div class="m-3 product">
+  <div class="card">
+    <div class="card-header">
+      <h5 class="product-name font-weight-bold mb-0">Name</h5>
+    </div>
+    <div class="card-header">
+      <ul class="nav nav-tabs card-header-tabs" role="tab">
+        <li class="nav-item">
+          <a class="nav-link active" href="#information-content" data-toggle="tab" role="tab"aria-controls="information" aria-selected="true" >
+            <%= fa_icon("info-circle", text: "Tab 1") %>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#role-content" data-toggle="tab" role="tab"aria-controls="role" aria-selected="true">
+            <%= fa_icon("server", text: "Tab 2") %>
+          </a>
+        </li>
+
+      </ul>
+    </div>
+    <div class="card-body">
+      <div class="tab-content">
+        <div class="tab-pane fade show active" id="information-content" role="tabpanel" aria-labelledby="information-tab">
+
+        </div>
+
+        <div class="tab-pane fade show active" id="role-content" role="tabpanel" aria-labelledby="role-tab">
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

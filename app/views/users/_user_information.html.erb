@@ -1,0 +1,69 @@
+<div class="row mb-3">
+  <div class="col-md-4 col-sm-6">
+    <div class="row">
+      <div class="col-4"><%= t('activerecord.attributes.user.username') %></div>
+      <div class="col-8 font-weight-bold"><%= @user.username %></div>
+    </div>
+
+    <hr>
+
+    <div class="row">
+      <div class="col-4"><%= t('activerecord.attributes.user.fullname') %></div>
+      <div class="col-8 font-weight-bold"><%= @user.fullname %></div>
+    </div>
+
+    <hr>
+
+    <div class="row">
+      <div class="col-4"><%= t('activerecord.attributes.user.phone') %></div>
+      <div class="col-8 font-weight-bold"><%= @user.phone %></div>
+    </div>
+
+    <hr>
+
+    <div class="row">
+      <div class="col-4"><%= t('activerecord.attributes.user.birthday') %></div>
+      <div class="col-8 font-weight-bold"><%= @user.birthday %></div>
+    </div>
+
+
+  </div>
+
+  <div class="col-md-4 col-sm-6">
+    <div class="row">
+      <div class="col-4"><%= t('activerecord.attributes.user.email') %></div>
+      <div class="col-8 font-weight-bold"><%= @user.email %></div>
+    </div>
+
+    <hr>
+
+    <div class="row">
+      <div class="col-4"><%= t('activerecord.attributes.user.address') %></div>
+      <div class="col-8 font-weight-bold"><%= @user.address %></div>
+    </div>
+
+    <hr>
+
+    <div class="row">
+      <div class="col-4"><%= t('activerecord.attributes.user.area') %></div>
+      <div class="col-8 font-weight-bold"><%= @user.province.name %> - <%= @user.district.name %></div>
+    </div>
+
+    <hr>
+
+    <div class="row">
+      <div class="col-4"><%= t('activerecord.attributes.user.commune') %></div>
+      <div class="col-8 font-weight-bold"><%= @user.commune.name %></div>
+    </div>
+
+  </div>
+
+
+</div>
+
+
+<div class="nav-item float-right">
+  <%= link_to fa_icon(:edit, text: t(:update)), edit_user_path(@user), remote: true, class: "btn btn-success" %>
+
+  <%= link_to fa_icon("trash", text: t(:delete)), user_path(@user), method: :delete, data: { confirm: "Bạn có chắc chắn muốn xóa yêu cầu này ?" }, class: "btn btn-danger" %>
+</div>

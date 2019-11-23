@@ -4,7 +4,7 @@ class SuppliersController < ApplicationController
 
   def index
     @per_page = params[:per_page] || Product.per_page || 20
-    @q = Customer.ransack(params[:q])
+    @q = Supplier.ransack(params[:q])
     @suppliers = @q.result.by_store(current_store.id).paginate(:page => params[:page], :per_page => @per_page)
   end
 

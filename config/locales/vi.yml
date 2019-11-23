@@ -64,6 +64,9 @@ vi:
         birthday: Ngày sinh
         address: Địa chỉ
         role: Vai trò
+        email: Email
+        area: Khu vực
+        commune: Xã/Phường
       purchase_order:
         title: Yêu cầu Nhập hàng
         name: Tên yêu cầu
@@ -146,6 +149,9 @@ vi:
       email_placeholder: Nhập email
       username_placeholder: Nhập tên đăng nhập
       address_placeholder: Nhập địa chỉ
+    show:
+      tab_information: Thông tin
+      tab_role: Phân quyền
 
 
   customer_tab: Khách hàng

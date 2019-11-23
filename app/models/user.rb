@@ -5,6 +5,9 @@ class User < ApplicationRecord
 
   has_one_attached :avatar
   has_many :stores
+  belongs_to :province
+  belongs_to :district
+  belongs_to :commune
 
   attr_accessor :login
 
