@@ -22,7 +22,10 @@ class RolesController < ApplicationController
   end
 
   def update
-
+    if @role.update(role_params)
+      @user = User.find(params[:user_id])
+      redirect_to user_path(@user, anchor: "role-content")
+    end
   end
 
   def destroy
@@ -31,7 +34,7 @@ class RolesController < ApplicationController
 
   private
   def set_role
-
+    @role = Role.find(params[:id])
   end
   def role_params
     params.require(:role).permit(:name, permissions: [])

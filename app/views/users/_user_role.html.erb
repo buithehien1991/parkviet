@@ -7,8 +7,8 @@
     <%= select_tag 'member[role_id]', options_for_select(roles, role.present? ? role.id : ""), prompt: t(:prompt_role), class: "form-control form-control-sm"%>
   </div>
   <div class="col">
-    <%= link_to fa_icon("edit", text: t(:edit)), "", class: "btn btn-success" %>
-    <%= link_to fa_icon("paste", text: "Lưu thành vai trò mới"), "", class: "btn btn-info" %>
+    <%= link_to fa_icon("edit", text: t(:edit)), "#", class: "btn btn-success d-none", id: "edit_role", remote: true %>
+    <%= link_to fa_icon("paste", text: "Lưu thành vai trò mới"), "", class: "btn btn-info d-none" %>
     <%= link_to fa_icon("plus", text: "Thêm vai trò mới"), new_role_path(user_id: @user.id), class: "btn btn-park text-white", remote: true %>
   </div>
 </div>
@@ -16,3 +16,19 @@
 <div>
   
 </div>
+
+<script>
+  $(document).ready(function () {
+      let current_user_id = <%= @user.id %>;
+      $('#member_role_id').on('change', function() {
+          console.log( this.value );
+
+          if (this.value) {
+              $("#edit_role").attr("href", "/manage/roles/" + this.value + "/edit?user_id=" + current_user_id)
+          } else {
+              $("#edit_role").attr("href", "#");
+              toastr.error("Vui lòng chọn một vai trò trước khi sửa.")
+          }
+      });
+  })
+</script>

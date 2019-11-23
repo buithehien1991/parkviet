@@ -239,3 +239,10 @@ vi:
         zero:  hàng hóa
         one:   hàng hóa
         other: hàng hóa
+
+  # Permission
+  system: Hệ thống
+  product: Hàng hóa
+  transaction: Giao dịch
+  partner: Đối tác
+  report: Báo cáo

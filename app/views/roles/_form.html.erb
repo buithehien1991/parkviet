@@ -8,24 +8,34 @@
             <%= f.label :name, class: "col-form-label font-weight-bold" %>
           </div>
           <div class="col-6">
-            <%= f.text_field :name, class: "form-control form-control-sm", placeholder: t('.name_placeholder') %>
+            <%= f.text_field :name, class: "form-control form-control-sm", placeholder: t('.name_placeholder'), required: true %>
           </div>
         </div>
       </div>
     </div>
 
-    <div>Giao dịch</div>
+    <% Role.all_permissions.each do |class_permissions| %>
+      <div><%= t(class_permissions[0]) %></div>
 
-    <fieldset class="border">
-      <legend class="w-auto">
-        <%= link_to fa_icon("check"), "" %>
-        Đặt hàng nhập</legend>
-      <label>
-        <%= check_box_tag 'role[permissions][]', "view_purchase_orders", false, id: "role_permissions_" %> Xem danh sách
-
-        <%= check_box_tag 'role[permissions][]', "add_purchase_orders", false, id: "role_permissions_" %> Thêm/Sửa
-      </label>
-    </fieldset>
+      <% class_permissions[1].each do |group_permissions| %>
+        <fieldset class="border">
+          <legend class="w-auto">
+            <%= link_to fa_icon("check"), "" %>
+            <%= group_permissions.keys.first %>
+          </legend>
+          <div style="margin-bottom: 0.5rem;">
+            <div class="row">
+              <% group_permissions.values.first.each do |permission| %>
+                <div class="col-3">
+                  <% checked = role.permissions.include?(permission.to_s) if role.permissions.present? %>
+                  <%= check_box_tag 'role[permissions][]', permission, checked.present? ? checked : false , id: "role_permissions_" %> <%= permission %>
+                </div>
+              <% end %>
+            </div>
+          </div>
+        </fieldset>
+      <% end %>
+    <% end %>
 
     <%= f.submit t(:save), class: 'd-none' %>
   <% end %>
