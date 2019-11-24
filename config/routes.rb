@@ -39,6 +39,7 @@ Rails.application.routes.draw do
 
     resources :users
     resources :roles
+    resources :purchases
   end
 
   namespace :api, defaults: {format: :json} do

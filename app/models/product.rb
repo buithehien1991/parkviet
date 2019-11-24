@@ -23,4 +23,7 @@ class Product < ApplicationRecord
 
   has_many :product_purchase_orders
   has_many :purchase_orders, through: :product_purchase_orders
+
+  has_many :product_purchases
+  has_many :purchases, through: :product_purchases
 end

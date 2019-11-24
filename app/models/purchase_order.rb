@@ -10,7 +10,7 @@ class PurchaseOrder < ApplicationRecord
   validates :name, presence: true, length: {minimum: 2, maximum: 64}
   validates :code, uniqueness: {scope: :store}, length: {minimum: 2, maximum: 32}, :allow_blank => true
 
-  enum status: { created: 0, checking: 1, checked: 2, confirmed: 3 }
+  enum status: { created: 0, checking: 1, checked: 2, confirmed: 3, completed: 4, canceled: 5 }
   scope :by_store, -> (store_id) { where(store_id: store_id) }
   self.per_page = 10
 end

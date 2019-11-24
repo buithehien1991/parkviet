@@ -42,12 +42,12 @@
         <li class="<%= request.path.start_with?(purchase_orders_path) ? "active" : '' %>">
           <%= link_to purchase_orders_path do %>
             <%= fa_icon "car", class: "sidebar-icon" %>
-            <span class="sidebar-name">Yêu cầu Nhập hàng</span>
+            <span class="sidebar-name">Đặt hàng nhập</span>
           <% end %>
         </li>
 
-        <li>
-          <%= link_to "#" do %>
+        <li class="<%= request.path.start_with?(purchases_path) ? "active" : '' %>">
+          <%= link_to purchases_path do %>
             <%= fa_icon "truck", class: "sidebar-icon" %>
             <span class="sidebar-name">Nhập hàng</span>
           <% end %>

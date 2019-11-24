@@ -68,7 +68,7 @@ vi:
         area: Khu vực
         commune: Xã/Phường
       purchase_order:
-        title: Yêu cầu Nhập hàng
+        title: Đặt hàng nhập
         name: Tên yêu cầu
         code: Mã yêu cầu
         supplier: Nhà cung cấp
@@ -78,6 +78,14 @@ vi:
         status: Trạng thái
       role:
         name: Tên vai trò
+      purchase:
+        title: Nhập hàng
+        code: Mã nhập hàng
+        name: Tên nhập hàng
+        supplier: Nhà cung cấp
+        note: Ghi chú
+        status: Trạng thái
+
 
   # Translate views
   products:
@@ -157,6 +165,10 @@ vi:
   roles:
     form:
       name_placeholder: Nhập tên vai trò
+  purchases:
+    index:
+      add_purchase: Thêm nhập hàng
+      search_placeholer: Nhập mã nhập hàng hoặc tên đơn nhập
 
 
   customer_tab: Khách hàng
