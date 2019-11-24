@@ -12,6 +12,8 @@ $custom-file-text: (
 @import "customers";
 @import "sale";
 @import "roles";
+@import "purchases";
+@import "lib/jquery-ui";
 
 body {
   color: #565a5c;

@@ -1,17 +1,208 @@
-<%= form_with(model: purchase, local: true) do |form| %>
-  <% if purchase.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(purchase.errors.count, "error") %> prohibited this purchase from being saved:</h2>
+<%= form_with(model: @purchase, remote: true) do |form| %>
+  <div id="purchase-app">
+    <div class="sale-container">
+      <div class="wrap-container">
+        <div class="col-right">
+          <div class="sale-user d-flex mt-2">
+            <div class="mr-auto">
+              <i class="fa fa-user-circle-o"></i> <%= current_user.fullname %>
+            </div>
 
-      <ul>
-      <% purchase.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
+            <div>
+              <%= Time.now %>
+            </div>
+          </div>
+        </div>
+        <div style="height: 100%">
+          <div class="product-cart" style="height: 100%">
+            <div class="row col purchase-header">
+              <div class="purchase-title">
+                Nhập hàng
+              </div>
+
+              <div class="form col-md-5">
+                <div class="input-group">
+                  <div class="input-group-prepend">
+                      <span class="input-group-text bg-white border-right-0">
+                        <i class="fa fa-search"></i>
+                      </span>
+                  </div>
+                  <input type="text" class="form-control form-control-sm border-left-0" placeholder="Nhập mã hoặc tên mặt hàng (F3)" aria-label="Tìm mặt hàng" id="search-product-input" autofocus>
+                </div>
+              </div>
+            </div>
+
+            <div>
+              <table class="table table-bordered">
+                <thead>
+                <th>STT</th>
+                <th>Mã hàng hóa</th>
+                <th>Tên hàng hóa</th>
+                <th>Đơn vị</th>
+                <th width="120px">Số lượng</th>
+                <th width="150px">Đơn giá</th>
+                <th width="150px">Giảm giá</th>
+                <th>Thành tiền</th>
+                </thead>
+                <tbody>
+                  <tr id="product_purchase_0" class="product_purchase" style="display: none">
+                    <td>
+                      <span class="number">0</span>
+                      <button type="button" class="close" data-dismiss="alert" aria-label="Close" onclick="removeProduct(this)">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </td>
+                    <td class="code">SP0000</td>
+                    <td class="name">Tên hàng hóa</td>
+                    <td class="unit"></td>
+                    <td class="quantity">
+                      <%= number_field_tag 'purchase[product_purchases_attributes][][quantity]', 1, class: "form-control form-control-sm input_quantity", onchange: "updatePrice()" %>
+                    </td>
+                    <td class="unit_price">
+                      <%= number_field_tag 'purchase[product_purchases_attributes][][unit_price]', 0, class: "form-control form-control-sm input_unit_price", onchange: "updatePrice()" %>
+                    </td>
+                    <td class="discount_money">
+                      <%= number_field_tag 'purchase[product_purchases_attributes][][discount_money]', 0, class: "form-control form-control-sm input_discount_money", onchange: "updatePrice()" %>
+                    </td>
+                    <td style="justify-content: right;" class="total_money">
+                      0
+                    </td>
+                  </tr>
+
+                  <%= form.fields_for :product_purchases do |f| %>
+
+                  <% end %>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
-  <% end %>
-
-  <div class="actions">
-    <%= form.submit %>
   </div>
+
+  <%= form.submit "Save" %>
 <% end %>
+
+<script>
+    $(document).on('turbolinks:load', function () {
+        $("#search-product-input").autocomplete({
+            minLength: 0,
+            source: function( request, response ) {
+                $.getJSON( "/manage/products.json", {
+                    term: extractLast( request.term )
+                }, response );
+            },
+            focus: function() {
+                // prevent value inserted on focus
+                return false;
+            },
+            select: function( event, ui ) {
+                // Search exist and increase quantity
+                let $row = $("#product_purchase_" + ui.item.id);
+                if ($row.length !== 0) {
+                    let number = parseInt($row.find('.input_quantity').val()) + 1;
+                    $row.find('.input_quantity').val(number);
+                } else {
+                    let clone_tr = $("#product_purchase_0").clone(true);
+
+                    // Edit attribute
+                    clone_tr.attr("id", "product_purchase_" + ui.item.id)
+                    clone_tr.css("display", "" );
+
+                    $(clone_tr).find('.code').html(ui.item.code);
+                    $(clone_tr).find('.name').html(ui.item.name);
+                    if (ui.item.basic_unit) {
+                        $(clone_tr).find('.unit').html(ui.item.basic_unit);
+                    }
+
+                    $(".product_purchase:last").after(clone_tr[0].outerHTML)
+
+                    if (ui.item.cost_price) {
+                        $("#" + "product_purchase_" + ui.item.id).find('.input_unit_price').val(ui.item.cost_price)
+                    } else {
+                        $("#" + "product_purchase_" + ui.item.id).find('.input_unit_price').val(0)
+                    }
+
+                    updateSTT();
+                }
+
+                updatePrice();
+
+                return false;
+            }
+        }).autocomplete( "instance" )._renderItem = function( ul, item ) {
+            return $( "<li>" )
+                .append( "<div>" + item.name +"</div>" )
+                .appendTo( ul );
+        };
+
+        $(".delete_product_purchase").click(function (e) {
+
+        })
+
+        function split( val ) {
+            return val.split( /,\s*/ );
+        }
+        function extractLast( term ) {
+            return split( term ).pop();
+        }
+    })
+
+    function removeProduct(e) {
+        $(e).closest('tr').remove();
+        updateSTT();
+    }
+
+    function updateSTT() {
+        $('.product_purchase').each(function (index, row) {
+            $(row).find(".number").html(index)
+        })
+    }
+
+    function updatePrice() {
+        $('.product_purchase').each(function (index, row) {
+            if (index !== 0) {
+                let unit_price = $(row).find(".input_unit_price").val()
+                if (unit_price) {
+                    unit_price = parseInt(unit_price)
+                } else {
+                    unit_price = 0
+                }
+
+                let quantity = $(row).find(".input_quantity").val()
+                if (quantity) {
+                    quantity = parseInt(quantity)
+                } else {
+                    quantity = 0
+                }
+
+                let discount = $(row).find(".input_discount_money").val()
+                if (discount && parseInt(discount)) {
+                    discount = parseInt(discount)
+                } else {
+                    discount = 0
+                }
+
+                let price = quantity * unit_price - discount
+                $(row).find(".total_money").html(formatMoney(price, 0, ",", "."))
+            }
+        })
+    }
+
+    function formatMoney(amount, decimalCount = 2, decimal = ".", thousands = ",") {
+        try {
+            decimalCount = Math.abs(decimalCount);
+            decimalCount = isNaN(decimalCount) ? 2 : decimalCount;
+
+            const negativeSign = amount < 0 ? "-" : "";
+
+            let i = parseInt(amount = Math.abs(Number(amount) || 0).toFixed(decimalCount)).toString();
+            let j = (i.length > 3) ? i.length % 3 : 0;
+
+            return negativeSign + (j ? i.substr(0, j) + thousands : '') + i.substr(j).replace(/(\d{3})(?=\d)/g, "$1" + thousands) + (decimalCount ? decimal + Math.abs(amount - i).toFixed(decimalCount).slice(2) : "");
+        } catch (e) {
+            console.log(e)
+        }
+    }
+</script>

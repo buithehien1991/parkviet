@@ -5,7 +5,7 @@ class ProductSerializer < ActiveModel::Serializer
   belongs_to :product_type
   belongs_to :product_group
 
-  attributes :id, :name, :code, :abbr_name, :description, :cost_price, :sale_price, :vat, :in_stock, :in_stock_max, :in_stock_min, :status
+  attributes :id, :name, :code, :abbr_name, :description, :cost_price, :sale_price, :vat, :in_stock, :in_stock_max, :in_stock_min, :status, :basic_unit
   attribute :avatar_url
 
   # https://medium.com/@elenichappen/using-active-storage-with-active-model-serializers-36c91f5a0686

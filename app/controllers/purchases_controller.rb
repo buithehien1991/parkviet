@@ -21,6 +21,7 @@ class PurchasesController < ApplicationController
 
   # GET /purchases/1/edit
   def edit
+    @purchase.product_purchases.build
   end
 
   # POST /purchases
@@ -33,6 +34,7 @@ class PurchasesController < ApplicationController
         format.html { redirect_to @purchase, notice: 'Purchase was successfully created.' }
         format.json { render :show, status: :created, location: @purchase }
       else
+        p @purchase.errors.full_messages
         format.html { render :new }
         format.json { render json: @purchase.errors, status: :unprocessable_entity }
       end
@@ -71,6 +73,6 @@ class PurchasesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def purchase_params
-      params.fetch(:purchase, {})
+      params.require(:purchase).permit(:name, product_purchases_attributes: [:product_id, :purchase_id, :quantity, :unit_price, :discount_percent, :discount_money, :final_price])
     end
 end

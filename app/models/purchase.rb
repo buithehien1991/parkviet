@@ -8,6 +8,8 @@ class Purchase < ApplicationRecord
   has_many :product_purchases, dependent: :delete_all
   has_many :products, through: :product_purchases
 
+  accepts_nested_attributes_for :product_purchases
+
   validates :name, presence: true, length: {minimum: 2, maximum: 64}
   validates :code, uniqueness: {scope: :store}, length: {minimum: 2, maximum: 32}, :allow_blank => true
 
