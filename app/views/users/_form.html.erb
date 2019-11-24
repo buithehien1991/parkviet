@@ -36,7 +36,7 @@
           <%= f.label :role, class: "col-form-label font-weight-bold" %>
           <% roles = current_store.roles.collect{|role| [role.name, role.id]} %>
           <% role = current_store.members.where(user_id: user.id).first.role unless user.new_record? %>
-          <%= select_tag 'member[role_id]', options_for_select(roles, role.present? ? role.id : ""), prompt: t(:prompt_role), class: "form-control form-control-sm"%>
+          <%= select_tag 'member[role_id]', options_for_select(roles, role.present? ? role.id : ""), prompt: t(:prompt_role), class: "form-control form-control-sm", required: true%>
         </div>
       </div>
 

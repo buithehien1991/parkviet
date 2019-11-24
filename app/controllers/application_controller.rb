@@ -41,7 +41,22 @@ class ApplicationController < ActionController::Base
   end
 
   def current_store
-    current_user.stores.first
+    # owner of this store
+    store = current_user.stores.first if current_user.present?
+    unless store
+      member = current_user.members.first
+      if member.present?
+        store = member.store
+        unless store
+          sign_out
+          redirect_to root_path, alert: "Bạn không có quyền sử dụng trang web này. Vui lòng liên hệ với quản trị viên."
+        end
+      else
+        sign_out
+        redirect_to root_path, alert: "Bạn không có quyền sử dụng trang web này. Vui lòng liên hệ với quản trị viên. "
+      end
+    end
+    store
   end
 
   def info_for_paper_trail

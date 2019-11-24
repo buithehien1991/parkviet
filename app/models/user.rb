@@ -5,9 +5,10 @@ class User < ApplicationRecord
 
   has_one_attached :avatar
   has_many :stores
-  belongs_to :province
-  belongs_to :district
-  belongs_to :commune
+  belongs_to :province, optional: true
+  belongs_to :district, optional: true
+  belongs_to :commune, optional: true
+  has_many :members, dependent: :delete_all
 
   attr_accessor :login
 

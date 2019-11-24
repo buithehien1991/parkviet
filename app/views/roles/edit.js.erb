@@ -1,7 +1,7 @@
 <% if user_signed_in? %>
 var message = "<%= j render :partial => 'form', locals: {role: @role} %>";
 message = message.replace(/(?:\r\n|\r|\n)/g, '');
-var modal = "<%= j render :partial => 'shared/modal_submit', locals: {title: t(:edit_member), submit_id: 'submit_add_role_btn'} %>";
+var modal = "<%= j render :partial => 'shared/modal_submit_delete', locals: {title: t(:edit_member), submit_id: 'submit_add_role_btn', delete_id: 'delete_role_btn'} %>";
 modal = modal.replace(/(?:\r\n|\r|\n)/g, '');
 $("body").append(modal);
 $(".modal-body").html(message);

@@ -38,6 +38,9 @@
     <% end %>
 
     <%= f.submit t(:save), class: 'd-none' %>
+    <div id="delete-container">
+      <%= link_to "Delete", role_path(role), method: :delete, id: "delete_role", data: { confirm: "Bạn có chắc chắn muốn xóa vai trò này ?" } %>
+    </div>
   <% end %>
 </div>
 
@@ -47,6 +50,10 @@
 
         $('#submit_add_role_btn').click(function () {
             $('#new-role').find('[type="submit"]').trigger('click');
+        });
+
+        $('#delete_role_btn').click(function () {
+            $('#delete-container').find('a')[0].click();
         });
     })
 </script>

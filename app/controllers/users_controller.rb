@@ -33,15 +33,25 @@ class UsersController < ApplicationController
   end
 
   def update
-    if params[:user][:password].blank?
-      params[:user].delete(:password)
-      params[:user].delete(:password_confirmation)
-    end
+    if params[:user].present?
+      if params[:user][:password].blank?
+        params[:user].delete(:password)
+        params[:user].delete(:password_confirmation)
+      end
 
-    if @user.update(user_params)
+      if @user.update(user_params)
+        member = current_store.members.where(user_id: @user.id).first
+        member.update(member_params)
+        # Should logout member and must re-login
+        redirect_to users_path, notice: "Cập nhật người dùng thành công"
+      end
+    else
+      # That case only update role for member
       member = current_store.members.where(user_id: @user.id).first
       member.update(member_params)
-      redirect_to users_path, notice: "Cập nhật người dùng thành công"
+      redirect_to users_path, notice: "Cập nhật vai trò thành công"
+
+      # Should logout member and must re-login
     end
   end
 

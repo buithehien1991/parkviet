@@ -40,6 +40,7 @@
       <thead class="thead-light">
       <th>Tên đăng nhập</th>
       <th>Tên người dùng</th>
+      <th>Vai trò</th>
       <th>Số điện thoại</th>
       <th></th>
       </thead>
@@ -49,6 +50,7 @@
         <tr>
           <td><%= link_to user.username, user_path(user) %></td>
           <td><%= user.fullname %></td>
+          <td><%= current_store.members.where(user_id: user.id).first.role.name if current_store.members.where(user_id: user.id).present? && current_store.members.where(user_id: user.id).first.role.present? %></td>
           <td><%= user.phone %></td>
           <td>
             <%= link_to fa_icon("pencil", class: "btn btn-success"), edit_user_path(user), remote: true %>
