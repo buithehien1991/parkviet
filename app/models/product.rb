@@ -26,4 +26,7 @@ class Product < ApplicationRecord
 
   has_many :product_purchases
   has_many :purchases, through: :product_purchases
+
+  has_many :product_invoices
+  has_many :invoices, through: :product_invoices
 end

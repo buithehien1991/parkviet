@@ -85,6 +85,13 @@ vi:
         supplier: Nhà cung cấp
         note: Ghi chú
         status: Trạng thái
+      invoice:
+        title: Hóa đơn
+        code: Mã hóa đơn
+        name: Tên hóa đơn
+        customer: Khách hàng
+        note: Ghi chú
+        status: Trạng thái
 
 
   # Translate views
@@ -169,7 +176,10 @@ vi:
     index:
       add_purchase: Thêm nhập hàng
       search_placeholer: Nhập mã nhập hàng hoặc tên đơn nhập
-
+  invoices:
+    index:
+      add_invoice: Bán hàng
+      search_placeholer: Nhập mã hóa đơn
 
   customer_tab: Khách hàng
   supplier_tab: Nhà cung cấp
