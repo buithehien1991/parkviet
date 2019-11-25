@@ -64,7 +64,6 @@
       <th><%= sort_link @q, :name, t('activerecord.attributes.purchase.name') %></th>
       <th><%= sort_link @q, :supplier, t('activerecord.attributes.purchase.supplier') %></th>
       <th><%= sort_link @q, :status, t('activerecord.attributes.purchase.status') %></th>
-      <th></th>
       </thead>
 
       <tbody>
@@ -81,10 +80,6 @@
           </td>
           <td>
             <%= purchase.status %>
-          </td>
-          <td>
-            <%= link_to fa_icon("pencil"), edit_purchase_path(purchase) %>
-            <%= link_to fa_icon("trash"), purchase_path(purchase), method: :delete, class: "text-danger", data: { confirm: "Bạn có chắc chắn muốn xóa yêu cầu này ?" } %>
           </td>
         </tr>
       <% end %>

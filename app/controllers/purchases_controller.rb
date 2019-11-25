@@ -21,7 +21,7 @@ class PurchasesController < ApplicationController
 
   # GET /purchases/1/edit
   def edit
-    @purchase.product_purchases.build
+    @purchase = Purchase.find(params[:id])
   end
 
   # POST /purchases
@@ -58,8 +58,22 @@ class PurchasesController < ApplicationController
   # PATCH/PUT /purchases/1
   # PATCH/PUT /purchases/1.json
   def update
+    # Remove template row data
+    params[:purchase][:product_purchases_attributes].shift if params[:purchase].present? && params[:purchase][:product_purchases_attributes].present?
+    new_pps = params[:purchase][:product_purchases_attributes].map{|pp| pp['id'].to_i}
+
     respond_to do |format|
       if @purchase.update(purchase_params)
+        @purchase.product_purchases.each do |pp|
+          # Delete removed item or update price
+          if new_pps.include?(pp.id)
+            pp.final_price = pp.quantity * pp.unit_price - pp.discount_money
+            pp.save
+          else
+            pp.destroy
+          end
+        end
+
         format.html { redirect_to @purchase, notice: 'Purchase was successfully updated.' }
         format.json { render :show, status: :ok, location: @purchase }
       else
@@ -87,6 +101,6 @@ class PurchasesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def purchase_params
-      params.require(:purchase).permit(:name, product_purchases_attributes: [:product_id, :purchase_id, :quantity, :unit_price, :discount_percent, :discount_money, :final_price])
+      params.require(:purchase).permit(:name, product_purchases_attributes: [:id, :product_id, :purchase_id, :quantity, :unit_price, :discount_percent, :discount_money, :final_price])
     end
 end

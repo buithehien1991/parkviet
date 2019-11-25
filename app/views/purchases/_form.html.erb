@@ -70,9 +70,40 @@
                     </td>
                   </tr>
 
-                  <%= form.fields_for :product_purchases do |f| %>
-
-                  <% end %>
+                  <% index = 0 %>
+                  <% @purchase.product_purchases.each do |pp| %>
+                    <tr id="product_purchase_<%= pp.id %>" class="product_purchase">
+                      <td>
+                        <span class="number"><%= index+1 %></span>
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close" onclick="removeProduct(this)">
+                          <span aria-hidden="true">&times;</span>
+                        </button>
+                        <%= hidden_field_tag 'purchase[product_purchases_attributes][][product_id]', pp.product_id, class: 'input_product_id' %>
+                        <%= hidden_field_tag 'purchase[product_purchases_attributes][][id]', pp.id %>
+                      </td>
+                      <td class="code">
+                        <%= pp.product.code %>
+                      </td>
+                      <td class="code">
+                        <%= pp.product.name %>
+                      </td>
+                      <td class="unit">
+                        <%= pp.product.basic_unit %>
+                      </td>
+                      <td class="quantity">
+                        <%= number_field_tag 'purchase[product_purchases_attributes][][quantity]', pp.quantity, class: "form-control form-control-sm input_quantity", onchange: "updatePrice()" %>
+                      </td>
+                      <td class="unit_price">
+                        <%= number_field_tag 'purchase[product_purchases_attributes][][unit_price]', pp.unit_price, class: "form-control form-control-sm input_unit_price", onchange: "updatePrice()" %>
+                      </td>
+                      <td class="discount_money">
+                        <%= number_field_tag 'purchase[product_purchases_attributes][][discount_money]', pp.discount_money, class: "form-control form-control-sm input_discount_money", onchange: "updatePrice()" %>
+                      </td>
+                      <td style="justify-content: right;" class="total_money">
+                        <%= number_to_currency(pp.final_price, precision: 0, unit: '') %>
+                      </td>
+                    </tr>
+                  <% end if @purchase.product_purchases.present? && @purchase.product_purchases.size > 0 %>
                 </tbody>
               </table>
             </div>
