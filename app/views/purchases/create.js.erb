@@ -1,0 +1,3 @@
+<% if @purchase.errors.present? %>
+  toastr.error("<%= @purchase.errors.full_messages.to_sentence %>");
+<% end %>

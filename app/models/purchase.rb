@@ -10,7 +10,7 @@ class Purchase < ApplicationRecord
 
   accepts_nested_attributes_for :product_purchases
 
-  validates :name, presence: true, length: {minimum: 2, maximum: 64}
+  #validates :name, presence: false, length: {minimum: 2, maximum: 64}
   validates :code, uniqueness: {scope: :store}, length: {minimum: 2, maximum: 32}, :allow_blank => true
 
   enum status: { created: 0 }

@@ -27,14 +27,28 @@ class PurchasesController < ApplicationController
   # POST /purchases
   # POST /purchases.json
   def create
+    # Remove template row data
+    params[:purchase][:product_purchases_attributes].shift if params[:purchase].present? && params[:purchase][:product_purchases_attributes].present?
+
     @purchase = Purchase.new(purchase_params)
+    @purchase.user = current_user
+    @purchase.purchaser = current_user
+    @purchase.store = current_store
 
     respond_to do |format|
       if @purchase.save
-        format.html { redirect_to @purchase, notice: 'Purchase was successfully created.' }
+
+        @purchase.code = build_code("PO", @purchase) unless @purchase.code.present?
+        @purchase.save
+
+        @purchase.product_purchases.each do |pp|
+          pp.final_price = pp.quantity * pp.unit_price - pp.discount_money
+          pp.save
+        end
+
+        format.html { redirect_to @purchase, notice: 'Tạo đơn nhập hàng thành công.' }
         format.json { render :show, status: :created, location: @purchase }
       else
-        p @purchase.errors.full_messages
         format.html { render :new }
         format.json { render json: @purchase.errors, status: :unprocessable_entity }
       end

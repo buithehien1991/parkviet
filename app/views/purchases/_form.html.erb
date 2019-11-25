@@ -51,6 +51,7 @@
                       <button type="button" class="close" data-dismiss="alert" aria-label="Close" onclick="removeProduct(this)">
                         <span aria-hidden="true">&times;</span>
                       </button>
+                      <%= hidden_field_tag 'purchase[product_purchases_attributes][][product_id]', 0, class: 'input_product_id' %>
                     </td>
                     <td class="code">SP0000</td>
                     <td class="name">Tên hàng hóa</td>
@@ -123,6 +124,8 @@
                     } else {
                         $("#" + "product_purchase_" + ui.item.id).find('.input_unit_price').val(0)
                     }
+
+                    $("#" + "product_purchase_" + ui.item.id).find('.input_product_id').val(ui.item.id)
 
                     updateSTT();
                 }
