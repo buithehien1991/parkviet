@@ -38,7 +38,7 @@ class PurchasesController < ApplicationController
     respond_to do |format|
       if @purchase.save
 
-        @purchase.code = build_code("PO", @purchase) unless @purchase.code.present?
+        @purchase.code = build_code("PC", @purchase) unless @purchase.code.present?
         @purchase.save
 
         @purchase.product_purchases.each do |pp|

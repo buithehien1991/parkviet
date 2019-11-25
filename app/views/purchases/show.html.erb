@@ -1,4 +1,99 @@
-<p id="notice"><%= notice %></p>
+<div class="m-3 product">
+  <div class="card">
+    <div class="card-header">
+      <h5 class="product-name font-weight-bold mb-0">#<%= @purchase.code %> <%= @purchase.name if @purchase.name.present? %></h5>
+    </div>
+    <div class="card-header">
+      <ul class="nav nav-tabs card-header-tabs" role="tab">
+        <li class="nav-item">
+          <a class="nav-link active" href="#information-content" data-toggle="tab" role="tab"aria-controls="information" aria-selected="true" >
+            <%= fa_icon("info-circle", text: t('.tab_information')) %>
+          </a>
+        </li>
+      </ul>
+    </div>
+    <div class="card-body">
+      <div class="tab-content">
+        <div class="tab-pane fade show active" id="information-content" role="tabpanel" aria-labelledby="information-tab">
 
-<%= link_to 'Edit', edit_purchase_path(@purchase) %> |
-<%= link_to 'Back', purchases_path %>
+          <div class="row mb-3">
+            <div class="col-md-4 col-sm-6">
+              <div class="row">
+                <div class="col-4"><%= t('activerecord.attributes.purchase.code') %></div>
+                <div class="col-8 font-weight-bold"><%= @purchase.code %></div>
+              </div>
+
+              <hr>
+
+              <div class="row">
+                <div class="col-4"><%= t('activerecord.attributes.purchase.date') %></div>
+                <div class="col-8 font-weight-bold"><%= @purchase.date %></div>
+              </div>
+
+              <hr>
+
+              <div class="row">
+                <div class="col-4"><%= t('activerecord.attributes.purchase.supplier') %></div>
+                <div class="col-8 font-weight-bold"><%= link_to @purchase.supplier.name, supplier_path(@purchase.supplier) if @purchase.supplier.present? %></div>
+              </div>
+
+            </div>
+
+            <div class="col-md-4 col-sm-6">
+              <div class="row">
+                <div class="col-4"><%= t('activerecord.attributes.purchase.status') %></div>
+                <div class="col-8 font-weight-bold"><%= @purchase.status %></div>
+              </div>
+
+              <hr>
+
+              <div class="row">
+                <div class="col-4"><%= t('activerecord.attributes.purchase.user') %></div>
+                <div class="col-8 font-weight-bold"><%= @purchase.user.fullname if @purchase.user.present? %></div>
+              </div>
+
+              <hr>
+
+              <div class="row">
+                <div class="col-4"><%= t('activerecord.attributes.purchase.purchaser') %></div>
+                <div class="col-8 font-weight-bold"><%= @purchase.purchaser.fullname if @purchase.purchaser.present? %></div>
+              </div>
+
+            </div>
+          </div>
+
+          <div class="mb-3">
+            <table class="table table-bordered">
+              <thead>
+              <th><%= t('activerecord.attributes.product.code') %></th>
+              <th><%= t('activerecord.attributes.product.name') %></th>
+              <th><%= t('activerecord.attributes.product.quantity') %></th>
+              <th><%= t('activerecord.attributes.product.unit_price') %></th>
+              <th><%= t('activerecord.attributes.product.discount_money') %></th>
+              <th><%= t('activerecord.attributes.product.final_price') %></th>
+              </thead>
+              <tbody>
+                <% @purchase.product_purchases.each do |pp| %>
+                  <tr>
+                    <td><%= pp.product.code %></td>
+                    <td><%= pp.product.name %></td>
+                    <td><%= pp.quantity %></td>
+                    <td><%= pp.unit_price %></td>
+                    <td><%= pp.discount_money %></td>
+                    <td><%= pp.final_price %></td>
+                  </tr>
+                <% end %>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="nav-item float-right">
+            <%= link_to fa_icon(:edit, text: t(:update)), edit_purchase_path(@purchase), class: "btn btn-success" %>
+
+            <%= link_to fa_icon("trash", text: t(:delete)), purchase_path(@purchase), method: :delete, data: { confirm: "Bạn có chắc chắn muốn xóa yêu cầu này ?" }, class: "btn btn-danger" %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

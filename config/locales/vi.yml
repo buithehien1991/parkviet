@@ -29,6 +29,11 @@ vi:
         description: Mô tả chi tiết
         note: Ghi chú
         basic_unit: Đơn vị cơ bản
+        quantity: Số lượng
+        unit_price: Đơn giá
+        discount_money: Giảm giá
+        import_price: Giá nhập
+        final_price: Thành tiền
       customer:
         name: Tên khách hàng
         code: Mã khách hàng
@@ -85,6 +90,9 @@ vi:
         supplier: Nhà cung cấp
         note: Ghi chú
         status: Trạng thái
+        date: Thời gian
+        user: Người tạo
+        purchaser: Người nhập
       invoice:
         title: Hóa đơn
         code: Mã hóa đơn
@@ -176,6 +184,8 @@ vi:
     index:
       add_purchase: Thêm nhập hàng
       search_placeholer: Nhập mã nhập hàng hoặc tên đơn nhập
+    show:
+      tab_information: Thông tin
   invoices:
     index:
       add_invoice: Bán hàng
