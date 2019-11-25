@@ -16,6 +16,7 @@
 //= require jquery3
 //= require jquery-ui/widgets/autocomplete
 //= require toastr
+//= require popper
 //= require bootstrap
 //= require activestorage
 //= require_tree .

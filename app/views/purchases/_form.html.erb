@@ -5,13 +5,58 @@
         <div class="col-right">
           <div class="sale-user d-flex mt-2">
             <div class="mr-auto">
-              <i class="fa fa-user-circle-o"></i> <%= current_user.fullname %>
+              <i class="fa fa-user-circle-o"></i>
+              <div class="ui-widget">
+                <%= form.select :purchaser, options_for_select(@users.collect{|u| [u.fullname, u.id]}) %>
+              </div>
             </div>
 
             <div>
-              <%= Time.now %>
+              <%= form.datetime_field :date %>
             </div>
           </div>
+
+          <div class="input-group">
+            <div class="input-group-prepend">
+                    <span class="input-group-text bg-white border-right-0">
+                      <i class="fa fa-search"></i>
+                    </span>
+            </div>
+            <input type="text" class="form-control form-control-sm border-left-0" placeholder="Nhập mã hoặc tên nhà cung cấp" aria-label="Tìm nhà cung cấp" id="search-supplier-input">
+          </div>
+
+          <div class="row">
+            <div class="col"><%= t('activerecord.attributes.purchase.code') %></div>
+            <div class="col">
+              <%= form.text_field :code, class: "form-control form-control-sm" %>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col"><%= t('activerecord.attributes.purchase.status') %></div>
+            <div class="col"><%= form.object.status %></div>
+          </div>
+
+          <div class="row">
+            <div class="col">
+              <%= t('activerecord.attributes.purchase.total_price') %>
+            </div>
+            <div class="col">0</div>
+          </div>
+
+          <div class="row">
+            <div class="col">
+              <%= t('activerecord.attributes.purchase.paid') %>
+            </div>
+            <div class="col">
+              <%= form.number_field :paid, class: "form-control form-control-sm" %>
+            </div>
+          </div>
+
+          <div>
+            <%= form.text_area :note, class: "form-control form-control-sm", placeholder: "Ghi chú" %>
+          </div>
+
         </div>
         <div style="height: 100%">
           <div class="product-cart" style="height: 100%">
@@ -116,7 +161,31 @@
   <%= form.submit "Save" %>
 <% end %>
 
+<% content_for :javascript do %>
+  <%= javascript_include_tag 'lib/combobox' %>
+<% end %>
+<% content_for :stylesheet do %>
+  <style>
+    .custom-combobox {
+      position: relative;
+      display: inline-block;
+    }
+    .custom-combobox-toggle {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      margin-left: -1px;
+      padding: 0;
+    }
+    .custom-combobox-input {
+      margin: 0;
+      padding: 5px 10px;
+    }
+  </style>
+<% end %>
+
 <script>
+
     $(document).on('turbolinks:load', function () {
         $("#search-product-input").autocomplete({
             minLength: 0,
@@ -171,9 +240,26 @@
                 .appendTo( ul );
         };
 
-        $(".delete_product_purchase").click(function (e) {
+        /**
+         * Autocomplete for search supplier
+         */
+        $("#search-supplier-input").autocomplete({
+            minLength: 0,
+            source: function( request, response ) {
+                $.getJSON( "/manage/suppliers.json", {
+                    term: extractLast( request.term )
+                }, response );
+            },
+            focus: function() {
+                // prevent value inserted on focus
+                return false;
+            },
 
-        })
+        }).autocomplete( "instance" )._renderItem = function( ul, item ) {
+            return $( "<li>" )
+                .append( "<div>" + item.name +"</div>" )
+                .appendTo( ul );
+        };
 
         function split( val ) {
             return val.split( /,\s*/ );

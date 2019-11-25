@@ -93,6 +93,10 @@ vi:
         date: Thời gian
         user: Người tạo
         purchaser: Người nhập
+        total_price: Tổng tiền hàng
+        discount_money: Giảm giá
+        paid: Tiền trả nhà cung cấp
+
       invoice:
         title: Hóa đơn
         code: Mã hóa đơn

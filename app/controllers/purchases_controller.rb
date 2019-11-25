@@ -16,12 +16,14 @@ class PurchasesController < ApplicationController
 
   # GET /purchases/new
   def new
-    @purchase = Purchase.new
+    @purchase = Purchase.new(date: DateTime.now.strftime('%Y-%m-%dT%H:%M'))
+    @users = ([current_user] + current_store.members.map{|m| m.user}).uniq
   end
 
   # GET /purchases/1/edit
   def edit
     @purchase = Purchase.find(params[:id])
+    @users = ([current_user] + current_store.members.map{|m| m.user}).uniq
   end
 
   # POST /purchases
