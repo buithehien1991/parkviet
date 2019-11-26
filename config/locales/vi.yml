@@ -96,6 +96,7 @@ vi:
         total_price: Tổng tiền hàng
         discount_money: Giảm giá
         paid: Tiền trả nhà cung cấp
+        dept: Tiền thừa lấy lại
 
       invoice:
         title: Hóa đơn

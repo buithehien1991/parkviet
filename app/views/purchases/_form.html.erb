@@ -16,45 +16,106 @@
             </div>
           </div>
 
-          <div class="input-group">
-            <div class="input-group-prepend">
-                    <span class="input-group-text bg-white border-right-0">
-                      <i class="fa fa-search"></i>
-                    </span>
-            </div>
-            <input type="text" class="form-control form-control-sm border-left-0" placeholder="Nhập mã hoặc tên nhà cung cấp" aria-label="Tìm nhà cung cấp" id="search-supplier-input">
-          </div>
-
-          <div class="row">
-            <div class="col"><%= t('activerecord.attributes.purchase.code') %></div>
-            <div class="col">
-              <%= form.text_field :code, class: "form-control form-control-sm" %>
+          <div class="mt-2">
+            <div class="input-group">
+              <input type="text" class="form-control form-control-sm" placeholder="Tìm nhà cung cấp (F4)" id="search-supplier-input"/>
+              <div class="input-group-append">
+                <i class="fa fa-plus input-group-text"></i>
+              </div>
             </div>
           </div>
 
-          <div class="row">
-            <div class="col"><%= t('activerecord.attributes.purchase.status') %></div>
-            <div class="col"><%= form.object.status %></div>
+          <hr style="margin: 0.8rem -10px;">
+
+          <div class="">
+            <div>
+              <h5>THANH TOÁN</h5>
+            </div>
+
+            <div class="d-flex">
+              <div class="mr-auto">
+                <%= t('activerecord.attributes.purchase.code') %>
+              </div>
+              <div>
+                <%= form.text_field :code, class: "form-control form-control-sm" %>
+              </div>
+            </div>
+
+            <hr style="margin: 5px 0;">
+
+            <div class="d-flex">
+              <div class="mr-auto">
+                <%= t('activerecord.attributes.purchase.status') %>
+              </div>
+              <div>
+                <%= form.object.status %>
+              </div>
+            </div>
+
+            <hr style="margin: 5px 0;">
+
+            <div class="d-flex">
+              <div class="mr-auto">
+                <%= t('activerecord.attributes.purchase.total_price') %>
+              </div>
+              <div>
+                0
+              </div>
+            </div>
+
+            <hr style="margin: 5px 0;">
+
+            <div class="d-flex">
+              <div class="mr-auto">
+                <%= t('activerecord.attributes.purchase.discount_money') %>
+              </div>
+              <div>
+                <%= form.number_field :discount_money, class: "form-control form-control-sm" %>
+              </div>
+            </div>
+
+            <hr style="margin: 5px 0;">
+
+            <div class="d-flex">
+              <div class="mr-auto">
+                <%= t('activerecord.attributes.purchase.paid') %>
+              </div>
+              <div>
+                <%= form.number_field :paid, class: "form-control form-control-sm" %>
+              </div>
+            </div>
+
+            <hr style="margin: 5px 0;">
+
+            <div class="d-flex">
+              <div class="mr-auto">
+                <%= t('activerecord.attributes.purchase.dept') %>
+              </div>
+              <div>
+                0
+              </div>
+            </div>
+
+            <hr style="margin: 5px 0;">
+
+            <div>
+              <%= form.text_area :note, class: "form-control form-control-sm", placeholder: "Ghi chú" %>
+            </div>
+
           </div>
 
-          <div class="row">
-            <div class="col">
-              <%= t('activerecord.attributes.purchase.total_price') %>
-            </div>
-            <div class="col">0</div>
-          </div>
-
-          <div class="row">
-            <div class="col">
-              <%= t('activerecord.attributes.purchase.paid') %>
-            </div>
-            <div class="col">
-              <%= form.number_field :paid, class: "form-control form-control-sm" %>
-            </div>
-          </div>
+          <hr style="margin: 0.8rem -10px;">
 
           <div>
-            <%= form.text_area :note, class: "form-control form-control-sm", placeholder: "Ghi chú" %>
+            <%= link_to fa_icon("times", text: "Hủy bỏ"), "", class: "btn btn-secondary btn-lg text-white" %>
+
+            <button type="submit" class="btn btn-info btn-lg">
+              <i class="fa fa-floppy-o fa-lg"></i> Lưu tạm
+            </button>
+
+            <button type="submit" class="btn btn-success btn-lg">
+              <i class="fa fa-shopping-cart fa-lg"></i> Thanh toán
+            </button>
           </div>
 
         </div>
