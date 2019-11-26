@@ -1,5 +1,6 @@
 <div class="new-supplier">
   <%= form_with model: supplier, id: 'new-supplier' do |f| %>
+    <%= hidden_field_tag 'from', params[:from] if params[:from].present? %>
     <div class="row">
       <div class="col-md-6">
 

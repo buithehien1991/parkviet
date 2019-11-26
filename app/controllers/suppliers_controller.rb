@@ -6,6 +6,13 @@ class SuppliersController < ApplicationController
     @per_page = params[:per_page] || Product.per_page || 20
     @q = Supplier.ransack(params[:q])
     @suppliers = @q.result.by_store(current_store.id).paginate(:page => params[:page], :per_page => @per_page)
+
+    respond_to do |format|
+      format.html {}
+      format.json {
+        render json: @suppliers, each_serializer: SupplierSerializer
+      }
+    end
   end
 
   def new
@@ -29,7 +36,12 @@ class SuppliersController < ApplicationController
     if @supplier.save
       @supplier.code = build_supplier_code unless @supplier.code.present?
       @supplier.save
-      redirect_to suppliers_path, notice: t(:notice_create_supplier_successfully)
+
+      if params[:from].present? && params[:from].eql?('purchase')
+        render "purchases/create_supplier"
+      else
+        redirect_to suppliers_path, notice: t(:notice_create_supplier_successfully)
+      end
     end
   end
 
