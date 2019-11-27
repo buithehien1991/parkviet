@@ -6,7 +6,7 @@ class PurchasesController < ApplicationController
   def index
     @per_page = params[:per_page] || Purchase.per_page || 20
     @q = Purchase.ransack(params[:q])
-    @purchases = @q.result.by_store(current_store.id).paginate(:page => params[:page], :per_page => @per_page)
+    @purchases = @q.result.by_store(current_store.id).order('id desc').paginate(:page => params[:page], :per_page => @per_page)
   end
 
   # GET /purchases/1
@@ -114,10 +114,12 @@ class PurchasesController < ApplicationController
   # DELETE /purchases/1
   # DELETE /purchases/1.json
   def destroy
-    @purchase.destroy
-    respond_to do |format|
-      format.html { redirect_to purchases_url, notice: 'Purchase was successfully destroyed.' }
-      format.json { head :no_content }
+    @purchase.status = :cancel
+    if @purchase.save
+      respond_to do |format|
+        format.html { redirect_to purchases_url, notice: 'Purchase was successfully destroyed.' }
+        format.json { head :no_content }
+      end
     end
   end
 

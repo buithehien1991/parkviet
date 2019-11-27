@@ -16,4 +16,8 @@ class Purchase < ApplicationRecord
   enum status: { created: 0, purchased: 1, cancel: 2 }
   scope :by_store, -> (store_id) { where(store_id: store_id) }
   self.per_page = 10
+
+  scope :active, -> {
+    where(status: [:created, :purchased])
+  }
 end

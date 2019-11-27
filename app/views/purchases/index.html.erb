@@ -61,8 +61,9 @@
     <table class="table table-bordered table-hover">
       <thead class="thead-light">
       <th><%= sort_link @q, :code, t('activerecord.attributes.purchase.code'), default_order: :desc %></th>
-      <th><%= sort_link @q, :name, t('activerecord.attributes.purchase.name') %></th>
+      <th><%= t('activerecord.attributes.purchase.date') %></th>
       <th><%= sort_link @q, :supplier, t('activerecord.attributes.purchase.supplier') %></th>
+      <th><%= sort_link @q, :price, t('activerecord.attributes.purchase.supplier') %></th>
       <th><%= sort_link @q, :status, t('activerecord.attributes.purchase.status') %></th>
       </thead>
 
@@ -72,14 +73,17 @@
           <td>
             <%= link_to purchase.code, purchase_path(purchase) %>
           </td>
-          <td class="font-weight-bold">
-            <%= link_to purchase.name, purchase_path(purchase) %>
+          <td>
+            <%= "#{purchase.date} #{purchase.time.strftime('%H:%M') if purchase.time}"  %>
           </td>
           <td>
             <%= purchase.supplier.name if purchase.supplier.present? %>
           </td>
           <td>
-            <%= purchase.status %>
+            <%= number_to_dong(purchase.price) %>
+          </td>
+          <td class="purchase-status-<%= purchase.status %>">
+            <%= Purchase.human_enum_name(:status, purchase.status) %>
           </td>
         </tr>
       <% end %>

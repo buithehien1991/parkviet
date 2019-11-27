@@ -16,4 +16,16 @@ module ApplicationHelper
     end
     store
   end
+
+  def number_to_dong(number)
+    number_to_currency(number, precision: 0, unit: '')
+  end
+
+  def number_to_dong_unit(number)
+    number_to_currency(number, precision: 0, unit: '₫')
+  end
+
+  def number_to_vnd_unit(number)
+    number_to_currency(number, precision: 0, unit: 'VND')
+  end
 end

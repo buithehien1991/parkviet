@@ -42,7 +42,7 @@
             <div class="col-md-4 col-sm-6">
               <div class="row">
                 <div class="col-4"><%= t('activerecord.attributes.purchase.status') %></div>
-                <div class="col-8 font-weight-bold"><%= @purchase.status %></div>
+                <div class="col-8 font-weight-bold"><%= Purchase.human_enum_name(:status, @purchase.status) %></div>
               </div>
 
               <hr>
@@ -60,6 +60,11 @@
               </div>
 
             </div>
+
+            <div class="col-md-4">
+              <div>Ghi chú</div>
+              <div><%= @purchase.note %></div>
+            </div>
           </div>
 
           <div class="mb-3">
@@ -73,24 +78,57 @@
               <th><%= t('activerecord.attributes.product.final_price') %></th>
               </thead>
               <tbody>
+                <% total_quantity = 0 %>
                 <% @purchase.product_purchases.each do |pp| %>
+                  <% total_quantity += pp.quantity %>
                   <tr>
                     <td><%= pp.product.code %></td>
                     <td><%= pp.product.name %></td>
                     <td><%= pp.quantity %></td>
-                    <td><%= pp.unit_price %></td>
-                    <td><%= pp.discount_money %></td>
-                    <td><%= pp.final_price %></td>
+                    <td><%= number_to_dong(pp.unit_price) %></td>
+                    <td><%= number_to_dong(pp.discount_money) %></td>
+                    <td><%= number_to_dong pp.final_price %></td>
                   </tr>
                 <% end %>
               </tbody>
             </table>
           </div>
 
+          <div class="row">
+            <div class="col">
+              <table class="table table-borderless float-right" style="width: 400px">
+                <tr>
+                  <td class="text-right">Tổng số lượng hàng</td>
+                  <td class="text-right"><%= total_quantity %></td>
+                </tr>
+                <tr>
+                  <td class="text-right">Tổng số mặt hàng</td>
+                  <td class="text-right"><%= @purchase.product_purchases.size %></td>
+                </tr>
+                <tr>
+                  <td class="text-right">Tổng tiền hàng</td>
+                  <td class="text-right"><%= number_to_dong(@purchase.total_price) %></td>
+                </tr>
+                <tr>
+                  <td class="text-right">Giảm giá</td>
+                  <td class="text-right"><%= number_to_currency(@purchase.discount_money, precision: 0, unit: '') %></td>
+                </tr>
+                <tr>
+                  <td class="text-right">Cần trả nhà cung cấp</td>
+                  <td class="text-right"><%= number_to_currency(@purchase.price, precision: 0, unit: '') %></td>
+                </tr>
+                <tr>
+                  <td class="text-right">Đã trả nhà cung cấp</td>
+                  <td class="text-right"><%= number_to_currency(@purchase.paid, precision: 0, unit: '') %></td>
+                </tr>
+              </table>
+            </div>
+          </div>
+
           <div class="nav-item float-right">
             <%= link_to fa_icon(:edit, text: t(:update)), edit_purchase_path(@purchase), class: "btn btn-success" %>
 
-            <%= link_to fa_icon("trash", text: t(:delete)), purchase_path(@purchase), method: :delete, data: { confirm: "Bạn có chắc chắn muốn xóa yêu cầu này ?" }, class: "btn btn-danger" %>
+            <%= link_to fa_icon("trash", text: t(:cancel)), purchase_path(@purchase), method: :delete, data: { confirm: "Bạn có chắc chắn muốn xóa yêu cầu này ?" }, class: "btn btn-danger" %>
           </div>
         </div>
       </div>

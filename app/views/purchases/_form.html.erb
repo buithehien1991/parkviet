@@ -19,7 +19,7 @@
             </div>
             <div class="form-inline">
               <%= form.date_field 'date', class: "form-control form-control-sm" %>
-              <%= form.time_field 'time', value: @purchase.time.strftime('%H:%M'), class: "form-control form-control-sm" %>
+              <%= form.time_field 'time', value: @purchase.time.present? ? @purchase.time.strftime('%H:%M') : Time.now.strftime('%H:%M'), class: "form-control form-control-sm" %>
             </div>
           </div>
 
@@ -55,7 +55,7 @@
                 <%= t('activerecord.attributes.purchase.status') %>
               </div>
               <div>
-                <%= form.object.status %>
+                <%= Purchase.human_enum_name(:status, form.object.status) %>
               </div>
             </div>
 

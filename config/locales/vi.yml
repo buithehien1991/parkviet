@@ -97,6 +97,11 @@ vi:
         discount_money: Giảm giá
         paid: Tiền trả nhà cung cấp
         dept: Tiền thừa lấy lại
+        price: Cần trả NCC
+        statuses:
+          created: Phiếu tạm
+          purchased: Đã nhập hàng
+          cancel: Đã hủy bỏ
 
       invoice:
         title: Hóa đơn
