@@ -81,6 +81,12 @@ vi:
         note: Ghi chú
         product: Hàng hóa
         status: Trạng thái
+        statuses:
+          created: Phiếu tạm
+          checked: Đã kiểm tra
+          confirmed: Đã xác nhận
+          completed: Đã hoàn thành
+          canceled: Đã hủy bỏ
       role:
         name: Tên vai trò
       purchase:

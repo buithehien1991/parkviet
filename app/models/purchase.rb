@@ -20,4 +20,19 @@ class Purchase < ApplicationRecord
   scope :active, -> {
     where(status: [:created, :purchased])
   }
+
+  def update_price
+    total = 0
+    self.product_purchases.each do |pp|
+      final_price = pp.quantity * pp.unit_price - pp.discount_money
+      pp.final_price = final_price
+      total += final_price
+    end
+
+    self.discount_money = 0 if discount_money.nil?
+    self.paid = 0 if paid.nil?
+    self.total_price = total
+    self.price = total - discount_money
+    self.dept = paid + discount_money - total
+  end
 end

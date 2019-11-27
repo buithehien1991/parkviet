@@ -1,6 +1,6 @@
 class PurchaseOrdersController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_purchase_order, only: [:show, :edit, :update, :destroy]
+  before_action :set_purchase_order, only: [:show, :edit, :update, :destroy, :status]
 
   # GET /purchase_orders
   # GET /purchase_orders.json
@@ -51,6 +51,21 @@ class PurchaseOrdersController < ApplicationController
     end
   end
 
+  # Update status
+  def status
+    if params[:status].eql?("complete")
+      @purchase_order.status = :completed
+      if @purchase_order.save
+        redirect_to purchase_orders_path, notice: "Đã hoàn thành đặt hàng nhập"
+      end
+    elsif params[:status].eql?("approve")
+      @purchase_order.status = :approved
+      if @purchase_order.save
+        redirect_to @purchase_order, notice: "Đã phê duyệt"
+      end
+    end
+  end
+
   # PATCH/PUT /purchase_orders/1
   # PATCH/PUT /purchase_orders/1.json
   def update
@@ -68,7 +83,9 @@ class PurchaseOrdersController < ApplicationController
   # DELETE /purchase_orders/1
   # DELETE /purchase_orders/1.json
   def destroy
-    @purchase_order.destroy
+    # @purchase_order.destroy
+    @purchase_order.status = :canceled
+    @purchase_order.save
     respond_to do |format|
       format.html { redirect_to purchase_orders_url, notice: 'Purchase order was successfully destroyed.' }
       format.json { head :no_content }

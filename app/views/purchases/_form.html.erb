@@ -114,7 +114,11 @@
           <hr style="margin: 0.8rem -10px;">
 
           <div class="float-right">
-            <%= link_to fa_icon("times", text: "Hủy bỏ"), :back, class: "btn btn-secondary btn-lg text-white" %>
+            <% if params[:purchase_order_id].present? && !@purchase.new_record? %>
+              <%= link_to fa_icon("times", text: "Hủy bỏ"), purchase_path(@purchase), method: :delete, class: "btn btn-secondary btn-lg text-white" %>
+            <% else %>
+              <%= link_to fa_icon("times", text: "Hủy bỏ"), :back, class: "btn btn-secondary btn-lg text-white" %>
+            <% end %>
 
             <button type="submit" class="btn btn-info btn-lg" name="type" value="save">
               <i class="fa fa-floppy-o fa-lg"></i> <%= @purchase.purchased? ? t(:save) : "Lưu tạm" %>

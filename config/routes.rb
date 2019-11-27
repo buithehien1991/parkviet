@@ -34,7 +34,11 @@ Rails.application.routes.draw do
     resources :product_groups
     resources :producers
 
-    resources :purchase_orders
+    resources :purchase_orders do
+      member do
+        post 'status'
+      end
+    end
     resources :product_purchase_orders
 
     resources :users

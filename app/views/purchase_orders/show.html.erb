@@ -9,10 +9,16 @@
     <% if @purchase_order.supplier %>
       <%= @purchase_order.supplier.name %>
     <% else %>
-      vui lòng chọn nhà cung cấp
+
     <% end %>
   </div>
 
+  <div class="form-group">
+    <label class="font-weight-bold"><%= t(:'activerecord.attributes.purchase_order.status') %>:</label>
+    <span class="status-<%= @purchase_order.status %>">
+      <%= PurchaseOrder.human_enum_name(:status, @purchase_order.status)%>
+    </span>
+  </div>
 
   <div class="form-group">
     <label class="font-weight-bold"><%= t(:'activerecord.attributes.purchase_order.note') %>:</label>
@@ -80,33 +86,31 @@
   <hr>
 
   <% if current_user == current_store.user %>
-    <%= link_to new_product_purchase_order_path(purchase_order_id: @purchase_order.id), class: "btn btn-warning", remote: true do %>
+    <%= link_to status_purchase_order_path(status: 'approve'), method: :post, class: "btn btn-warning", remote: true do %>
       <%= fa_icon "check", text: "Phê duyệt" %>
     <% end %>
 
-    <%= link_to "", class: "btn btn-success" do  %>
+    <%= link_to status_purchase_order_path(status: 'complete'), method: :post, class: "btn btn-success" do  %>
       <%= fa_icon "check-square-o", text: "Hoàn thành" %>
     <% end %>
 
-    <%= link_to "", class: "btn btn-success" do  %>
+    <%= link_to new_purchase_path(purchase_order_id: @purchase_order.id), class: "btn btn-success" do  %>
       <%= fa_icon "plus", text: "Tạo đơn nhập hàng" %>
     <% end %>
 
-    <%= link_to product_purchase_order_path(purchase_order_id: @purchase_order.id), class: "btn btn-info", remote: true do %>
+    <%= link_to "", class: "btn btn-info", remote: true do %>
       <%= fa_icon "paper-plane", text: "Gửi email" %>
     <% end %>
 
-    <%= link_to product_purchase_order_path(purchase_order_id: @purchase_order.id), class: "btn btn-info", remote: true do %>
+    <%= link_to "", class: "btn btn-info", remote: true do %>
       <%= fa_icon "download", text: "Xuất excel" %>
     <% end %>
 
-    <%= link_to product_purchase_order_path(purchase_order_id: @purchase_order.id), class: "btn btn-info", remote: true do %>
+    <%= link_to "", class: "btn btn-info", remote: true do %>
       <%= fa_icon "print", text: "In" %>
     <% end %>
 
-    <%= link_to product_purchase_order_path(purchase_order_id: @purchase_order.id), class: "btn btn-danger", remote: true do %>
-      <%= fa_icon "trash", text: "Hủy bỏ" %>
-    <% end %>
+    <%= link_to fa_icon("trash", text: t(:cancel)), purchase_order_path(@purchase_order), method: :delete, data: { confirm: "Bạn có chắc chắn muốn xóa yêu cầu này ?" }, class: "btn btn-danger" %>
   <% end %>
 </div>
 

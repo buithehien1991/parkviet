@@ -21,6 +21,38 @@ class PurchasesController < ApplicationController
     @purchase.time =  Time.now.strftime('%H:%M') #  Time.now.strftime('%H:%M')
     @users = ([current_user] + current_store.members.map{|m| m.user}).uniq
     @suppliers = Supplier.by_store(current_store.id)
+
+    # Copy data from PPO
+    if params[:purchase_order_id].present?
+      purchase_order = PurchaseOrder.find(params[:purchase_order_id])
+      if purchase_order.store == current_store
+        @purchase.supplier = purchase_order.supplier
+        @purchase.user = current_user
+        @purchase.purchaser = current_user
+        @purchase.store = current_store
+
+        if @purchase.save
+          @purchase.code = build_code("PC", @purchase) unless @purchase.code.present?
+
+          purchase_order.product_purchase_orders.each do |ppo|
+            pp = ProductPurchase.new
+            pp.purchase = @purchase
+            pp.product = ppo.product
+            pp.quantity = ppo.quantity.present? ? ppo.quantity : 0
+            pp.unit_price = ppo.unit_price.present? ? ppo.unit_price : 0
+            pp.discount_percent = ppo.discount_percent.present? ? ppo.discount_percent : 0
+            pp.discount_money = ppo.discount_money.present? ? ppo.discount_money : 0
+            pp.final_price = ppo.total_price
+            pp.save
+          end
+
+          @purchase.update_price
+          @purchase.save
+        end
+
+        p @purchase.errors.full_messages
+      end
+    end
   end
 
   # GET /purchases/1/edit

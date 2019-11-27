@@ -84,8 +84,8 @@
           <td>
             <%= order.supplier.name if order.supplier.present? %>
           </td>
-          <td>
-            <%= order.status %>
+          <td class="status-<%= order.status %>">
+            <%= PurchaseOrder.human_enum_name(:status, order.status) %>
           </td>
           <td>
             <%= link_to fa_icon("pencil"), edit_purchase_order_path(order) %>
