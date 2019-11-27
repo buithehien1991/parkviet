@@ -18,8 +18,8 @@
 
             </div>
             <div class="form-inline">
-              <%= date_field_tag 'date', Date.today, class: "form-control form-control-sm" %>
-              <%= time_field_tag 'time', Time.now.strftime('%H:%M'), class: "form-control form-control-sm" %>
+              <%= form.date_field 'date', class: "form-control form-control-sm" %>
+              <%= form.time_field 'time', value: @purchase.time.strftime('%H:%M'), class: "form-control form-control-sm" %>
             </div>
           </div>
 
@@ -113,16 +113,18 @@
 
           <hr style="margin: 0.8rem -10px;">
 
-          <div>
-            <%= link_to fa_icon("times", text: "Hủy bỏ"), "", class: "btn btn-secondary btn-lg text-white" %>
+          <div class="float-right">
+            <%= link_to fa_icon("times", text: "Hủy bỏ"), :back, class: "btn btn-secondary btn-lg text-white" %>
 
-            <button type="submit" class="btn btn-info btn-lg">
-              <i class="fa fa-floppy-o fa-lg"></i> Lưu tạm
+            <button type="submit" class="btn btn-info btn-lg" name="type" value="save">
+              <i class="fa fa-floppy-o fa-lg"></i> <%= @purchase.purchased? ? t(:save) : "Lưu tạm" %>
             </button>
 
-            <button type="submit" class="btn btn-success btn-lg">
-              <i class="fa fa-shopping-cart fa-lg"></i> Thanh toán
-            </button>
+            <% unless @purchase.purchased?  %>
+              <button type="submit" class="btn btn-success btn-lg" name="type" value="purchase">
+                <i class="fa fa-shopping-cart fa-lg"></i> Thanh toán
+              </button>
+            <% end %>
           </div>
 
         </div>
@@ -255,6 +257,9 @@
 <script>
 
     $(document).on('turbolinks:load', function () {
+        // Update price every times open this page
+        updatePrice();
+
         $("#search-product-input").autocomplete({
             minLength: 0,
             source: function( request, response ) {
@@ -413,7 +418,6 @@
         }
 
         $("#purchase-dept").html(formatMoney(paid + discount_all - total_price, 0, ",", "."))
-
     }
 
     function formatMoney(amount, decimalCount = 2, decimal = ".", thousands = ",") {

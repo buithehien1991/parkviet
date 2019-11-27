@@ -16,7 +16,9 @@ class PurchasesController < ApplicationController
 
   # GET /purchases/new
   def new
-    @purchase = Purchase.new(date: DateTime.now.strftime('%Y-%m-%dT%H:%M'))
+    @purchase = Purchase.new
+    @purchase.date = Date.today
+    @purchase.time =  Time.now.strftime('%H:%M') #  Time.now.strftime('%H:%M')
     @users = ([current_user] + current_store.members.map{|m| m.user}).uniq
     @suppliers = Supplier.by_store(current_store.id)
   end
@@ -39,16 +41,29 @@ class PurchasesController < ApplicationController
     @purchase.purchaser = current_user
     @purchase.store = current_store
 
+    if params[:type].eql?("purchase")
+      @purchase.status = :purchased
+    end
+
     respond_to do |format|
       if @purchase.save
 
         @purchase.code = build_code("PC", @purchase) unless @purchase.code.present?
-        @purchase.save
 
+        total = 0
         @purchase.product_purchases.each do |pp|
-          pp.final_price = pp.quantity * pp.unit_price - pp.discount_money
+          final_price = pp.quantity * pp.unit_price - pp.discount_money
+          pp.final_price = final_price
+          total += final_price
           pp.save
         end
+
+        @purchase.discount_money = 0 if @purchase.discount_money.nil?
+        @purchase.paid = 0 if @purchase.paid.nil?
+        @purchase.total_price = total
+        @purchase.price = total - @purchase.discount_money
+        @purchase.dept = @purchase.paid + @purchase.discount_money - total
+        @purchase.save
 
         format.html { redirect_to @purchase, notice: 'Tạo đơn nhập hàng thành công.' }
         format.json { render :show, status: :created, location: @purchase }
@@ -78,6 +93,15 @@ class PurchasesController < ApplicationController
           end
         end
 
+        total = 0
+        @purchase.product_purchases.each do |pp|
+          total += pp.final_price
+        end
+        @purchase.total_price = total
+        @purchase.price = total - @purchase.discount_money
+        @purchase.dept = @purchase.paid + @purchase.discount_money - total
+        @purchase.save
+
         format.html { redirect_to @purchase, notice: 'Purchase was successfully updated.' }
         format.json { render :show, status: :ok, location: @purchase }
       else
@@ -105,6 +129,6 @@ class PurchasesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def purchase_params
-      params.require(:purchase).permit(:name, product_purchases_attributes: [:id, :product_id, :purchase_id, :quantity, :unit_price, :discount_percent, :discount_money, :final_price])
+      params.require(:purchase).permit(:name, :purchaser_id, :supplier_id, :code, :discount_money, :paid, :note, :date, :time, product_purchases_attributes: [:id, :product_id, :purchase_id, :quantity, :unit_price, :discount_percent, :discount_money, :final_price])
     end
 end
