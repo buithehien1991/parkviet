@@ -108,14 +108,23 @@ vi:
           created: Phiếu tạm
           purchased: Đã nhập hàng
           cancel: Đã hủy bỏ
-
       invoice:
         title: Hóa đơn
         code: Mã hóa đơn
+        date: Thời gian
         name: Tên hóa đơn
         customer: Khách hàng
+        total_price: Tổng tiền hàng
+        sale_off: Giảm giá
+        final_price: Tổng sau giảm giá
+        paid: Khách đã trả
         note: Ghi chú
         status: Trạng thái
+        statuses:
+          created: Phiếu tạm
+          completed: Hoàn thành
+        user: Người tạo
+        seller: Người bán
 
 
   # Translate views
@@ -206,6 +215,8 @@ vi:
     index:
       add_invoice: Bán hàng
       search_placeholer: Nhập mã hóa đơn
+    show:
+      tab_information: Thông tin
 
   customer_tab: Khách hàng
   supplier_tab: Nhà cung cấp

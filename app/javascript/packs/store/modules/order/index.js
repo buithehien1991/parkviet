@@ -141,7 +141,7 @@ const mutations = {
             order => order.id === state.selectedOrderId
         )
         if (currentOrder) {
-            let data = currentOrder
+            let data = {invoice: currentOrder}
             axios.post(config.INVOICES_PATH, data).then((response) => {
                 // TODO làm gì nhỉ không biết @_@
             });

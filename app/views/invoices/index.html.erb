@@ -60,10 +60,12 @@
     <table class="table table-bordered table-hover">
       <thead class="thead-light">
       <th><%= sort_link @q, :code, t('activerecord.attributes.invoice.code'), default_order: :desc %></th>
-      <th><%= sort_link @q, :name, t('activerecord.attributes.invoice.name') %></th>
+      <th><%= t('activerecord.attributes.invoice.date') %></th>
       <th><%= sort_link @q, :supplier, t('activerecord.attributes.invoice.customer') %></th>
-      <th><%= sort_link @q, :status, t('activerecord.attributes.invoice.status') %></th>
-      <th></th>
+      <th><%= sort_link @q, :total_price, t('activerecord.attributes.invoice.total_price') %></th>
+      <th><%= sort_link @q, :total_price, t('activerecord.attributes.invoice.sale_off') %></th>
+      <th><%= sort_link @q, :total_price, t('activerecord.attributes.invoice.final_price') %></th>
+      <th><%= sort_link @q, :total_price, t('activerecord.attributes.invoice.paid') %></th>
       </thead>
 
       <tbody>
@@ -72,18 +74,23 @@
           <td>
             <%= link_to invoice.code, invoice_path(invoice) %>
           </td>
-          <td class="font-weight-bold">
-            <%= link_to invoice.name, invoice_path(invoice) %>
+          <td>
+            <%= "#{invoice.date} #{invoice.time.strftime('%H:%M') if invoice.time}"  %>
           </td>
           <td>
-            <%= invoice.customer.name if invoice.customer.present? %>
+            <%= invoice.customer.present? ? invoice.customer.name : "Khách lẻ" %>
           </td>
-          <td>
-            <%= invoice.status %>
+          <td class="text-right">
+            <%= number_to_dong(invoice.total_price) %>
           </td>
-          <td>
-            <%= link_to fa_icon("pencil"), edit_invoice_path(invoice) %>
-            <%= link_to fa_icon("trash"), invoice_path(invoice), method: :delete, class: "text-danger", data: { confirm: "Bạn có chắc chắn muốn xóa yêu cầu này ?" } %>
+          <td class="text-right">
+            <%= number_to_dong(invoice.sale_off) %>
+          </td>
+          <td class="text-right">
+            <%= number_to_dong(invoice.final_price) %>
+          </td>
+          <td class="text-right">
+            <%= number_to_dong(invoice.given_money) %>
           </td>
         </tr>
       <% end %>

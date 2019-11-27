@@ -7,10 +7,25 @@ class Invoice < ApplicationRecord
   has_many :product_invoices, dependent: :delete_all
   has_many :products, through: :product_invoices
 
-  validates :name, presence: false, length: {minimum: 2, maximum: 64}
   validates :code, uniqueness: {scope: :store}, length: {minimum: 2, maximum: 32}, :allow_blank => true
 
   enum status: { created: 0 }
   scope :by_store, -> (store_id) { where(store_id: store_id) }
   self.per_page = 10
+
+  def update_price
+    total = 0
+    self.product_invoices.each do |pp|
+      final_price = pp.quantity * pp.unit_price - pp.discount_money
+      pp.final_price = final_price
+      total += final_price
+    end
+
+    self.sale_off = 0 if self.sale_off.nil?
+    self.paid = 0 if self.paid.nil?
+    self.total_price = total
+    self.final_price = total - sale_off
+    self.given_money = 0 if self.given_money.nil?
+    self.returned_money = self.given_money - self.final_price
+  end
 end

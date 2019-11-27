@@ -1,6 +1,8 @@
 class InvoicesController < ApplicationController
   before_action :set_invoice, only: [:show, :edit, :update, :destroy]
 
+  protect_from_forgery :except => [:create]
+
   # GET /invoices
   # GET /invoices.json
   def index
@@ -27,9 +29,31 @@ class InvoicesController < ApplicationController
   # POST /invoices.json
   def create
     @invoice = Invoice.new(invoice_params)
+    @invoice.user = current_user
+    @invoice.seller = current_user unless params[:invoice][:seller_id].present?
+    @invoice.store = current_store
+
+    @invoice.date = Date.today
+    @invoice.time = Time.now
 
     respond_to do |format|
       if @invoice.save
+        @invoice.code = build_code("HD", @invoice)
+
+        params[:invoice][:orderProducts].each do |product|
+          pi = ProductInvoice.new
+          pi.invoice = @invoice
+          pi.product_id = product['id']
+          pi.quantity = product['quantity']
+          pi.unit_price = product['sale_price']
+          pi.discount_percent = product['discount_percent']
+          pi.discount_money = product['discount_money']
+          pi.final_price = product['final_price']
+          pi.save
+        end if params[:invoice].present? && params[:invoice][:orderProducts].present?
+        @invoice.update_price
+        @invoice.save
+
         format.html { redirect_to @invoice, notice: 'Invoice was successfully created.' }
         format.json { render :show, status: :created, location: @invoice }
       else
@@ -71,6 +95,6 @@ class InvoicesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def invoice_params
-      params.fetch(:invoice, {})
+      params.require(:invoice).permit(:name, :total_price, :sale_off, :paid, :given_money, :returned_money, :note)
     end
 end

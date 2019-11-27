@@ -1,4 +1,139 @@
-<p id="notice"><%= notice %></p>
+<div class="m-3 product">
+  <div class="card">
+    <div class="card-header">
+      <h5 class="product-name font-weight-bold mb-0">#<%= @invoice.code %></h5>
+    </div>
+    <div class="card-header">
+      <ul class="nav nav-tabs card-header-tabs" role="tab">
+        <li class="nav-item">
+          <a class="nav-link active" href="#information-content" data-toggle="tab" role="tab"aria-controls="information" aria-selected="true" >
+            <%= fa_icon("info-circle", text: t('.tab_information')) %>
+          </a>
+        </li>
+      </ul>
+    </div>
+    <div class="card-body">
+      <div class="tab-content">
+        <div class="tab-pane fade show active" id="information-content" role="tabpanel" aria-labelledby="information-tab">
 
-<%= link_to 'Edit', edit_invoice_path(@invoice) %> |
-<%= link_to 'Back', invoices_path %>
+          <div class="row mb-3">
+            <div class="col-md-4 col-sm-6">
+              <div class="row">
+                <div class="col-4"><%= t('activerecord.attributes.invoice.code') %></div>
+                <div class="col-8 font-weight-bold"><%= @invoice.code %></div>
+              </div>
+
+              <hr>
+
+              <div class="row">
+                <div class="col-4"><%= t('activerecord.attributes.invoice.date') %></div>
+                <div class="col-8 font-weight-bold"><%= @invoice.date %></div>
+              </div>
+
+              <hr>
+
+              <div class="row">
+                <div class="col-4"><%= t('activerecord.attributes.invoice.customer') %></div>
+                <div class="col-8 font-weight-bold"><%= @invoice.customer.present? ? @invoice.customer.name : "Khách lẻ" %></div>
+              </div>
+
+            </div>
+
+            <div class="col-md-4 col-sm-6">
+              <div class="row">
+                <div class="col-4"><%= t('activerecord.attributes.invoice.status') %></div>
+                <div class="col-8 font-weight-bold"><%= Invoice.human_enum_name(:status, @invoice.status) %></div>
+              </div>
+
+              <hr>
+
+              <div class="row">
+                <div class="col-4"><%= t('activerecord.attributes.invoice.user') %></div>
+                <div class="col-8 font-weight-bold"><%= @invoice.user.fullname if @invoice.user.present? %></div>
+              </div>
+
+              <hr>
+
+              <div class="row">
+                <div class="col-4"><%= t('activerecord.attributes.invoice.seller') %></div>
+                <div class="col-8 font-weight-bold"><%= @invoice.seller.fullname if @invoice.seller.present? %></div>
+              </div>
+
+            </div>
+
+            <div class="col-md-4">
+              <div>Ghi chú</div>
+              <div><%= @invoice.note %></div>
+            </div>
+          </div>
+
+          <div class="mb-3">
+            <table class="table table-bordered">
+              <thead>
+              <th><%= t('activerecord.attributes.product.code') %></th>
+              <th><%= t('activerecord.attributes.product.name') %></th>
+              <th><%= t('activerecord.attributes.product.quantity') %></th>
+              <th><%= t('activerecord.attributes.product.unit_price') %></th>
+              <th><%= t('activerecord.attributes.product.sale_price') %></th>
+              <th><%= t('activerecord.attributes.product.discount_money') %></th>
+              <th><%= t('activerecord.attributes.product.final_price') %></th>
+              </thead>
+              <tbody>
+              <% total_quantity = 0 %>
+              <% @invoice.product_invoices.each do |pp| %>
+                <% total_quantity += pp.quantity %>
+                <tr>
+                  <td><%= pp.product.code %></td>
+                  <td><%= pp.product.name %></td>
+                  <td><%= pp.quantity %></td>
+                  <td><%= number_to_dong pp.product.sale_price %></td>
+                  <td><%= number_to_dong(pp.unit_price) %></td>
+                  <td><%= number_to_dong(pp.discount_money) %></td>
+                  <td><%= number_to_dong pp.final_price %></td>
+                </tr>
+              <% end %>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="row">
+            <div class="col">
+              <table class="table table-borderless float-right" style="width: 400px">
+                <tr>
+                  <td class="text-right">Tổng số lượng hàng</td>
+                  <td class="text-right"><%= total_quantity %></td>
+                </tr>
+                <tr>
+                  <td class="text-right">Tổng số mặt hàng</td>
+                  <td class="text-right"><%= @invoice.product_invoices.size %></td>
+                </tr>
+                <tr>
+                  <td class="text-right">Tổng tiền hàng</td>
+                  <td class="text-right"><%= number_to_dong(@invoice.total_price) %></td>
+                </tr>
+                <tr>
+                  <td class="text-right">Giảm giá</td>
+                  <td class="text-right"><%= number_to_dong @invoice.sale_off %></td>
+                </tr>
+                <tr>
+                  <td class="text-right">Khách cần trả</td>
+                  <td class="text-right"><%= number_to_dong(@invoice.final_price) %></td>
+                </tr>
+                <tr>
+                  <td class="text-right">Khách đã trả</td>
+                  <td class="text-right"><%= number_to_dong(@invoice.given_money) %></td>
+                </tr>
+              </table>
+            </div>
+          </div>
+
+          <div class="nav-item float-right">
+            <%= link_to fa_icon(:edit, text: t(:update)), edit_invoice_path(@invoice), class: "btn btn-success" %>
+
+            <%= link_to fa_icon("trash", text: t(:cancel)), edit_invoice_path(@invoice), method: :delete, data: { confirm: "Bạn có chắc chắn muốn xóa yêu cầu này ?" }, class: "btn btn-danger" %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
