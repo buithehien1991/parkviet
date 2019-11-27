@@ -61,6 +61,7 @@
     <table class="table table-bordered table-hover">
       <thead class="thead-light">
       <th><%= sort_link @q, :code, t('activerecord.attributes.purchase.code'), default_order: :desc %></th>
+      <th><%= t('activerecord.attributes.purchase_order.code') %></th>
       <th><%= t('activerecord.attributes.purchase.date') %></th>
       <th><%= sort_link @q, :supplier, t('activerecord.attributes.purchase.supplier') %></th>
       <th><%= sort_link @q, :price, t('activerecord.attributes.purchase.price') %></th>
@@ -72,6 +73,9 @@
         <tr>
           <td>
             <%= link_to purchase.code, purchase_path(purchase) %>
+          </td>
+          <td>
+            <%= link_to purchase.purchase_order.code, purchase.purchase_order if purchase.purchase_order %>
           </td>
           <td>
             <%= "#{purchase.date} #{purchase.time.strftime('%H:%M') if purchase.time}"  %>

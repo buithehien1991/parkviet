@@ -75,7 +75,7 @@ vi:
       purchase_order:
         title: Đặt hàng nhập
         name: Tên yêu cầu
-        code: Mã yêu cầu
+        code: Mã đặt hàng nhập
         supplier: Nhà cung cấp
         supplier_choose: Nhà cung cấp (Không chọn nếu có nhiều nhà cung cấp)
         note: Ghi chú

@@ -8,6 +8,8 @@ class Purchase < ApplicationRecord
   has_many :product_purchases, dependent: :delete_all
   has_many :products, through: :product_purchases
 
+  belongs_to :purchase_order, optional: true
+
   accepts_nested_attributes_for :product_purchases
 
   #validates :name, presence: false, length: {minimum: 2, maximum: 64}

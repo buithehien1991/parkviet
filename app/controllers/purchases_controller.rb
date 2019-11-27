@@ -26,6 +26,7 @@ class PurchasesController < ApplicationController
     if params[:purchase_order_id].present?
       purchase_order = PurchaseOrder.find(params[:purchase_order_id])
       if purchase_order.store == current_store
+        @purchase.purchase_order_id = purchase_order.id
         @purchase.supplier = purchase_order.supplier
         @purchase.user = current_user
         @purchase.purchaser = current_user
@@ -163,6 +164,6 @@ class PurchasesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def purchase_params
-      params.require(:purchase).permit(:name, :purchaser_id, :supplier_id, :code, :discount_money, :paid, :note, :date, :time, product_purchases_attributes: [:id, :product_id, :purchase_id, :quantity, :unit_price, :discount_percent, :discount_money, :final_price])
+      params.require(:purchase).permit(:name, :purchaser_id, :supplier_id, :code, :discount_money, :paid, :note, :date, :time, :purchase_order_id, product_purchases_attributes: [:id, :product_id, :purchase_id, :quantity, :unit_price, :discount_percent, :discount_money, :final_price])
     end
 end
