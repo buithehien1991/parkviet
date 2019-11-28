@@ -103,12 +103,10 @@
     <% end %>
 
     <%= link_to "", class: "btn btn-info", remote: true do %>
-      <%= fa_icon "download", text: "Xuất excel" %>
+      <%= fa_icon "download", text: t(:export_file) %>
     <% end %>
 
-    <%= link_to "", class: "btn btn-info", remote: true do %>
-      <%= fa_icon "print", text: "In" %>
-    <% end %>
+    <%= link_to fa_icon("print", text: t(:print)), "", class: "btn btn-info", remote: true %>
 
     <%= link_to fa_icon("trash", text: t(:cancel)), purchase_order_path(@purchase_order), method: :delete, data: { confirm: "Bạn có chắc chắn muốn xóa yêu cầu này ?" }, class: "btn btn-danger" %>
   <% end %>

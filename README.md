@@ -20,8 +20,8 @@ Park Việt là phần mềm quản lý bán hàng, kinh doanh sử dụng tại
 - Quản lý sản phẩm
 - Quản lý đối tác: Khách hàng & Nhà cung cấp
 - Quản lý nhập hàng
-- Quảng lý đặt hàng nhập
-- Thanh toán và lập hóa đơn mua hàng
+- Quảng lý đặt hàng trước khi nhập từ nhà cung cấp
+- Quản lý bán hàng: Thanh toán và lập hóa đơn mua hàng
 - Quản lý người dùng trong cửa hàng
 
 ![QuanLy](screenshots/quanly.png)

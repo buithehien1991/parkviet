@@ -128,8 +128,10 @@
           </div>
 
           <div class="nav-item float-right">
-            <%= link_to fa_icon(:edit, text: t(:update)), edit_invoice_path(@invoice), class: "btn btn-success" %>
-
+            <%= link_to fa_icon(:edit, text: t(:update)), sale_path(invoice: @invoice), class: "btn btn-success" %>
+            <%= link_to fa_icon("download", text: t(:export_file)), "", class: "btn btn-info", remote: true %>
+            <%= link_to fa_icon("print", text: "In"), "", class: "btn btn-info", remote: true %>
+            <%= link_to fa_icon("copy", text: t(:copy)), sale_path(from_invoice: @invoice), class: "btn btn-success" %>
             <%= link_to fa_icon("trash", text: t(:cancel)), edit_invoice_path(@invoice), method: :delete, data: { confirm: "Bạn có chắc chắn muốn xóa yêu cầu này ?" }, class: "btn btn-danger" %>
           </div>
         </div>

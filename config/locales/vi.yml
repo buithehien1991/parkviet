@@ -243,10 +243,13 @@ vi:
   save_cont: Lưu và Thêm mới
   search: Tìm kiếm
   cancel: Hủy bỏ
+  copy: Sao chép
   back: Trở về
   update: Cập nhật
   edit: Sửa
   delete: Xóa
+  export_file: Xuất file
+  print: In
   stop_sale: Ngừng kinh doanh
   allow_sale: Cho phép kinh doanh
   not_update: Chưa cập nhật
@@ -294,10 +297,13 @@ vi:
       multi_page: "Hiển thị %{from} - %{to} trên tổng số %{count} %{model}"
       multi_page_html: "Hiển thị <b>%{from}&nbsp;-&nbsp;%{to}</b> trên tổng số <b>%{count}</b> %{model}"
     models:
-      product:
-        zero:  hàng hóa
-        one:   hàng hóa
-        other: hàng hóa
+      product: hàng hóa
+      invoice: hóa đơn
+      customer: khách hàng
+      supplier: nhà cung cấp
+      purchase_order: đơn đặt hàng nhập
+      purchase: đơn nhập hàng
+      user: người dùng
 
   # Permission
   system: Hệ thống

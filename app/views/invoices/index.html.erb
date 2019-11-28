@@ -14,13 +14,13 @@
       <div class="navbar-nav">
         <ul class="navbar-nav ml-auto">
           <li class="nav-item">
-            <%= link_to new_purchase_path, class: "btn btn-info header-menu" do %>
+            <%= link_to sale_path, class: "btn btn-info header-menu", target: '_blank' do %>
               <%= fa_icon "plus", text: t('.add_invoice') %>
             <% end %>
           </li>
 
           <li class="nav-item">
-            <%= link_to new_purchase_path, class: "btn btn-info header-menu" do %>
+            <%= link_to "", class: "btn btn-info header-menu" do %>
               <%= fa_icon "download", text: "Xuất excel" %>
             <% end %>
           </li>
@@ -98,7 +98,7 @@
 
       <tfoot>
       <tr>
-        <td colspan="6">
+        <td colspan="7">
           <%= render partial: 'shared/pagination_footer_table', locals: {objects: @invoices} %>
         </td>
       </tr>
