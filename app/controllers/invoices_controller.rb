@@ -1,4 +1,5 @@
 class InvoicesController < ApplicationController
+  before_action :authenticate_user!
   before_action :set_invoice, only: [:show, :edit, :update, :destroy]
 
   protect_from_forgery :except => [:create]
@@ -14,6 +15,12 @@ class InvoicesController < ApplicationController
   # GET /invoices/1
   # GET /invoices/1.json
   def show
+    respond_to do |format|
+      format.html {}
+      format.json {
+        render json: @invoice, serializer: InvoiceSerializer
+      }
+    end
   end
 
   # GET /invoices/new

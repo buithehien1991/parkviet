@@ -8,10 +8,13 @@
 // layout file, like app/views/layouts/application.html.erb
 import 'babel-polyfill'
 import Vue from 'vue/dist/vue.esm'
-import App from '../app.vue'
+import router from './router'
 import * as filters from './filters'
 import './components'
 import store from './store/index'
+
+import App from '../app.vue'
+
 // Global filters
 for (const key in filters) {
   Vue.filter(key, filters[key])
@@ -20,6 +23,7 @@ for (const key in filters) {
 document.addEventListener('DOMContentLoaded', () => {
     function main() {
         new Vue({
+            router,
             store,
             render: h => h(App)
         }).$mount('#sale-page')

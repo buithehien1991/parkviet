@@ -1,7 +1,9 @@
 import axios from 'axios'
 import config from '../../../config'
+import stringInject from 'stringinject';
 
 const state = {
+    type: 'new',
     orders: [],
     selectedOrderId: null
 }
@@ -136,6 +138,14 @@ const mutations = {
         }
     },
 
+    UPDATE_TYPE(state, payload) {
+        state.type = payload
+    },
+
+    GET_INVOICE_FROM_SERVER() {
+
+    },
+
     CHECKOUT(state) {
         let currentOrder = state.orders.find(
             order => order.id === state.selectedOrderId
@@ -153,11 +163,20 @@ const mutations = {
 }
 
 const actions = {
-    getOrderItems({ commit }) {
-        // axios.get(config.ORDERS_PATH).then((response) => {
-        //     commit('UPDATE_ORDER_ITEMS', response.data)
-        // })
+    getOrderItems({ commit }, order_id) {
         commit('UPDATE_ORDER_ITEMS', [])
+    },
+
+    getOrderItem({ commit }, order_id) {
+        let url = stringInject(config.INVOICE_PATH, {id: order_id})
+        axios.get(url).then((response) => {
+            //commit('UPDATE_ORDER_ITEMS', response.data)
+
+            console.log(response)
+            // commit('ADD_ORDER_ITEMS', orderItem)
+        }).catch(error => {
+            console.log(error)
+        });
     },
 
     /**
@@ -213,6 +232,10 @@ const actions = {
 
     updateGivenMoney({ commit }, giveMoney) {
         commit('UPDATE_GIVEN_MONEY', giveMoney)
+    },
+
+    updateType({ commit }, type) {
+        commit('UPDATE_TYPE', type)
     },
 
     checkout({ commit }) {
