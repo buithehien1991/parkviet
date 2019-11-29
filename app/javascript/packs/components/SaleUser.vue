@@ -24,6 +24,11 @@
             <i class="fa fa-shopping-cart"></i>
             Thanh toán
         </button>
+
+        <b-modal id="modal-checkout-success" title="Thanh toán" @ok="closeOrder">
+            <p class="my-4">Đã thanh toán thành công, bạn có muốn đóng hóa đơn này không ?, </p>
+
+        </b-modal>
     </div>
 </template>
 
@@ -46,16 +51,35 @@
         },
         methods: {
             checkout() {
+                let _this = this
                 this.$store.dispatch('checkout').then(() => {
                     //  Show dialog đã thanh toán thành công. bạn có muốn đóng hóa đơn này không ?
-
+                    this.$bvModal.show("modal-checkout-success")
                     // In hóa đơn ???
                 })
+
+                // this.$modal.show('dialog', {
+                //     title: '',
+                //     text: 'Show dialog đã thanh toán thành công. bạn có muốn đóng hóa đơn này không ?',
+                //     buttons: [
+                //         {
+                //             title: 'ĐỒNG Ý',
+                //             default: true,
+                //             handler: () => { alert('Woot!') }
+                //         },
+                //         {
+                //             title: 'KHÔNG ĐỒNG Ý'
+                //         }
+                //     ]
+                // })
+
+            },
+            closeOrder() {
+
             }
         }
     }
 </script>
 
-<style scoped>
-
+<style scoped lang="scss">
 </style>

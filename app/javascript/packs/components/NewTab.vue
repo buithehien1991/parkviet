@@ -35,7 +35,7 @@
                     return 1;
                 }
 
-                return Math.max.apply(Math, this.orders.map(function(o) { return o.number; })) + 1
+                return Math.max.apply(Math, this.orders.map(function(o) { return o.number ? o.number : 0; })) + 1
             }
         },
 

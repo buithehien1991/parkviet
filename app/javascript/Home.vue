@@ -45,15 +45,16 @@
             this.$store.dispatch('getUserInfo')
             this.$store.dispatch('getOrderItems')
             this.$store.dispatch('getCustomers')
-
+        },
+        mounted() {
             console.log(this.$route)
 
             if (this.$route && this.$route.query.invoice && !this.$route.query.from_invoice) {
                 this.$store.dispatch('updateType', 'edit')
-                this.$store.dispatch('getOrderItem', this.$route.query.invoice)
+                this.$store.dispatch('getInvoiceFromServer', this.$route.query.invoice)
             } else if (this.$route&& !this.$route.query.invoice && this.$route.query.from_invoice) {
                 this.$store.dispatch('updateType', 'copy')
-                this.$store.dispatch('getOrderItem', this.$route.query.from_invoice)
+                this.$store.dispatch('getInvoiceFromServer', this.$route.query.from_invoice)
             }
         }
     }

@@ -20,6 +20,15 @@ for (const key in filters) {
   Vue.filter(key, filters[key])
 }
 
+// Import Vue Modal
+// import VModal from 'vue-js-modal'
+// Vue.use(VModal, { dialog: true })
+
+import BootstrapVue from 'bootstrap-vue'
+Vue.use(BootstrapVue)
+import 'bootstrap/dist/css/bootstrap.css'
+import 'bootstrap-vue/dist/bootstrap-vue.css'
+
 document.addEventListener('DOMContentLoaded', () => {
     function main() {
         new Vue({

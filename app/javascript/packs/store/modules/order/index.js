@@ -142,8 +142,81 @@ const mutations = {
         state.type = payload
     },
 
-    GET_INVOICE_FROM_SERVER() {
+    GET_INVOICE_FROM_SERVER(state, payload) {
+        let id, time, title
+        if (state.type === 'edit') {
+            id = payload.id
+            time = payload.time
+            title = payload.code ? payload.code : payload.id
+            title = "UPDATE_" + title
+        } else {
+            // Copy
+            id = Date.now()
+            time = Date.now()
+            title = payload.code ? payload.code : payload.id
+            title = "COPY_" + title
+        }
 
+        let orderProducts = []
+
+        for (let i = 0; i < payload.product_invoices.length; i++) {
+            let pi = payload.product_invoices[i]
+            let newOrderProductItem = {}
+            Object.assign(newOrderProductItem, pi.product)
+            newOrderProductItem.id = pi.product_id
+
+            newOrderProductItem.quantity = pi.quantity
+            newOrderProductItem.discount_percent = pi.discount_percent
+            newOrderProductItem.discount_money = pi.discount_money
+            newOrderProductItem.sale_price = pi.unit_price
+            newOrderProductItem.final_price = pi.final_price
+
+            orderProducts.push(newOrderProductItem)
+        }
+
+        let order = {}
+        if (state.type === 'edit') {
+            order = {
+                id: id,
+                title: title,
+                number: 1,
+                orderProducts: orderProducts,
+                total_price: payload.total_price ? payload.total_price : 0,
+                sale_off: payload.sale_off ? payload.sale_off : 0,
+                paid: payload.paid ? payload.paid : 0,
+                given_money: payload.given_money ? payload.given_money : 0,
+                returned_money: payload.returned_money ? payload.returned_money : null,
+                note: payload.note ? payload.note : "",
+                created: time,
+
+                // Other field
+                code: payload.code,
+                customer_id: payload.customer_id,
+                payment_method: payload.payment_method,
+                seller_id: payload.seller_id,
+                final_price: payload.final_price,
+                time: payload.time,
+                date: payload.date
+            }
+        } else {
+            order = {
+                id: String(id),
+                title: title,
+                number: 1,
+                orderProducts: orderProducts,
+                total_price: 0,
+                sale_off: 0,
+                paid: 0,
+                given_money: 0,
+                returned_money: null,
+                note: "",
+                created: time,
+            }
+        }
+
+        state.orders = []
+        state.orders.push(order)
+        state.selectedOrderId = id
     },
 
     CHECKOUT(state) {
@@ -163,20 +236,39 @@ const mutations = {
 }
 
 const actions = {
-    getOrderItems({ commit }, order_id) {
+    getOrderItems({ commit }) {
         commit('UPDATE_ORDER_ITEMS', [])
     },
 
-    getOrderItem({ commit }, order_id) {
+    getInvoiceFromServer({ commit, rootState }, order_id) {
         let url = stringInject(config.INVOICE_PATH, {id: order_id})
         axios.get(url).then((response) => {
-            //commit('UPDATE_ORDER_ITEMS', response.data)
-
+            commit('GET_INVOICE_FROM_SERVER', response.data)
             console.log(response)
-            // commit('ADD_ORDER_ITEMS', orderItem)
         }).catch(error => {
             console.log(error)
         });
+    },
+
+    addNewOrder({ commit }) {
+        const time = Date.now()
+        let id = String(time)
+        const order = {
+            id: id,
+            title: 'Hóa đơn ' + this.nextNumber,
+            number: this.nextNumber,
+            orderProducts: [],
+            total_price: 0,
+            sale_off: 0,
+            paid: 0,
+            given_money: 0,
+            returned_money: null,
+            note: "",
+            created: time,
+        }
+
+        commit('ADD_ORDER_ITEMS', order)
+        commit('UPDATE_SELECTED_ORDER_ID', id)
     },
 
     /**
@@ -195,6 +287,13 @@ const actions = {
      */
     removeOrderItem({ commit }, orderItem) {
         commit('REMOVE_ORDER_ITEMS', orderItem)
+    },
+    
+    removeCurrentOrde({ commit }) {
+        let currentOrder = state.orders.find(
+            order => order.id === state.selectedOrderId
+        )
+        commit('REMOVE_ORDER_ITEMS', currentOrder)
     },
 
     /**
