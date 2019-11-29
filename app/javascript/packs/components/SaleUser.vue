@@ -51,31 +51,14 @@
         },
         methods: {
             checkout() {
-                let _this = this
                 this.$store.dispatch('checkout').then(() => {
                     //  Show dialog đã thanh toán thành công. bạn có muốn đóng hóa đơn này không ?
                     this.$bvModal.show("modal-checkout-success")
                     // In hóa đơn ???
                 })
-
-                // this.$modal.show('dialog', {
-                //     title: '',
-                //     text: 'Show dialog đã thanh toán thành công. bạn có muốn đóng hóa đơn này không ?',
-                //     buttons: [
-                //         {
-                //             title: 'ĐỒNG Ý',
-                //             default: true,
-                //             handler: () => { alert('Woot!') }
-                //         },
-                //         {
-                //             title: 'KHÔNG ĐỒNG Ý'
-                //         }
-                //     ]
-                // })
-
             },
             closeOrder() {
-
+                this.$store.dispatch('closeCheckoutOrder')
             }
         }
     }

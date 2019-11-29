@@ -250,13 +250,23 @@ const actions = {
         });
     },
 
+    closeCheckoutOrder({ commit, dispatch, state }) {
+        dispatch('removeCurrentOrder')
+
+        if (state.orders.length > 0) {
+            commit('UPDATE_SELECTED_ORDER_ID', state.orders[0].id)
+        } else {
+            dispatch('addNewOrder')
+        }
+    },
+
     addNewOrder({ commit }) {
         const time = Date.now()
         let id = String(time)
         const order = {
             id: id,
-            title: 'Hóa đơn ' + this.nextNumber,
-            number: this.nextNumber,
+            title: 'Hóa đơn 1',
+            number: 1,
             orderProducts: [],
             total_price: 0,
             sale_off: 0,
@@ -289,7 +299,7 @@ const actions = {
         commit('REMOVE_ORDER_ITEMS', orderItem)
     },
     
-    removeCurrentOrde({ commit }) {
+    removeCurrentOrder({ commit }) {
         let currentOrder = state.orders.find(
             order => order.id === state.selectedOrderId
         )
