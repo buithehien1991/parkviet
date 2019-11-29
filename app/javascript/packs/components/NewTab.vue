@@ -81,6 +81,27 @@
 
             saveOrders () {
 
+            },
+
+            showCloseConfirmDialog() {
+                this.boxTwo = ''
+                this.$bvModal.msgBoxConfirm('Please confirm that you want to delete everything.', {
+                    title: 'Please Confirm',
+                    size: 'sm',
+                    buttonSize: 'sm',
+                    okVariant: 'danger',
+                    okTitle: 'YES',
+                    cancelTitle: 'NO',
+                    footerClass: 'p-2',
+                    hideHeaderClose: false,
+                    centered: true
+                })
+                    .then(value => {
+                        this.boxTwo = value
+                    })
+                    .catch(err => {
+                        // An error occurred
+                    })
             }
         }
     }

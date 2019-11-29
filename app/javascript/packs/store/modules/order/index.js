@@ -227,6 +227,22 @@ const mutations = {
             let data = {invoice: currentOrder}
             axios.post(config.INVOICES_PATH, data).then((response) => {
                 // TODO làm gì nhỉ không biết @_@
+
+
+                // update order id and title
+                if (response.data && response.data.id && response.data.code) {
+                    currentOrder.id = response.data.id
+                    currentOrder.code = response.data.code
+                    currentOrder.title = "UPDATE_" + response.data.code
+                    state.orders = state.orders.map((order) => {
+                        if (order.id === state.selectedOrderId) {
+                            order = currentOrder
+                        }
+                        return order
+                    })
+                    state.selectedOrderId = response.data.id
+                }
+
             });
         } else {
             // TODO thông báo lỗi cho khách hàng

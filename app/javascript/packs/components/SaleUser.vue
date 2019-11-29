@@ -26,8 +26,7 @@
         </button>
 
         <b-modal id="modal-checkout-success" title="Thanh toán" @ok="closeOrder">
-            <p class="my-4">Đã thanh toán thành công, bạn có muốn đóng hóa đơn này không ?, </p>
-
+            <p class="my-4 text-success">Đã thanh toán thành công, bạn có muốn đóng hóa đơn này không ?, </p>
         </b-modal>
     </div>
 </template>
