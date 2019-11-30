@@ -11,6 +11,9 @@ class Invoice < ApplicationRecord
 
   enum status: { created: 0, completed: 1, canceled: 2 }
   scope :by_store, -> (store_id) { where(store_id: store_id) }
+  scope :active, -> (){
+      where(status: [:completed])
+  }
   self.per_page = 10
 
   def update_price

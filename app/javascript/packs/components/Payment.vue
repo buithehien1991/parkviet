@@ -87,12 +87,14 @@
         name: "Payment",
         computed: {
             ...mapGetters(['totalPriceByOrder', 'saleOff', 'quantityByOrder']),
+            inputGivenMoney: false,
             giveMoney: {
                 get() {
                     return this.$store.getters.givenMoney
                 },
                 set(value) {
                     this.$store.dispatch('updateGivenMoney', value)
+                    console.log(value)
                 }
             },
             totalFinalPrice: function () {
@@ -107,6 +109,11 @@
         },
         components: {
             VueNumeric
+        },
+        watch: {
+            totalFinalPrice: function (newValue, oldValue) {
+                this.giveMoney = newValue
+            }
         }
     }
 </script>

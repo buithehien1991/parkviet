@@ -9,7 +9,7 @@ class InvoicesController < ApplicationController
   def index
     @per_page = params[:per_page] || Invoice.per_page || 20
     @q = Invoice.ransack(params[:q])
-    @invoices = @q.result.by_store(current_store.id).paginate(:page => params[:page], :per_page => @per_page)
+    @invoices = @q.result.by_store(current_store.id).active.order('id desc').paginate(:page => params[:page], :per_page => @per_page)
   end
 
   # GET /invoices/1
@@ -59,6 +59,7 @@ class InvoicesController < ApplicationController
           pi.save
         end if params[:invoice].present? && params[:invoice][:orderProducts].present?
         @invoice.update_price
+        @invoice.status = :completed
         @invoice.save
 
         format.html { redirect_to @invoice, notice: 'Invoice was successfully created.' }

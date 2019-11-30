@@ -4,7 +4,7 @@
             <li v-for="order of orders" class="nav-item">
                 <a :class="['nav-link', {active: order === selectedOrder}]" @click="selectOrder(order)">
                     {{ order.title }}
-                    <button type="button" class="close" aria-label="Close" @click.stop="removeOrder(order)">
+                    <button type="button" class="close" aria-label="Close" @click.stop="clickOnRemoveOrder(order)">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </a>
@@ -72,6 +72,8 @@
                     this.$store.dispatch('removeOrderItem', order)
                     if (this.orders.length > 0) {
                         this.selectOrder(this.orders[this.orders.length - 1])
+                    } else {
+                        this.addOrder()
                     }
                 }
             },
@@ -79,14 +81,20 @@
                 this.$store.dispatch('updateSelectedOrderId', order.id)
             },
 
-            saveOrders () {
-
+            clickOnRemoveOrder(order) {
+                if (order.orderProducts.length > 0) {
+                    // Show dialog
+                    // this.showCloseConfirmDialog(order)
+                    this.removeOrder(order)
+                } else {
+                    this.removeOrder(order)
+                }
             },
 
-            showCloseConfirmDialog() {
-                this.boxTwo = ''
-                this.$bvModal.msgBoxConfirm('Please confirm that you want to delete everything.', {
-                    title: 'Please Confirm',
+            showCloseConfirmDialog(order) {
+                let _this = this
+                this.$bvModal.msgBoxConfirm('Thông tin của ' + order.title + 'sẽ không được lưu lại. Ban có chắc chắn muốn đóng không', {
+                    title: 'Đóng ' + order.title,
                     size: 'sm',
                     buttonSize: 'sm',
                     okVariant: 'danger',
@@ -94,13 +102,14 @@
                     cancelTitle: 'NO',
                     footerClass: 'p-2',
                     hideHeaderClose: false,
-                    centered: true
                 })
                     .then(value => {
-                        this.boxTwo = value
+                        if (value) {
+                            _this.removeOrder(order)
+                        }
                     })
                     .catch(err => {
-                        // An error occurred
+
                     })
             }
         }
