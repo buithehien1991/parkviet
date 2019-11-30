@@ -7,7 +7,7 @@ class PurchaseOrdersController < ApplicationController
   def index
     @per_page = params[:per_page] || PurchaseOrder.per_page || 20
     @q = PurchaseOrder.ransack(params[:q])
-    @purchase_orders = @q.result.by_store(current_store.id).paginate(:page => params[:page], :per_page => @per_page)
+    @purchase_orders = @q.result.by_store(current_store.id).order('id desc').paginate(:page => params[:page], :per_page => @per_page)
 
     respond_to do |format|
       format.html {}

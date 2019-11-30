@@ -39,7 +39,7 @@
 
     <%= f.submit t(:save), class: 'd-none' %>
     <div id="delete-container">
-      <%= link_to "Delete", role_path(role), method: :delete, id: "delete_role", data: { confirm: "Bạn có chắc chắn muốn xóa vai trò này ?" } %>
+      <%= link_to "Delete", role_path(role), method: :delete, id: "delete_role", data: { confirm: "Bạn có chắc chắn muốn xóa vai trò này ?" } unless role.new_record?%>
     </div>
   <% end %>
 </div>
