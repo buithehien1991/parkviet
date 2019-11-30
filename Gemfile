@@ -56,6 +56,7 @@ end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
+gem 'wdm', '>= 0.1.0' if Gem.win_platform?
 
 gem 'devise', '~> 4.7.1'
 
@@ -71,14 +72,13 @@ gem 'acts_as_tree'
 gem 'paper_trail', '~> 9.0.2'
 
 # Authorization to system
-gem 'pundit', '~> 1.1.0'
-gem 'wdm', '>= 0.1.0' if Gem.win_platform?
+# gem 'pundit', '~> 1.1.0'
 
 # Translate date time class in date_select tag
 gem 'rails-i18n'
 
 # Search: Elasticsearch 6.0.2
-gem 'chewy', '~> 5.0.0'
+# gem 'chewy', '~> 5.0.0'
 
 # Paginate
 gem 'will_paginate', '~> 3.1.6'
