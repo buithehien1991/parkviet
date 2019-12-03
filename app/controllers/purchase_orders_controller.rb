@@ -22,16 +22,25 @@ class PurchaseOrdersController < ApplicationController
   # GET /purchase_orders/1
   # GET /purchase_orders/1.json
   def show
-
+    unless has_permission?("transaction_purchase_order_view")
+      render "roles/no_permission", layout: 'home'
+    end
   end
 
   # GET /purchase_orders/new
   def new
+    unless has_permission?("transaction_purchase_order_new")
+      render "roles/no_permission", layout: 'home'
+      return
+    end
     @purchase_order = PurchaseOrder.new
   end
 
   # GET /purchase_orders/1/edit
   def edit
+    unless has_permission?("transaction_purchase_order_edit")
+      render "roles/no_permission", layout: 'home'
+    end
   end
 
   # POST /purchase_orders

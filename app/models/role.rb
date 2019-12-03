@@ -17,7 +17,7 @@ class Role < ApplicationRecord
             {preorder: [:view, :new, :edit, :destroy, :reprint, :export_file]},
             {invoice: [:view, :new, :edit, :destroy, :export_file, :print, :copy]},
             {invoice_return: []},
-            {purchase_order: [:view, :new, :update, :delete, :print,:import, :export_file, :new_purchase, :copy]},
+            {purchase_order: [:view, :new, :edit, :delete, :print, :import, :export_file, :new_purchase, :copy, :approve]},
             {purchase_return: []},
             {transfer: []},
             {destroy_product: []}

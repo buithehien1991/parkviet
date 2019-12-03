@@ -17,6 +17,16 @@ module ApplicationHelper
     store
   end
 
+  def has_permission?(permission_name)
+    if current_store.user == current_user
+      true
+    else
+      member = current_store.members.where(user_id: current_user.id).first
+      permissions = member.role.permissions || []
+      permissions.include?(permission_name)
+    end
+  end
+
   def number_to_dong(number)
     number_to_currency(number, precision: 0, unit: '')
   end

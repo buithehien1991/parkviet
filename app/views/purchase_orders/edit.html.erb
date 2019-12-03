@@ -1,6 +1,7 @@
-<h1>Editing Purchase Order</h1>
+<div class="m-3">
 
-<%= render 'form', purchase_order: @purchase_order %>
+  <h1><%= t('.edit_purchase_order') %></h1>
 
-<%= link_to 'Show', @purchase_order %> |
-<%= link_to 'Back', purchase_orders_path %>
+  <%= render 'form', purchase_order: @purchase_order %>
+
+</div>

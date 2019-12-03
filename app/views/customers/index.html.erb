@@ -64,7 +64,7 @@
             <td></td>
             <td>
               <%= link_to fa_icon("pencil"), edit_customer_path(customer), remote: true %>
-              <%= link_to fa_icon("trash"), customer_path(customer), method: :delete, class: "text-danger", data: {remote: true, confirm: 'Bạn có chắc muốn xóa KH này?'} %>
+              <%= link_to fa_icon("trash"), customer_path(customer), method: :delete, class: "text-danger", data: {confirm: 'Bạn có chắc muốn xóa KH này?'} %>
             </td>
           </tr>
         <% end %>
