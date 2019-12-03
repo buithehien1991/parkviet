@@ -20,15 +20,15 @@
       <% class_permissions[1].each do |group_permissions| %>
         <fieldset class="border">
           <legend class="w-auto">
-            <%= link_to fa_icon("check"), "" %>
+            <%= link_to fa_icon("check"), "#" %>
             <%= group_permissions.keys.first %>
           </legend>
           <div style="margin-bottom: 0.5rem;">
             <div class="row">
               <% group_permissions.values.first.each do |permission| %>
                 <div class="col-3">
-                  <% checked = role.permissions.include?(permission.to_s) if role.permissions.present? %>
-                  <%= check_box_tag 'role[permissions][]', permission, checked.present? ? checked : false , id: "role_permissions_" %> <%= permission %>
+                  <% checked = role.permissions.include?("#{class_permissions[0]}_#{group_permissions.keys.first}_#{permission}") if role.permissions.present? %>
+                  <%= check_box_tag 'role[permissions][]', "#{class_permissions[0]}_#{group_permissions.keys.first}_#{permission}" , checked.present? ? checked : false , id: "role_permissions_" %> <%= permission %>
                 </div>
               <% end %>
             </div>
@@ -38,7 +38,7 @@
     <% end %>
 
     <%= f.submit t(:save), class: 'd-none' %>
-    <div id="delete-container">
+    <div id="delete-container" class="d-none">
       <%= link_to "Delete", role_path(role), method: :delete, id: "delete_role", data: { confirm: "Bạn có chắc chắn muốn xóa vai trò này ?" } unless role.new_record?%>
     </div>
   <% end %>

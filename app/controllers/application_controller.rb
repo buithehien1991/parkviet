@@ -59,6 +59,16 @@ class ApplicationController < ActionController::Base
     store
   end
 
+  def has_permission?(permission_name)
+    if current_store.user == current_user
+      true
+    else
+      member = current_store.members.where(user_id: current_user.id).first
+      permissions = member.role.permissions || []
+      permissions.include?(permission_name)
+    end
+  end
+
   def info_for_paper_trail
     { ip: request.remote_ip, user_agent: request.user_agent }
   end

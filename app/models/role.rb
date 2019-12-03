@@ -11,19 +11,29 @@ class Role < ApplicationRecord
             {users: [:view_user, :add_user, :edit_user, :delete_user]}
         ],
         "product": [
-
+            {product: [:index, :show, :edit, :destroy, :import, :export_file]}
         ],
         "transaction": [
-            {preorder: [:index, :new, :edit, :destroy, :reprint, :export_file]},
-            {invoice: [:index, :new, :edit, :destroy, :export_file, :print, :copy]},
-            {invoice_returns: []},
-            {purchase_order: [:view, :new, :update, :delete, :print, :export_file, :new_purchase, :copy]}
+            {preorder: [:view, :new, :edit, :destroy, :reprint, :export_file]},
+            {invoice: [:view, :new, :edit, :destroy, :export_file, :print, :copy]},
+            {invoice_return: []},
+            {purchase_order: [:view, :new, :update, :delete, :print,:import, :export_file, :new_purchase, :copy]},
+            {purchase_return: []},
+            {transfer: []},
+            {destroy_product: []}
         ],
-        "partner": [],
-        "report": []
-        #"Sổ quỹ": [],
-        #"Khuyến mại": [],
-        #"Voucher": []
+        "partner": [
+            {customer: []},
+            {supplier: []},
+        ],
+        "report": [
+            {daily: [:summary, :product, :income_outcome, :sale]},
+            {sale: []},
+            {preorder: []},
+            {customer: []},
+            {supplier: []},
+            {user: []}
+        ]
     }
   end
 end

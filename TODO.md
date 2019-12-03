@@ -198,3 +198,7 @@ Thiết lập tích điểm ???
 - Our application use turbolink => How to adapt with turbolink when calling autocomplete: https://gorails.com/episodes/global-autocomplete-search
 
 ### Email system
+
+
+### Update webpacker 3.5 to 4
+https://github.com/connorshea/VideoGameList/pull/77/files#diff-e56633f72ecc521128b3db6586074d2c

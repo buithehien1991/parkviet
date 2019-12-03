@@ -10,7 +10,11 @@ class PurchaseOrdersController < ApplicationController
     @purchase_orders = @q.result.by_store(current_store.id).order('id desc').paginate(:page => params[:page], :per_page => @per_page)
 
     respond_to do |format|
-      format.html {}
+      format.html {
+        unless has_permission?("transaction_purchase_order_view")
+          render "roles/no_permission", layout: 'home'
+        end
+      }
       format.json {}
     end
   end
