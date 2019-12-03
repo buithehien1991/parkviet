@@ -85,11 +85,11 @@
 
   <hr>
 
-  <%= link_to status_purchase_order_path(status: 'approve'), method: :post, class: "btn btn-warning", remote: true do %>
+  <%= link_to status_purchase_order_path(status: 'approve'), method: :post, class: "btn btn-warning #{@purchase_order.approved? || @purchase_order.completed? ? "disabled" : ""}", remote: true do %>
     <%= fa_icon "check", text: "Phê duyệt" %>
   <% end if has_permission?("transaction_purchase_order_approve") %>
 
-  <%= link_to status_purchase_order_path(status: 'complete'), method: :post, class: "btn btn-success" do  %>
+  <%= link_to status_purchase_order_path(status: 'complete'), method: :post, class: "btn btn-success #{@purchase_order.completed? ? "disabled" : ""}" do  %>
     <%= fa_icon "check-square-o", text: "Hoàn thành" %>
   <% end if has_permission?("transaction_purchase_order_approve") %>
 

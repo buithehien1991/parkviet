@@ -67,14 +67,22 @@ class PurchaseOrdersController < ApplicationController
   # Update status
   def status
     if params[:status].eql?("complete")
-      @purchase_order.status = :completed
-      if @purchase_order.save
-        redirect_to purchase_orders_path, notice: "Đã hoàn thành đặt hàng nhập"
+      if @purchase_order.filled?
+        @purchase_order.status = :completed
+        if @purchase_order.save
+          redirect_to purchase_orders_path, notice: "Đã hoàn thành đặt hàng nhập"
+        end
+      else
+        redirect_to @purchase_order, alert: "Thông tin đơn đặt hàng nhập chưa đầy đủ. Vui long cung cấp thêm thông tin trước khi hoàn thành"
       end
     elsif params[:status].eql?("approve")
-      @purchase_order.status = :approved
-      if @purchase_order.save
-        redirect_to @purchase_order, notice: "Đã phê duyệt"
+      if @purchase_order.filled?
+        @purchase_order.status = :approved
+        if @purchase_order.save
+          redirect_to @purchase_order, notice: "Đã phê duyệt"
+        end
+      else
+        redirect_to @purchase_order, alert: "Thông tin đơn đặt hàng nhập chưa đầy đủ. Vui long cung cấp thêm thông tin trước khi phê duyệt"
       end
     end
   end
