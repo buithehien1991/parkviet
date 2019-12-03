@@ -87,6 +87,7 @@ vi:
           confirmed: Đã xác nhận
           completed: Đã hoàn thành
           canceled: Đã hủy bỏ
+          approved: Đã phê duyệt
       role:
         name: Tên vai trò
       purchase:
