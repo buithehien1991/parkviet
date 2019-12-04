@@ -87,15 +87,15 @@
 
   <%= link_to status_purchase_order_path(status: 'approve'), method: :post, class: "btn btn-warning #{@purchase_order.approved? || @purchase_order.completed? ? "disabled" : ""}", remote: true do %>
     <%= fa_icon "check", text: "Phê duyệt" %>
-  <% end if has_permission?("transaction_purchase_order_approve") %>
+  <% end if has_permission?("purchase_order_approve") %>
 
   <%= link_to status_purchase_order_path(status: 'complete'), method: :post, class: "btn btn-success #{@purchase_order.completed? ? "disabled" : ""}" do  %>
     <%= fa_icon "check-square-o", text: "Hoàn thành" %>
-  <% end if has_permission?("transaction_purchase_order_approve") %>
+  <% end if has_permission?("purchase_order_approve") %>
 
   <%= link_to new_purchase_path(purchase_order_id: @purchase_order.id), class: "btn btn-success #{@purchase_order.completed? ? "disabled" : ""}" do  %>
     <%= fa_icon "plus", text: "Tạo đơn nhập hàng" %>
-  <% end if has_permission?("transaction_purchase_order_new_purchase") %>
+  <% end if has_permission?("purchase_order_new_purchase") %>
 
   <%= link_to "", class: "btn btn-info", remote: true do %>
     <%= fa_icon "paper-plane", text: "Gửi email" %>
@@ -103,11 +103,11 @@
 
   <%= link_to "", class: "btn btn-info", remote: true do %>
     <%= fa_icon "download", text: t(:export_file) %>
-  <% end if has_permission?("transaction_purchase_order_export_file") %>
+  <% end if has_permission?("purchase_order_export_file") %>
 
-  <%= link_to fa_icon("print", text: t(:print)), "", class: "btn btn-info", remote: true if has_permission?("transaction_purchase_order_print") %>
+  <%= link_to fa_icon("print", text: t(:print)), "", class: "btn btn-info", remote: true if has_permission?("purchase_order_print") %>
 
-  <%= link_to fa_icon("trash", text: t(:cancel)), purchase_order_path(@purchase_order), method: :delete, data: { confirm: "Bạn có chắc chắn muốn xóa yêu cầu này ?" }, class: "btn btn-danger" if has_permission?("transaction_purchase_order_delete") %>
+  <%= link_to fa_icon("trash", text: t(:cancel)), purchase_order_path(@purchase_order), method: :delete, data: { confirm: "Bạn có chắc chắn muốn xóa yêu cầu này ?" }, class: "btn btn-danger" if has_permission?("purchase_order_delete") %>
 </div>
 
 

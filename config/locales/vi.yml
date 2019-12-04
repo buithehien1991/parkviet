@@ -315,19 +315,36 @@ vi:
   role:
     system:
       name: Hệ thống
-      generals:
-        name: Chung
-        setting: Thiết lập
-        history_activity: Lịch sử hoạt động
-        dashboard: Tổng quan
-      users:
-        name: Người dùng
+      setting: Thiết lập
+      history_activity: Lịch sử hoạt động
+      dashboard: Tổng quan
+    user:
+      name: Người dùng
     product:
       name: Hàng hóa
-    transaction:
-      name: Giao dịch
-    partner: Đối tác
-    report: Báo cáo
+    invoice:
+      name: Hóa đơn
+    purchase_order:
+      name: Đặt hàng nhập
+      new_purchase: Tạo nhập hàng
+      approve: Phê duyệt
+    purchase:
+      name: Nhập hàng
+    customer:
+      name: Khách hàng
+    supplier:
+      name: Nhà cung cấp
+    report:
+      name: Báo cáo
+    actions:
+      view: Xem
+      new: Thêm mới
+      edit: Chỉnh sửa
+      delete: Xóa
+      print: In
+      export_file: Xuất file
+      import: Nhập file
+      copy: Sao chép
 
 
 

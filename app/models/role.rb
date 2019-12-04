@@ -6,9 +6,23 @@ class Role < ApplicationRecord
 
   def self.all_permissions
     {
+      system: [:setting, :history_activity, :dashboard],
+      user: [:view, :new, :edit, :delete],
+      product: [:index, :show, :edit, :delete, :import, :export_file],
+      invoice: [:view, :new, :edit, :delete, :export_file, :print, :copy],
+      purchase_order: [:view, :new, :edit, :delete, :print, :import, :export_file, :new_purchase, :copy, :approve],
+      purchase: [:view, :new, :edit, :delete, :print, :export_file],
+      customer: [:view, :new, :edit, :delete],
+      supplier: [:view, :new, :edit, :delete]
+    }
+  end
+
+  # TODO Remove. Only for reference
+  def self.permissions
+    {
         "system": [
             {generals: [:setting, :history_activity, :dashboard]},
-            {users: [:view_user, :add_user, :edit_user, :delete_user]}
+            {users: [:view, :new, :edit, :delete]}
         ],
         "product": [
             {product: [:index, :show, :edit, :destroy, :import, :export_file]}

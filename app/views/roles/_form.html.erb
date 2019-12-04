@@ -14,27 +14,23 @@
       </div>
     </div>
 
-    <% Role.all_permissions.each do |class_permissions| %>
-      <div><%= t("role.#{class_permissions[0]}.name") %></div>
-
-      <% class_permissions[1].each do |group_permissions| %>
-        <fieldset class="border">
-          <legend class="w-auto">
-            <%= link_to fa_icon("check"), "#" %>
-            <%= group_permissions.keys.first %>
-          </legend>
-          <div style="margin-bottom: 0.5rem;">
-            <div class="row">
-              <% group_permissions.values.first.each do |permission| %>
-                <div class="col-3">
-                  <% checked = role.permissions.include?("#{class_permissions[0]}_#{group_permissions.keys.first}_#{permission}") if role.permissions.present? %>
-                  <%= check_box_tag 'role[permissions][]', "#{class_permissions[0]}_#{group_permissions.keys.first}_#{permission}", checked.present? ? checked : false , id: "role_#{class_permissions[0]}_#{group_permissions.keys.first}_#{permission}" %> <%= permission %>
-                </div>
-              <% end %>
-            </div>
+    <% Role.all_permissions.each do |group_permissions| %>
+      <fieldset class="border">
+        <legend class="w-auto">
+          <%= link_to fa_icon("check"), "#" %>
+          <%= t("role.#{group_permissions[0]}.name") %>
+        </legend>
+        <div style="margin-bottom: 0.5rem;">
+          <div class="row">
+            <% group_permissions[1].each do |permission| %>
+              <div class="col-3">
+                <% checked = role.permissions.include?("#{group_permissions[0]}_#{permission}") if role.permissions.present? %>
+                <%= check_box_tag 'role[permissions][]', "#{group_permissions[0]}_#{permission}", checked.present? ? checked : false , id: "role_#{group_permissions[0]}_#{permission}" %> <%= t("role.#{group_permissions[0]}.#{permission}", default: t("role.actions.#{permission}")) %>
+              </div>
+            <% end %>
           </div>
-        </fieldset>
-      <% end %>
+        </div>
+      </fieldset>
     <% end %>
 
     <%= f.submit t(:save), class: 'd-none' %>
