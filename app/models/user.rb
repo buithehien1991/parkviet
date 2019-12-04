@@ -10,6 +10,8 @@ class User < ApplicationRecord
   belongs_to :commune, optional: true
   has_many :members, dependent: :delete_all
 
+  enum status: { active: 0, inactive: 1, archived: 2 }
+
   attr_accessor :login
 
   def self.find_for_database_authentication warden_conditions

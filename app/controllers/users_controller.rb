@@ -4,11 +4,21 @@ class UsersController < ApplicationController
   require 'will_paginate/array'
 
   def index
+    unless has_permission?("user_view")
+      render "roles/no_permission", layout: 'home'
+      return
+    end
+
     @per_page = params[:per_page] || User.per_page || 20
     @users = current_store.members.map{|m| m.user}.paginate(:page => params[:page], :per_page => @per_page)
   end
 
   def new
+    unless has_permission?("user_new")
+      render "roles/no_permission", layout: 'home'
+      return
+    end
+
     @user = User.new
   end
 
@@ -25,11 +35,15 @@ class UsersController < ApplicationController
   end
 
   def show
-
+    unless has_permission?("user_view")
+      render "roles/no_permission", layout: 'home'
+    end
   end
 
   def edit
-
+    unless has_permission?("user_edit")
+      render "roles/no_permission", layout: 'home'
+    end
   end
 
   def update
@@ -56,11 +70,19 @@ class UsersController < ApplicationController
   end
 
   def destroy
+    unless has_permission?("user_delete")
+      render "roles/no_permission", layout: 'home'
+      return
+    end
+
     if current_store.user == @user
-      redirect_to users_path, error: "Bạn không thể xóa người dùng này"
+      redirect_to users_path, alert: "Bạn không thể xóa người dùng này"
     else
-      if @user.destroy
+      @user.status = :archived
+      if @user.save
         redirect_to users_path
+      else
+        redirect_to users_path, alert: "Có lỗi khi xóa người dùng này. Vui lòng thử lại"
       end
     end
   end

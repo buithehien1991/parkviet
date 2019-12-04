@@ -104,6 +104,11 @@ class PurchaseOrdersController < ApplicationController
   # DELETE /purchase_orders/1
   # DELETE /purchase_orders/1.json
   def destroy
+    unless has_permission?("purchase_order_delete")
+      render "roles/no_permission", layout: 'home'
+      return
+    end
+
     # @purchase_order.destroy
     @purchase_order.status = :canceled
     @purchase_order.save

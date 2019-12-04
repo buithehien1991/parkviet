@@ -4,6 +4,11 @@ class PurchasesController < ApplicationController
   # GET /purchases
   # GET /purchases.json
   def index
+    unless has_permission?("purchase_view")
+      render "roles/no_permission", layout: 'home'
+      return
+    end
+
     @per_page = params[:per_page] || Purchase.per_page || 20
     @q = Purchase.ransack(params[:q])
     @purchases = @q.result.by_store(current_store.id).order('id desc').paginate(:page => params[:page], :per_page => @per_page)
@@ -12,10 +17,18 @@ class PurchasesController < ApplicationController
   # GET /purchases/1
   # GET /purchases/1.json
   def show
+    unless has_permission?("purchase_view")
+      render "roles/no_permission", layout: 'home'
+    end
   end
 
   # GET /purchases/new
   def new
+    unless has_permission?("purchase_new")
+      render "roles/no_permission", layout: 'home'
+      return
+    end
+
     @purchase = Purchase.new
     @purchase.date = Date.today
     @purchase.time =  Time.now.strftime('%H:%M') #  Time.now.strftime('%H:%M')
@@ -50,14 +63,17 @@ class PurchasesController < ApplicationController
           @purchase.update_price
           @purchase.save
         end
-
-        p @purchase.errors.full_messages
       end
     end
   end
 
   # GET /purchases/1/edit
   def edit
+    unless has_permission?("purchase_edit")
+      render "roles/no_permission", layout: 'home'
+      return
+    end
+
     @purchase = Purchase.find(params[:id])
     @users = ([current_user] + current_store.members.map{|m| m.user}).uniq
     @suppliers = Supplier.by_store(current_store.id)
@@ -147,6 +163,11 @@ class PurchasesController < ApplicationController
   # DELETE /purchases/1
   # DELETE /purchases/1.json
   def destroy
+    unless has_permission?("purchase_delete")
+      render "roles/no_permission", layout: 'home'
+      return
+    end
+
     @purchase.status = :cancel
     if @purchase.save
       respond_to do |format|
