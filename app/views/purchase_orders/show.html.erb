@@ -93,7 +93,7 @@
     <%= fa_icon "check-square-o", text: "Hoàn thành" %>
   <% end if has_permission?("transaction_purchase_order_approve") %>
 
-  <%= link_to new_purchase_path(purchase_order_id: @purchase_order.id), class: "btn btn-success" do  %>
+  <%= link_to new_purchase_path(purchase_order_id: @purchase_order.id), class: "btn btn-success #{@purchase_order.completed? ? "disabled" : ""}" do  %>
     <%= fa_icon "plus", text: "Tạo đơn nhập hàng" %>
   <% end if has_permission?("transaction_purchase_order_new_purchase") %>
 

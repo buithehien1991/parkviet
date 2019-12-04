@@ -15,7 +15,7 @@
     </div>
 
     <% Role.all_permissions.each do |class_permissions| %>
-      <div><%= t(class_permissions[0]) %></div>
+      <div><%= t("role.#{class_permissions[0]}.name") %></div>
 
       <% class_permissions[1].each do |group_permissions| %>
         <fieldset class="border">

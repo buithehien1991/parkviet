@@ -88,6 +88,11 @@ vi:
           completed: Đã hoàn thành
           canceled: Đã hủy bỏ
           approved: Đã phê duyệt
+      product_purchase_order:
+        product_id: Hàng hóa
+        quantity: Số lượng
+        unit_price: Đơn giá
+        supplier: Nhà cung cấp
       role:
         name: Tên vai trò
       purchase:
@@ -307,8 +312,22 @@ vi:
       user: người dùng
 
   # Permission
-  system: Hệ thống
-  product: Hàng hóa
-  transaction: Giao dịch
-  partner: Đối tác
-  report: Báo cáo
+  role:
+    system:
+      name: Hệ thống
+      generals:
+        name: Chung
+        setting: Thiết lập
+        history_activity: Lịch sử hoạt động
+        dashboard: Tổng quan
+      users:
+        name: Người dùng
+    product:
+      name: Hàng hóa
+    transaction:
+      name: Giao dịch
+    partner: Đối tác
+    report: Báo cáo
+
+
+
