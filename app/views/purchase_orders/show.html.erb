@@ -101,13 +101,26 @@
     <%= fa_icon "paper-plane", text: "Gửi email" %>
   <% end %>
 
-  <%= link_to "", class: "btn btn-info", remote: true do %>
+  <%= link_to purchase_order_path(@purchase_order, format: :pdf), class: "btn btn-info" do %>
     <%= fa_icon "download", text: t(:export_file) %>
   <% end if has_permission?("purchase_order_export_file") %>
 
-  <%= link_to fa_icon("print", text: t(:print)), "", class: "btn btn-info", remote: true if has_permission?("purchase_order_print") %>
+  <%= link_to fa_icon("print", text: t(:print)), "", class: "btn btn-info", remote: true, onclick: "print()" if has_permission?("purchase_order_print") %>
 
   <%= link_to fa_icon("trash", text: t(:cancel)), purchase_order_path(@purchase_order), method: :delete, data: { confirm: "Bạn có chắc chắn muốn xóa yêu cầu này ?" }, class: "btn btn-danger" if has_permission?("purchase_order_delete") %>
 </div>
 
+<div class="d-none">
+  <iframe id="printf" name="printf" src="<%=  pdf_purchase_order_path(@purchase_order, format: :pdf) %>"></iframe>
+</div>
+
+<script>
+  function print() {
+      //e.preventDefault()
+      //e.stopPropagation()
+
+      window.frames["printf"].focus();
+      window.frames["printf"].print();
+  }
+</script>
 

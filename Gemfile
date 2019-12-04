@@ -92,3 +92,7 @@ gem 'ransack', '~> 1.8.8'
 # JSON format
 gem 'active_model_serializers'
 gem 'numbers_and_words'
+
+# Export file
+gem 'wicked_pdf'
+gem 'wkhtmltopdf-binary'

@@ -1,6 +1,6 @@
 class PurchaseOrdersController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_purchase_order, only: [:show, :edit, :update, :destroy, :status]
+  before_action :set_purchase_order, only: [:show, :edit, :update, :destroy, :status, :pdf]
 
   # GET /purchase_orders
   # GET /purchase_orders.json
@@ -24,7 +24,19 @@ class PurchaseOrdersController < ApplicationController
   def show
     unless has_permission?("purchase_order_view")
       render "roles/no_permission", layout: 'home'
+      return
     end
+
+    respond_to do |format|
+      format.html
+      format.pdf do
+        render pdf: "#{@purchase_order.code}", disposition: 'attachment'
+      end
+    end
+  end
+
+  def pdf
+    render pdf: "#{@purchase_order.code}", disposition: 'inline', template: 'purchase_orders/show'
   end
 
   # GET /purchase_orders/new

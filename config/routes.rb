@@ -37,6 +37,7 @@ Rails.application.routes.draw do
     resources :purchase_orders do
       member do
         post 'status'
+        get 'pdf'
       end
     end
     resources :product_purchase_orders
