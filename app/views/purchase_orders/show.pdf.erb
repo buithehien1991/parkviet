@@ -1,9 +1,75 @@
-HienBT
+<div class="m-3">
+  <h3>
+    #<%= @purchase_order.code %> <%= @purchase_order.name %>
+  </h3>
 
-<script>
-    function ready() {
-        window.print();
-    }
 
-    document.addEventListener("DOMContentLoaded", ready)
-</script>
+  <div class="form-group">
+    <label class="font-weight-bold"><%= t(:'activerecord.attributes.purchase_order.supplier') %>:</label>
+    <% if @purchase_order.supplier %>
+      <%= @purchase_order.supplier.name %>
+    <% else %>
+
+    <% end %>
+  </div>
+
+  <div class="form-group">
+    <label class="font-weight-bold"><%= t(:'activerecord.attributes.purchase_order.status') %>:</label>
+    <span class="status-<%= @purchase_order.status %>">
+      <%= PurchaseOrder.human_enum_name(:status, @purchase_order.status)%>
+    </span>
+  </div>
+
+  <div class="form-group">
+    <label class="font-weight-bold"><%= t(:'activerecord.attributes.purchase_order.note') %>:</label>
+    <%= @purchase_order.note %>
+  </div>
+
+
+  <div class="row">
+    <div class="col-md-9">
+      <div class="form-group">
+        <label class="font-weight-bold"><%= t(:'activerecord.attributes.purchase_order.product') %></label>
+
+        <table class="table table-bordered">
+          <thead>
+          <th>Mã hàng hóa</th>
+          <th>Tên hàng hóa</th>
+          <th>Số lượng</th>
+          <th>Đơn vị</th>
+          <th>Đơn giá</th>
+          <th>Nhà cung cấp</th>
+          <th>Thành tiền</th>
+          </thead>
+          <tbody>
+          <% total = 0 %>
+          <% @purchase_order.product_purchase_orders.each do |product_ordered| %>
+            <tr>
+              <td><%= product_ordered.product.code %></td>
+              <td><%= product_ordered.product.name %></td>
+              <td><%= product_ordered.quantity %></td>
+              <td><%= product_ordered.product.basic_unit.capitalize if product_ordered.product.basic_unit.present? %></td>
+              <td><%= number_to_currency(product_ordered.unit_price, precision: 0, unit: '') %></td>
+
+              <td><%= product_ordered.supplier.name if product_ordered.supplier.present? %></td>
+              <% if product_ordered.quantity.present? && product_ordered.unit_price.present? %>
+                <% price = product_ordered.quantity * product_ordered.unit_price %>
+                <td><%= number_to_currency(price, precision: 0, unit: '') %></td>
+                <% total += price %>
+              <% else %>
+                <td></td>
+              <% end %>
+            </tr>
+          <% end %>
+          <tr>
+            <td colspan="6">Tổng tiền hàng hóa</td>
+            <td style="font-weight: bold"><%= number_to_currency(total, precision: 0, unit: '') %></td>
+            <td><%= I18n.with_locale(:vi) { total.to_words }.capitalize %> đồng</td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
