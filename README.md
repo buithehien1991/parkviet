@@ -67,10 +67,13 @@ Phần mềm đương nhiên vẫn là miễn phí nhé mọi người. Ngoài r
 # Hướng dẫn sử dụng
 ## Cài đặt
 ### Bước 1: Cài đặt database
- - rails db:migrate
+ - rails db:migrate RAILS_ENV=production
  - rails db:seed
+ - rake assets:precompile, rake assets:clobber
+ 
 ### Bước 2: Import CSDL tỉnh/huyện/xã
  - CSDL tại db/diadanh_2018-05-05.sql
+ mysql -uroot -proot --default-character-set=utf8 parkviet < ...
 ### Bước 3: Cài đặt Redis & Elastic search
 
 ### Bước 4: Run server
