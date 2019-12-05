@@ -20,6 +20,10 @@ class Users::RegistrationsController < Devise::RegistrationsController
       store = Store.new(new_store_params.merge(store_params))
       store.save
 
+      # Create default role
+      role = Role.new(store_id: store.id, name: "Nhân viên", permissions: Role.default_permissions)
+      role.save
+
       if resource.active_for_authentication?
         set_flash_message! :notice, :signed_up
         sign_up(resource_name, resource)

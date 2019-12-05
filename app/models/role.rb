@@ -8,13 +8,17 @@ class Role < ApplicationRecord
     {
       system: [:setting, :history_activity, :dashboard],
       user: [:view, :new, :edit, :delete],
-      product: [:index, :show, :edit, :delete, :import, :export_file],
+      product: [:view, :edit, :delete, :import, :export_file],
       invoice: [:view, :new, :edit, :delete, :export_file, :print, :copy],
       purchase_order: [:view, :new, :edit, :delete, :print, :import, :export_file, :new_purchase, :copy, :approve],
       purchase: [:view, :new, :edit, :delete, :print, :export_file],
       customer: [:view, :new, :edit, :delete],
       supplier: [:view, :new, :edit, :delete]
     }
+  end
+
+  def self.default_permissions
+    %w(product_view invoice_view purchase_order_view purchase_view customer_view supplier_view)
   end
 
   # TODO Remove. Only for reference

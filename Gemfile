@@ -78,7 +78,7 @@ gem 'paper_trail', '~> 9.0.2'
 gem 'rails-i18n'
 
 # Search: Elasticsearch 6.0.2
-# gem 'chewy', '~> 5.0.0'
+gem 'chewy', '~> 5.1.0'
 
 # Paginate
 gem 'will_paginate', '~> 3.1.6'
