@@ -133,6 +133,9 @@ vi:
           completed: Hoàn thành
         user: Người tạo
         seller: Người bán
+      report:
+        title: Tiêu đề
+        content: Nội dung
 
 
   # Translate views
@@ -232,6 +235,10 @@ vi:
       search_placeholer: Nhập mã hóa đơn
     show:
       tab_information: Thông tin
+  reports:
+    form:
+      title_placeholder: Nhập tiêu đề
+      content_placeholder: Nhập nội dung
 
   customer_tab: Khách hàng
   supplier_tab: Nhà cung cấp
@@ -247,6 +254,7 @@ vi:
   edit_member: Sửa thông tin người dùng
   add_new_role: Thêm vai trò mới
   edit_role: Sửa vai trò
+  add_new_report: Báo cáo
 
 
   # Common button

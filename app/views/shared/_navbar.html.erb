@@ -31,6 +31,8 @@
       <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
         <%= link_to "Tài khoản", "#", class: "dropdown-item" %>
         <div class="dropdown-divider"></div>
+        <%= link_to "Báo cáo", new_report_path, class: "dropdown-item", remote: true %>
+        <div class="dropdown-divider"></div>
         <%= link_to "Đăng xuất", destroy_user_session_path, method: :delete, class: "dropdown-item"%>
       </div>
     </li>

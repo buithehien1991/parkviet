@@ -1,0 +1,45 @@
+<div class="new-customer">
+  <%= form_with(model: report, local: true, id: 'new-report') do |form| %>
+    <% if report.errors.any? %>
+      <div id="error_explanation">
+        <h2><%= pluralize(report.errors.count, "error") %> prohibited this report from being saved:</h2>
+
+        <ul>
+        <% report.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+    <div class="row">
+      <div class="col">
+        <span class="text-danger"><%= fa_icon('flag') %> Bạn có thể báo cáo lỗi xảy ra hoặc đề xuất tính năng mới phù hợp với bạn tại đây!</span>
+
+        <div class="form-group">
+          <%= form.label :title, class: "col-form-label font-weight-bold" %>
+          <%= form.text_field :title, class: "form-control form-control-sm", placeholder: t('.title_placeholder'), required: true %>
+        </div>
+
+        <div class="form-group">
+          <%= form.label :content, class: "col-form-label font-weight-bold" %>
+          <%= form.text_area :content, class: "form-control form-control-sm ckeditor", placeholder: t('.content_placeholder'), required: true %>
+        </div>
+      </div>
+    </div>
+
+    <%= form.submit t(:save), class: 'd-none' %>
+  <% end %>
+</div>
+
+<script>
+    $(document).ready(function () {
+        'use strict';
+
+        $('#submit_add_report_btn').click(function () {
+            $('#new-report').find('[type="submit"]').trigger('click');
+        });
+
+        CKEDITOR.replace($('.ckeditor').attr('id'))
+    })
+</script>
