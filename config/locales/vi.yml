@@ -57,6 +57,8 @@ vi:
         address: Địa chỉ
         sex: Giới tính
         tax: Mã số thuế
+        email: Email
+        area: Khu vực
         description: Ghi chú
       user:
         login: Tên đăng nhập hoặc Email
@@ -191,6 +193,9 @@ vi:
       search_placeholer: Nhập mã KH, tên KH, chữ cái đầu, SĐT KH
     show:
       tab_information: Thông tin
+    user_information:
+      type_personal: Cá nhân
+      type_company: Công ty
   shared:
     navbar_sale:
       label_search_product: Nhập mã hoặc tên mặt hàng (F3)

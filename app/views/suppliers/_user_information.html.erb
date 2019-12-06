@@ -1,0 +1,92 @@
+<div class="row mb-3">
+  <div class="col-md-4 col-sm-6">
+
+    <div class="row">
+      <div class="col-4"><%= t('activerecord.attributes.supplier.code') %></div>
+      <div class="col-8 font-weight-bold"><%= @supplier.code %></div>
+    </div>
+
+    <hr>
+
+    <div class="row">
+      <div class="col-4"><%= t('activerecord.attributes.supplier.name') %></div>
+      <div class="col-8 font-weight-bold"><%= @supplier.name %></div>
+    </div>
+
+    <hr>
+
+    <div class="row">
+      <div class="col-4"><%= t('activerecord.attributes.supplier.phone') %></div>
+      <div class="col-8 font-weight-bold"><%= @supplier.phone %></div>
+    </div>
+
+    <hr>
+
+    <div class="row">
+      <div class="col-4"><%= t('activerecord.attributes.supplier.birthday') %></div>
+      <div class="col-8 font-weight-bold"><%= @supplier.birthday %></div>
+    </div>
+
+  </div>
+
+  <div class="col-md-4 col-sm-6">
+    <div class="row">
+      <div class="col-4"><%= t('activerecord.attributes.supplier.supplier_type') %></div>
+      <% supplier_type = "" %>
+      <% if @supplier.supplier_type.present? %>
+        <% supplier_type = @supplier.supplier_type == 0 ? t('.type_personal') : t('.type_company') %>
+      <% end %>
+      <div class="col-8 font-weight-bold"><%= supplier_type %></div>
+    </div>
+
+    <hr>
+
+    <div class="row">
+      <div class="col-4"><%= t('activerecord.attributes.supplier.email') %></div>
+      <div class="col-8 font-weight-bold"><%= @supplier.email %></div>
+    </div>
+
+    <hr>
+
+    <div class="row">
+      <div class="col-4"><%= t('activerecord.attributes.supplier.tax') %></div>
+      <div class="col-8 font-weight-bold"><%= @supplier.tax %></div>
+    </div>
+
+    <hr>
+
+    <div class="row">
+      <div class="col-4"><%= t('activerecord.attributes.supplier.address') %></div>
+      <div class="col-8 font-weight-bold"><%= @supplier.address %></div>
+    </div>
+
+    <hr>
+
+    <div class="row">
+      <div class="col-4"><%= t('activerecord.attributes.supplier.area') %></div>
+      <div class="col-8 font-weight-bold"><%= @supplier.province.name if @supplier.province %> - <%= @supplier.district.name if @supplier.district %></div>
+    </div>
+
+    <hr>
+
+    <div class="row">
+      <div class="col-4"><%= t(:label_commune) %></div>
+      <div class="col-8 font-weight-bold"><%= @supplier.commune.name if @supplier.commune %></div>
+    </div>
+
+  </div>
+
+  <div class="col-md-4 col-sm-6">
+    <div>Ghi chú</div>
+    <div><%= @supplier.description %></div>
+  </div>
+
+
+</div>
+
+
+<div class="nav-item float-right">
+  <%= link_to fa_icon(:edit, text: t(:update)), edit_supplier_path(@supplier), remote: true, class: "btn btn-success" %>
+
+  <%= link_to fa_icon("trash", text: t(:delete)), supplier_path(@supplier), method: :delete, data: { confirm: "Bạn có chắc chắn muốn xóa yêu cầu này ?" }, class: "btn btn-danger" %>
+</div>
