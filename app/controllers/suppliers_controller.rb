@@ -3,6 +3,11 @@ class SuppliersController < ApplicationController
   before_action :authenticate_user!
 
   def index
+    unless has_permission?("supplier_view")
+      render "roles/no_permission", layout: 'home'
+      return
+    end
+
     @per_page = params[:per_page] || Product.per_page || 20
     @q = Supplier.ransack(params[:q])
     @suppliers = @q.result.by_store(current_store.id).paginate(:page => params[:page], :per_page => @per_page)
@@ -15,12 +20,26 @@ class SuppliersController < ApplicationController
     end
   end
 
+  def show
+    unless has_permission?("supplier_view")
+      render "roles/no_permission", layout: 'home'
+    end
+  end
+
   def new
+    unless has_permission?("supplier_new")
+      render "roles/no_permission", layout: 'home'
+      return
+    end
+
     @supplier = Supplier.new
   end
 
   def edit
-
+    unless has_permission?("supplier_edit")
+      render "roles/no_permission", layout: 'home'
+      return
+    end
   end
 
   def search
@@ -54,7 +73,15 @@ class SuppliersController < ApplicationController
   end
 
   def destroy
-    @supplier.destroy
+    unless has_permission?("supplier_delete")
+      render "roles/no_permission", layout: 'home'
+      return
+    end
+
+    @supplier.status = :archived
+    if @supplier.save
+      redirect_to suppliers_path
+    end
   end
 
   private

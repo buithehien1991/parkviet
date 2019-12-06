@@ -44,6 +44,8 @@ vi:
         address: Địa chỉ
         sex: Giới tính
         tax: Mã số thuế
+        email: Email
+        area: Khu vực
         description: Ghi chú
       supplier:
         name: Tên nhà cung cấp
@@ -165,6 +167,11 @@ vi:
       type_company: Công ty
     index:
       search_placeholer: Nhập mã KH, tên KH, chữ cái đầu, SĐT KH
+    show:
+      tab_information: Thông tin
+    user_information:
+      type_personal: Cá nhân
+      type_company: Công ty
   suppliers:
     form:
       name_placeholder: Nhập tên nhà cung cấp
@@ -179,6 +186,8 @@ vi:
       type_company: Công ty
     index:
       search_placeholer: Nhập mã KH, tên KH, chữ cái đầu, SĐT KH
+    show:
+      tab_information: Thông tin
   shared:
     navbar_sale:
       label_search_product: Nhập mã hoặc tên mặt hàng (F3)

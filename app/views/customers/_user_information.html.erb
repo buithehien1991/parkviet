@@ -1,0 +1,98 @@
+<div class="row mb-3">
+  <div class="col-md-4 col-sm-6">
+
+    <div class="row">
+      <div class="col-4"><%= t('activerecord.attributes.customer.code') %></div>
+      <div class="col-8 font-weight-bold"><%= @customer.code %></div>
+    </div>
+
+    <hr>
+
+    <div class="row">
+      <div class="col-4"><%= t('activerecord.attributes.customer.name') %></div>
+      <div class="col-8 font-weight-bold"><%= @customer.name %></div>
+    </div>
+
+    <hr>
+
+    <div class="row">
+      <div class="col-4"><%= t('activerecord.attributes.customer.phone') %></div>
+      <div class="col-8 font-weight-bold"><%= @customer.phone %></div>
+    </div>
+
+    <hr>
+
+    <div class="row">
+      <div class="col-4"><%= t('activerecord.attributes.customer.birthday') %></div>
+      <div class="col-8 font-weight-bold"><%= @customer.birthday %></div>
+    </div>
+
+    <hr>
+
+    <div class="row">
+      <div class="col-4"><%= t('activerecord.attributes.customer.sex') %></div>
+      <% sex = "" %>
+      <% if @customer.sex.present? %>
+        <% sex = @customer.sex == 0 ? t(:label_male) : t(:label_female) %>
+      <% end %>
+      <div class="col-8 font-weight-bold"><%= sex %></div>
+    </div>
+
+  </div>
+
+  <div class="col-md-4 col-sm-6">
+    <div class="row">
+      <div class="col-4"><%= t('activerecord.attributes.customer.customer_type') %></div>
+      <% customer_type = "" %>
+      <% if @customer.customer_type.present? %>
+        <% customer_type = @customer.customer_type == 0 ? t('.type_personal') : t('.type_company') %>
+      <% end %>
+      <div class="col-8 font-weight-bold"><%= customer_type %></div>
+    </div>
+
+    <hr>
+
+    <div class="row">
+      <div class="col-4"><%= t('activerecord.attributes.customer.email') %></div>
+      <div class="col-8 font-weight-bold"><%= @customer.email %></div>
+    </div>
+
+    <hr>
+
+    <div class="row">
+      <div class="col-4"><%= t('activerecord.attributes.customer.tax') %></div>
+      <div class="col-8 font-weight-bold"><%= @customer.tax %></div>
+    </div>
+
+    <hr>
+
+    <div class="row">
+      <div class="col-4"><%= t('activerecord.attributes.customer.address') %></div>
+      <div class="col-8 font-weight-bold"><%= @customer.address %></div>
+    </div>
+
+    <hr>
+
+    <div class="row">
+      <div class="col-4"><%= t('activerecord.attributes.customer.area') %></div>
+      <div class="col-8 font-weight-bold"><%= @customer.province.name if @customer.province %> - <%= @customer.district.name if @customer.district %></div>
+    </div>
+
+    <hr>
+
+    <div class="row">
+      <div class="col-4"><%= t(:label_commune) %></div>
+      <div class="col-8 font-weight-bold"><%= @customer.commune.name if @customer.commune %></div>
+    </div>
+
+  </div>
+
+
+</div>
+
+
+<div class="nav-item float-right">
+  <%= link_to fa_icon(:edit, text: t(:update)), edit_customer_path(@customer), remote: true, class: "btn btn-success" %>
+
+  <%= link_to fa_icon("trash", text: t(:delete)), customer_path(@customer), method: :delete, data: { confirm: "Bạn có chắc chắn muốn xóa yêu cầu này ?" }, class: "btn btn-danger" %>
+</div>

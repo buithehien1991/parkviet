@@ -5,6 +5,11 @@ class CustomersController < ApplicationController
   def index
     respond_to do |format|
       format.html {
+        unless has_permission?("customer_view")
+          render "roles/no_permission", layout: 'home'
+          return
+        end
+
         @per_page = params[:per_page] || Product.per_page || 20
         @q = Customer.ransack(params[:q])
         @customers = @q.result.by_store(current_store.id).paginate(:page => params[:page], :per_page => @per_page)
@@ -17,11 +22,26 @@ class CustomersController < ApplicationController
     end
   end
 
+  def show
+    unless has_permission?("customer_view")
+      render "roles/no_permission", layout: 'home'
+      return
+    end
+  end
+
   def new
+    unless has_permission?("customer_new")
+      render "roles/no_permission", layout: 'home'
+      return
+    end
+
     @customer = Customer.new
   end
 
   def edit
+    unless has_permission?("customer_edit")
+      render "roles/no_permission", layout: 'home'
+    end
   end
 
   def search
@@ -51,7 +71,15 @@ class CustomersController < ApplicationController
   end
 
   def destroy
-    @customer.destroy
+    unless has_permission?("customer_delete")
+      render "roles/no_permission", layout: 'home'
+      return
+    end
+
+    @customer.status = :archived
+    if @customer.save
+      redirect_to customers_path
+    end
   end
 
   private
