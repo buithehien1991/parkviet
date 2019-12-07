@@ -41,23 +41,45 @@ class UsersController < ApplicationController
   end
 
   def edit
-    unless has_permission?("user_edit")
-      render "roles/no_permission", layout: 'home'
+    if @user != current_user
+      unless has_permission?("user_edit")
+        render "roles/no_permission", layout: 'home'
+      end
     end
   end
 
   def update
     if params[:user].present?
-      if params[:user][:password].blank?
-        params[:user].delete(:password)
-        params[:user].delete(:password_confirmation)
-      end
+      # Update My Account
+      if @user == current_user
+        change_password = true
+        if params[:user][:current_password].blank? || params[:user][:password].blank?
+          params[:user].delete(:current_password)
+          params[:user].delete(:password)
+          params[:user].delete(:password_confirmation)
+          change_password = false
+        end
 
-      if @user.update(user_params)
-        member = current_store.members.where(user_id: @user.id).first
-        member.update(member_params)
-        # Should logout member and must re-login
-        redirect_to users_path, notice: "Cập nhật người dùng thành công"
+        if change_password
+          if @user.update_with_password(user_params)
+            bypass_sign_in(@user)
+          end
+        else
+          @user.update(user_params)
+        end
+      else
+        # Update user in store
+        if params[:user][:password].blank?
+          params[:user].delete(:password)
+          params[:user].delete(:password_confirmation)
+        end
+
+        if @user.update(user_params)
+          member = current_store.members.where(user_id: @user.id).first
+          member.update(member_params)
+          # Should logout member and must re-login
+          redirect_to users_path, notice: "Cập nhật người dùng thành công"
+        end
       end
     else
       # That case only update role for member
@@ -89,7 +111,7 @@ class UsersController < ApplicationController
 
   private
   def user_params
-    params.require(:user).permit(:fullname, :username, :email, :password, :password_confirmation, :phone, :birthday, :province_id, :district_id, :commune_id, :address)
+    params.require(:user).permit(:fullname, :username, :email, :password, :password_confirmation, :current_password, :phone, :birthday, :province_id, :district_id, :commune_id, :address)
   end
 
   def member_params

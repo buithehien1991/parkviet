@@ -64,6 +64,9 @@ vi:
         login: Tên đăng nhập hoặc Email
         password: Mật khẩu
         password_confirmation: Xác nhận mật khẩu
+        current_password: Mật khẩu hiện tại
+        new_password: Mật khẩu mới
+        new_password_confirmation: Xác nhận mật khẩu mới
         remember_me: Nhớ mật khẩu
         current_sign_in_at: Đăng nhập lúc
         last_sign_in_at: Đăng nhập lần cuối lúc

@@ -30,7 +30,7 @@ class PurchaseOrdersController < ApplicationController
     respond_to do |format|
       format.html
       format.pdf do
-        render pdf: "#{@purchase_order.code}", disposition: 'attachment', encoding: 'UTF-8'
+        render pdf: "#{@purchase_order.code}", disposition: 'inline', encoding: 'UTF-8', layout: "pdf"
       end
     end
   end

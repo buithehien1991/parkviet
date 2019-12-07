@@ -1,3 +1,12 @@
-<% if @user.errors.present? %>
-  toastr.error("<%= @user.errors.full_messages.to_sentence %>");
+<% if @user == current_user %>
+  <% if @user.errors.present? %>
+    toastr.error("<%= @user.errors.full_messages.to_sentence %>");
+  <% else %>
+    $('#park-modal').modal('toggle');
+    toastr.success("Cập nhật tài khoản thành công");
+  <% end %>
+<% else %>
+  <% if @user.errors.present? %>
+    toastr.error("<%= @user.errors.full_messages.to_sentence %>");
+  <% end %>
 <% end %>

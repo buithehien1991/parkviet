@@ -1,5 +1,5 @@
 <% if user_signed_in? %>
-  <% if current_store.user == current_user %>
+  <% if @user == current_user %>
     var message = "<%= j render :partial => 'users/form_owner', locals: {user: @user} %>";
   <% else %>
     var message = "<%= j render :partial => 'users/form', locals: {user: @user} %>";
