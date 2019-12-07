@@ -1,8 +1,8 @@
 <aside class="manage-aside">
   <div class="side-content">
-    <nav class="sidebar sidebar-fixed">
+    <nav class="sidebar sidebar-fixed navmenu" role="navigation">
 
-      <ul class="nav nav-list">
+      <ul class="nav nav-list navbar-nav">
 
         <li class="sale-menu">
           <%= link_to sale_path, class: "btn btn-sale", target: :_blank do %>
@@ -78,13 +78,6 @@
           <%= link_to users_path do %>
             <%= fa_icon "user", class: "sidebar-icon" %>
             <span class="sidebar-name">Quản lý người dùng</span>
-          <% end %>
-        </li>
-
-        <li>
-          <%= link_to "#" do %>
-            <%= fa_icon "cogs", class: "sidebar-icon" %>
-            <span class="sidebar-name">Thiết lập</span>
           <% end %>
         </li>
       </ul>

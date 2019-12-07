@@ -46,6 +46,7 @@ Rails.application.routes.draw do
     resources :roles
     resources :purchases
     resources :reports
+    resources :print_templates
   end
 
   namespace :api, defaults: {format: :json} do

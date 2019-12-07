@@ -1,0 +1,24 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @print_template.name %>
+</p>
+
+<p>
+  <strong>Type:</strong>
+  <%= @print_template.type %>
+</p>
+
+<p>
+  <strong>Size:</strong>
+  <%= @print_template.size %>
+</p>
+
+<p>
+  <strong>Template:</strong>
+  <%= @print_template.template %>
+</p>
+
+<%= link_to 'Edit', edit_print_template_path(@print_template) %> |
+<%= link_to 'Back', print_templates_path %>

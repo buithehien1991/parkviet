@@ -1,0 +1,37 @@
+<%= form_with(model: print_template, local: true) do |form| %>
+  <% if print_template.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(print_template.errors.count, "error") %> prohibited this print_template from being saved:</h2>
+
+      <ul>
+      <% print_template.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :name %>
+    <%= form.text_field :name %>
+  </div>
+
+  <div class="field">
+    <%= form.label :type %>
+    <%= form.text_field :type %>
+  </div>
+
+  <div class="field">
+    <%= form.label :size %>
+    <%= form.text_field :size %>
+  </div>
+
+  <div class="field">
+    <%= form.label :template %>
+    <%= form.text_field :template %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

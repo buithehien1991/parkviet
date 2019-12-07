@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <%= display_meta_tags site: t(:full_title) %>
+  <%= csrf_meta_tags %>
+  <%= csp_meta_tag %>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+  <%= yield :stylesheets %>
+</head>
+
+<body>
+
+<div class="container-fluid">
+  <%= render 'shared/message' %>
+  <div class="navbar-container">
+    <%= render 'shared/navbar' %>
+  </div>
+
+  <div class="setting-container">
+    <%= yield %>
+  </div>
+</div>
+
+<%= yield :javascript %>
+<script src="https://cdn.ckeditor.com/4.9.2/standard/ckeditor.js"></script>
+</body>
+</html>

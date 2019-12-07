@@ -1,0 +1,35 @@
+<p id="notice"><%= notice %></p>
+
+<div class="row">
+  <div class="col-1">
+    <h3>Mẫu in</h3>
+  </div>
+  <div class="col">
+    <ul class="nav nav-pills">
+      <li class="nav-item">
+        <%= link_to "Hóa đơn", print_templates_path(type: "invoice"), class: "nav-link #{current_page?(print_templates_path) || current_page?(print_templates_path(type: "invoice")) ? "active" : ""}" %>
+      </li>
+      <li class="nav-item">
+        <%= link_to "Đặt hàng nhập", print_templates_path(type: "purchase_order"), class: "nav-link #{current_page?(print_templates_path(type: "purchase_order")) ? "active" : ""}" %>
+      </li>
+      <li class="nav-item">
+        <%= link_to "Nhập hàng", print_templates_path(type: "purchase"), class: "nav-link #{current_page?(print_templates_path(type: "purchase")) ? "active" : ""}" %>
+      </li>
+    </ul>
+  </div>
+</div>
+<br>
+
+<div class="row">
+  <div class="col">
+    <div class="title">
+      Mẫu in
+    </div>
+
+    <%= link_to fa_icon("plus"), new_print_template_path,  class: "btn btn-outline-success" %>
+  </div>
+  <div class="col">
+    <div class="title"></div>
+  </div>
+</div>
+
