@@ -1,12 +1,16 @@
 <% if user_signed_in? %>
-var message = "<%= j render :partial => 'users/form', locals: {user: @user} %>";
-message = message.replace(/(?:\r\n|\r|\n)/g, '');
-var modal = "<%= j render :partial => 'shared/modal_submit', locals: {title: t(:edit_member), submit_id: 'submit_add_member_btn'} %>";
-modal = modal.replace(/(?:\r\n|\r|\n)/g, '');
-$("body").append(modal);
-$(".modal-body").html(message);
-$("#park-modal").modal({
-    backdrop: 'static',
-    keyboard: false
-});
+  <% if current_store.user == current_user %>
+    var message = "<%= j render :partial => 'users/form_owner', locals: {user: @user} %>";
+  <% else %>
+    var message = "<%= j render :partial => 'users/form', locals: {user: @user} %>";
+  <% end %>
+  message = message.replace(/(?:\r\n|\r|\n)/g, '');
+  var modal = "<%= j render :partial => 'shared/modal_submit', locals: {title: t(:edit_member), submit_id: 'submit_add_member_btn'} %>";
+  modal = modal.replace(/(?:\r\n|\r|\n)/g, '');
+  $("body").append(modal);
+  $(".modal-body").html(message);
+  $("#park-modal").modal({
+      backdrop: 'static',
+      keyboard: false
+  });
 <% end %>

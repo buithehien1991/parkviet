@@ -1,0 +1,176 @@
+<div class="new-customer">
+  <%= form_with model: user, id: 'new-member' do |f| %>
+    <div class="row">
+      <div class="col-md-6">
+
+        <div class="form-group">
+          <%= f.label :fullname, class: "col-form-label font-weight-bold" %>
+          <%= f.text_field :fullname, class: "form-control form-control-sm", placeholder: t('.fullname_placeholder'), required: true %>
+        </div>
+
+        <div class="form-group">
+          <%= f.label :username, class: "col-form-label font-weight-bold" %>
+          <%= f.text_field :username, class: "form-control form-control-sm", placeholder: t('.username_placeholder') %>
+        </div>
+
+        <div class="form-group">
+          <%= f.label :role, class: "col-form-label font-weight-bold" %>
+          <% roles = current_store.roles.collect{|role| [role.name, role.id]} %>
+          <% role = current_store.members.where(user_id: user.id).first.role unless user.new_record? %>
+          <%= select_tag 'member[role_id]', options_for_select(roles, role.present? ? role.id : ""), prompt: t(:prompt_role), class: "form-control form-control-sm", required: true%>
+        </div>
+
+        <div class="form-group">
+          <%= f.label :email, class: "col-form-label font-weight-bold" %>
+          <%= f.email_field :email, class: "form-control form-control-sm", placeholder: t('.email_placeholder') %>
+        </div>
+
+        <div class="form-row">
+
+          <div class="col">
+            <%= f.label :password, class: "col-form-label font-weight-bold" %>
+            <% if @minimum_password_length %>
+              <em>(ít nhất <%= @minimum_password_length %> ký tự)</em>
+            <% end %><br/>
+            <%= f.password_field :password, autocomplete: "off", class: "form-control form-control-sm", required: user.new_record? ? true : false %>
+          </div>
+          <div class="col">
+            <%= f.label :password_confirmation, class: "col-form-label font-weight-bold" %>
+            <%= f.password_field :password_confirmation, autocomplete: "off", class: "form-control form-control-sm", required: user.new_record? ? true : false %>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div class="col-md-6">
+        <div class="form-group">
+          <%= f.label :phone, class: "col-form-label font-weight-bold" %>
+          <%= f.phone_field :phone, class: "form-control form-control-sm", placeholder: t('.phone_placeholder') %>
+        </div>
+
+        <div class="form-group">
+          <%= f.label :birthday, class: "col-form-label font-weight-bold mr-3" %>
+          <div class="input-group">
+            <%= f.date_select :birthday, {order: [:day, :month, :year], prompt: { day: 'Ngày', month: 'Tháng', year: 'Năm' }, start_year: Date.today.year - 18, end_year: Date.today.year - 100}, {class: "form-control form-control-sm d-inline-block"} %>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="col">
+            <%= f.label t(:label_province), class: "col-form-label font-weight-bold" %>
+            <%= f.select :province_id, options_for_select(Province.all.collect{|province| [province.name, province.id]}, user.province_id.present? ? user.province_id : ''), {prompt: t(:prompt_province_select)}, class: "form-control form-control-sm" %>
+          </div>
+          <div class="col">
+            <%= f.label t(:label_district), class: "col-form-label font-weight-bold" %>
+            <%= f.select :district_id, [], {prompt: t(:prompt_district_select)}, class: "form-control form-control-sm" %>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <%= f.label t(:label_commune), class: "col-form-label font-weight-bold" %>
+          <%= f.select :commune_id, [], {prompt: t(:prompt_commune_select)}, class: "form-control form-control-sm" %>
+        </div>
+
+        <div class="form-group">
+          <%= f.label :address, class: "col-form-label font-weight-bold" %>
+          <%= f.text_field :address, class: "form-control form-control-sm", placeholder: t('.address_placeholder') %>
+        </div>
+      </div>
+
+      <%= f.submit t(:save), class: 'd-none' %>
+    </div>
+
+  <% end %>
+</div>
+
+<script>
+    $(document).ready(function () {
+        'use strict';
+
+        let province = $('#user_province_id').val();
+        if (province) {
+            getDistrictAndCommuneOptions(province);
+        }
+
+        $('#user_province_id').on('change', function () {
+            let province_id = this.value;
+            getDistrictOption(province_id);
+        });
+
+        $('#user_district_id').on('change', function () {
+            let district_id = this.value;
+            getCommuneOptions(district_id);
+        });
+
+        $('#submit_add_member_btn').click(function () {
+            $('#new-member').find('[type="submit"]').trigger('click');
+        });
+
+        function getDistrictOption(province_id) {
+            $.ajax({
+                url: '/get_district_list',
+                data: {
+                    province_id: province_id
+                },
+                success: function (data) {
+                    $('#user_district_id').html(data);
+                    if (!province_id) {
+                        $('#user_district_id').html('<option value=""><%= t(:prompt_district_select) %></option>');
+                    }
+                }
+            });
+        }
+
+        function getCommuneOptions(district_id) {
+            $.ajax({
+                url: '/get_commune_list',
+                data: {
+                    district_id: district_id
+                },
+                success: function (data) {
+                    $('#user_commune_id').html(data);
+                    if (!district_id) {
+                        $('#user_commune_id').html('<option value=""><%= t(:prompt_commune_select) %></option>');
+                    }
+                }
+            });
+        }
+
+        function getDistrictAndCommuneOptions(province_id) {
+            $.ajax({
+                url: '/get_district_list',
+                data: {
+                    province_id: province_id
+                },
+                success: function (data) {
+
+                    if (!province_id) {
+                        $('#user_district_id').html('<option value=""><%= t(:prompt_district_select) %></option>');
+                    } else {
+                        $('#user_district_id').html(data);
+                        $('#user_district_id').find('option[value=<%= user.district_id %>]').attr('selected',true);
+                    }
+
+                    let district_id = $('#user_district_id').val();
+                    if (district_id) {
+                        $.ajax({
+                            url: '/get_commune_list',
+                            data: {
+                                district_id: district_id
+                            },
+                            success: function (data) {
+                                if (!district_id) {
+                                    $('#user_commune_id').html('<option value=""><%= t(:prompt_commune_select) %></option>');
+                                } else {
+                                    $('#user_commune_id').html(data);
+                                    $('#user_commune_id').find('option[value=<%= user.commune_id %>]').attr('selected', true);
+                                }
+                            }
+                        });
+                    }
+                }
+            });
+        }
+    })
+</script>

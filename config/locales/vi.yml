@@ -222,6 +222,12 @@ vi:
       email_placeholder: Nhập email
       username_placeholder: Nhập tên đăng nhập
       address_placeholder: Nhập địa chỉ
+    form_owner:
+      fullname_placeholder: Nhập họ và tên đầy đủ của bạn
+      phone_placeholder: Nhập số điện thoại
+      email_placeholder: Nhập email
+      username_placeholder: Nhập tên đăng nhập
+      address_placeholder: Nhập địa chỉ
     show:
       tab_information: Thông tin
       tab_role: Phân quyền
