@@ -1,6 +1,6 @@
 <div class="new-print-template">
   <%= form_with model: print_template, id: 'new-print-template' do |form| %>
-    <%= hidden_field_tag "print_template[type]", params[:type].present? ? params[:type] : "" %>
+    <%= hidden_field_tag "print_template[template_type]", params[:type].present? ? params[:type] : "" if print_template.new_record?%>
     <div class="row">
       <div class="col">
 

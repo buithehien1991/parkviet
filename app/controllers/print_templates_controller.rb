@@ -5,7 +5,9 @@ class PrintTemplatesController < ApplicationController
   # GET /print_templates
   # GET /print_templates.json
   def index
-    @print_templates = PrintTemplate.all
+    type = params[:type].present? ? params[:type] : "invoice"
+    @print_templates = PrintTemplate.by_store_and_type(current_store.id, type)
+    p @print_templates
   end
 
   # GET /print_templates/1
@@ -27,10 +29,11 @@ class PrintTemplatesController < ApplicationController
   def create
     @print_template = PrintTemplate.new(print_template_params)
     @print_template.user = current_user
+    @print_template.store = current_store
 
     respond_to do |format|
       if @print_template.save
-        format.html { redirect_to @print_template, notice: 'Print template was successfully created.' }
+        format.html { redirect_to print_templates_path(type: @print_template.template_type), notice: 'Print template was successfully created.' }
         format.json { render :show, status: :created, location: @print_template }
       else
         format.html { render :new }
@@ -44,7 +47,7 @@ class PrintTemplatesController < ApplicationController
   def update
     respond_to do |format|
       if @print_template.update(print_template_params)
-        format.html { redirect_to @print_template, notice: 'Print template was successfully updated.' }
+        format.html { redirect_to print_templates_path(type: @print_template.template_type), notice: 'Print template was successfully updated.' }
         format.json { render :show, status: :ok, location: @print_template }
       else
         format.html { render :edit }
@@ -71,6 +74,6 @@ class PrintTemplatesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def print_template_params
-      params.require(:print_template).permit(:name, :type, :size, :template)
+      params.require(:print_template).permit(:name, :template_type, :size, :template)
     end
 end
