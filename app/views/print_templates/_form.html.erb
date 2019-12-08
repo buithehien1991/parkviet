@@ -11,27 +11,42 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= form.label :name %>
-    <%= form.text_field :name %>
+  <div class="row">
+    <div class="col">
+
+      <div class="row">
+        <div class="col-7 form-group form-inline">
+          <%= form.label :name %>
+          <%= form.text_field :name, class: "form-control form-control-sm" %>
+        </div>
+        <div class="col-5">
+          <%= form.label :size %>
+          <%= form.text_field :size %>
+        </div>
+      </div>
+
+      <div class="field">
+        <%= form.cktext_area :template, class: "form-control ckeditor", ckeditor: { toolbar: 'mini' } %>
+      </div>
+
+    </div>
+
+
+    <div class="col"></div>
   </div>
 
-  <div class="field">
-    <%= form.label :type %>
-    <%= form.text_field :type %>
-  </div>
-
-  <div class="field">
-    <%= form.label :size %>
-    <%= form.text_field :size %>
-  </div>
-
-  <div class="field">
-    <%= form.label :template %>
-    <%= form.text_field :template %>
-  </div>
-
-  <div class="actions">
+  <div class="actions d-none">
     <%= form.submit %>
   </div>
 <% end %>
+
+<script>
+  $(document).ready(function () {
+      CKEDITOR.replace($('.ckeditor').attr('id'), {
+          toolbar: [
+              { name: 'document', groups: [ 'mode', 'document', 'doctools' ], items: [ 'Source'] },
+              { name: 'clipboard', groups: [ 'clipboard', 'undo' ], items: [ 'Cut', 'Copy', 'Paste', 'PasteText', 'PasteFromWord', '-', 'Undo', 'Redo' ] },
+          ]
+      })
+  })
+</script>
