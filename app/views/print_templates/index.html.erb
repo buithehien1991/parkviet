@@ -7,7 +7,7 @@
   <div class="col">
     <ul class="nav nav-pills">
       <li class="nav-item">
-        <%= link_to "Hóa đơn", print_templates_path(type: "invoice"), class: "nav-link #{current_page?(print_templates_path) || current_page?(print_templates_path(type: "invoice")) ? "active" : ""}" %>
+        <%= link_to "Hóa đơn", print_templates_path(type: "invoice"), class: "nav-link #{current_page?(print_templates_path, check_parameters: true) || current_page?(print_templates_path(type: "invoice")) ? "active" : ""}" %>
       </li>
       <li class="nav-item">
         <%= link_to "Đặt hàng nhập", print_templates_path(type: "purchase_order"), class: "nav-link #{current_page?(print_templates_path(type: "purchase_order")) ? "active" : ""}" %>
