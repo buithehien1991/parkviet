@@ -26,6 +26,7 @@ class PrintTemplatesController < ApplicationController
   # POST /print_templates.json
   def create
     @print_template = PrintTemplate.new(print_template_params)
+    @print_template.user = current_user
 
     respond_to do |format|
       if @print_template.save

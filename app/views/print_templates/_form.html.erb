@@ -1,52 +1,47 @@
-<%= form_with(model: print_template, local: true) do |form| %>
-  <% if print_template.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(print_template.errors.count, "error") %> prohibited this print_template from being saved:</h2>
+<div class="new-print-template">
+  <%= form_with model: print_template, id: 'new-print-template' do |form| %>
+    <% form.hidden_field :type, params[:type] %>
+    <div class="row">
+      <div class="col">
 
-      <ul>
-      <% print_template.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
+        <div class="row">
+          <div class="col-7 form-group form-inline">
+            <%= form.label :name %>
+            <%= form.text_field :name, class: "form-control form-control-sm ml-5" %>
+          </div>
+        </div>
+
+        <div class="field">
+          <%= form.text_area :template, class: "form-control ckeditor" %>
+        </div>
+      </div>
+
     </div>
+
+    <%= form.submit t(:save), class: 'd-none' %>
   <% end %>
-
-  <div class="row">
-    <div class="col">
-
-      <div class="row">
-        <div class="col-7 form-group form-inline">
-          <%= form.label :name %>
-          <%= form.text_field :name, class: "form-control form-control-sm" %>
-        </div>
-        <div class="col-5">
-          <%= form.label :size %>
-          <%= form.text_field :size %>
-        </div>
-      </div>
-
-      <div class="field">
-        <%= form.cktext_area :template, class: "form-control ckeditor", ckeditor: { toolbar: 'mini' } %>
-      </div>
-
-    </div>
-
-
-    <div class="col"></div>
-  </div>
-
-  <div class="actions d-none">
-    <%= form.submit %>
-  </div>
-<% end %>
+</div>
 
 <script>
-  $(document).ready(function () {
-      CKEDITOR.replace($('.ckeditor').attr('id'), {
-          toolbar: [
-              { name: 'document', groups: [ 'mode', 'document', 'doctools' ], items: [ 'Source'] },
-              { name: 'clipboard', groups: [ 'clipboard', 'undo' ], items: [ 'Cut', 'Copy', 'Paste', 'PasteText', 'PasteFromWord', '-', 'Undo', 'Redo' ] },
-          ]
-      })
-  })
+    $(document).ready(function () {
+        'use strict';
+        $('#submit_add_print_btn').click(function () {
+            $('#new-print-template').find('[type="submit"]').trigger('click');
+        });
+
+        CKEDITOR.replace($('.ckeditor').attr('id'), {
+            toolbar: [
+                { name: 'document', groups: [ 'mode', 'document', 'doctools' ], items: [ 'Source'] },
+                { name: 'clipboard', groups: [ 'clipboard', 'undo' ], items: [ 'Cut', 'Copy', 'Paste', 'PasteText', 'PasteFromWord', '-', 'Undo', 'Redo' ] },
+                { name: 'editing', groups: [ 'find', 'selection', 'spellchecker' ], items: [ 'SelectAll' ] },
+                { name: 'insert', items: [ 'Image', 'Table', 'HorizontalRule', 'SpecialChar' ] },
+                '/',
+                { name: 'basicstyles', groups: [ 'basicstyles', 'cleanup' ], items: [ 'Bold', 'Italic', 'Underline', 'Subscript', 'Superscript', ] },
+                { name: 'paragraph', groups: [ 'list', 'indent', 'blocks', 'align', 'bidi' ], items: [ 'NumberedList', 'BulletedList', '-', 'Outdent', 'Indent', '-', 'CreateDiv', '-', 'JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock', '-', 'BidiLtr', 'BidiRtl' ] },
+                '/',
+                { name: 'styles', items: [ 'Styles', 'Format', 'Font', 'FontSize' ] },
+                { name: 'colors', items: [ 'TextColor', 'BGColor' ] }
+            ]
+        })
+    })
 </script>

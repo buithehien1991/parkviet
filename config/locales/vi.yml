@@ -141,6 +141,10 @@ vi:
       report:
         title: Tiêu đề
         content: Nội dung
+      print_template:
+        name: Tên mẫu in
+        size: Khổ giấy in
+        preview: Xem trước mẫu in
 
 
   # Translate views
@@ -270,6 +274,7 @@ vi:
   edit_role: Sửa vai trò
   add_new_report: Báo cáo
   add_new_print_template: Thêm mẫu in
+  edit_print_template: Sửa mẫu in
 
   # Common button
   btn_manage: Quản lý

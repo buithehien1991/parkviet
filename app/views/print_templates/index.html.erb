@@ -22,14 +22,29 @@
 
 <div class="row">
   <div class="col">
-    <div class="title">
+    <div class="title form-group form-inline">
       Mẫu in
+      <% templates = PrintTemplate.all.collect{|t| [t.name, t.id]} %>
+      <% template = PrintTemplate.first%>
+      <%= select_tag 'print_template', options_for_select(templates, template.present? ? template.id : ""), class: "form-control form-control-sm w-50 ml-3"%>
+      <%= link_to fa_icon("edit"), template.present? ? edit_print_template_path(template) : "#",  class: "btn btn-sm btn-outline-success ml-3", id: "edit_template", remote: true %>
+      <%= link_to fa_icon("plus"), new_print_template_path(type: params[:type].present? ? params[:type] : "invoice"),  class: "btn btn-sm btn-outline-success ml-3", remote: true %>
     </div>
-
-    <%= link_to fa_icon("plus"), new_print_template_path,  class: "btn btn-outline-success", remote: true %>
   </div>
   <div class="col">
     <div class="title"></div>
   </div>
 </div>
 
+<script>
+    $(document).ready(function () {
+        $('#print_template').on('change', function() {
+            if (this.value) {
+                $("#edit_template").attr("href", "/manage/print_templates/" + this.value + "/edit")
+            } else {
+                $("#edit_template").attr("href", "#");
+                toastr.error("Vui lòng chọn một vai trò trước khi sửa.")
+            }
+        });
+    })
+</script>

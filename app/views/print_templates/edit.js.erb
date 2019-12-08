@@ -1,7 +1,7 @@
 <% if user_signed_in? %>
 var message = "<%= j render :partial => 'print_templates/form', locals: {print_template: @print_template} %>";
 message = message.replace(/(?:\r\n|\r|\n)/g, '');
-var modal = "<%= j render :partial => 'shared/modal_submit_large', locals: {title: t(:add_new_print_template), submit_id: 'submit_add_print_btn'} %>";
+var modal = "<%= j render :partial => 'shared/modal_submit_large', locals: {title: t(:edit_print_template), submit_id: 'submit_add_print_btn'} %>";
 modal = modal.replace(/(?:\r\n|\r|\n)/g, '');
 $("body").append(modal);
 $(".modal-body").html(message);
