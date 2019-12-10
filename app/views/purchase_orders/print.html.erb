@@ -1,0 +1,20 @@
+<% unless @print_template.present? %>
+  Chưa có mẫu in, vui lòng thêm mẫu in trong phần thiết lập, sau đó thử lại.
+<% else %>
+  <%= @print_text.html_safe %>
+
+
+  <hr/>
+
+
+  <div id="template">
+    <%= @script_template.html_safe %>
+  </div>
+
+<% end %>
+
+<script>
+  $(document).ready(function () {
+
+  })
+</script>

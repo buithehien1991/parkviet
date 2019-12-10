@@ -1,6 +1,6 @@
 class PurchaseOrdersController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_purchase_order, only: [:show, :edit, :update, :destroy, :status, :pdf]
+  before_action :set_purchase_order, only: [:show, :edit, :update, :destroy, :status, :pdf, :print]
 
   # GET /purchase_orders
   # GET /purchase_orders.json
@@ -35,6 +35,18 @@ class PurchaseOrdersController < ApplicationController
     end
   end
 
+  helper :purchase_orders
+
+  def print
+    @print_template = PrintTemplate.by_store_and_type(current_store.id, "purchase_order").first
+    @script_template = @print_template.template.dup
+
+    template = @print_template.template if @print_template.present?
+
+    @print_text = PurchaseOrdersHelper.replace_token_for_print(template, @purchase_order)
+
+  end
+
   def pdf
     render pdf: "#{@purchase_order.code}", disposition: 'inline', template: 'purchase_orders/show'
   end
@@ -64,7 +76,7 @@ class PurchaseOrdersController < ApplicationController
 
     respond_to do |format|
       if @purchase_order.save
-        @purchase_order.code = build_code("PO", @purchase_order) unless @purchase_order.code.present?
+        @purchase_order.code = build_code("DHN", @purchase_order) unless @purchase_order.code.present?
         @purchase_order.save
 
         format.html { redirect_to @purchase_order, notice: 'Purchase order was successfully created.' }
