@@ -39,12 +39,6 @@ class PurchaseOrdersController < ApplicationController
 
   def print
     @print_template = PrintTemplate.by_store_and_type(current_store.id, "purchase_order").first
-    @script_template = @print_template.template.dup
-
-    template = @print_template.template if @print_template.present?
-
-    @print_text = PurchaseOrdersHelper.replace_token_for_print(template, @purchase_order)
-
   end
 
   def pdf

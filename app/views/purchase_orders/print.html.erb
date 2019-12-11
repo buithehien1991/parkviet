@@ -1,20 +1,82 @@
 <% unless @print_template.present? %>
   Chưa có mẫu in, vui lòng thêm mẫu in trong phần thiết lập, sau đó thử lại.
 <% else %>
-  <%= @print_text.html_safe %>
 
-
-  <hr/>
-
-
-  <div id="template">
-    <%= @script_template.html_safe %>
-  </div>
+  <div id="template"></div>
 
 <% end %>
 
 <script>
   $(document).ready(function () {
+      let template_raw = "<%=j @print_template.template.html_safe %>"
+      let $template = $(template_raw)
+      replaceToken("{Ma_Dat_Hang_Nhap}", "<%= @purchase_order.present? && @purchase_order.code.present? ? @purchase_order.code : "" %>")
+      replaceToken("{Ngay_Thang_Nam}", "")
+      replaceToken("{Nha_Cung_Cap}", "<%= @purchase_order.supplier.present? ? @purchase_order.supplier.name : "" %>")
+      replaceToken("{Nha_Cung_Cap_CongTy}", "<%= @purchase_order.supplier.present? ? @purchase_order.supplier.company_name : "" %>")
+      replaceToken("{Nha_Cung_Cap_Dai_Dien}", "<%= @purchase_order.supplier.present? ? @purchase_order.supplier.name : "" %>")
+      replaceToken("{Dia_Chi_Nha_Cung_Cap}", "<%= @purchase_order.supplier.present? ? @purchase_order.supplier.address : "" %>")
+      replaceToken("{Nguoi_Tao}", "<%= @purchase_order.user.fullname %>: <%= @purchase_order.user.phone %>")
+
+      replaceProductToken()
+
+      $("#template").html($template)
+
+      function replaceToken(token, value) {
+          let elements = $template.find(':contains("' + token + '")')
+          if (elements.length > 0) {
+              for (let i = 0; i < elements.length; i++) {
+                  let $element = $(elements[i])
+                  if ($element.children() && $element.children().length === 0) {
+                      $element.html($element.html().replace(token, value))
+                  }
+              }
+          }
+      }
+
+      function replaceTokenContent(content, token, value) {
+          let elements = $(content).find(':contains("' + token + '")')
+          if (elements.length > 0) {
+              for (let i = 0; i < elements.length; i++) {
+                  let $element = $(elements[i])
+                  if ($element.children() && $element.children().length === 0) {
+                      $element.html($element.html().replace(token, value))
+                  }
+              }
+          }
+      }
+
+      function replaceProductToken() {
+          let elements = $template.find(':contains("{Ma_Hang}")')
+          if (elements.length === 0) {
+              elements = $template.find(':contains("{Ten_Hang_Hoa}")')
+          }
+
+          if (elements.length > 0) {
+              let $element = $(elements[elements.length - 1])
+              let row = $element.closest("tr")
+              let table = $element.closest("table")
+
+              <% @purchase_order.product_purchase_orders.each_with_index do |ppo, index| %>
+                let copy_row = row.clone();
+                // Replace each row here
+
+                replaceTokenContent(copy_row, "{STT}", <%= index + 1 %>)
+                replaceTokenContent(copy_row, "{Ma_Hang}", "<%= ppo.product.code %>")
+                replaceTokenContent(copy_row, "{Ten_Hang_Hoa}", "<%= ppo.product.name %>")
+                replaceTokenContent(copy_row, "{Don_Vi}", "<%= ppo.unit || ppo.product.basic_unit %>")
+                replaceTokenContent(copy_row, "{Don_Gia}", "<%= ppo.unit_price %>")
+                replaceTokenContent(copy_row, "{So_Luong}", "<%= ppo.quantity %>")
+                replaceTokenContent(copy_row, "{Chiet_Khau}", "<%= ppo.discount_money %>")
+                replaceTokenContent(copy_row, "{Thanh_Tien}", "<%= ppo.total_price %>")
+
+                $(table).find("tr:last").after(copy_row)
+              <% end %>
+
+              $(row).remove()
+          }
+      }
+
 
   })
 </script>

@@ -5,7 +5,7 @@ module PurchaseOrdersHelper
     source.gsub!("{Nguoi_Tao}", purchase_order.user.fullname)
     source.gsub!("{Nha_Cung_Cap}", purchase_order.supplier.present? ? purchase_order.supplier.name : "")
     source.gsub!("{Dia_Chi_Nha_Cung_Cap}", purchase_order.supplier.present? ? purchase_order.supplier.address : "")
-    source.gsub!("{Ngay_Nhap_Du_Kien}", purchase_order.expected_date.present? ? purchase_order.expected_date : "")
+#    source.gsub!("{Ngay_Nhap_Du_Kien}", purchase_order.expected_date.present? ? purchase_order.expected_date : "")
 
     source.gsub!("{Tong_So_Luong_Hang}", purchase_order.code)
     source.gsub!("{Tong_Tien_Hang}", purchase_order.code)
