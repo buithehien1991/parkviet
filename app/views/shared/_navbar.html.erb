@@ -29,7 +29,7 @@
       <div class="dropdown-menu dropdown-menu-right" aria-labelledby="setupNavBarMenu">
         <%= link_to fa_icon("wrench", text: "Thiết lập cửa hàng"), "#", class: "dropdown-item" %>
         <div class="dropdown-divider"></div>
-        <%= link_to fa_icon("file-text", text: "Quản lý mẫu in"), print_templates_path, class: "dropdown-item" %>
+        <%= link_to fa_icon("file-text", text: "Quản lý mẫu in"), print_templates_path, class: "dropdown-item", "data-turbolinks": "false" %>
         <div class="dropdown-divider"></div>
         <%= link_to fa_icon("history", text: "Lịch sử thao tác") , "#", class: "dropdown-item" %>
       </div>
