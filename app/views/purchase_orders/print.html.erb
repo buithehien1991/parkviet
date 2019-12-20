@@ -52,6 +52,9 @@
               elements = $template.find(':contains("{Ten_Hang_Hoa}")')
           }
 
+          <% product_count = 0 %>
+          <% total = 0 %>
+          <% final = 0 %>
           if (elements.length > 0) {
               let $element = $(elements[elements.length - 1])
               let row = $element.closest("tr")
@@ -65,16 +68,27 @@
                 replaceTokenContent(copy_row, "{Ma_Hang}", "<%= ppo.product.code %>")
                 replaceTokenContent(copy_row, "{Ten_Hang_Hoa}", "<%= ppo.product.name %>")
                 replaceTokenContent(copy_row, "{Don_Vi}", "<%= ppo.unit || ppo.product.basic_unit %>")
-                replaceTokenContent(copy_row, "{Don_Gia}", "<%= ppo.unit_price %>")
+                replaceTokenContent(copy_row, "{Don_Gia}", "<%= number_to_dong(ppo.unit_price) if ppo.unit_price.present? %>")
                 replaceTokenContent(copy_row, "{So_Luong}", "<%= ppo.quantity %>")
-                replaceTokenContent(copy_row, "{Chiet_Khau}", "<%= ppo.discount_money %>")
-                replaceTokenContent(copy_row, "{Thanh_Tien}", "<%= ppo.total_price %>")
+                <% product_count += ppo.quantity %>
+                <% discount = ppo.discount_money || 0 %>
+                replaceTokenContent(copy_row, "{Chiet_Khau}", "<%= number_to_dong(discount) %>")
+                <% price = ppo.unit_price * ppo.quantity - discount if ppo.unit_price.present? && ppo.quantity.present? %>
+                <% price = 0 unless price.present? %>
+                <% total += price %>
+                replaceTokenContent(copy_row, "{Thanh_Tien}", "<%= number_to_dong(price) %>")
 
                 $(table).find("tr:last").after(copy_row)
               <% end %>
 
               $(row).remove()
           }
+
+          replaceToken("{Tong_So_Luong_Hang}", "<%= product_count %>")
+          replaceToken("{Tong_Tien_Hang}", "<%= number_to_dong(total) %>")
+          <% discount_all = @purchase_order.discount_money || 0 %>
+          replaceToken("{Giam_Gia_Dat_Hang_Nhap}", "<%= number_to_dong discount_all %>")
+          replaceToken("{Tong_Cong}", "<%= number_to_dong(total - discount_all) %>")
       }
 
 
