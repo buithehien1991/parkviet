@@ -105,23 +105,22 @@
     <%= fa_icon "download", text: t(:export_file) %>
   <% end if has_permission?("purchase_order_export_file") %>
 
-  <%#= link_to fa_icon("print", text: t(:print)), print_purchase_order_path, class: "btn btn-info", remote: true, onclick: "print()" if has_permission?("purchase_order_print") %>
-  <%= link_to fa_icon("print", text: t(:print)), print_purchase_order_path, class: "btn btn-info", target: "_blank"%>
+  <%= link_to fa_icon("print", text: t(:print)), print_purchase_order_path, class: "btn btn-info", remote: true, onclick: "print('printf')" if has_permission?("purchase_order_print") %>
+  <%#= link_to fa_icon("print", text: t(:print)), print_purchase_order_path, class: "btn btn-info", target: "_blank"%>
+
 
   <%= link_to fa_icon("trash", text: t(:cancel)), purchase_order_path(@purchase_order), method: :delete, data: { confirm: "Bạn có chắc chắn muốn xóa yêu cầu này ?" }, class: "btn btn-danger" if has_permission?("purchase_order_delete") %>
 </div>
 
 <div class="d-none">
-  <iframe id="printf" name="printf" src="<%=  pdf_purchase_order_path(@purchase_order, format: :pdf) %>"></iframe>
+  <iframe id="printf" name="printf" src="<%=  print_purchase_order_path(@purchase_order) %>"></iframe>
 </div>
 
 <script>
-  function print() {
-      //e.preventDefault()
-      //e.stopPropagation()
-
-      window.frames["printf"].focus();
-      window.frames["printf"].print();
+  function print(print_id) {
+      var print_element = document.getElementById(print_id);
+      print_element.focus();
+      print_element.contentWindow.print();
   }
 </script>
 

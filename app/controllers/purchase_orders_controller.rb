@@ -1,6 +1,7 @@
 class PurchaseOrdersController < ApplicationController
   before_action :authenticate_user!
   before_action :set_purchase_order, only: [:show, :edit, :update, :destroy, :status, :pdf, :print]
+  layout "print", only: [:print]
 
   # GET /purchase_orders
   # GET /purchase_orders.json

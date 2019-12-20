@@ -2,7 +2,7 @@
   Chưa có mẫu in, vui lòng thêm mẫu in trong phần thiết lập, sau đó thử lại.
 <% else %>
 
-  <div id="template"></div>
+  <div id="template" style="margin: 10mm"></div>
 
 <% end %>
 
@@ -94,3 +94,12 @@
 
   })
 </script>
+
+<%= content_for :stylesheets do %>
+  <style type="text/css">
+    @page {
+      size: 21cm 29.7cm;
+      margin: 0;
+    }
+  </style>
+<% end %>
