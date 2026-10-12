@@ -1,4 +1,4 @@
 class ProductInvoice < ApplicationRecord
-  belongs_to :product
-  belongs_to :invoice
+  include DocumentLine
+  belongs_to :invoice, inverse_of: :product_invoices
 end

@@ -1,0 +1,2 @@
+class BranchesController < ResourceController
+end

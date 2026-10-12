@@ -1,36 +1,20 @@
 class PurchaseOrder < ApplicationRecord
-  # Đây là model cho yêu cầu nhập hàng. VD khi tạo một yêu cầu nhập hàng và ông chủ có thể phê duyệt để nhân viên đặt hàng có thể thực hiện đặt hàng
-
-  belongs_to :user
-  belongs_to :store
+  include BusinessDocument
   belongs_to :supplier, optional: true
-  has_many :product_purchase_orders, dependent: :delete_all
-  has_many :products, through: :product_purchase_orders
+  has_many :product_purchase_orders, inverse_of: :purchase_order, dependent: :destroy
+  has_many :purchases, dependent: :restrict_with_error
+  accepts_nested_attributes_for :product_purchase_orders, allow_destroy: true
+  enum :status, { created: 0, checking: 1, checked: 2, confirmed: 3, completed: 4, canceled: 5, approved: 6 }
+  validates :name, presence: true
 
-  validates :name, presence: true, length: {minimum: 2, maximum: 64}
-  validates :code, uniqueness: {scope: :store}, length: {minimum: 2, maximum: 32}, :allow_blank => true
+  def received_quantities
+    ProductPurchase.joins(:purchase).where(purchases: { purchase_order_id: id, status: Purchase.statuses.fetch("purchased") })
+      .group(:product_id).sum(:quantity)
+  end
 
-  enum status: { created: 0, checking: 1, checked: 2, confirmed: 3, completed: 4, canceled: 5, approved: 6 }
-  scope :by_store, -> (store_id) { where(store_id: store_id) }
-  self.per_page = 10
-
-  def filled?
-    self.product_purchase_orders.each do |ppo|
-      unless ppo.quantity.present? && ppo.quantity > 0
-        return false
-      end
-
-      unless ppo.unit_price.present? && ppo.unit_price >= 0
-        return false
-      end
-
-      unless self.supplier.present?
-        unless ppo.supplier.present?
-          return false
-        end
-      end
-    end
-
-    true
+  def remaining_quantities
+    received = received_quantities
+    lines.group_by(&:product_id).transform_values { |items| items.sum(&:quantity) }
+      .transform_keys(&:to_i).to_h { |product_id, ordered| [ product_id, [ ordered - received.fetch(product_id, 0), 0 ].max ] }
   end
 end

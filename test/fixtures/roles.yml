@@ -1,0 +1,13 @@
+admin:
+  name: Admin
+  key: admin
+  builtin: true
+  admin: true
+  position: 0
+
+user:
+  name: User
+  key: user
+  builtin: true
+  admin: false
+  position: 10

@@ -1,0 +1,4 @@
+#!/bin/sh
+set -eu
+# Production schema changes are an explicit backed-up operation, never a boot side effect.
+exec "$@"

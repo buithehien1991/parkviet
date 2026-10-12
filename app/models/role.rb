@@ -1,57 +1,44 @@
 class Role < ApplicationRecord
-  belongs_to :store
-  serialize :permissions
+  has_many :role_permissions, dependent: :destroy
+  has_many :permissions, through: :role_permissions
+  has_many :users, dependent: :restrict_with_error
 
-  scope :by_store, -> (store_id) {where(store_id: store_id)}
+  validates :name, presence: true, length: { maximum: 64 }
+  validates :key, presence: true,
+                  uniqueness: { case_sensitive: false },
+                  length: { maximum: 64 },
+                  format: { with: /\A[a-z][a-z0-9_]*\z/ }
 
-  def self.all_permissions
-    {
-      system: [:setting, :history_activity, :dashboard],
-      user: [:view, :new, :edit, :delete],
-      product: [:view, :edit, :delete, :import, :export_file],
-      invoice: [:view, :new, :edit, :delete, :export_file, :print, :copy],
-      purchase_order: [:view, :new, :edit, :delete, :print, :import, :export_file, :new_purchase, :copy, :approve],
-      purchase: [:view, :new, :edit, :delete, :print, :export_file],
-      customer: [:view, :new, :edit, :delete],
-      supplier: [:view, :new, :edit, :delete]
-    }
+  before_validation :normalize_key
+
+  scope :ordered, -> { order(:position, :name) }
+  scope :builtin, -> { where(builtin: true) }
+  scope :with_admin_access, -> {
+    left_joins(:permissions)
+      .where(admin: true)
+      .or(left_joins(:permissions).where(permissions: { subject: "Admin", action: "manage" }))
+      .distinct
+  }
+
+  def self.ransackable_attributes(_auth_object = nil)
+    %w[admin builtin created_at id key name position updated_at]
   end
 
-  def self.default_permissions
-    %w(product_view invoice_view purchase_order_view purchase_view customer_view supplier_view)
+  def self.ransackable_associations(_auth_object = nil)
+    %w[permissions]
   end
 
-  # TODO Remove. Only for reference
-  def self.permissions
-    {
-        "system": [
-            {generals: [:setting, :history_activity, :dashboard]},
-            {users: [:view, :new, :edit, :delete]}
-        ],
-        "product": [
-            {product: [:index, :show, :edit, :destroy, :import, :export_file]}
-        ],
-        "transaction": [
-            {preorder: [:view, :new, :edit, :destroy, :reprint, :export_file]},
-            {invoice: [:view, :new, :edit, :destroy, :export_file, :print, :copy]},
-            {invoice_return: []},
-            {purchase_order: [:view, :new, :edit, :delete, :print, :import, :export_file, :new_purchase, :copy, :approve]},
-            {purchase_return: []},
-            {transfer: []},
-            {destroy_product: []}
-        ],
-        "partner": [
-            {customer: []},
-            {supplier: []},
-        ],
-        "report": [
-            {daily: [:summary, :product, :income_outcome, :sale]},
-            {sale: []},
-            {preorder: []},
-            {customer: []},
-            {supplier: []},
-            {user: []}
-        ]
-    }
+  def admin?
+    !!admin
+  end
+
+  def grants?(subject, action)
+    admin? || permissions.exists?(subject: subject.to_s, action: action.to_s)
+  end
+
+  private
+
+  def normalize_key
+    self.key = key.to_s.strip.downcase.presence
   end
 end

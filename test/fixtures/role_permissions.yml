@@ -1,0 +1,27 @@
+admin_can_manage_admin:
+  role: admin
+  permission: admin_manage
+
+admin_can_read_users:
+  role: admin
+  permission: user_read
+
+admin_can_create_users:
+  role: admin
+  permission: user_create
+
+admin_can_update_users:
+  role: admin
+  permission: user_update
+
+admin_can_delete_users:
+  role: admin
+  permission: user_delete
+
+admin_can_read_roles:
+  role: admin
+  permission: role_read
+
+admin_can_read_permissions:
+  role: admin
+  permission: permission_read

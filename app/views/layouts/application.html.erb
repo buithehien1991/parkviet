@@ -1,32 +1,19 @@
 <!DOCTYPE html>
-<html>
+<html lang="vi">
   <head>
-    <%= display_meta_tags site: t(:full_title) %>
+    <title data-inertia><%= content_for(:title) || "Park Việt" %></title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="application-name" content="Park Việt">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
-    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
-    <%= yield :stylesheets %>
+    <%= yield :head %>
+    <link rel="icon" href="/icon.svg" type="image/svg+xml">
+    <%= vite_react_refresh_tag %>
+    <%= vite_client_tag %>
+    <%= vite_typescript_tag "inertia.tsx" if inertia_rendering? %>
+    <%= inertia_ssr_head %>
   </head>
-
   <body>
-
-  <div class="container-fluid">
-    <%= render 'shared/message' %>
-    <div class="navbar-container">
-      <%= render 'shared/navbar' %>
-    </div>
-
-    <%= render 'manage/sidebar' %>
-    <div class="main-container">
-      <%= yield %>
-    </div>
-  </div>
-
-  <%= yield :javascript %>
-  <script src="https://cdn.ckeditor.com/4.9.2/standard/ckeditor.js"></script>
+    <%= inertia_rendering? ? inertia_root : yield %>
   </body>
 </html>

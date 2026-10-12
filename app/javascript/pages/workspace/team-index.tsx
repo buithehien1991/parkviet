@@ -1,0 +1,7 @@
+import { Link, router } from '@inertiajs/react'
+import { PageHeader } from '@/components/shared/business-form'
+
+type Member = { id: number; name?: string; email: string; role_name: string; branch_name?: string; active: boolean }
+export default function TeamIndex({ members, can_create, can_edit, can_delete }: { members: Member[]; can_create: boolean; can_edit: boolean; can_delete: boolean }) {
+  return <><PageHeader title="Nhân viên" subtitle="Mỗi nhân viên chỉ truy cập dữ liệu và quyền được giao.">{can_create && <Link href="/manage/members/new" className="pv-button">Thêm nhân viên</Link>}</PageHeader><section className="pv-panel overflow-x-auto"><table className="pv-table"><thead><tr><th>Tên / email</th><th>Vai trò</th><th>Chi nhánh</th><th>Trạng thái</th><th /></tr></thead><tbody>{members.map(member => <tr key={member.id}><td><p>{member.name}</p><p className="text-xs text-muted-foreground">{member.email}</p></td><td>{member.role_name}</td><td>{member.branch_name || '—'}</td><td>{member.active ? 'Hoạt động' : 'Ngừng truy cập'}</td><td>{can_edit && <Link className="pv-button-quiet" href={`/manage/members/${member.id}/edit`}>Sửa quyền</Link>}{can_delete && member.active && <button className="pv-button-quiet text-destructive" onClick={() => { if (window.confirm('Ngừng quyền truy cập của nhân viên?')) router.delete(`/manage/members/${member.id}`) }}>Ngừng truy cập</button>}</td></tr>)}</tbody></table>{!members.length && <p className="pv-empty">Chưa có nhân viên.</p>}</section></>
+}
