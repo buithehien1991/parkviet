@@ -1,0 +1,27 @@
+admin_manage:
+  subject: Admin
+  action: manage
+
+user_read:
+  subject: User
+  action: read
+
+user_create:
+  subject: User
+  action: create
+
+user_update:
+  subject: User
+  action: update
+
+user_delete:
+  subject: User
+  action: delete
+
+role_read:
+  subject: Role
+  action: read
+
+permission_read:
+  subject: Permission
+  action: read

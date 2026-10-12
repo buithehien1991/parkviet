@@ -1,4 +1,4 @@
 class ProductPurchase < ApplicationRecord
-  belongs_to :product, optional: true
-  belongs_to :purchase
+  include DocumentLine
+  belongs_to :purchase, inverse_of: :product_purchases
 end

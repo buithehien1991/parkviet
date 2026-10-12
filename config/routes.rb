@@ -1,57 +1,44 @@
 Rails.application.routes.draw do
-  devise_for :users,
-             path: '',
-             path_names: { sign_in: 'dang-nhap', sign_out: 'dang-xuat', sign_up: 'dang-ky' },
-             controllers: { registrations: 'users/registrations', sessions: 'users/sessions' }
-
-  root to: "home#index"
-
-  get 'get_district_list', to: "application#get_districts"
-  get 'get_commune_list', to: "application#get_communes"
-  get 'manage', to: "manage#index"
-  get 'sale', to: "sale#index"
-  get 'dashboard', to: "sale#dashboard"
-  get 'get_current_user', to: "application#get_current_user"
-  get 'bang-gia', to: "home#pricing", as: :pricing
-
+  root "home#index"
+  devise_for :users, controllers: {
+    registrations: "users/registrations", sessions: "users/sessions",
+    passwords: "users/passwords", omniauth_callbacks: "users/omniauth_callbacks"
+  }
+  devise_scope :user do
+    match "users/auth/failure", to: "users/omniauth_callbacks#failure", via: %i[get post]
+    get "dang-nhap", to: redirect("/users/sign_in")
+    get "dang-ky", to: redirect("/users/sign_up")
+  end
+  get "manage", to: "manage#index"
+  get "dashboard", to: "manage#index"
+  get "sale", to: "sale#index"
+  resources :stores, only: [ :new, :create ] do
+    member { post :switch }
+  end
   scope :manage do
-    resources :invoices
-    resources :products do
+    resources :products, :customers, :suppliers, :producers, :product_groups, :product_types,
+              :branches, :reports, :print_templates
+    resources :invoices, :purchases, :purchase_orders do
       member do
-        get 'update_status'
+        post :status
+        post :payment
       end
     end
-    resources :customers do
-      collection do
-        get 'search'
-      end
-    end
-    resources :suppliers do
-      collection do
-        get 'search'
-      end
-    end
-    resources :product_groups
-    resources :producers
-
-    resources :purchase_orders do
-      member do
-        post 'status'
-        get 'pdf'
-      end
-    end
-    resources :product_purchase_orders
-
-    resources :users
-    resources :roles
-    resources :purchases
-    resources :reports
-    resources :print_templates
+    resource :store_settings, only: [ :edit, :update ], controller: "store_settings"
+    get "debts", to: "debts#index"
+    resources :members, except: :show
+    resources :store_roles, except: :show
   end
-
-  namespace :api, defaults: {format: :json} do
-    namespace :v1 do
-      resources :products
+  namespace :admin do
+    root "dashboard#index"
+    resources :users, except: :show
+    get "settings", to: "settings#profile", as: :settings
+    scope "settings", as: :settings do
+      %w[profile account appearance notifications].each do |section|
+        get section, to: "settings##{section}", as: section
+        patch section, to: "settings#update_#{section}"
+      end
     end
   end
+  get "up" => "rails/health#show", as: :rails_health_check
 end

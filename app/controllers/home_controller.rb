@@ -1,11 +1,6 @@
-class HomeController < ApplicationController
-
-  layout 'home'
-
+class HomeController < InertiaController
   def index
-  end
-
-  def pricing
-
+    return redirect_to manage_path if user_signed_in?
+    render inertia: "workspace/welcome"
   end
 end

@@ -1,13 +1,11 @@
-class SaleController < ApplicationController
-  before_action :authenticate_user!
-
-  layout 'sale'
-  layout 'sale_html', only: 'dashboard'
+class SaleController < StoreController
   def index
-    @products = Product.by_store(current_store.id)
-  end
-
-  def dashboard
-    @products = Product.by_store(current_store.id)
+    permit_store!("invoice_new")
+    return if performed?
+    render inertia: "workspace/sale", props: {
+      products: current_store.products.active.order(:name).as_json(only: [ :id, :name, :code, :sale_price, :in_stock, :basic_unit ]),
+      customers: current_store.customers.active.order(:name).as_json(only: [ :id, :name, :phone ]),
+      can_create_customer: owner? || current_member&.store_role&.permissions&.include?("customer_new")
+    }
   end
 end
